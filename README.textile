@@ -1,0 +1,7 @@
+h1. Redmine Datacenter Plugin
+
+This plugin will help you manager your small datacenter through "Redmine":http://www.redmine.org/.
+
+h2. Install
+
+See first: http://www.redmine.org/wiki/redmine/Plugins

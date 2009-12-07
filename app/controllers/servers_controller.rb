@@ -8,11 +8,20 @@ class ServersController < ApplicationController
     sort_init 'name', 'asc'
     sort_update %w(name fqdn ipaddress)
     
-    @server_count = Server.count
+    @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
+    c = ARCondition.new(@status == 0 ? "" : ["status = ?", @status])
+    
+    unless params[:name].blank?
+      name = "%#{params[:name].strip.downcase}%"
+      c << ["LOWER(name) LIKE ?", name]
+    end
+    
+    @server_count = Server.count(:conditions => c.conditions)
     @server_pages = Paginator.new self, @server_count,
                 per_page_option,
                 params['page']
     @servers =  Server.all :order => sort_clause,
+            :conditions => c.conditions,
             :limit  =>  @server_pages.items_per_page,
             :offset =>  @server_pages.current.offset
 

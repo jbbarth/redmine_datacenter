@@ -1,0 +1,12 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  name: server-web
+  fqdn: server-web.example.com
+  ipaddress: 192.168.0.1
+  description: First server, a web server
+
+two:
+  name: server-mail
+  fqdn: server-mail.example.com
+  ipaddress: 192.168.0.2
+  description: Second server, a mail server

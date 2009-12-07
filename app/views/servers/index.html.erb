@@ -1,0 +1,37 @@
+<div class="contextual">
+  <%= link_to l(:label_server_new), new_server_path, :class => 'icon icon-add' %>
+</div>
+
+<h2><%=l(:label_server_plural)%></h2>
+
+<% if @servers.any? %>
+<table class="list">		
+  <thead><tr>
+	<%= sort_header_tag('name', :caption => l(:field_name)) %>
+	<%= sort_header_tag('fqdn', :caption => l(:field_fqdn)) %>
+	<%= sort_header_tag('ipaddress', :caption => l(:field_ipaddress)) %>
+	<%= sort_header_tag('description', :caption => l(:field_description)) %>
+  <%= sort_header_tag('created_at', :caption => l(:field_created_on), :default_order => 'desc') %>
+  <th> </th>
+  </tr></thead>
+  <tbody>
+<% for server in @servers -%>
+  <tr class="server <%= cycle("odd", "even") %>">
+	  <td class="name"><%= link_to h(server.name), edit_server_path(server) %></td>
+	  <td class="fqdn"><%= h(server.fqdn) %></td>
+	  <td class="ipaddress"><%= h(server.ipaddress) %></td>
+	  <td class="description"><%= h(server.description) %></td>
+	  <td class="created_at" align="center"><%= format_time(server.created_at) %></td>
+    <td class="buttons"><%= link_to l(:button_delete), server, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %></td>
+  </tr>
+<% end -%>
+  </tbody>
+</table>
+
+<p class="pagination"><%= pagination_links_full @server_pages, @server_count %></p>
+
+<% else %>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+
+<% html_title(l(:label_server_plural)) -%>

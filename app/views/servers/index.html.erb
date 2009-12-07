@@ -33,7 +33,10 @@
 	  <td class="ipaddress"><%= h(server.ipaddress) %></td>
 	  <td class="description"><%= h(server.description) %></td>
 	  <td class="created_at" align="center"><%= format_time(server.created_at) %></td>
-    <td class="buttons"><%= link_to l(:button_delete), server, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %></td>
+    <td class="buttons">
+      <%= change_link_server_status(server) %>
+      <%= link_to l(:button_delete), server, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+    </td>
   </tr>
 <% end -%>
   </tbody>

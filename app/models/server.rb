@@ -1,5 +1,5 @@
 class Server < ActiveRecord::Base
-  attr_accessible :name, :fqdn, :ipaddress, :description
+  attr_accessible :name, :fqdn, :ipaddress, :description, :status
   
   STATUS_ACTIVE = 1
   STATUS_LOCKED = 2

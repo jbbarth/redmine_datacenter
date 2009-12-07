@@ -9,7 +9,7 @@ class ServersController < ApplicationController
     sort_update %w(name fqdn ipaddress)
     
     @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
-    c = ARCondition.new(@status == 0 ? "" : ["status = ?", @status])
+    c = ARCondition.new(@status == 0 ? nil : ["status = ?", @status])
     
     unless params[:name].blank?
       name = "%#{params[:name].strip.downcase}%"

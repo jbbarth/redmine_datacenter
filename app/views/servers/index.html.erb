@@ -4,8 +4,6 @@
 
 <h2><%=l(:label_server_plural)%></h2>
 
-<% if @servers.any? %>
-
 <% form_tag({}, :method => :get) do %>
   <fieldset><legend><%= l(:label_filter_plural) %></legend>
   <label><%= l(:field_status) %>:</label>
@@ -17,6 +15,7 @@
 <% end %>
 &nbsp;
 
+<% if @servers.any? %>
 <table class="list">		
   <thead><tr>
 	<%= sort_header_tag('name', :caption => l(:field_name)) %>

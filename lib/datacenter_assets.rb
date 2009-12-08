@@ -3,4 +3,4 @@ class DatacenterAssets < Redmine::Hook::ViewListener
     stylesheet_link_tag("datacenter", {:plugin => "redmine_datacenter"})
   end
 end
-Redmine::Hook.add_listener(DatacenterAssets)
+#Redmine::Hook.add_listener(DatacenterAssets)

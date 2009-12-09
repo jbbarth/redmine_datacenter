@@ -4,10 +4,10 @@ This plugin will help you manager your small datacenter through "Redmine":http:/
 
 h2. Install
 
-See first: http://www.redmine.org/wiki/redmine/Plugins
+See first: "http://www.redmine.org/wiki/redmine/Plugins":http://www.redmine.org/wiki/redmine/Plugins 
 
 There are only 3 installation steps, it's very easy :
-* clone this repository in your vendor/plugins directory ; if you have a doubt you put it at the good level, you can check you have a vendor/plugins/redmine_setra/init.rb file
+* clone this repository in your vendor/plugins directory ; if you have a doubt you put it at the good level, you can check you have a vendor/plugins/redmine_datacenter/init.rb file
 * run the migrations with : rake db:migrate_plugins
 * restart your Redmine instance (depends on how you host it)
 

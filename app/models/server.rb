@@ -1,4 +1,6 @@
 class Server < ActiveRecord::Base
+  has_and_belongs_to_many :issues
+  
   attr_accessible :name, :fqdn, :ipaddress, :description, :status
   
   STATUS_ACTIVE = 1

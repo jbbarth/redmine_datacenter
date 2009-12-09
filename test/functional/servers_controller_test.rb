@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class ServersControllerTest < ActionController::TestCase
-  fixtures :servers
+  fixtures :servers, :issues
 
   def test_index
     get :index

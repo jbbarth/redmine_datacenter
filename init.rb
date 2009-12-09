@@ -1,5 +1,14 @@
 require 'redmine'
+
+#hooks
 require 'datacenter_assets'
+require 'add_servers_to_issue_form'
+
+#patches
+config.to_prepare do
+  require_dependency 'issue_patch'
+  require_dependency 'issues_controller_patch'
+end
 
 Redmine::Plugin.register :datacenter_plugin do
   name 'Datacenter management plugin'

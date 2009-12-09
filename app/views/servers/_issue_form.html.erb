@@ -1,0 +1,8 @@
+<p>
+  <label><%= l(:label_server_plural) %></label>
+  <% Server.all.sort_by(&:name).each do |server| %>
+    <label class="floating">
+      <%= check_box_tag 'issue[server_ids][]', server.id, @issue.has_server?(server) %> <%=h server.name %>
+    </label>
+  <% end -%>
+</p> 

@@ -1,0 +1,13 @@
+<tr> 
+  <th class="servers"><%= l(:label_server_plural) %></th>
+  <td class="servers">
+    <% if @issue.servers.any? %>
+      <% servers = @issue.servers.sort_by(&:name) %>
+      <% servers.each do |server| %>
+        <%= link_to(server.name, edit_server_path(server)) + (server == servers.last ? "" : ", ") %>
+      <% end %>
+    <% else %>
+      -
+    <% end %>
+    </td> 
+</tr>

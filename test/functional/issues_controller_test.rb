@@ -52,11 +52,11 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     User.current = nil
+    @request.session[:user_id] = 1
   end
   
   def test_add_and_remove_servers_from_an_issue
     issue = Issue.find(1)
-    @request.session[:user_id] = 1
     post :edit, :id => 1, :issue => {:subject => 'Custom field change',
                                      :priority_id => '6',
                                      :category_id => '1',
@@ -73,5 +73,23 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     assert_redirected_to :action => 'show', :id => '1'
     issue.reload
     assert_equal [], issue.server_ids
+  end
+
+  def test_new_issue_form_contains_active_but_not_locked_servers
+    get :new, :project_id => 1, :tracker_id => 1
+    assert_response :success
+    assert_template 'new'
+    assert_tag :input,
+                  :attributes => {
+                    :id => 'issue_server_ids_',
+                    :type => 'checkbox',
+                    :value => '2'
+                  }
+    assert_no_tag :input,
+                  :attributes => {
+                    :id => 'issue_server_ids_',
+                    :type => 'checkbox',
+                    :value => '3'
+                  }
   end
 end

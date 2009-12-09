@@ -1,7 +1,24 @@
 require File.dirname(__FILE__) + '/../test_helper'
+require 'servers_controller'
+
+# Re-raise errors caught by the controller.
+class Serversontroller; def rescue_action(e) raise e end; end
 
 class ServersControllerTest < ActionController::TestCase
-  fixtures :servers, :issues
+  fixtures :servers, :issues, :users
+
+  def setup
+    @controller = ServersController.new
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
+    @request.session[:user_id] = 1 # admin
+  end
+  
+  def test_non_admin_user_should_be_dropped_out
+    @request.session[:user_id] = 2
+    get :index
+    assert_response 403
+  end
 
   def test_index
     get :index

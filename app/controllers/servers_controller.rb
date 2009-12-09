@@ -1,4 +1,6 @@
 class ServersController < ApplicationController
+  before_filter :require_admin
+
   unloadable
 
   helper :sort

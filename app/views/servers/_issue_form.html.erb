@@ -1,9 +1,19 @@
 <p>
   <label><%= l(:label_server_plural) %></label>
-  <% servers = Server.active | @issue.servers %>
-  <% servers.sort_by(&:name).each do |server| %>
-    <label class="floating">
-      <%= check_box_tag 'issue[server_ids][]', server.id, @issue.has_server?(server) %> <%=h server.name %>
-    </label>
-  <% end -%>
+  <% servers = Server.all(:order => 'name ASC').select{|s| s.active? || @issue.server_ids.include?(s.id)} %>
+  <% if false %>
+    <% servers.sort_by(&:name).each do |server| %>
+      <label class="floating">
+        <%= check_box_tag 'issue[server_ids][]', server.id, @issue.has_server?(server) %> <%=h server.name %>
+      </label>
+    <% end -%>
+  <% else %>
+    <%= collection_select :issue,
+                          :server_ids,
+                          servers,
+                          :id,
+                          :name,
+                          { :selected => @issue.server_ids },
+                          { :multiple => true, :name => 'issue[server_ids][]' } -%>
+  <% end %>
 </p> 

@@ -92,4 +92,28 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
                     :value => '3'
                   }
   end
+
+  def test_edit_issue_form_contains_right_servers
+    issue = Issue.find(1)
+    issue.server_ids = [1,2,3] #1,2 are active, 3 is locked
+    get :edit, :id => 1
+    assert_tag :input,
+                  :attributes => {
+                    :id => 'issue_server_ids_',
+                    :type => 'checkbox',
+                    :value => '1'
+                  }
+    assert_tag :input,
+                  :attributes => {
+                    :id => 'issue_server_ids_',
+                    :type => 'checkbox',
+                    :value => '3'
+                  }
+    assert_no_tag :input,
+                  :attributes => {
+                    :id => 'issue_server_ids_',
+                    :type => 'checkbox',
+                    :value => '4'
+                  }
+  end
 end

@@ -22,3 +22,11 @@ three:
   ipaddress: 192.168.0.1
   description: This is the old web server, it is locked since it has disappeared
   status: 2
+
+four:
+  id: 4
+  name: server2-locked
+  fqdn: server2-locked.example.com
+  ipaddress: 192.168.0.4
+  description: Locked since it has disappeared
+  status: 2

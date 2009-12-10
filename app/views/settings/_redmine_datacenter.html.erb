@@ -1,0 +1,5 @@
+<p>
+  <label><%= l(:label_use_multiple_select) %></label> 
+  <%= hidden_field_tag 'settings[multiple_select]', 0 %>
+  <%= check_box_tag 'settings[multiple_select]', "1", Setting.datacenter_multiselect? %>
+</p>

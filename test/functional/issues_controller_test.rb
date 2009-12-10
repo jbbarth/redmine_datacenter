@@ -53,6 +53,7 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     @response   = ActionController::TestResponse.new
     User.current = nil
     @request.session[:user_id] = 1
+    Setting.plugin_datacenter_plugin["multiple_select"] = 0
   end
   
   def test_add_and_remove_servers_from_an_issue

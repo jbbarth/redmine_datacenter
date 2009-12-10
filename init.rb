@@ -8,6 +8,7 @@ require 'add_servers_to_issue_form'
 config.to_prepare do
   require_dependency 'issue_patch'
   require_dependency 'issues_controller_patch'
+  require_dependency 'setting_patch'
 end
 
 Redmine::Plugin.register :datacenter_plugin do
@@ -17,6 +18,8 @@ Redmine::Plugin.register :datacenter_plugin do
   url 'http://github.com/jbbarth/redmine_datacenter'
   author_url 'mailto:jeanbaptiste.barth@gmail.com'
   version '0.1'
+  settings :default => {'multiple_select' => "1"}, #false=checkboxes, true=multiple_select
+           :partial => 'settings/redmine_datacenter'
 end
 
 Redmine::MenuManager.map :admin_menu do |menu|

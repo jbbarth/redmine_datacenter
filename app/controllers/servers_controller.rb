@@ -27,6 +27,8 @@ class ServersController < ApplicationController
             :limit  =>  @server_pages.items_per_page,
             :offset =>  @server_pages.current.offset
 
+    @plugin = Redmine::Plugin.find(:datacenter_plugin)
+
     render :layout => !request.xhr?
   end
   

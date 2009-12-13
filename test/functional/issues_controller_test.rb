@@ -117,4 +117,34 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
                     :value => '4'
                   }
   end
+
+  def test_filter_by_server_is_present
+    get :index
+    assert_tag :tag => 'select', :attributes => {:id => 'add_filter_select'},
+               :child => {:tag => 'option', :attributes => {:value => 'server_id'} }
+    assert_tag :tag => 'tr', :attributes => {:id => 'tr_server_id', :style => 'display:none;'}
+  end
+
+  def test_filter_by_server_is_kept_when_used
+    #Parameters: {
+    # "group_by"=>"",
+    # "set_filter"=>"1",
+    # "project_id"=>"test",
+    # "action"=>"index",
+    # "authenticity_token"=>"4DKnXQtSSgyTR+AjccMghCmRWGrp8oeabfR6RnCRHuw=",
+    # "fields"=>["status_id", "server_id"],
+    # "operators"=>{"start_date"=>"<t+", "estimated_hours"=>"=", "created_on"=>">t-", "priority_id"=>"=", "server_id"=>"=", "done_ratio"=>"=", "updated_on"=>">t-", "subject"=>"~", "assigned_to_id"=>"=", "tracker_id"=>"=", "due_date"=>"<t+", "author_id"=>"=", "status_id"=>"o", "cf_1"=>"="},
+    # "values"=>{"start_date"=>[""], "estimated_hours"=>[""], "created_on"=>[""], "priority_id"=>["3"], "server_id"=>["1"], "done_ratio"=>[""], "updated_on"=>[""], "subject"=>[""], "assigned_to_id"=>["1"], "tracker_id"=>["1"], "due_date"=>[""], "author_id"=>["1"], "status_id"=>["1"], "cf_1"=>["Un"]},
+    # "controller"=>"issues",
+    # "_"=>"",
+    # "query"=>{"column_names"=>["tracker", "status", "priority", "subject", "assigned_to", "updated_on"]}
+    # }
+    post :index, :project_id => "1", :set_filter => "1",
+          :fields => ["status_id", "server_id"],
+          :operators => {"status_id" => "o", "server_id" => "="},
+          :values => {"status_id" => ["1"], "server_id"=>["1"]}
+    assert_response :success
+    assert_tag :tr, :attributes => {:id => 'tr_server_id'}
+    assert_no_tag :tr, :attributes => {:id => 'tr_server_id', :style => 'display:none;'}
+  end
 end

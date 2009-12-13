@@ -19,8 +19,7 @@ class Query
       v = values_for(field).clone
       next unless v and !v.empty?
       operator = operator_for(field)
-      db_table = 'issues_servers' #TODO: What.table_name ???
-      #"issues_servers"
+      db_table = Server.reflections[:issues].options[:join_table]
       db_field = 'server_id'
       is_custom_filter = true
       sql << "#{Issue.table_name}.id #{ operator == '=' ? 'IN' : 'NOT IN' } "

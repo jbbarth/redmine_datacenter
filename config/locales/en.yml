@@ -1,5 +1,9 @@
 # English strings go here for Rails i18n
 en:
+  activerecord:
+    errors:
+      messages:
+        invalid_ipaddress: "is not a valid IP address or CIDR mask"
   label_server_new: "New server"
   label_server_plural: "Servers"
   field_server: "Server"

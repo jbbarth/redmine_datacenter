@@ -1,3 +1,5 @@
+require 'ipaddr'
+
 class Server < ActiveRecord::Base
   has_and_belongs_to_many :issues
   
@@ -12,6 +14,14 @@ class Server < ActiveRecord::Base
   
   named_scope :active, :conditions => { :status => STATUS_ACTIVE }
   
+  def validate
+    begin
+      IPAddr.new(ipaddress)
+    rescue
+      errors.add(:ipaddress, :invalid_ipaddress)
+    end
+  end
+
   def active?
     self.status == STATUS_ACTIVE
   end

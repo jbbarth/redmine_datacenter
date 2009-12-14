@@ -1,5 +1,6 @@
 class ServersController < ApplicationController
   before_filter :require_admin
+  before_filter :retrieve_settings
 
   unloadable
 
@@ -37,6 +38,9 @@ class ServersController < ApplicationController
   end
   
   def create
+    unless params[:server].blank? || @settings["domain"].blank?
+      params[:server][:fqdn] ||= params[:server][:name]+@settings["domain"]
+    end
     @server = Server.new(params[:server])
     if @server.save
       flash[:notice] = l(:notice_successful_create)
@@ -65,5 +69,10 @@ class ServersController < ApplicationController
     @server.destroy
     #flash[:notice] = "Successfully destroyed server."
     redirect_to servers_url
+  end
+
+  private
+  def retrieve_settings
+    @settings = Setting["plugin_datacenter_plugin"]
   end
 end

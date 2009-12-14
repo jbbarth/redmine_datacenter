@@ -19,7 +19,10 @@ Redmine::Plugin.register :datacenter_plugin do
   url 'http://github.com/jbbarth/redmine_datacenter'
   author_url 'mailto:jeanbaptiste.barth@gmail.com'
   version '0.1'
-  settings :default => {'multiple_select' => "1"}, #false=checkboxes, true=multiple_select
+  settings :default => {
+              'multiple_select' => "1", #false=checkboxes, true=multiple_select
+              'domain'          => ""
+            },
            :partial => 'settings/redmine_datacenter'
 end
 

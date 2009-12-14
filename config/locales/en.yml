@@ -6,3 +6,4 @@ en:
   field_fqdn: "Fully qualified domain name"
   field_ipaddress: "IP Address"
   label_use_multiple_select: "Use multi-select instead of checkboxes ?"
+  field_domain: "Domain"

@@ -12,6 +12,7 @@ class ServersControllerTest < ActionController::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     @request.session[:user_id] = 1 # admin
+    Setting["plugin_datacenter_plugin"]["domain"] = ".example.com"
   end
   
   def test_non_admin_user_should_be_dropped_out
@@ -40,6 +41,9 @@ class ServersControllerTest < ActionController::TestCase
     Server.any_instance.stubs(:valid?).returns(true)
     post :create, :server => {:name => "myserver"}
     assert_redirected_to servers_url
+    server = Server.find_by_name("myserver")
+    assert_not_nil server
+    assert_equal "myserver.example.com", server.fqdn
   end
   
   def test_edit

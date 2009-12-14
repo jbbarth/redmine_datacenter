@@ -16,7 +16,7 @@ class Server < ActiveRecord::Base
   
   def validate
     begin
-      IPAddr.new(ipaddress)
+      IPAddr.new(ipaddress) unless ipaddress.blank?
     rescue
       errors.add(:ipaddress, :invalid_ipaddress)
     end

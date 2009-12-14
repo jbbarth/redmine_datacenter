@@ -1,3 +1,7 @@
+<div class="contextual">
+  <%= link_to l(:label_server_plural), servers_path, :class => 'icon icon-servers' %>
+</div>
+
 <p>
   <label><%= l(:field_domain) %></label> 
   <%= text_field_tag 'settings[domain]', @settings["domain"] %>

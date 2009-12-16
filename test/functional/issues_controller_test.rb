@@ -45,7 +45,8 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
            :journals,
            :journal_details,
            :queries,
-           :servers
+           :servers,
+           :applis
   
   def setup
     @controller = IssuesController.new
@@ -146,5 +147,21 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     assert_response :success
     assert_tag :tr, :attributes => {:id => 'tr_server_id'}
     assert_no_tag :tr, :attributes => {:id => 'tr_server_id', :style => 'display:none;'}
+  end
+  
+  def test_add_and_remove_applis_from_an_issue
+    issue = Issue.find(1)
+    post :edit, :id => 1, :issue => {:subject => 'Custom field change',
+                                     :priority_id => '6',
+                                     :category_id => '1',
+                                     :appli_ids => ["1", "2"]}
+    assert_redirected_to :action => 'show', :id => '1'
+    issue.reload
+    assert_equal [1,2], issue.appli_ids
+    post :edit, :id => 1, :issue => {:subject => 'Custom field change',
+                                     :priority_id => '6',
+                                     :category_id => '1'}
+    issue.reload
+    assert_equal [], issue.appli_ids
   end
 end

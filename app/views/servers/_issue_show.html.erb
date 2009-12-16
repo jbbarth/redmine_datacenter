@@ -4,7 +4,7 @@
     <% if @issue.servers.any? %>
       <% servers = @issue.servers.sort_by(&:name) %>
       <% servers.each do |server| %>
-        <%= link_to(server.name, edit_server_path(server)) + (server == servers.last ? "" : ", ") %>
+        <%= link_to(server.name, server_path(server)) + (server == servers.last ? "" : ", ") %>
       <% end %>
     <% else %>
       -

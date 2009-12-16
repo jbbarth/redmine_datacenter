@@ -33,6 +33,22 @@ class ServersController < ApplicationController
     render :layout => !request.xhr?
   end
   
+  def show
+    @server = Server.find(params[:id], :include => :issues)
+    c = ARCondition.new(["issues_servers.server_id = ?", @server.id])
+    sort_init([['id', 'desc']])
+    sort_update({'id' => "#{Issue.table_name}.id"})
+    @issue_count = Issue.count(:joins => :servers, :conditions => c.conditions)
+    @issue_pages = Paginator.new self, @issue_count, per_page_option, params['page']
+    @issues = Issue.all :order => 'id desc',
+                        :joins => :servers,
+                        :conditions => c.conditions,
+                        :limit => @issue_pages.items_per_page,
+                        :offset => @issue_pages.current.offset,
+                        :order => sort_clause
+    render :layout => !request.xhr?
+  end
+
   def new
     @server = Server.new
   end

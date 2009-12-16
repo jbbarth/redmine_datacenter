@@ -1,2 +1,4 @@
 .icon22-servers { background-image: url(../images/20x20/servers.png); }
 .icon-servers { background-image: url(../images/14x14/servers.png); }
+div.server {background:#ffffdd; padding:0 6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
+div.server table.attributes th {width:30%; white-space: nowrap;}

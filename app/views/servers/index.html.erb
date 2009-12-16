@@ -31,13 +31,14 @@
   <tbody>
 <% for server in @servers -%>
   <tr class="server <%= cycle("odd", "even") %>">
-	  <td class="name"><%= link_to h(server.name), edit_server_path(server) %></td>
+	  <td class="name"><%= link_to h(server.name), server_path(server) %></td>
 	  <td class="fqdn"><%= h(server.fqdn) %></td>
 	  <td class="ipaddress"><%= h(server.ipaddress) %></td>
 	  <td class="description"><%= h(server.description) %></td>
 	  <td class="created_at" align="center"><%= format_time(server.created_at) %></td>
     <td class="buttons">
       <%= change_link_server_status(server) %>
+      <%= link_to l(:button_update), edit_server_path(server), :class => 'icon icon-edit' %>
       <%= link_to l(:button_delete), server, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
     </td>
   </tr>

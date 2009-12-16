@@ -1,0 +1,13 @@
+<tr> 
+  <th class="applis"><%= l(:label_appli_plural) %></th>
+  <td class="applis">
+    <% if @issue.applis.any? %>
+      <% applis = @issue.applis.sort_by(&:name) %>
+      <% applis.each do |appli| %>
+        <%= link_to(appli.name, appli_path(appli)) + (appli == applis.last ? "" : ", ") %>
+      <% end %>
+    <% else %>
+      -
+    <% end %>
+    </td> 
+</tr>

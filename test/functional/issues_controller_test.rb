@@ -119,14 +119,17 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
                   }
   end
 
-  def test_filter_by_server_is_present
+  def test_custom_filters_are_present
     get :index
     assert_tag :tag => 'select', :attributes => {:id => 'add_filter_select'},
                :child => {:tag => 'option', :attributes => {:value => 'server_id'} }
     assert_tag :tag => 'tr', :attributes => {:id => 'tr_server_id', :style => 'display:none;'}
+    assert_tag :tag => 'select', :attributes => {:id => 'add_filter_select'},
+               :child => {:tag => 'option', :attributes => {:value => 'appli_id'} }
+    assert_tag :tag => 'tr', :attributes => {:id => 'tr_appli_id', :style => 'display:none;'}
   end
 
-  def test_filter_by_server_is_kept_when_used
+  def test_custom_filters_are_kept_when_used
     #Parameters: {
     # "group_by"=>"",
     # "set_filter"=>"1",
@@ -140,6 +143,7 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     # "_"=>"",
     # "query"=>{"column_names"=>["tracker", "status", "priority", "subject", "assigned_to", "updated_on"]}
     # }
+    #SERVERS
     post :index, :project_id => "1", :set_filter => "1",
           :fields => ["status_id", "server_id"],
           :operators => {"status_id" => "o", "server_id" => "="},
@@ -147,6 +151,14 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     assert_response :success
     assert_tag :tr, :attributes => {:id => 'tr_server_id'}
     assert_no_tag :tr, :attributes => {:id => 'tr_server_id', :style => 'display:none;'}
+    #APPLIS
+    post :index, :project_id => "1", :set_filter => "1",
+          :fields => ["status_id", "appli_id"],
+          :operators => {"status_id" => "o", "appli_id" => "="},
+          :values => {"status_id" => ["1"], "appli_id"=>["1"]}
+    assert_response :success
+    assert_tag :tr, :attributes => {:id => 'tr_appli_id'}
+    assert_no_tag :tr, :attributes => {:id => 'tr_appli_id', :style => 'display:none;'}
   end
   
   def test_add_and_remove_applis_from_an_issue

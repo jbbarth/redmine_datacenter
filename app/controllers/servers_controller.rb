@@ -1,11 +1,5 @@
-class ServersController < ApplicationController
-  before_filter :require_admin
-  before_filter :retrieve_settings
-
+class ServersController < DatacenterController
   unloadable
-
-  helper :sort
-  include SortHelper
 
   def index
     sort_init 'name', 'asc'
@@ -85,10 +79,5 @@ class ServersController < ApplicationController
     @server.destroy
     #flash[:notice] = "Successfully destroyed server."
     redirect_to servers_url
-  end
-
-  private
-  def retrieve_settings
-    @settings = Setting["plugin_datacenter_plugin"]
   end
 end

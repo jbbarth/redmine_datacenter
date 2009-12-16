@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 require 'servers_controller'
 
 # Re-raise errors caught by the controller.
-class Serversontroller; def rescue_action(e) raise e end; end
+class ServersController; def rescue_action(e) raise e end; end
 
 class ServersControllerTest < ActionController::TestCase
   fixtures :servers, :issues, :users

@@ -52,7 +52,7 @@ class ServersController < DatacenterController
     @server = Server.new(params[:server])
     if @server.save
       flash[:notice] = l(:notice_successful_create)
-      redirect_to servers_url
+      redirect_to @server
     else
       render :action => 'new'
     end
@@ -66,7 +66,7 @@ class ServersController < DatacenterController
     @server = Server.find(params[:id])
     if @server.update_attributes(params[:server])
       flash[:notice] = l(:notice_successful_update)
-      redirect_to url_for(:overwrite_params => {:action => :index, :id => nil})
+      redirect_to @server
     else
       render :action => 'edit'
     end

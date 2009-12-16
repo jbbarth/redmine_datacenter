@@ -2,8 +2,7 @@ require 'redmine'
 
 #hooks
 require 'datacenter_assets'
-require 'add_servers_to_issue_form'
-require 'add_applis_to_issue_form'
+require 'issue_view_additions'
 
 #patches
 config.to_prepare do

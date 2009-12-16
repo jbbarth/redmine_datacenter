@@ -13,7 +13,19 @@ class ApplisController < DatacenterController
   end
   
   def show
-    @appli = Appli.find(params[:id])
+    @appli = Appli.find(params[:id], :include => :issues)
+    c = ARCondition.new(["applis_issues.appli_id = ?", @appli.id])
+    sort_init([['id', 'desc']])
+    sort_update({'id' => "#{Issue.table_name}.id"})
+    @issue_count = Issue.count(:joins => :applis, :conditions => c.conditions)
+    @issue_pages = Paginator.new self, @issue_count, per_page_option, params['page']
+    @issues = Issue.all :order => 'id desc',
+                        :joins => :applis,
+                        :conditions => c.conditions,
+                        :limit => @issue_pages.items_per_page,
+                        :offset => @issue_pages.current.offset,
+                        :order => sort_clause
+    render :layout => !request.xhr?
   end
   
   def new

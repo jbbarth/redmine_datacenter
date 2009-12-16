@@ -40,7 +40,7 @@ class ServersControllerTest < ActionController::TestCase
   def test_create_valid
     Server.any_instance.stubs(:valid?).returns(true)
     post :create, :server => {:name => "myserver"}
-    assert_redirected_to servers_url
+    assert_redirected_to server_url(assigns(:server))
     server = Server.find_by_name("myserver")
     assert_not_nil server
     assert_equal "myserver.example.com", server.fqdn
@@ -60,7 +60,7 @@ class ServersControllerTest < ActionController::TestCase
   def test_update_valid
     Server.any_instance.stubs(:valid?).returns(true)
     put :update, :id => Server.first
-    assert_redirected_to servers_url
+    assert_redirected_to server_url(assigns(:server))
   end
   
   def test_destroy

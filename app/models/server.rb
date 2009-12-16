@@ -8,6 +8,7 @@ class Server < ActiveRecord::Base
   STATUS_ACTIVE = 1
   STATUS_LOCKED = 2
   
+  validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
   validates_uniqueness_of :fqdn, :case_sensitive => false
   validates_format_of :name, :with => /\A[a-zA-Z0-9_-]*\Z/

@@ -29,4 +29,5 @@ end
 
 Redmine::MenuManager.map :admin_menu do |menu|
   menu.push :servers, :servers, :caption => :label_server_plural
+  menu.push :applis, :applis, :caption => :label_appli_plural
 end

@@ -1,0 +1,7 @@
+one:
+  name: first_application
+  description: This is the first application of our datacenter!
+
+two:
+  name: second_app
+  description: Second application of our datacenter...

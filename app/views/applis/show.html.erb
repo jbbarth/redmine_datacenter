@@ -1,0 +1,13 @@
+<div class="contextual">
+  <%= link_to l(:button_update), edit_appli_path(@appli), :class => 'icon icon-edit' %> 
+  <%= link_to l(:label_appli_plural), applis_path, :class => 'icon icon-applis' %>
+</div>
+
+<h2><%= link_to l(:field_appli), applis_path %> &#187; <%=h @appli.name %></h2>
+
+<div class="splitcontentleft appli">
+  <h3><%= @appli.name %></h3>
+  <p><%= @appli.description %></p>
+</div>
+
+<% html_title(l(:label_appli_plural)) -%>

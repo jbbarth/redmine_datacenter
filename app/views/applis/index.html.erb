@@ -1,0 +1,39 @@
+<div class="contextual">
+  <%= link_to l(:label_appli_new), new_appli_path, :class => 'icon icon-add' %>
+  <%= link_to(l(:button_configure),
+                {:controller => 'settings', :action => 'plugin', :id => @plugin.id},
+                :class => 'icon icon-package') %>
+</div>
+
+<h2><%=l(:label_appli_plural)%></h2>
+
+<% if @applis.any? %>
+<table class="list">		
+  <thead><tr>
+	<%= sort_header_tag('name', :caption => l(:field_name)) %>
+	<%= sort_header_tag('description', :caption => l(:field_description)) %>
+  <%= sort_header_tag('created_at', :caption => l(:field_created_on), :default_order => 'desc') %>
+  <th> </th>
+  </tr></thead>
+  <tbody>
+<% for appli in @applis -%>
+  <tr class="appli <%= cycle("odd", "even") %>">
+	  <td class="name"><%= link_to h(appli.name), appli_path(appli) %></td>
+	  <td class="description"><%= h(appli.description) %></td>
+	  <td class="created_at" align="center"><%= format_time(appli.created_at) %></td>
+    <td class="buttons">
+      <%= link_to l(:button_update), edit_appli_path(appli), :class => 'icon icon-edit' %>
+      <%= link_to l(:button_delete), appli, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+    </td>
+  </tr>
+<% end -%>
+  </tbody>
+</table>
+
+<p class="pagination"><%= pagination_links_full @appli_pages, @appli_count %></p>
+
+<% else %>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+
+<% html_title(l(:label_appli_plural)) -%>

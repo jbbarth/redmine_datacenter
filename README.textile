@@ -17,3 +17,8 @@ If you like this plugin, it's a good idea to contribute :
 * by giving feed back on what is cool, what should be improved
 * by reporting bugs : you can open issues directly on github for the moment
 * by forking it and sending pull request if you have a patch or a feature you want to implement
+
+h2. Known bugs / limitations
+
+Here are some limitations I see in the actual implementation ; maybe they will be solved in future releases (depending on my own needs and potential requests from .. you) :
+* bad separation of datacenters at project level : you can enable/disable "datacenter" module at project level ; but if you enable it on two different projects, 1/ you will see the same servers/apps/etc., 2/ you'll see issues from other projects. The main problem is I don't know how to handle separation, functionnaly first, and also technically... Any idea would be welcome !

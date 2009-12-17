@@ -3,12 +3,14 @@ require_dependency 'query'
 class Query
   def available_filters_with_datacenter_custom_filters
     available_filters_without_datacenter_custom_filters
-    @available_filters["server_id"] = { :type => :list,
-                                        :order => 25,
-                                        :values => Server.active.collect{|s| [s.name, s.id.to_s] } }
-    @available_filters["appli_id"] = { :type => :list,
-                                        :order => 30,
-                                        :values => Appli.all.collect{|s| [s.name, s.id.to_s] } }
+    if project.nil? || project.module_enabled?(:datacenter)
+      @available_filters["server_id"] = { :type => :list,
+                                          :order => 25,
+                                          :values => Server.active.collect{|s| [s.name, s.id.to_s] } }
+      @available_filters["appli_id"] = { :type => :list,
+                                          :order => 30,
+                                          :values => Appli.all.collect{|s| [s.name, s.id.to_s] } }
+    end
     @available_filters
   end
   alias_method_chain :available_filters, :datacenter_custom_filters

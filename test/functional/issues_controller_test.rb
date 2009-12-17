@@ -55,6 +55,8 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     User.current = nil
     @request.session[:user_id] = 1
     Setting.plugin_datacenter_plugin["multiple_select"] = 0
+    p = Project.find(1)
+    p.enabled_module_names = p.enabled_modules.map(&:name) << "datacenter"
   end
   
   def test_add_and_remove_servers_from_an_issue

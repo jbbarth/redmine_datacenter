@@ -1,2 +1,4 @@
-<%= render :partial => 'servers/issue_show' %>
-<%= render :partial => 'applis/issue_show' %>
+<% if @project.module_enabled?(:datacenter) %>
+  <%= render :partial => 'servers/issue_show' %>
+  <%= render :partial => 'applis/issue_show' %>
+<% end %>

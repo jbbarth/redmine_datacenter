@@ -1,4 +1,4 @@
-class ApplisController < DatacenterController
+class ApplisController < DatacenterPluginController
   def index
     sort_init 'name', 'asc'
     sort_update %w(id name)

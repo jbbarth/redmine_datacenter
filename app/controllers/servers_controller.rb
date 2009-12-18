@@ -1,4 +1,4 @@
-class ServersController < DatacenterController
+class ServersController < DatacenterPluginController
   unloadable
 
   def index

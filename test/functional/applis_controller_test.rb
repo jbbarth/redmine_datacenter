@@ -14,9 +14,11 @@ class ApplisControllerTest < ActionController::TestCase
     @request.session[:user_id] = 1 # admin
   end
   
-  def test_non_admin_user_should_be_dropped_out
+  def test_non_admin_user_should_be_dropped_out_on_admin_actions
     @request.session[:user_id] = 2
     get :index
+    assert_response :success
+    get :edit, :id => Appli.first
     assert_response 403
   end
   

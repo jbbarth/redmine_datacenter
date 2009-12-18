@@ -1,9 +1,11 @@
+<% if User.current.admin? %>
 <div class="contextual">
   <%= link_to l(:label_server_new), new_server_path, :class => 'icon icon-add' %>
   <%= link_to(l(:button_configure),
                 {:controller => 'settings', :action => 'plugin', :id => @plugin.id},
                 :class => 'icon icon-package') %>
 </div>
+<% end %>
 
 <h2><%=l(:label_server_plural)%></h2>
 
@@ -37,9 +39,11 @@
 	  <td class="description"><%= h(server.description) %></td>
 	  <td class="created_at" align="center"><%= format_time(server.created_at) %></td>
     <td class="buttons">
+      <% if User.current.admin? %>
       <%= change_link_server_status(server) %>
       <%= link_to l(:button_update), edit_server_path(server), :class => 'icon icon-edit' %>
       <%= link_to l(:button_delete), server, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+      <% end %>
     </td>
   </tr>
 <% end -%>

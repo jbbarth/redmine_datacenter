@@ -1,5 +1,5 @@
 <div class="contextual">
-  <%= link_to l(:button_update), edit_server_path(@server), :class => 'icon icon-edit' %> 
+  <%= link_to l(:button_update), edit_server_path(@server), :class => 'icon icon-edit' if User.current.admin? %> 
   <%= link_to l(:label_server_plural), servers_path, :class => 'icon icon-servers' %>
 </div>
 

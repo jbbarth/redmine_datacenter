@@ -1,5 +1,5 @@
 class DatacenterPluginController < ApplicationController
-  before_filter :require_admin
+  before_filter :require_admin, :except => [:index, :show]
   before_filter :retrieve_settings
   before_filter :retrieve_plugin, :only => :index
 

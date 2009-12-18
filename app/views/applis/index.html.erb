@@ -1,9 +1,11 @@
+<% if User.current.admin? %>
 <div class="contextual">
   <%= link_to l(:label_appli_new), new_appli_path, :class => 'icon icon-add' %>
   <%= link_to(l(:button_configure),
                 {:controller => 'settings', :action => 'plugin', :id => @plugin.id},
                 :class => 'icon icon-package') %>
 </div>
+<% end %>
 
 <h2><%=l(:label_appli_plural)%></h2>
 
@@ -22,8 +24,10 @@
 	  <td class="description"><%= h(appli.description) %></td>
 	  <td class="created_at" align="center"><%= format_time(appli.created_at) %></td>
     <td class="buttons">
+      <% if User.current.admin? %>
       <%= link_to l(:button_update), edit_appli_path(appli), :class => 'icon icon-edit' %>
       <%= link_to l(:button_delete), appli, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+      <% end %>
     </td>
   </tr>
 <% end -%>

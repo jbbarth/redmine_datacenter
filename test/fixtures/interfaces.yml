@@ -1,0 +1,24 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  name: eth1
+  ipaddress: 192.168.0.1
+  note: Private address of server-web
+
+two:
+  id: 2
+  name: eth0
+  ipaddress: 192.168.0.2
+  note: Private address of server-mail
+
+three:
+  id: 3
+  name: eth0
+  ipaddress: 192.168.0.1
+  note: "Former address of server-locked (but it's locked!)"
+
+four:
+  id: 4
+  name: eth0
+  ipaddress: 192.168.0.4
+  note: Address for server-locked2

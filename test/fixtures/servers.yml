@@ -3,7 +3,6 @@ one:
   id: 1
   name: server-web
   fqdn: server-web.example.com
-  ipaddress: 192.168.0.1
   description: First server, a web server
   status: 1
 
@@ -11,7 +10,6 @@ two:
   id: 2
   name: server-mail
   fqdn: server-mail.example.com
-  ipaddress: 192.168.0.2
   description: Second server, a mail server
   status: 1
 
@@ -19,7 +17,6 @@ three:
   id: 3
   name: server-locked
   fqdn: server-locked.example.com
-  ipaddress: 192.168.0.1
   description: This is the old web server, it is locked since it has disappeared
   status: 2
 
@@ -27,6 +24,5 @@ four:
   id: 4
   name: server2-locked
   fqdn: server2-locked.example.com
-  ipaddress: 192.168.0.4
   description: Locked since it has disappeared
   status: 2

@@ -1,0 +1,8 @@
+<span class="interface">
+  <% fields_for_interface(interface) do |interface_form| %>
+    <%= interface_form.text_field :name, :class => "interface_name" %>
+    <%= interface_form.text_field :ipaddress, :class => "interface_ipaddress" %>
+    <%= link_to_function image_tag('delete.png', :style => 'vertical-align: middle;'),
+                                   "$(this).up('.interface').remove()" %>
+  <% end %>
+</span>

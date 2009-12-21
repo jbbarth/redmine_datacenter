@@ -8,7 +8,11 @@
     <p><%= f.text_field :name, :required => true %></p>
     <p><%= f.text_field :fqdn %></p>
   <% end %>
-  <p><%= f.text_field :ipaddress %></p>
+  <p>
+    <label><%= l(:label_interface_plural) %></label>
+    <%= render :partial => 'interface', :collection => @server.interfaces %>
+    <%= add_interface_link l(:button_add_interface) %>
+  </p>
   <p><%= f.text_area :description, :rows => 5 %></p>
 </div>
 <!--[eoform:server]-->

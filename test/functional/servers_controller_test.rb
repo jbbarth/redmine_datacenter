@@ -55,13 +55,13 @@ class ServersControllerTest < ActionController::TestCase
   
   def test_update_invalid
     Server.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Server.first
+    put :update, :id => Server.first.id, :server => {}
     assert_template 'edit'
   end
   
   def test_update_valid
     Server.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Server.first
+    put :update, :id => Server.first.id, :server => {}
     assert_redirected_to server_url(assigns(:server))
   end
   
@@ -70,5 +70,58 @@ class ServersControllerTest < ActionController::TestCase
     delete :destroy, :id => server
     assert_redirected_to servers_url
     assert !Server.exists?(server.id)
+  end
+
+  def test_create_valid_with_interfaces
+    post :create,
+         :server => {
+           :name => "myserverwithinterfaces",
+           :new_interface_attributes => [
+             {:name => "eth0", :ipaddress => "192.168.0.99"},
+             {:name => "eth1", :ipaddress => "192.168.1.99"}
+           ]
+         }
+    assert_redirected_to server_url(assigns(:server))
+    server = Server.find_by_name("myserverwithinterfaces")
+    assert_not_nil server
+    assert_equal ["eth0","eth1"], server.interfaces.map(&:name)
+    assert_equal ["192.168.0.99","192.168.1.99"], server.interfaces.map(&:ipaddress)
+  end
+  
+  def test_create_with_invalid_interface
+    post :create,
+         :server => {
+           :name => "myserverwithinterfaces",
+           :new_interface_attributes => [
+             {:name => "eth0", :ipaddress => "192.168.0.99"},
+             {:name => "eth1", :ipaddress => "blablabla"}
+           ]
+         }
+    assert_template 'new'
+  end
+  
+  def test_update_interfaces
+    server = Server.first
+    interface_ids = server.interface_ids
+    interfaces_hash = Hash[ server.interfaces.map do |interface|
+      [ interface.id.to_s , {:name => interface.name, :ipaddress => interface.ipaddress} ]
+    end ]
+    put :update, :id => server.id,
+        :server => {
+          :name => server.name,
+          :existing_interface_attributes => interfaces_hash
+        }
+    assert_redirected_to server_url(assigns(:server))
+    server.reload
+    assert_equal interface_ids, server.interface_ids
+  end
+  
+  def test_update_interfaces_without_value
+    server = Server.first
+    assert_not_equal [], server.interface_ids
+    put :update, :id => server.id, :server => {}
+    assert_redirected_to server_url(assigns(:server))
+    server.reload
+    assert_equal [], server.interface_ids
   end
 end

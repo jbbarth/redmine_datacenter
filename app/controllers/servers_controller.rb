@@ -43,6 +43,7 @@ class ServersController < DatacenterPluginController
 
   def new
     @server = Server.new
+    @server.interfaces.build
   end
   
   def create
@@ -63,6 +64,7 @@ class ServersController < DatacenterPluginController
   end
   
   def update
+    params[:server][:existing_interface_attributes] ||= {}
     @server = Server.find(params[:id])
     if @server.update_attributes(params[:server])
       flash[:notice] = l(:notice_successful_update)

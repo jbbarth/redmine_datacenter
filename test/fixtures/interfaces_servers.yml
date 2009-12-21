@@ -1,0 +1,12 @@
+one:
+  interface_id: 1
+  server_id: 1
+two:
+  interface_id: 2
+  server_id: 2
+three:
+  interface_id: 3
+  server_id: 3
+four:
+  interface_id: 4
+  server_id: 4

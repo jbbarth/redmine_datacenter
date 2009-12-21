@@ -14,3 +14,6 @@ en:
   label_appli_new: "New application"
   label_appli_plural: "Applications"
   field_appli: "Application"
+  label_interface: "Interface"
+  label_interface_plural: "Interfaces"
+  button_add_interface: "Add an interface"

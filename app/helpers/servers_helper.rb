@@ -22,4 +22,16 @@ module ServersHelper
               :class => 'icon icon-unlock'
     end
   end
+
+  def fields_for_interface(interface, &block)
+    prefix = interface.new_record? ? 'new' : 'existing'
+    fields_for("server[#{prefix}_interface_attributes][]", interface, &block)
+  end
+  
+  def add_interface_link(name)
+    link_to_function name, :id => 'add_interface', :class => 'icon icon-add' do |page|
+      page.insert_html :before, :add_interface,
+                       :partial => 'interface', :object => Interface.new
+    end
+  end
 end

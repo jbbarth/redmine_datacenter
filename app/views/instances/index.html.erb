@@ -1,0 +1,43 @@
+<% if User.current.admin? %>
+<div class="contextual">
+  <%= link_to l(:label_instance_new), new_instance_path, :class => 'icon icon-add' %>
+  <%= link_to(l(:button_configure),
+                {:controller => 'settings', :action => 'plugin', :id => @plugin.id},
+                :class => 'icon icon-package') %>
+</div>
+<% end %>
+
+<h2><%=l(:label_instance_plural)%></h2>
+
+<% if @instances.any? %>
+<table class="list">		
+  <thead><tr>
+	<%= sort_header_tag('name', :caption => l(:field_name)) %>
+	<%= sort_header_tag('description', :caption => l(:field_description)) %>
+  <%= sort_header_tag('created_at', :caption => l(:field_created_on), :default_order => 'desc') %>
+  <th> </th>
+  </tr></thead>
+  <tbody>
+<% for instance in @instances -%>
+  <tr class="instance <%= cycle("odd", "even") %>">
+	  <td class="name"><%= link_to h(instance.name), instance_path(instance) %></td>
+	  <td class="description"><%= h(instance.description) %></td>
+	  <td class="created_at" align="center"><%= format_time(instance.created_at) %></td>
+    <td class="buttons">
+      <% if User.current.admin? %>
+      <%= link_to l(:button_update), edit_instance_path(instance), :class => 'icon icon-edit' %>
+      <%= link_to l(:button_delete), instance, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+      <% end %>
+    </td>
+  </tr>
+<% end -%>
+  </tbody>
+</table>
+
+<p class="pagination"><%= pagination_links_full @instance_pages, @instance_count %></p>
+
+<% else %>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+
+<% html_title(l(:label_instance_plural)) -%>

@@ -1,4 +1,6 @@
 class ApplisController < DatacenterPluginController
+  helper :servers
+
   def index
     sort_init 'name', 'asc'
     sort_update %w(id name)
@@ -13,7 +15,7 @@ class ApplisController < DatacenterPluginController
   end
   
   def show
-    @appli = Appli.find(params[:id], :include => :issues)
+    @appli = Appli.find(params[:id], :include => [:issues, :instances])
     c = ARCondition.new(["applis_issues.appli_id = ?", @appli.id])
     sort_init([['id', 'desc']])
     sort_update({'id' => "#{Issue.table_name}.id"})

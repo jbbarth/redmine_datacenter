@@ -1,0 +1,36 @@
+<script type="text/javascript">
+//<![CDATA[
+function toggle_multi_select_datacenter(field) {
+    select = $(field);
+    if (select.multiple == true) {
+        select.multiple = false;
+    } else {
+        select.multiple = true;
+    }
+}
+//]]>
+</script>
+
+<%= error_messages_for 'instance' %>
+
+<!--[form:instance]-->
+<div class="box tabular">
+  <p>
+  <label><%= l(:field_appli) %><span class="required"> *</span></label>
+  <%= collection_select :instance, :appli_id,
+                        Appli.all, :id, :name,
+                        { :selected => @appli.id, :include_blank => false } %>
+  </p>
+  <p><%= f.text_field :name, :required => true %></p>
+  <p>
+    <label><%= l(:label_server_plural) %></label>
+    <%= collection_select :instance, :server_ids, @servers, :id, :name,
+                          { :selected => @instance.server_ids, :include_blank => true },
+                          { :multiple => (@instance.server_ids.length > 1 ? true : false),
+                            :name => 'instance[server_ids][]' } -%>
+    <%= link_to_function image_tag('bullet_toggle_plus.png'),
+                          "toggle_multi_select_datacenter('instance_server_ids');",
+                          :style => "vertical-align: bottom;" %>
+  </p>
+</div>
+<!--[eoform:instance]-->

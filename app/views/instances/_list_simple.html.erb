@@ -1,0 +1,22 @@
+<% if instances && instances.any? %>
+<table class="list instances"><tbody>
+	<% instances.sort_by(&:name).each do |instance| %>
+  <tr class="instance">
+    <td class="name">
+      <strong><%= link_to instance.name, edit_appli_instance_path(@appli,instance) %></strong>
+    </td>
+    <td class="servers">
+      <%= links_to_servers(instance.servers) %>
+    </td>
+    <td class="buttons">
+      <% if User.current.admin? %>
+      <%= link_to l(:button_update), edit_appli_instance_path(@appli,instance), :class => 'icon icon-edit' %>
+      <%= link_to l(:button_delete), appli_instance_path(@appli,instance), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+      <% end %>
+    </td>
+  </tr>
+  <% end -%>
+</tbody></table>
+<% else %>
+	<p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>

@@ -9,6 +9,7 @@
 <h2><%= link_to l(:label_server_plural), servers_path %> &#187; <%=h @server.name %></h2>
 
 <div class="splitcontentleft server">
+
   <h3><%= @server.name %></h3>
   <table class="attributes">
     <tr><th><%=l(:field_name)%>:</th><td><%= @server.name %></td></tr>
@@ -23,6 +24,15 @@
     </tr>
     <tr><th><%=l(:field_description)%>:</th><td><%= @server.description %></td></tr>
   </table>
+
+  <h3><%= l(:label_appli_plural) %>/<%= l(:label_instance_plural) %></h3>
+  <% @server.instances.sort_by{|x| [x.appli.name, x.name]}.each do |instance| %>
+    <p>
+    <strong><%= link_to instance.appli.name, instance.appli %></strong>
+    (<%= link_to instance.name, edit_appli_instance_path(instance.appli,instance) %>) : 
+    <%= links_to_servers(instance.servers) %>
+    </p>
+  <% end %>
 </div>
 
 <div class="splitcontentright">

@@ -9,18 +9,32 @@
 <h2><%= link_to l(:label_appli_plural), applis_path %> &#187; <%=h @appli.name %></h2>
 
 <div class="splitcontentleft appli">
+
   <h3><%= l(:field_description) %></h3>
   <p><%= @appli.description %></p>
+  
+  <div class="contextual">
+    <%= link_to l(:label_instance_new), new_appli_instance_path(@appli), :class => 'icon icon-add' %>
+  </div>
+  <h3><%= l(:label_instance_plural) %></h3>
+  <% if @appli.instances.empty? %>
+    <p><%= l(:label_no_data) %></p>
+  <% else %>
+    <%= render :partial => 'instances/list_simple', :locals => {:instances => @appli.instances} %>
+  <% end %>
+  
 </div>
 
 <div class="splitcontentright">
+  
   <h3><%= l(:label_related_issues) %></h3>
   <% if @issues.empty? %>
-  <p class="nodata"><%= l(:label_no_data) %></p>
+    <p class="nodata"><%= l(:label_no_data) %></p>
   <% else %>
-  <%= render :partial => 'issues/list_simple', :locals => {:issues => @issues} %>
-  <p class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></p>
+    <%= render :partial => 'issues/list_simple', :locals => {:issues => @issues} %>
+    <p class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></p>
   <% end %>
+
 </div>
 
 <% html_title(l(:label_appli_plural)) -%>

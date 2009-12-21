@@ -1,0 +1,30 @@
+<div class="contextual">
+  <% if User.current.admin? %>
+    <%= link_to l(:button_update), edit_appli_instance_path(@appli,@instance), :class => 'icon icon-edit' %>
+    <%= link_to l(:button_delete), @instance, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+  <% end %>
+  <!--<%= link_to l(:label_instance_plural), appli_instances_path(@appli), :class => 'icon icon-instances' %>-->
+</div>
+
+<h2>
+  <%= link_to l(:label_appli_plural), applis_path %> 
+  &#187; <%= link_to @appli.name, appli_path(@appli) %>
+  &#187; <%= h @instance.name %>
+</h2>
+
+<div class="splitcontentleft instance">
+  <h3><%= l(:field_description) %></h3>
+  <p><%= @instance.description %></p>
+</div>
+
+<div class="splitcontentright">
+  <h3><%= l(:label_related_issues) %></h3>
+  <% if @issues.empty? %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+  <% else %>
+  <%= render :partial => 'issues/list_simple', :locals => {:issues => @issues} %>
+  <p class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></p>
+  <% end %>
+</div>
+
+<% html_title(l(:label_instance_plural)) -%>

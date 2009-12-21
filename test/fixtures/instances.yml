@@ -1,0 +1,19 @@
+one:
+  id: 1
+  name: first-app-prod
+  appli_id: 1
+
+two:
+  id: 2
+  name: first-app-test
+  appli_id: 1
+
+three:
+  id: 3
+  name: first-app-school
+  appli_id: 1
+
+four:
+  id: 4
+  name: second-app-prod
+  appli_id: 2

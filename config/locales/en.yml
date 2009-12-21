@@ -17,3 +17,6 @@ en:
   label_interface: "Interface"
   label_interface_plural: "Interfaces"
   button_add_interface: "Add an interface"
+  label_instance: "Instance"
+  label_instance_plural: "Instances"
+  label_instance_new: "New instance"

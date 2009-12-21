@@ -1,6 +1,7 @@
 require_dependency 'issues_controller'
 
 class IssuesController
+  helper :servers
   before_filter :fix_missing_server_ids, :only => [:edit, :update]
   before_filter :fix_missing_appli_ids, :only => [:edit, :update]
   

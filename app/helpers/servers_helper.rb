@@ -34,4 +34,10 @@ module ServersHelper
                        :partial => 'interface', :object => Interface.new
     end
   end
+  
+  def links_to_servers(servers)
+    servers.sort_by(&:name).map do |server|
+      link_to(server.name, server)
+    end.join(", ")
+  end
 end

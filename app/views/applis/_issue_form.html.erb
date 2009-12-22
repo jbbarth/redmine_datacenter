@@ -12,12 +12,8 @@ function toggle_multi_select_datacenter(field) {
 </script>
 <p>
   <label><%= l(:label_appli_plural) %></label>
-  <% applis = Appli.all(:order => 'name ASC') %>
-  <%= collection_select :issue, :appli_ids, applis, :id, :name,
-                        { :selected => @issue.appli_ids, :include_blank => true },
-                        { :multiple => (@issue.appli_ids.length > 1 ? true : false),
-                          :name => 'issue[appli_ids][]' } -%>
+  <%= select_applis_or_instances(@issue,Appli.all(:include => :instances)) %>
   <%= link_to_function image_tag('bullet_toggle_plus.png'),
-                       "toggle_multi_select_datacenter('issue_appli_ids');",
+                       "toggle_multi_select_datacenter('issue_appli_instance_ids');",
                        :style => "vertical-align: bottom;" %>
 </p> 

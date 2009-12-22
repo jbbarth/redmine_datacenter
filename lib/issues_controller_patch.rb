@@ -11,7 +11,7 @@ class IssuesController
     #the future :)
     if request.post? || request.put?
       params[:issue][:server_ids] ||= []
-      params[:issue][:appli_ids] ||= []
+      params[:issue][:appli_instance_ids] ||= []
     end
   end
 end

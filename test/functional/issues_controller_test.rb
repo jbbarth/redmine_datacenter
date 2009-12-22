@@ -168,14 +168,18 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     post :edit, :id => 1, :issue => {:subject => 'Custom field change',
                                      :priority_id => '6',
                                      :category_id => '1',
-                                     :appli_ids => ["1", "2"]}
+                                     :appli_instance_ids => ["Appli:1", "Appli:2", "Instance:1"]}
     assert_redirected_to :action => 'show', :id => '1'
     issue.reload
     assert_equal [1,2], issue.appli_ids
+    assert_equal [1], issue.instance_ids
+    assert_equal ["Appli:1", "Appli:2", "Instance:1"], issue.appli_instance_ids
     post :edit, :id => 1, :issue => {:subject => 'Custom field change',
                                      :priority_id => '6',
                                      :category_id => '1'}
     issue.reload
     assert_equal [], issue.appli_ids
+    assert_equal [], issue.instance_ids
+    assert_equal [], issue.appli_instance_ids
   end
 end

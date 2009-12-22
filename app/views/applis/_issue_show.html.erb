@@ -1,6 +1,6 @@
 <tr> 
   <th class="applis"><%= l(:label_appli_plural) %></th>
   <td class="applis">
-    <%= @issue.applis.any? ? links_to_applis(@issue.applis) : "-" %>
+    <%= @issue.applis_and_instances.any? ? links_to_applis(@issue.applis_and_instances) : "-" %>
   </td> 
 </tr>

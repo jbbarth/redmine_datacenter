@@ -7,4 +7,8 @@ class Instance < ActiveRecord::Base
   attr_accessible :name, :appli_id, :server_ids
 
   validates_presence_of :name
+
+  def fullname
+    "#{appli.name}(#{name})"
+  end
 end

@@ -10,10 +10,8 @@
 
 <div class="splitcontentleft server">
 
-  <h3><%= @server.name %></h3>
+  <h3><%= @server.fqdn %></h3>
   <table class="attributes">
-    <tr><th><%=l(:field_name)%>:</th><td><%= @server.name %></td></tr>
-    <tr><th><%=l(:field_fqdn)%>:</th><td><%= @server.fqdn %></td></tr>
     <tr>
       <th><%=l(:label_interface_plural)%>:</th>
       <td>
@@ -24,6 +22,10 @@
     </tr>
     <tr><th><%=l(:field_description)%>:</th><td><%= @server.description %></td></tr>
   </table>
+
+  <div class="contextual">
+    <%= link_to l(:label_appli_plural), applis_path, :class => 'icon icon-applis' %>
+  </div>
 
   <h3><%= l(:label_appli_plural) %>/<%= l(:label_instance_plural) %></h3>
   <% @server.instances.sort_by{|x| [x.appli.name, x.name]}.each do |instance| %>

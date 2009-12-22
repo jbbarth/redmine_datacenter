@@ -7,7 +7,7 @@ en:
   label_server_new: "New server"
   label_server_plural: "Servers"
   field_server: "Server"
-  field_fqdn: "Fully qualified domain name"
+  field_fqdn: "Fullname (fqdn)"
   field_ipaddress: "IP Address"
   label_use_multiple_select: "Use multi-select instead of checkboxes ?"
   field_domain: "Domain"

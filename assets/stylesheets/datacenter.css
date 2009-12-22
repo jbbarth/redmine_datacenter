@@ -3,7 +3,8 @@
 .icon22-applis { background-image: url(../images/22x22/applications.png); }
 .icon-applis { background-image: url(../images/16x16/applications.png); }
 div.server, div.appli {background:#ffffdd; padding:0 6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
-div.server table.attributes th, div.appli table.attributes th {width:30%; white-space: nowrap;}
+div.server table.attributes, div.appli table.attributes {margin-bottom:10px;}
+div.server table.attributes th, div.appli table.attributes th {width:20%; white-space: nowrap;}
 span.interface {display:block;}
 span.interface input.interface_name {width:3em;}
 span.interface input.interface_ipaddress {width:10em;}

@@ -1,8 +1,11 @@
 class Appli < ActiveRecord::Base
   unloadable
 
-  has_and_belongs_to_many :issues
   has_many :instances
+  has_many :issue_elements, :as => :element,
+           :dependent => :destroy
+  has_many :issues,
+           :through => :issue_elements
 
   attr_accessible :name, :description
 

@@ -1,0 +1,19 @@
+one:
+  issue_id: 1
+  element_id: 1
+  element_type: Appli
+
+two:
+  issue_id: 1
+  element_id: 1
+  element_type: Instance
+
+three:
+  issue_id: 2
+  element_id: 2
+  element_type: Appli
+
+four:
+  issue_id: 3
+  element_id: 4
+  element_type: Instance

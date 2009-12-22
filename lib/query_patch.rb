@@ -34,11 +34,13 @@ class Query
           sql << "(SELECT #{db_table}.issue_id FROM #{db_table} WHERE "
           sql << sql_for_field(field, '=', v, db_table, db_field) + ')'
         when "appli_id"
-          db_table = Appli.reflections[:issues].options[:join_table]
-          db_field = 'appli_id'
+          #db_table = Appli.reflections[:issues].options[:join_table]
+          db_table = IssueElement.table_name
+          db_field = 'element_id'
           is_custom_filter = true
           sql << "#{Issue.table_name}.id #{ operator == '=' ? 'IN' : 'NOT IN' } "
           sql << "(SELECT #{db_table}.issue_id FROM #{db_table} WHERE "
+          sql << "#{db_table}.element_type = 'Appli' AND "
           sql << sql_for_field(field, '=', v, db_table, db_field) + ')'
         else
           #nothing:-), this shouldn't happen

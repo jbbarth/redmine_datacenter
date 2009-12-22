@@ -2,7 +2,11 @@ require_dependency 'issue'
 
 class Issue
   has_and_belongs_to_many :servers
-  has_and_belongs_to_many :applis
+  has_many :issue_elements, :dependent => :destroy
+  has_many :applis,
+           :through => :issue_elements,
+           :source => :element,
+           :source_type => 'Appli'
 
   def has_server?(server)
     server_ids.include?(server.id)

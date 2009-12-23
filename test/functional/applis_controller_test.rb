@@ -31,6 +31,12 @@ class ApplisControllerTest < ActionController::TestCase
     get :show, :id => Appli.first
     assert_template 'show'
   end
+
+  def test_show_includes_related_issues
+    get :show, :id => Appli.find(2)
+    assert_tag :tr, :attributes => {:id => 'issue-2'} #Issue(2) linked to Appli(2)
+    assert_tag :tr, :attributes => {:id => 'issue-3'} #Issue(3) linked to Instance(4) linked tp Appli(2)
+  end
   
   def test_new
     get :new

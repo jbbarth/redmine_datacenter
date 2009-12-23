@@ -2,18 +2,22 @@ one:
   issue_id: 1
   element_id: 1
   element_type: Appli
+  appli_id: 1
 
 two:
   issue_id: 1
   element_id: 1
   element_type: Instance
+  appli_id: 1
 
 three:
   issue_id: 2
   element_id: 2
   element_type: Appli
+  appli_id: 2
 
 four:
   issue_id: 3
   element_id: 4
   element_type: Instance
+  appli_id: 2

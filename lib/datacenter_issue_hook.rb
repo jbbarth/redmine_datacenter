@@ -15,8 +15,13 @@ class DatacenterIssueHook < Redmine::Hook::ViewListener
   
   # Add journal details for our Appli/Instance related to the current issues
   #
+  # Context:
+  # * :params => Parameters of the request
+  # * :issue => Current issue object
+  # * :time_entry => Current time entry
+  # * :journal => Current journal for this issue
+  #
   def controller_issues_edit_before_save(context)
-    #{:params => params, :issue => @issue, :time_entry => @time_entry, :journal => journal}
     app_before = context[:controller].instance_variable_get("@appli_instance_ids_before_change").sort
     if app_before
       app_after = context[:issue].appli_instance_ids.sort

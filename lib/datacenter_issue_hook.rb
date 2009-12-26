@@ -21,7 +21,7 @@ class DatacenterIssueHook < Redmine::Hook::ViewListener
   # * :time_entry => Current time entry
   # * :journal => Current journal for this issue
   #
-  def controller_issues_edit_before_save(context)
+  def controller_issues_edit_after_save(context)
     dc_elements = context[:controller].instance_variable_get("@datacenter_elements_before_change")
     if dc_elements
       #appli_instance_ids

@@ -182,4 +182,40 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     assert_equal [], issue.instance_ids
     assert_equal [], issue.appli_instance_ids
   end
+  
+  def test_servers_and_applis_are_added_to_journal
+    issue = Issue.find(4)
+    issue.journals.clear
+    ActionMailer::Base.deliveries.clear
+
+    #first we make sure no instance or appli is linked..
+    assert_equal [], issue.appli_instance_ids
+    
+    #ok, let's add appli/instances
+    post :edit, :id => issue.id, 
+         :issue => {:appli_instance_ids => ["Appli:1", "Appli:2", "Instance:1"]}
+    assert_redirected_to :action => 'show', :id => issue.id
+    
+    issue.reload
+    j = issue.journals.find(:first, :order => 'id DESC')
+    details = j.details.reject{|d| d.property == "cf"} #we don't want to have custom field details..
+    assert j.notes.blank?
+    assert_equal 1, details.size
+    assert_equal [], YAML.load(details.first.old_value)
+    assert_equal ["Appli:1", "Appli:2", "Instance:1"], YAML.load(details.first.value)
+    
+    post :edit, :id => issue.id, :issue => {}
+    assert_redirected_to :action => 'show', :id => issue.id
+    issue.reload
+    j = issue.journals.find(:first, :order => 'id DESC')
+    details = j.details.reject{|d| d.property == "cf"} #we don't want to have custom field details..
+    assert_equal 1, details.size
+    assert_equal [], YAML.load(details.first.value)
+    assert_equal ["Appli:1", "Appli:2", "Instance:1"], YAML.load(details.first.old_value)
+
+    #let's test applis are formated correctly in a journal detail
+    get :show, :id => issue.id
+    assert_select "div#history div.journal",
+                  /Applications set to first_application, first_application\(first-app-prod\), second_app/
+  end
 end

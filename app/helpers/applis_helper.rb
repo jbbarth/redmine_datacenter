@@ -1,8 +1,8 @@
 module ApplisHelper
-  def links_to_applis(applis_and_instances)
+  def links_to_applis(applis_and_instances, no_html = false)
     applis_and_instances.sort_by(&:fullname).map do |element|
       appli_id = element.is_a?(Appli) ? element.id : element.appli_id
-      link_to(element.fullname, appli_path(appli_id))
+      (no_html ? element.fullname : link_to(element.fullname, appli_path(appli_id)))
     end.join(", ")
   end
 

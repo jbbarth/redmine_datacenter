@@ -2,9 +2,7 @@ require 'redmine'
 
 #hooks
 require 'datacenter_assets'
-require 'issue_view_additions'
-require 'issues_controller_additions'
-require 'issues_helper_additions'
+require 'datacenter_issue_hook'
 
 #patches
 config.to_prepare do

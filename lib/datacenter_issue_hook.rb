@@ -13,7 +13,7 @@ class DatacenterIssueHook < Redmine::Hook::ViewListener
   render_on :view_issues_form_details_bottom, :partial => "datacenter_plugin/issue_form"
   render_on :view_issues_show_details_bottom, :partial => "datacenter_plugin/issue_show"
   
-  # Add journal details for our Appli/Instance related to the current issues
+  # Add journal details for our elements related to the current issues
   #
   # Context:
   # * :params => Parameters of the request
@@ -22,16 +22,24 @@ class DatacenterIssueHook < Redmine::Hook::ViewListener
   # * :journal => Current journal for this issue
   #
   def controller_issues_edit_before_save(context)
-    app_before = context[:controller].instance_variable_get("@appli_instance_ids_before_change").sort
-    if app_before
+    dc_elements = context[:controller].instance_variable_get("@datacenter_elements_before_change")
+    if dc_elements
+      #appli_instance_ids
+      app_before = dc_elements[:appli_instance_ids].sort
       app_after = context[:issue].appli_instance_ids.sort
-      if app_after != app_before
-        context[:journal].details << JournalDetail.new(:property => 'attr',
-                                                       :prop_key => 'appli_instance_ids',
-                                                       :old_value => app_before,
-                                                       :value => app_after)
-        context[:journal].save!
-      end
+      context[:journal].details << JournalDetail.new(:property => 'attr',
+                                                     :prop_key => 'appli_instance_ids',
+                                                     :old_value => app_before,
+                                                     :value => app_after) unless app_before == app_after
+      #server_ids
+      serv_before = dc_elements[:server_ids]
+      serv_after = context[:issue].server_ids
+      context[:journal].details << JournalDetail.new(:property => 'attr',
+                                                     :prop_key => 'server_ids',
+                                                     :old_value => serv_before,
+                                                     :value => serv_after) unless serv_before == serv_after
+      #save changes
+      context[:journal].save!
     end
   end
   
@@ -47,7 +55,7 @@ class DatacenterIssueHook < Redmine::Hook::ViewListener
     #TODO: DRY it (see ApplisHelper)
     #TODO: optimize it: caching between multiple journals and between these two..
     d = context[:detail]
-    if d.prop_key == 'appli_instance_ids'
+    if %w(appli_instance_ids server_ids).include?(d.prop_key)
       #Principle:
       # d.value = YAML.load(d.value.to_s)
       # d.value.map! do |a|
@@ -58,12 +66,13 @@ class DatacenterIssueHook < Redmine::Hook::ViewListener
         d.send("#{key}=",YAML.load(d.send(key).to_s)) if d.send(key).is_a?(String) && d.send(key).match(/^---/)
         if d.send(key).respond_to?(:to_ary)
           d.send("#{key}=",d.send(key).map do |value|
-            if value.match(/^(Appli|Instance):(\d+)$/)
-              Kernel.const_get($~[1]).find($~[2]).fullname
-            else
-              value
+            case d.prop_key
+            when 'appli_instance_ids'
+              (value.match(/^(Appli|Instance):(\d+)$/) ? Kernel.const_get($~[1]).find($~[2]).fullname : value)
+            when 'server_ids'
+              Server.find(value).name
             end
-          end.sort.join(", "))
+          end.compact.sort.join(", "))
         end
       end
     end

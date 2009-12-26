@@ -21,3 +21,4 @@ en:
   label_instance_plural: "Instances"
   label_instance_new: "New instance"
   field_appli_instance_ids: "Applications"
+  field_server_ids: "Servers"

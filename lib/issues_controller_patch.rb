@@ -4,7 +4,7 @@ class IssuesController
   helper :servers
   helper :applis
   before_filter :fix_missing_ids, :only => [:edit, :update]
-  before_filter :remember_appli_instance_ids_value, :only => [:edit, :update]
+  before_filter :remember_datacenter_elements, :only => [:edit, :update]
   
   def fix_missing_ids
     #see railscasts #17 ; actually redmine only uses "edit" method with "post" requests
@@ -16,7 +16,10 @@ class IssuesController
     end
   end
 
-  def remember_appli_instance_ids_value
-    @appli_instance_ids_before_change = @issue.appli_instance_ids
+  def remember_datacenter_elements
+    @datacenter_elements_before_change = {
+      :appli_instance_ids => @issue.appli_instance_ids,
+      :server_ids => @issue.server_ids
+    }
   end
 end

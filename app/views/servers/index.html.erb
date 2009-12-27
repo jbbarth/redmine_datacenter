@@ -36,7 +36,7 @@
 	  <td class="name"><%= link_to h(server.name), server_path(server) %></td>
 	  <td class="fqdn"><%= h(server.fqdn) %></td>
 	  <td class="ipaddress"><%= h(server.ipaddress) %></td>
-	  <td class="description"><%= textilizable server, :description %></td>
+	  <td class="description"><%= server.description %></td>
 	  <td class="created_at" align="center"><%= format_time(server.created_at) %></td>
     <td class="buttons">
       <% if User.current.admin? %>

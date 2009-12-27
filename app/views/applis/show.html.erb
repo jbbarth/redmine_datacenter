@@ -11,7 +11,7 @@
 <div class="splitcontentleft appli">
 
   <h3><%= l(:field_description) %></h3>
-  <p><%= @appli.description %></p>
+  <p><%= textilizable @appli, :description %></p>
   
   <div class="contextual">
     <%= link_to l(:label_instance_new), new_appli_instance_path(@appli), :class => 'icon icon-add' %>

@@ -15,7 +15,7 @@ module ApplisHelper
     #=> <select class="form_input" id="access" multiple="multiple" name="access[]"><option>Read</option>
     #   <option>Write</option></select>
     #
-    available_options = ["",""]
+    available_options = [["",""]]
     applis.sort_by(&:name).each do |appli|
       available_options << [ appli.name, "Appli:#{appli.id}" ]
       appli.instances.sort_by(&:name).each do |instance|

@@ -38,7 +38,7 @@ class ApplisController < DatacenterPluginController
   def create
     @appli = Appli.new(params[:appli])
     if @appli.save
-      flash[:notice] = "Successfully created appli."
+      flash[:notice] = l(:notice_successful_create)
       redirect_to @appli
     else
       render :action => 'new'
@@ -52,7 +52,7 @@ class ApplisController < DatacenterPluginController
   def update
     @appli = Appli.find(params[:id])
     if @appli.update_attributes(params[:appli])
-      flash[:notice] = "Successfully updated appli."
+      flash[:notice] = l(:notice_successful_update)
       redirect_to @appli
     else
       render :action => 'edit'
@@ -62,7 +62,7 @@ class ApplisController < DatacenterPluginController
   def destroy
     @appli = Appli.find(params[:id])
     @appli.destroy
-    flash[:notice] = "Successfully destroyed appli."
+    flash[:notice] = l(:notice_successful_delete)
     redirect_to applis_url
   end
 end

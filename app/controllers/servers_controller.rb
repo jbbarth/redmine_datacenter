@@ -77,7 +77,7 @@ class ServersController < DatacenterPluginController
   def destroy
     @server = Server.find(params[:id])
     @server.destroy
-    #flash[:notice] = "Successfully destroyed server."
+    flash[:notice] = l(:notice_successful_delete)
     redirect_to servers_url
   end
 end

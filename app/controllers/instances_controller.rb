@@ -10,7 +10,7 @@ class InstancesController < DatacenterPluginController
     @instance = Instance.new(params[:instance])
     @servers = Server.active
     if @instance.save
-      flash[:notice] = "Successfully created instance."
+      flash[:notice] = l(:notice_successful_create)
       redirect_to @appli
     else
       render :action => 'new'
@@ -26,7 +26,7 @@ class InstancesController < DatacenterPluginController
     @instance = Instance.find(params[:id])
     @servers = (Server.active + @instance.servers).uniq.sort_by(&:name)
     if @instance.update_attributes(params[:instance])
-      flash[:notice] = "Successfully updated instance."
+      flash[:notice] = l(:notice_successful_update)
       redirect_to @appli
     else
       render :action => 'edit'
@@ -36,7 +36,7 @@ class InstancesController < DatacenterPluginController
   def destroy
     @instance = Instance.find(params[:id])
     @instance.destroy
-    flash[:notice] = "Successfully destroyed instance."
+    flash[:notice] = l(:notice_successful_delete)
     redirect_to @appli
   end
 

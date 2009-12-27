@@ -6,7 +6,7 @@ class AppliTest < ActiveSupport::TestCase
     Dir.glob("config/locales/*.yml").each do |locale|
       locale_keys[locale] = File.open(locale).readlines.map(&:strip).delete_if do |line|
         line.match(/^#/) || line.match(/^$/)
-      end.map do |line|
+      end.drop(1).map do |line|
         line.split(":").first
       end.sort
     end

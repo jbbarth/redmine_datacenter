@@ -12,8 +12,13 @@ class Server < ActiveRecord::Base
   STATUS_LOCKED = 2
   
   validates_presence_of :name
-  validates_uniqueness_of :name, :case_sensitive => false
-  validates_uniqueness_of :fqdn, :case_sensitive => false
+  validates_uniqueness_of :name, :case_sensitive => false,
+                          :scope => [:status],
+                          :unless => Proc.new { |server| !server.active? }
+  validates_uniqueness_of :fqdn, :case_sensitive => false,
+                          :scope => [:status],
+                          :unless => Proc.new { |server| !server.active? },
+                          :allow_nil => true, :allow_blank => true
   validates_format_of :name, :with => /\A[a-zA-Z0-9_-]*\Z/
   validates_associated :interfaces
 

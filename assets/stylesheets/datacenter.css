@@ -10,3 +10,4 @@ span.interface {display:block;}
 span.interface input.interface_name {width:3em;}
 span.interface input.interface_ipaddress {width:10em;}
 table.instances {border: 0;}
+table.instances td.buttons a {padding-right:0;}

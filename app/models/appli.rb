@@ -1,7 +1,7 @@
 class Appli < ActiveRecord::Base
   unloadable
 
-  has_many :instances
+  has_many :instances, :dependent => :destroy
   has_many :issue_elements, :as => :element,
            :dependent => :destroy
   has_many :issues,

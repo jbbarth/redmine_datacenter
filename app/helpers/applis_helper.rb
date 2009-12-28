@@ -1,4 +1,6 @@
 module ApplisHelper
+  include InstancesHelper
+
   def links_to_applis(applis_and_instances, no_html = false)
     applis_and_instances.sort_by(&:fullname).map do |element|
       appli_id = element.is_a?(Appli) ? element.id : element.appli_id
@@ -23,6 +25,21 @@ module ApplisHelper
                 :name => 'issue[appli_instance_ids][]' }
 
     select_tag "issue_appli_instance_ids", values, options
+  end
+
+  def change_link_appli_status(appli)
+    parameters = {:id => appli, :action => :update}
+    if appli.active?
+      link_to l(:button_lock),
+              url_for(:overwrite_params => parameters.merge(:appli => {:status => Appli::STATUS_LOCKED})),
+              :method => :put,
+              :class => 'icon icon-lock'
+    else
+      link_to l(:button_unlock),
+              url_for(:overwrite_params => parameters.merge(:instance => {:status => Appli::STATUS_ACTIVE})),
+              :method => :put,
+              :class => 'icon icon-unlock'
+    end
   end
 end
 

@@ -35,8 +35,8 @@ class InstancesController < DatacenterPluginController
   
   def destroy
     @instance = Instance.find(params[:id])
-    @instance.destroy
-    flash[:notice] = l(:notice_successful_delete)
+    @instance.status = Instance::STATUS_LOCKED
+    @instance.save
     redirect_to @appli
   end
 

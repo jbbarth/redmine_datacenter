@@ -7,10 +7,19 @@ class Appli < ActiveRecord::Base
   has_many :issues,
            :through => :issue_elements
 
-  attr_accessible :name, :description
+  attr_accessible :name, :description, :status
 
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
+
+  STATUS_ACTIVE = 1
+  STATUS_LOCKED = 2
+
+  named_scope :active, :conditions => { :status => STATUS_ACTIVE }
+  
+  def active?
+    self.status == STATUS_ACTIVE
+  end
 
   def fullname
     self.name

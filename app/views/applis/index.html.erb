@@ -26,7 +26,7 @@
     <td class="buttons">
       <% if User.current.admin? %>
       <%= link_to l(:button_update), edit_appli_path(appli), :class => 'icon icon-edit' %>
-      <%= link_to l(:button_delete), appli, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+      <%= change_link_appli_status(appli) %>
       <% end %>
     </td>
   </tr>

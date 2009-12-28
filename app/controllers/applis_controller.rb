@@ -61,8 +61,8 @@ class ApplisController < DatacenterPluginController
   
   def destroy
     @appli = Appli.find(params[:id])
-    @appli.destroy
-    flash[:notice] = l(:notice_successful_delete)
+    @appli.status = Appli::STATUS_LOCKED
+    @appli.save
     redirect_to applis_url
   end
 end

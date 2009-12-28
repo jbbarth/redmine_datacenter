@@ -40,9 +40,8 @@
 	  <td class="created_at" align="center"><%= format_time(server.created_at) %></td>
     <td class="buttons">
       <% if User.current.admin? %>
-      <%= change_link_server_status(server) %>
       <%= link_to l(:button_update), edit_server_path(server), :class => 'icon icon-edit' %>
-      <%= link_to l(:button_delete), server, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+      <%= change_link_server_status(server) %>
       <% end %>
     </td>
   </tr>

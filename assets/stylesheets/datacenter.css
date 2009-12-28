@@ -5,6 +5,7 @@
 div.server, div.appli {background:#ffffdd; padding:0 6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
 div.server table.attributes, div.appli table.attributes {margin-bottom:10px;}
 div.server table.attributes th, div.appli table.attributes th {width:20%; white-space: nowrap;}
+div.server p.nodata, div.appli p.nodata {text-align:left; background:#ffffdd; border:0; color:inherit; margin:2px 0 6px 0; padding:2px; font-size:100%;}
 span.interface {display:block;}
 span.interface input.interface_name {width:3em;}
 span.interface input.interface_ipaddress {width:10em;}

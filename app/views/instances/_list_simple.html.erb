@@ -7,7 +7,7 @@
         <% if User.current.admin? %>
           <%= link_to instance.name, edit_appli_instance_path(@appli,instance) %><
         <% else %>
-          <%= instance.name
+          <%= instance.name %>
         <% end %>
       </strong>
     </td>

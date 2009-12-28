@@ -68,9 +68,21 @@ class DatacenterIssueHook < Redmine::Hook::ViewListener
           d.send("#{key}=",d.send(key).map do |value|
             case d.prop_key
             when 'appli_instance_ids'
-              (value.match(/^(Appli|Instance):(\d+)$/) ? Kernel.const_get($~[1]).find($~[2]).fullname : value)
+              if value.match(/^(Appli|Instance):(\d+)$/)
+                begin
+                  Kernel.const_get($~[1]).find($~[2]).fullname
+                rescue
+                 "unknown"
+                end
+              else
+                value
+              end
             when 'server_ids'
-              Server.find(value).name
+              begin
+                Server.find(value).name
+              rescue
+                "unknown"
+              end
             end
           end.compact.sort.join(", "))
         end

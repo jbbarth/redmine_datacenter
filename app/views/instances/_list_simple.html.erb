@@ -5,7 +5,7 @@
     <td class="name">
       <strong>
         <% if User.current.admin? %>
-          <%= link_to instance.name, edit_appli_instance_path(@appli,instance) %><
+          <%= link_to instance.name, edit_appli_instance_path(@appli,instance) %>
         <% else %>
           <%= instance.name %>
         <% end %>

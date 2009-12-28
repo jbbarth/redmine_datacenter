@@ -13,25 +13,21 @@
   <h3><%= l(:field_description) %></h3>
   <p><%= textilizable @appli, :description %></p>
   
-  <div class="contextual">
-    <%= link_to l(:label_instance_new), new_appli_instance_path(@appli), :class => 'icon icon-add' %>
-  </div>
-  <h3><%= l(:label_instance_plural) %></h3>
-  <% if @appli.instances.empty? %>
-    <p><%= l(:label_no_data) %></p>
-  <% else %>
-    <%= render :partial => 'instances/list_simple', :locals => {:instances => @appli.instances} %>
+  <% if User.current.admin? %>
+    <div class="contextual">
+      <%= link_to l(:label_instance_new), new_appli_instance_path(@appli), :class => 'icon icon-add' %>
+    </div>
   <% end %>
+  <h3><%= l(:label_instance_plural) %></h3>
+  <%= render :partial => 'instances/list_simple', :locals => {:instances => @appli.instances} %>
   
 </div>
 
 <div class="splitcontentright">
   
   <h3><%= l(:label_related_issues) %></h3>
-  <% if @issues.empty? %>
-    <p class="nodata"><%= l(:label_no_data) %></p>
-  <% else %>
-    <%= render :partial => 'issues/list_simple', :locals => {:issues => @issues} %>
+  <%= render :partial => 'issues/list_simple', :locals => {:issues => @issues} %>
+  <% if @issues.any? %>
     <p class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></p>
   <% end %>
 

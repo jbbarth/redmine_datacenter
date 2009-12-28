@@ -3,7 +3,13 @@
 	<% instances.sort_by(&:name).each do |instance| %>
   <tr class="instance">
     <td class="name">
-      <strong><%= link_to instance.name, edit_appli_instance_path(@appli,instance) %></strong>
+      <strong>
+        <% if User.current.admin? %>
+          <%= link_to instance.name, edit_appli_instance_path(@appli,instance) %><
+        <% else %>
+          <%= instance.name
+        <% end %>
+      </strong>
     </td>
     <td class="servers">
       <%= links_to_servers(instance.servers) %>

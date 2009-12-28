@@ -52,6 +52,8 @@ class InstancesControllerTest < ActionController::TestCase
     instance = Instance.first
     delete :destroy, :id => instance, :appli_id => 1
     assert_redirected_to appli_url(Appli.first)
-    assert !Instance.exists?(instance.id)
+    instance.reload
+    assert Instance.exists?(instance.id)
+    assert_equal Instance::STATUS_LOCKED, instance.status
   end
 end

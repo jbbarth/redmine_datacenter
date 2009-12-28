@@ -69,7 +69,9 @@ class ServersControllerTest < ActionController::TestCase
     server = Server.first
     delete :destroy, :id => server
     assert_redirected_to servers_url
-    assert !Server.exists?(server.id)
+    server.reload
+    assert Server.exists?(server.id)
+    assert_equal Server::STATUS_LOCKED, server.status
   end
 
   def test_create_valid_with_interfaces

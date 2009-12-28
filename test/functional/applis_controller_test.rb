@@ -76,6 +76,8 @@ class ApplisControllerTest < ActionController::TestCase
     appli = Appli.first
     delete :destroy, :id => appli
     assert_redirected_to applis_url
-    assert !Appli.exists?(appli.id)
+    appli.reload
+    assert Appli.exists?(appli.id)
+    assert_equal Appli::STATUS_LOCKED, appli.status
   end
 end

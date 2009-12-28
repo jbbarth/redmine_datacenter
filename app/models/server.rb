@@ -34,6 +34,10 @@ class Server < ActiveRecord::Base
     interfaces.first.ipaddress if interfaces.any?
   end
 
+  def fullname
+    self.fqdn.blank? ? self.name : self.fqdn
+  end
+
   def new_interface_attributes=(interface_attributes)
     interface_attributes.each do |attrs|
       interfaces.build(attrs) unless attrs['name'].blank? && attrs['ipaddress'].blank?

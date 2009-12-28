@@ -15,4 +15,9 @@ class Appli < ActiveRecord::Base
   def fullname
     self.name
   end
+  
+  def short_description(max=50)
+    short = "#{self.description}".split("\n").first.to_s
+    (short.length > max ? short[0..(max-5)] + "<i>[...]</i>" : short)
+  end
 end

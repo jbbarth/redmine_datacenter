@@ -21,7 +21,7 @@
 <% for appli in @applis -%>
   <tr class="appli <%= cycle("odd", "even") %>">
 	  <td class="name"><%= link_to h(appli.name), appli_path(appli) %></td>
-	  <td class="description"><%= appli.description %></td>
+	  <td class="description"><%= appli.short_description %></td>
 	  <td class="created_at" align="center"><%= format_time(appli.created_at) %></td>
     <td class="buttons">
       <% if User.current.admin? %>

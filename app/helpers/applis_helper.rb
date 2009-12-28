@@ -13,7 +13,9 @@ module ApplisHelper
     applis.sort_by(&:name).each do |appli|
       available_options << [ appli.name, "Appli:#{appli.id}" ]
       appli.instances.sort_by(&:name).each do |instance|
-        available_options << [ "&nbsp;  -- #{instance.fullname}", "Instance:#{instance.id}" ]
+        if instance.active? || issue.has_instance?(instance)
+          available_options << [ "&nbsp;  -- #{instance.fullname}", "Instance:#{instance.id}" ]
+        end
       end
     end
     

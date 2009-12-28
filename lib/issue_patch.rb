@@ -16,6 +16,10 @@ class Issue
     appli_ids.include?(appli.id)
   end
 
+  def has_instance?(instance)
+    instance_ids.include?(instance.id)
+  end
+
   def appli_instance_ids
     appli_ids.map{|i|"Appli:#{i}"} + instance_ids.map{|i|"Instance:#{i}"}
   end

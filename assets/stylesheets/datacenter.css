@@ -1,6 +1,6 @@
-.icon22-servers { background-image: url(../images/20x20/servers.png); }
-.icon-servers { background-image: url(../images/14x14/servers.png); }
-.icon22-applis { background-image: url(../images/22x22/applications.png); }
+.icon22-servers, #admin-menu a.servers { background-image: url(../images/22x22/servers.png); }
+.icon-servers { background-image: url(../images/16x16/servers.png); }
+.icon22-applis, #admin-menu a.applis { background-image: url(../images/22x22/applications.png); }
 .icon-applis { background-image: url(../images/16x16/applications.png); }
 div.server, div.appli {background:#ffffdd; padding:0 6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
 div.server table.attributes, div.appli table.attributes {margin-bottom:10px;}

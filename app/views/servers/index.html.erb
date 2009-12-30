@@ -27,7 +27,6 @@
 	<%= sort_header_tag('fqdn', :caption => l(:field_fqdn)) %>
 	<%= sort_header_tag('ipaddress', :caption => l(:field_ipaddress)) %>
 	<%= sort_header_tag('description', :caption => l(:field_description)) %>
-  <%= sort_header_tag('created_at', :caption => l(:field_created_on), :default_order => 'desc') %>
   <th> </th>
   </tr></thead>
   <tbody>
@@ -37,7 +36,6 @@
 	  <td class="fqdn"><%= h(server.fqdn) %></td>
 	  <td class="ipaddress"><%= h(server.ipaddress) %></td>
 	  <td class="description"><%= server.description %></td>
-	  <td class="created_at" align="center"><%= format_time(server.created_at) %></td>
     <td class="buttons">
       <% if User.current.admin? %>
       <%= link_to l(:button_update), edit_server_path(server), :class => 'icon icon-edit' %>

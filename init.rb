@@ -19,7 +19,7 @@ Redmine::Plugin.register :datacenter_plugin do
   url 'http://github.com/jbbarth/redmine_datacenter'
   author_url 'mailto:jeanbaptiste.barth@gmail.com'
   version '0.1'
-  requires_redmine :version_or_higher => '0.8.0'
+  requires_redmine :version_or_higher => '0.9.0'
   project_module :datacenter do
     permission :dummy_datacenter_permission, {}, :public => true
   end

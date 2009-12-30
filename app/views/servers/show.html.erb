@@ -30,12 +30,16 @@
   </div>
 
   <h3><%= l(:label_appli_plural) %>/<%= l(:label_instance_plural) %></h3>
-  <% @server.instances.sort_by{|x| [x.appli.name, x.name]}.each do |instance| %>
+  <% if @server.instances.any? %>
+    <% @server.instances.sort_by{|x| [x.appli.name, x.name]}.each do |instance| %>
     <p>
-    <strong><%= link_to instance.appli.name, instance.appli %></strong>
-    (<%= link_to instance.name, edit_appli_instance_path(instance.appli,instance) %>) : 
-    <%= links_to_servers(instance.servers) %>
+      <strong><%= link_to instance.appli.name, instance.appli %></strong>
+      (<%= link_to instance.name, edit_appli_instance_path(instance.appli,instance) %>) : 
+      <%= links_to_servers(instance.servers) %>
     </p>
+    <% end %>
+  <% else %>
+    <p class="nodata"><%= l(:label_no_data) %></p>
   <% end %>
 </div>
 

@@ -8,6 +8,12 @@ module ApplisHelper
     end.join(", ")
   end
 
+  def link_to_instances(appli)
+    appli.instances.map do |instance|
+      link_to instance.name, edit_appli_instance_path(appli,instance)
+    end.join(", ")
+  end
+
   def select_applis_or_instances(issue,applis)
     available_options = [["",""]]
     applis.sort_by(&:name).each do |appli|

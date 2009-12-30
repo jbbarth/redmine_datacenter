@@ -13,16 +13,16 @@
 <table class="list">		
   <thead><tr>
 	<%= sort_header_tag('name', :caption => l(:field_name)) %>
+  <%= sort_header_tag('instances', :caption => l(:label_instance_plural)) %>
 	<%= sort_header_tag('description', :caption => l(:field_description)) %>
-  <%= sort_header_tag('created_at', :caption => l(:field_created_on), :default_order => 'desc') %>
   <th> </th>
   </tr></thead>
   <tbody>
 <% for appli in @applis -%>
   <tr class="appli <%= cycle("odd", "even") %>">
 	  <td class="name"><%= link_to h(appli.name), appli_path(appli) %></td>
+    <td class="instances"><%= link_to_instances(appli) %>
 	  <td class="description"><%= appli.short_description(80) %></td>
-	  <td class="created_at" align="center"><%= format_time(appli.created_at) %></td>
     <td class="buttons">
       <% if User.current.admin? %>
       <%= link_to l(:button_update), edit_appli_path(appli), :class => 'icon icon-edit' %>

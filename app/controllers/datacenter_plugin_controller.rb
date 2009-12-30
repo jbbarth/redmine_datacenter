@@ -7,6 +7,8 @@ class DatacenterPluginController < ApplicationController
 
   helper :sort
   include SortHelper
+
+  layout 'admin'
   
   private
   def retrieve_settings

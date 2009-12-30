@@ -49,6 +49,15 @@ module ApplisHelper
               :class => 'icon icon-unlock'
     end
   end
+  
+  def applis_status_options_for_select(selected)
+    appli_count_by_status = Appli.count(:group => 'status').to_hash
+    options = [[l(:label_all), '']]
+    [[:status_active,Appli::STATUS_ACTIVE],[:status_locked,Appli::STATUS_LOCKED]].each do |a|
+      options << ["#{l(a[0])} (#{appli_count_by_status[a[1]].to_i})", a[1]]
+    end
+    options_for_select(options, selected)
+  end
 end
 
 module ActionView

@@ -5,9 +5,18 @@ class ApplisController < DatacenterPluginController
     sort_init 'name', 'asc'
     sort_update %w(id name)
 
-    @appli_count = Appli.count
+    @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
+    c = ARCondition.new(@status == 0 ? nil : ["status = ?", @status])
+    
+    unless params[:name].blank?
+      name = "%#{params[:name].strip.downcase}%"
+      c << ["LOWER(name) LIKE ?", name]
+    end
+
+    @appli_count = Appli.count(:conditions => c.conditions)
     @appli_pages = Paginator.new self, @appli_count, per_page_option, params['page']
     @applis =  Appli.all :order => sort_clause,
+            :conditions => c.conditions,
             :limit  =>  @appli_pages.items_per_page,
             :offset =>  @appli_pages.current.offset
 

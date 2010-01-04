@@ -39,7 +39,7 @@ class DatacenterIssueHook < Redmine::Hook::ViewListener
                                                      :old_value => serv_before,
                                                      :value => serv_after) unless serv_before == serv_after
       #save changes
-      context[:journal].save!
+      context[:journal].save
     end
   end
   

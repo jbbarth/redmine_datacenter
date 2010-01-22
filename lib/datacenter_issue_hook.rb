@@ -10,6 +10,9 @@ class DatacenterIssueHook < Redmine::Hook::ViewListener
   #     template.render :partial => "datacenter_plugin/issue_form", :locals => {:context => context}
   #   end
   #
+  #   def view_issues_form_details_bottom(context)
+  #     context[:controller].send(:render, :partial => "datacenter_plugin/issue_form", :locals => {:context => context})
+  #   end
   render_on :view_issues_form_details_bottom, :partial => "datacenter_plugin/issue_form"
   render_on :view_issues_show_details_bottom, :partial => "datacenter_plugin/issue_show"
   

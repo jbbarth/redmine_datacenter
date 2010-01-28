@@ -86,5 +86,13 @@ module Storage
         puts execute("show array[#{array}]")
       end
     end
+
+    def disk_usage_for(regex)
+      logical_drives.select do |ld|
+        ld[:name].match(regex)
+      end.inject(0) do |sum,ld|
+        sum + ld[:size]
+      end
+    end
   end
 end

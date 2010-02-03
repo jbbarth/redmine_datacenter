@@ -16,7 +16,7 @@ Redmine::Plugin.register :datacenter_plugin do
   name 'Datacenter management plugin'
   author 'Jean-Baptiste BARTH'
   description 'This plugin helps you manage your (small) datacenter with redmine'
-  url 'http://github.com/jbbarth/redmine_datacenter'
+  url 'http://code.jbbarth.com/projects/redmine-datacenter/wiki'
   author_url 'mailto:jeanbaptiste.barth@gmail.com'
   version '0.1'
   requires_redmine :version_or_higher => '0.9.0'

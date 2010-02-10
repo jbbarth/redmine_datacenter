@@ -1,0 +1,18 @@
+<% content_for :sidebar do %>
+  <div id="admin-menu">
+	  <h3><%=l(:label_administration)%></h3>
+    <ul>
+      <li><%= link_to l(:label_project_plural), {:controller => 'admin', :action => 'projects'}, :class => 'projects' %></li>
+      <li><%= link_to l(:label_user_plural), {:controller => 'users'}, :class => 'users' %></li>
+      <li><%= link_to l(:label_group_plural), {:controller => 'groups'}, :class => 'groups' %></li>
+    </ul>
+	  <h3><%=l(:label_datacenter)%></h3>
+    <ul>
+      <% menu_items_for(:admin_menu) do |item| -%>
+        <li><%= link_to h(item.caption), item.url.merge(:project_id => @project), item.html_options %></li>
+      <% end -%>
+    </ul>
+  </div>
+<% end %>
+
+<%= render :file => "layouts/base" %>

@@ -20,9 +20,17 @@ Redmine::Plugin.register :datacenter_plugin do
   author_url 'mailto:jeanbaptiste.barth@gmail.com'
   version '0.1'
   requires_redmine :version_or_higher => '0.9.0'
+  
+  menu :project_menu,
+       :datacenter, { :controller => 'applis', :action => 'index' },
+       :caption => :label_datacenter,
+       :param => :project_id
+
   project_module :datacenter do
     permission :dummy_datacenter_permission, {}, :public => true
+    permission :dummy2_datacenter_permission, {:applis=>[:index]}, :public => true
   end
+  
   settings :default => {
               'multiple_select' => "1", #false=checkboxes, true=multiple_select
               'domain'          => ""
@@ -31,6 +39,6 @@ Redmine::Plugin.register :datacenter_plugin do
 end
 
 Redmine::MenuManager.map :admin_menu do |menu|
-  menu.push :servers, :servers, :caption => :label_server_plural
-  menu.push :applis, :applis, :caption => :label_appli_plural
+  menu.push :servers, {:controller => :servers}, :caption => :label_server_plural
+  menu.push :applis, {:controller => :applis}, :caption => :label_appli_plural
 end

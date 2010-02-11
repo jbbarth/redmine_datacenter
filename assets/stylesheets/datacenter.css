@@ -1,12 +1,13 @@
 .icon-servers, #admin-menu a.servers { background-image: url(../images/servers.png); }
 .icon-applis, #admin-menu a.applis { background-image: url(../images/applications.png); }
-div.server, div.appli {background:#ffffdd; padding:0 6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
-div.server table.attributes, div.appli table.attributes {margin-bottom:10px;}
-div.server table.attributes th, div.appli table.attributes th {width:20%; white-space: nowrap;}
-div.server p.nodata, div.appli p.nodata {text-align:left; background:#ffffdd; border:0; color:inherit; margin:2px 0 6px 0; padding:2px; font-size:100%;}
+.icon-datacenters, #admin-menu a.datacenters { background-image: url(../images/datacenter.png); }
+div.server, div.appli, div.datacenter {background:#ffffdd; padding:0 6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
+div.server table.attributes, div.appli table.attributes, div.datacenter table.attributes {margin-bottom:10px;}
+div.server table.attributes th, div.appli table.attributes th, div.datacenter table.attributes th {width:20%; white-space: nowrap;}
+div.server p.nodata, div.appli p.nodata, div.datacenter p.nodata {text-align:left; background:#ffffdd; border:0; color:inherit; margin:2px 0 6px 0; padding:2px; font-size:100%;}
 span.interface {display:block;}
 span.interface input.interface_name {width:3em;}
 span.interface input.interface_ipaddress {width:10em;}
 table.instances {border: 0;}
 table.instances td.buttons a {padding-right:0;}
-tr.appli td.buttons, tr.server td.buttons {text-align:left;}
+tr.appli td.buttons, tr.server td.buttons, tr.datacenter td.buttons {text-align:left;}

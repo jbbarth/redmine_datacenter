@@ -6,6 +6,7 @@ class Appli < ActiveRecord::Base
            :dependent => :destroy
   has_many :issues,
            :through => :issue_elements
+  belongs_to :datacenter
 
   attr_accessible :name, :description, :status
 

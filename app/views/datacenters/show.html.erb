@@ -1,0 +1,36 @@
+<div class="contextual">
+  <% if User.current.admin? %>
+    <%= link_to l(:button_update), edit_datacenter_path(@datacenter), :class => 'icon icon-edit' %> 
+    <%= change_link_datacenter_status(@datacenter) %>
+  <% end %>
+  <!--<%= link_to l(:label_datacenter_plural), datacenters_path, :class => 'icon icon-datacenters' %>-->
+</div>
+
+<h2><%= link_to l(:label_datacenter_plural), datacenters_path %> &#187; <%=h @datacenter.name %></h2>
+
+<div class="splitcontentleft datacenter">
+
+  <h3><%= @datacenter.name %></h3>
+  <table class="attributes">
+    <tr>
+      <th><%= l(:field_project)%>:</th>
+      <td><%= project_link(@datacenter) %></td>
+    </tr>
+    <tr>
+      <th><%= l(:field_description)%>:</th>
+      <td><%= textilizable @datacenter, :description %></td>
+    </tr>
+  </table>
+
+</div>
+
+<div class="splitcontentright">
+  <div class="overview box">
+    <h3><%= l(:label_overview) %></h3>
+    <p><%= @datacenter.appli_ids.length %> <%= l(:label_appli_plural) %></p>
+    <p><%= @datacenter.applis.map{|appli|appli.instance_ids.length}.inject(0){|memo,n|memo+n} %> <%= l(:label_instance_plural) %></p>
+    <p><%= @datacenter.server_ids.length %> <%= l(:label_server_plural) %></p>
+  </div>
+</div>
+
+<% html_title(l(:label_datacenter_plural)) -%>

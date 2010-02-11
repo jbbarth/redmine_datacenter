@@ -5,4 +5,5 @@ ActionController::Routing::Routes.draw do |map|
       instance.resources :servers
     end
   end
+  map.resources :datacenters, :path_prefix => 'datacenter'
 end

@@ -10,6 +10,7 @@ config.to_prepare do
   require_dependency 'issues_controller_patch'
   require_dependency 'setting_patch'
   require_dependency 'query_patch'
+  require_dependency 'project_patch'
 end
 
 Redmine::Plugin.register :datacenter_plugin do
@@ -39,6 +40,7 @@ Redmine::Plugin.register :datacenter_plugin do
 end
 
 Redmine::MenuManager.map :admin_menu do |menu|
+  menu.push :datacenters, {:controller => :datacenters}, :caption => :label_datacenter_plural
   menu.push :servers, {:controller => :servers}, :caption => :label_server_plural
   menu.push :applis, {:controller => :applis}, :caption => :label_appli_plural
 end

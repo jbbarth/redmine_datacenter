@@ -6,6 +6,8 @@ fr:
         invalid_ipaddress: "n'est pas une adresse IP valide ou un masque CIDR"
 
   label_datacenter: Centre-Serveur
+  label_datacenter_new: Nouveau centre-serveur
+  label_datacenter_plural: Centres-Serveurs
   label_server_new: Nouveau serveur
   label_server_plural: Serveurs
   label_use_multiple_select: Utiliser des listes déroulantes multiples ?

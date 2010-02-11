@@ -1,0 +1,9 @@
+<%= error_messages_for 'datacenter' %>
+
+<!--[form:datacenter]-->
+<div class="box tabular">
+  <p><%= f.text_field :name, :required => true %></p>
+  <p><%= f.text_area :description, :rows => 5 %></p>
+  <p><%= f.select :project_id, @projects.map{|p| [p.name, p.id]} %></p>
+</div>
+<!--[eoform:datacenter]-->

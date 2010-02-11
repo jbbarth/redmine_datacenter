@@ -11,9 +11,6 @@ class DatacenterPluginController < ApplicationController
 
   layout :set_layout
 
-  def index
-  end
-  
   private
   def retrieve_settings
     @settings = Setting["plugin_datacenter_plugin"]

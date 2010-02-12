@@ -6,7 +6,8 @@ class ServersController < DatacenterPluginController
     sort_update %w(name fqdn description)
     
     @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
-    c = ARCondition.new(@status == 0 ? nil : ["status = ?", @status])
+    c = ARCondition.new(["datacenter_id = ?", @project.datacenter.id])
+    c << ["status = ?", @status] unless @status == 0
     
     unless params[:name].blank?
       name = "%#{params[:name].strip.downcase}%"

@@ -95,6 +95,12 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
                     :type => 'checkbox',
                     :value => '3'
                   }
+    assert_no_tag :input,
+                  :attributes => {
+                    :id => 'issue_server_ids_',
+                    :type => 'checkbox',
+                    :value => '5'
+                  } #server not in this datacenter
   end
 
   def test_edit_issue_form_contains_right_servers
@@ -119,10 +125,16 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
                     :type => 'checkbox',
                     :value => '4'
                   }
+    assert_no_tag :input,
+                  :attributes => {
+                    :id => 'issue_server_ids_',
+                    :type => 'checkbox',
+                    :value => '5'
+                  } #server not in this datacenter
   end
 
   def test_custom_filters_are_present
-    get :index
+    get :index, :project_id => 1
     assert_tag :tag => 'select', :attributes => {:id => 'add_filter_select'},
                :child => {:tag => 'option', :attributes => {:value => 'server_id'} }
     assert_tag :tag => 'tr', :attributes => {:id => 'tr_server_id', :style => 'display:none;'}

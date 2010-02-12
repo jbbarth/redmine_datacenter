@@ -1,6 +1,6 @@
 <p>
   <label><%= l(:label_server_plural) %></label>
-  <% servers = Server.all(:order => 'name ASC').select{|s| s.active? || @issue.server_ids.include?(s.id)} %>
+  <% servers = Server.for_project(@project.id).all(:order => 'name ASC').select{|s| s.active? || @issue.server_ids.include?(s.id)} %>
   <% if Setting.datacenter_multiselect? %>
     <%= collection_select :issue, :server_ids, servers, :id, :name,
                           { :selected => @issue.server_ids, :include_blank => true },

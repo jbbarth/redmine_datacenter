@@ -30,3 +30,11 @@ four:
   description: Locked since it has disappeared
   status: 2
   datacenter_id: 1
+
+five:
+  id: 5
+  name: stranger
+  fqdn: stranger.example.ru
+  description: A server which is not in the first datacenter!
+  status: 1
+  datacenter_id: 2

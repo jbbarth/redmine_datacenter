@@ -9,3 +9,9 @@ two:
   name: second_app
   description: Second application of our datacenter...
   datacenter_id: 1
+
+three:
+  id: 3
+  name: stranger_app
+  description: Third app, in a foreign datacenter
+  datacenter_id: 2

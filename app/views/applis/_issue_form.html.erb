@@ -12,7 +12,7 @@ function toggle_multi_select_datacenter(field) {
 </script>
 <p>
   <label><%= l(:label_appli_plural) %></label>
-  <% applis = Appli.active(:include => :instances) | @issue.applis | @issue.instances.map(&:appli) %>
+  <% applis = Appli.for_project(@project.id).active(:include => :instances) | @issue.applis | @issue.instances.map(&:appli) %>
   <%= select_applis_or_instances(@issue,applis) %>
   <%= link_to_function image_tag('bullet_toggle_plus.png'),
                        "toggle_multi_select_datacenter('issue_appli_instance_ids');",

@@ -26,6 +26,7 @@ class Server < ActiveRecord::Base
   after_update :save_interfaces
   
   named_scope :active, :conditions => { :status => STATUS_ACTIVE }, :order => 'name asc'
+  named_scope :for_project, lambda {|datacenter_id| {:conditions => ["datacenter_id = ?", datacenter_id]}}
   
   def active?
     self.status == STATUS_ACTIVE

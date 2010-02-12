@@ -1,6 +1,9 @@
-.icon-servers, #admin-menu a.servers { background-image: url(../images/servers.png); }
-.icon-applis, #admin-menu a.applis { background-image: url(../images/applications.png); }
+.icon-servers, #admin-menu a.servers, .overview a.servers { background-image: url(../images/servers.png); }
+.icon-applis, #admin-menu a.applis, .overview a.applis { background-image: url(../images/applications.png); }
 .icon-datacenters, #admin-menu a.datacenters { background-image: url(../images/datacenter.png); }
+div.datacenter h3 { background: url(../images/datacenter.png) no-repeat 0% 50%; padding-left: 20px; }
+div.datacenter td.overview {padding:5px;}
+div.datacenter td.overview a { background-position: 0% 40%; background-repeat: no-repeat; padding-left: 20px; padding-top: 2px; padding-bottom: 3px;}
 div.server, div.appli, div.datacenter {background:#ffffdd; padding:0 6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
 div.server table.attributes, div.appli table.attributes, div.datacenter table.attributes {margin-bottom:10px;}
 div.server table.attributes th, div.appli table.attributes th, div.datacenter table.attributes th {width:20%; white-space: nowrap;}

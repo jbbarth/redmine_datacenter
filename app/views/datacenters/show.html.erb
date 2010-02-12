@@ -16,20 +16,27 @@
       <td><%= project_link(@datacenter) %></td>
     </tr>-->
     <tr>
-      <th><%= l(:field_description)%>:</th>
+      <th><%= l(:label_overview) %></th>
+      <td class="overview">
+        <%= link_to "#{@datacenter.appli_ids.length} #{l(:label_appli_plural)} (#{@datacenter.instances_number} #{l(:label_instance_plural)})",
+          {:controller => 'applis', :project_id => @project}, :class => 'applis' %> 
+        <%= link_to "#{@datacenter.server_ids.length} #{l(:label_server_plural)}",
+          {:controller => 'servers', :project_id => @project}, :class => 'servers' %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= l(:field_description)%></th>
       <td><%= textilizable @datacenter, :description %></td>
     </tr>
   </table>
 
 </div>
 
+<!--
 <div class="splitcontentright">
-  <div class="overview box">
-    <h3><%= l(:label_overview) %></h3>
-    <p><%= @datacenter.appli_ids.length %> <%= l(:label_appli_plural) %></p>
-    <p><%= @datacenter.instances_number %> <%= l(:label_instance_plural) %></p>
-    <p><%= @datacenter.server_ids.length %> <%= l(:label_server_plural) %></p>
+  <div class="box">
   </div>
 </div>
+-->
 
 <% html_title(l(:label_datacenter)) -%>

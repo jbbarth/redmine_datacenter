@@ -25,6 +25,5 @@ class CreateDatacenters < ActiveRecord::Migration
     remove_column :servers, :datacenter_id
     remove_column :applis, :datacenter_id
     drop_table :datacenters
-    drop_table :datacenters_projects
   end
 end

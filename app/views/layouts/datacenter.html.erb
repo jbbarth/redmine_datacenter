@@ -6,6 +6,7 @@
       <li><%= link_to l(:label_user_plural), {:controller => 'users'}, :class => 'users' %></li>
       <li><%= link_to l(:label_group_plural), {:controller => 'groups'}, :class => 'groups' %></li>
       <li><%= link_to l(:label_datacenter_plural), {:controller => 'datacenters'}, :class => 'datacenters' %></li> 
+      <li><%= link_to(l(:button_configure), {:controller => 'settings', :action => 'plugin', :id => @plugin.id}, :class => 'icon icon-package') %></li>
     </ul>
 	  <h3><%=l(:label_datacenter)%></h3>
     <ul>

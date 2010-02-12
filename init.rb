@@ -41,6 +41,6 @@ end
 
 Redmine::MenuManager.map :admin_menu do |menu|
   menu.push :datacenters, {:controller => :datacenters}, :caption => :label_datacenter_plural
-  menu.push :servers, {:controller => :servers}, :caption => :label_server_plural
-  menu.push :applis, {:controller => :applis}, :caption => :label_appli_plural
+  #menu.push :servers, {:controller => :servers}, :caption => :label_server_plural
+  #menu.push :applis, {:controller => :applis}, :caption => :label_appli_plural
 end

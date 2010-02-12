@@ -1,7 +1,7 @@
 <div class="contextual">
   <% if User.current.admin? %>
     <%= link_to l(:button_update), {:action => 'edit', :project_id => @project}, :class => 'icon icon-edit' %> 
-    <%= change_link_datacenter_status(@datacenter) %>
+    <!--<%= change_link_datacenter_status(@datacenter) %>-->
   <% end %>
 </div>
 

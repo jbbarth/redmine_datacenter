@@ -50,8 +50,8 @@ module ApplisHelper
     end
   end
   
-  def applis_status_options_for_select(selected)
-    appli_count_by_status = Appli.count(:group => 'status').to_hash
+  def applis_status_options_for_select(selected, datacenter)
+    appli_count_by_status = Appli.count(:conditions => ["datacenter_id = ?", datacenter], :group => 'status').to_hash
     options = [[l(:label_all), '']]
     [[:status_active,Appli::STATUS_ACTIVE],[:status_locked,Appli::STATUS_LOCKED]].each do |a|
       options << ["#{l(a[0])} (#{appli_count_by_status[a[1]].to_i})", a[1]]

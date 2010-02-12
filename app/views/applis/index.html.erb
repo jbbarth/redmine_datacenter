@@ -12,7 +12,7 @@
 <% form_tag({}, :method => :get) do %>
   <fieldset><legend><%= l(:label_filter_plural) %></legend>
   <label><%= l(:field_status) %>:</label>
-  <%= select_tag 'status', applis_status_options_for_select(@status), :class => "small", :onchange => "this.form.submit(); return false;"  %>
+  <%= select_tag 'status', applis_status_options_for_select(@status,@project.datacenter), :class => "small", :onchange => "this.form.submit(); return false;"  %>
   <label><%= l(:field_name) %>:</label>
   <%= text_field_tag 'name', params[:name], :size => 30 %>
   <%= submit_tag l(:button_apply), :class => "small", :name => nil %>

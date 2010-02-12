@@ -1,5 +1,5 @@
 require_dependency 'project'
 
 class Project
-  has_many :datacenters
+  has_one :datacenter
 end

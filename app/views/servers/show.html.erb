@@ -1,9 +1,8 @@
 <div class="contextual">
   <% if User.current.admin? %>
-    <%= link_to l(:button_update), edit_server_path(@server), :class => 'icon icon-edit' %> 
+    <%= link_to l(:button_update), edit_server_path(:project_id => @project, :id => @server), :class => 'icon icon-edit' %> 
     <%= change_link_server_status(@server) %>
   <% end %>
-  <!--<%= link_to l(:label_server_plural), servers_path, :class => 'icon icon-servers' %>-->
 </div>
 
 <h2><%= link_to l(:label_server_plural), servers_path %> &#187; <%=h @server.name %></h2>
@@ -26,16 +25,16 @@
   </table>
 
   <div class="contextual">
-    <%= link_to l(:label_appli_plural), applis_path, :class => 'icon icon-applis' %>
+    <%= link_to l(:label_appli_plural), applis_path(@project), :class => 'icon icon-applis' %>
   </div>
 
   <h3><%= l(:label_appli_plural) %>/<%= l(:label_instance_plural) %></h3>
   <% if @server.instances.any? %>
     <% @server.instances.sort_by{|x| [x.appli.name, x.name]}.each do |instance| %>
     <p>
-      <strong><%= link_to instance.appli.name, instance.appli %></strong>
-      (<%= link_to instance.name, edit_appli_instance_path(instance.appli,instance) %>) : 
-      <%= links_to_servers(instance.servers) %>
+      <strong><%= link_to instance.appli.name, appli_path(@project,instance.appli) %></strong>
+      (<%= link_to instance.name, edit_appli_instance_path(:project_id => @project, :appli_id => instance.appli, :id => instance) %>) : 
+      <%= links_to_servers(@project,instance.servers) %>
     </p>
     <% end %>
   <% else %>

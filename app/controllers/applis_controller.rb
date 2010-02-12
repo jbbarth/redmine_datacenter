@@ -48,7 +48,7 @@ class ApplisController < DatacenterPluginController
     @appli = Appli.new(params[:appli])
     if @appli.save
       flash[:notice] = l(:notice_successful_create)
-      redirect_to @appli
+      redirect_to appli_path(@project,@appli)
     else
       render :action => 'new'
     end
@@ -62,7 +62,7 @@ class ApplisController < DatacenterPluginController
     @appli = Appli.find(params[:id])
     if @appli.update_attributes(params[:appli])
       flash[:notice] = l(:notice_successful_update)
-      redirect_to @appli
+      redirect_to appli_path(@project,@appli)
     else
       render :action => 'edit'
     end
@@ -72,6 +72,6 @@ class ApplisController < DatacenterPluginController
     @appli = Appli.find(params[:id])
     @appli.status = Appli::STATUS_LOCKED
     @appli.save
-    redirect_to applis_url
+    redirect_to applis_url(:project_id => @project)
   end
 end

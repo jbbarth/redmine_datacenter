@@ -14,5 +14,6 @@
     <%= add_interface_link l(:button_add_interface) %>
   </p>
   <p><%= f.text_area :description, :rows => 5 %></p>
+  <%= f.hidden_field :datacenter_id, :value => @project.datacenter.id %>
 </div>
 <!--[eoform:server]-->

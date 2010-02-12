@@ -1,21 +1,20 @@
 <div class="contextual">
   <% if User.current.admin? %>
-    <%= link_to l(:button_update), edit_datacenter_path(@datacenter), :class => 'icon icon-edit' %> 
+    <%= link_to l(:button_update), {:action => 'edit', :project_id => @project}, :class => 'icon icon-edit' %> 
     <%= change_link_datacenter_status(@datacenter) %>
   <% end %>
-  <!--<%= link_to l(:label_datacenter_plural), datacenters_path, :class => 'icon icon-datacenters' %>-->
 </div>
 
-<h2><%= link_to l(:label_datacenter_plural), datacenters_path %> &#187; <%=h @datacenter.name %></h2>
+<h2><%= l(:label_datacenter) %> &#187; <%=h @datacenter.name %></h2>
 
 <div class="splitcontentleft datacenter">
 
   <h3><%= @datacenter.name %></h3>
   <table class="attributes">
-    <tr>
+    <!--<tr>
       <th><%= l(:field_project)%>:</th>
       <td><%= project_link(@datacenter) %></td>
-    </tr>
+    </tr>-->
     <tr>
       <th><%= l(:field_description)%>:</th>
       <td><%= textilizable @datacenter, :description %></td>
@@ -33,4 +32,4 @@
   </div>
 </div>
 
-<% html_title(l(:label_datacenter_plural)) -%>
+<% html_title(l(:label_datacenter)) -%>

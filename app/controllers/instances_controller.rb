@@ -11,7 +11,7 @@ class InstancesController < DatacenterPluginController
     @servers = Server.active
     if @instance.save
       flash[:notice] = l(:notice_successful_create)
-      redirect_to @appli
+      redirect_to appli_path(@project,@appli)
     else
       render :action => 'new'
     end
@@ -27,7 +27,7 @@ class InstancesController < DatacenterPluginController
     @servers = (Server.active + @instance.servers).uniq.sort_by(&:name)
     if @instance.update_attributes(params[:instance])
       flash[:notice] = l(:notice_successful_update)
-      redirect_to @appli
+      redirect_to appli_path(@project,@appli)
     else
       render :action => 'edit'
     end
@@ -37,7 +37,7 @@ class InstancesController < DatacenterPluginController
     @instance = Instance.find(params[:id])
     @instance.status = Instance::STATUS_LOCKED
     @instance.save
-    redirect_to @appli
+    redirect_to appli_path(@project,@appli)
   end
 
   private

@@ -1,4 +1,4 @@
-<h2><%= link_to l(:label_datacenter_plural), datacenters_path %> &#187; <%=h @datacenter.name %></h2>
+<h2><%= l(:label_datacenter) %> &#187; <%=h @datacenter.name %></h2>
 
 <% labelled_tabular_form_for :datacenter, @datacenter, :url => datacenter_path(@datacenter),
                              :html => { :class => nil, :method => :put } do |f| %>

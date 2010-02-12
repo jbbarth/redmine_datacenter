@@ -23,13 +23,13 @@ Redmine::Plugin.register :datacenter_plugin do
   requires_redmine :version_or_higher => '0.9.0'
   
   menu :project_menu,
-       :datacenter, { :controller => 'applis', :action => 'index' },
+       :datacenter, { :controller => 'datacenters', :action => 'show' },
        :caption => :label_datacenter,
        :param => :project_id
 
   project_module :datacenter do
     permission :dummy_datacenter_permission, {}, :public => true
-    permission :dummy2_datacenter_permission, {:applis=>[:index]}, :public => true
+    permission :dummy2_datacenter_permission, {:datacenters=>[:show]}, :public => true
   end
   
   settings :default => {

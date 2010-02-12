@@ -53,7 +53,7 @@ class ServersController < DatacenterPluginController
     @server = Server.new(params[:server])
     if @server.save
       flash[:notice] = l(:notice_successful_create)
-      redirect_to @server
+      redirect_to server_path(@project,@server)
     else
       render :action => 'new'
     end
@@ -68,7 +68,7 @@ class ServersController < DatacenterPluginController
     @server = Server.find(params[:id])
     if @server.update_attributes(params[:server])
       flash[:notice] = l(:notice_successful_update)
-      redirect_to @server
+      redirect_to server_path(@project,@server)
     else
       render :action => 'edit'
     end
@@ -78,6 +78,6 @@ class ServersController < DatacenterPluginController
     @server = Server.find(params[:id])
     @server.status = Server::STATUS_LOCKED
     @server.save
-    redirect_to servers_url
+    redirect_to servers_url(:project_id => @project)
   end
 end

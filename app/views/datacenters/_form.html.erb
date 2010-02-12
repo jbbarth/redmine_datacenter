@@ -4,6 +4,6 @@
 <div class="box tabular">
   <p><%= f.text_field :name, :required => true %></p>
   <p><%= f.text_area :description, :rows => 5 %></p>
-  <p><%= f.select :project_id, @projects.map{|p| [p.name, p.id]} %></p>
+  <%= f.hidden_field :project_id, :value => @project.id %>
 </div>
 <!--[eoform:datacenter]-->

@@ -5,18 +5,18 @@
     <td class="name">
       <strong>
         <% if User.current.admin? %>
-          <%= link_to instance.name, edit_appli_instance_path(@appli,instance) %>
+          <%= link_to instance.name, edit_appli_instance_path(@project,@appli,instance) %>
         <% else %>
           <%= instance.name %>
         <% end %>
       </strong>
     </td>
     <td class="servers">
-      <%= links_to_servers(instance.servers) %>
+      <%= links_to_servers(@project,instance.servers) %>
     </td>
     <td class="buttons">
       <% if User.current.admin? %>
-      <%= link_to l(:button_update), edit_appli_instance_path(@appli,instance), :class => 'icon icon-edit' %>
+      <%= link_to l(:button_update), edit_appli_instance_path(@project,@appli,instance), :class => 'icon icon-edit' %>
       <%= change_link_instance_status(@appli,instance) %>
       <% end %>
     </td>

@@ -1,6 +1,6 @@
 <tr> 
   <th class="servers"><%= l(:label_server_plural) %></th>
   <td class="servers">
-    <%= @issue.servers.any? ? links_to_servers(@issue.servers) : "-" %>
+    <%= @issue.servers.any? ? links_to_servers(@project,@issue.servers) : "-" %>
   </td> 
 </tr>

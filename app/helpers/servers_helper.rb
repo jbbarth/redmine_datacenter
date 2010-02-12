@@ -35,9 +35,9 @@ module ServersHelper
     end
   end
   
-  def links_to_servers(servers)
+  def links_to_servers(project,servers)
     servers.sort_by(&:name).map do |server|
-      link_to(server.name, server)
+      link_to(server.name, server_path(project,server))
     end.join(", ")
   end
 end

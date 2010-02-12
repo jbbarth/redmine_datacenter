@@ -7,7 +7,7 @@
 </div>
 <% end %>
 
-<h2><%=l(:label_server_plural)%></h2>
+<h2><%= link_to l(:label_server_plural), servers_path %></h2>
 
 <% form_tag({}, :method => :get) do %>
   <fieldset><legend><%= l(:label_filter_plural) %></legend>
@@ -32,14 +32,14 @@
   <tbody>
 <% for server in @servers -%>
   <tr class="server <%= cycle("odd", "even") %>">
-	  <td class="name"><%= link_to h(server.name), server_path(server) %></td>
+	  <td class="name"><%= link_to h(server.name), server_path(@project,server) %></td>
 	  <td class="fqdn"><%= h(server.fqdn) %></td>
 	  <td class="ipaddress"><%= h(server.ipaddress) %></td>
 	  <td class="description"><%= server.description %></td>
     <td class="buttons">
       <% if User.current.admin? %>
-      <%= link_to l(:button_update), edit_server_path(server), :class => 'icon icon-edit' %>
-      <%= change_link_server_status(server) %>
+        <%= link_to l(:button_update), edit_server_path(@project,server), :class => 'icon icon-edit' %>
+        <%= change_link_server_status(server) %>
       <% end %>
     </td>
   </tr>

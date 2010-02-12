@@ -1,6 +1,6 @@
 <div class="contextual">
   <% if User.current.admin? %>
-    <%= link_to l(:button_update), edit_appli_path(@appli), :class => 'icon icon-edit' %>
+    <%= link_to l(:button_update), edit_appli_path(@project,@appli), :class => 'icon icon-edit' %>
     <%= change_link_appli_status(@appli) %>
   <% end %>
   <!--<%= link_to l(:label_appli_plural), applis_path, :class => 'icon icon-applis' %>-->
@@ -15,7 +15,7 @@
   
   <% if User.current.admin? %>
     <div class="contextual">
-      <%= link_to l(:label_instance_new), new_appli_instance_path(@appli), :class => 'icon icon-add' %>
+      <%= link_to l(:label_instance_new), new_appli_instance_path(@project,@appli), :class => 'icon icon-add' %>
     </div>
   <% end %>
   <h3><%= l(:label_instance_plural) %></h3>

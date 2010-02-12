@@ -8,7 +8,7 @@ class Appli < ActiveRecord::Base
            :through => :issue_elements
   belongs_to :datacenter
 
-  attr_accessible :name, :description, :status
+  attr_accessible :name, :description, :status, :datacenter_id
 
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false

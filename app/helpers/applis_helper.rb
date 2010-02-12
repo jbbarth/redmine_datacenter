@@ -1,16 +1,16 @@
 module ApplisHelper
   include InstancesHelper
 
-  def links_to_applis(applis_and_instances, no_html = false)
+  def links_to_applis(project,applis_and_instances, no_html = false)
     applis_and_instances.sort_by(&:fullname).map do |element|
       appli_id = element.is_a?(Appli) ? element.id : element.appli_id
-      (no_html ? element.fullname : link_to(element.fullname, appli_path(appli_id)))
+      (no_html ? element.fullname : link_to(element.fullname, appli_path(project,appli_id)))
     end.join(", ")
   end
 
-  def link_to_instances(appli)
+  def links_to_instances(project,appli)
     appli.instances.map do |instance|
-      link_to instance.name, edit_appli_instance_path(appli,instance)
+      link_to instance.name, edit_appli_instance_path(project,appli,instance)
     end.join(", ")
   end
 

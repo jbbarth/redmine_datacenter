@@ -22,9 +22,21 @@ class Datacenter < ActiveRecord::Base
   
   def instances_number
     self.applis.map do |appli|
-      appli.instance_ids.length
-    end.inject(0) do |memo,n|
+      appli.instances.select{|i| i.active? }.length if appli.active?
+    end.compact.inject(0) do |memo,n|
       memo + n
     end
+  end
+
+  def applis_number
+    self.applis.select do |appli|
+      appli.active?
+    end.length
+  end
+
+  def servers_number
+    self.servers.select do |server|
+      server.active?
+    end.length
   end
 end

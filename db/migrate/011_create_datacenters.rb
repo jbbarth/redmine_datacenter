@@ -9,10 +9,16 @@ class CreateDatacenters < ActiveRecord::Migration
     
     add_column :servers, :datacenter_id, :integer
     add_column :applis, :datacenter_id, :integer
-
-    Datacenter.create(:name => "Default datacenter")
-    Server.update_all("datacenter_id = 1")
-    Appli.update_all("datacenter_id = 1")
+    
+    #migrate old data
+    #NB: works only if you just have one project with datacenter module
+    #enabled. As nobody uses this plugin for the moment, no pb with that :)
+    project = Project.all.detect{|p|p.module_enabled?(:datacenter)}
+    if project
+      Datacenter.create(:name => "Default datacenter", :project_id => project.id)
+      Server.update_all("datacenter_id = 1")
+      Appli.update_all("datacenter_id = 1")
+    end
   end
   
   def self.down

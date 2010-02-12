@@ -3,6 +3,13 @@ class DatacentersController < DatacenterPluginController
 
   #no pagination or such things here
   #if you have more than 20 datacenters, you're too big for this plugin :)
+
+  def index
+    # admin part, not scoped under a specific project
+    @status = params[:status] ? params[:status].to_i : Datacenter::STATUS_ACTIVE
+    @datacenters = Datacenter.all(:conditions => (@status == 0 ? nil : ["status = ?", @status]))
+  end
+
   def show
     @datacenter = @project.datacenter
   end

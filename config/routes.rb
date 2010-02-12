@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   #map.resources :datacenters, :path_prefix => 'datacenter'
   map.with_options :path_prefix => 'projects/:project_id' do |mmap|
     mmap.resource  :datacenter
+    mmap.datacenters 'datacenters', :controller => 'datacenters'
     mmap.resources :servers
     mmap.resources :applis do |appli|
       appli.resources :instance, :controller => 'instances' do |instance|

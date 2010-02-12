@@ -1,5 +1,6 @@
 <% content_for :sidebar do %>
   <div id="admin-menu">
+    <% if User.current.admin? %>
 	  <h3><%=l(:label_administration)%></h3>
     <ul>
       <li><%= link_to l(:label_project_plural), {:controller => 'admin', :action => 'projects'}, :class => 'projects' %></li>
@@ -8,6 +9,7 @@
       <li><%= link_to l(:label_datacenter_plural), {:controller => 'datacenters'}, :class => 'datacenters' %></li> 
       <li><%= link_to(l(:button_configure), {:controller => 'settings', :action => 'plugin', :id => @plugin.id}, :class => 'icon icon-package') %></li>
     </ul>
+    <% end %>
 	  <h3><%=l(:label_datacenter)%></h3>
     <ul>
       <li><%= link_to l(:label_appli_plural), {:controller => 'applis', :project_id => @project}, :class => 'applis' %></li>

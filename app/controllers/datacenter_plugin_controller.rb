@@ -1,7 +1,7 @@
 class DatacenterPluginController < ApplicationController
   before_filter :require_admin, :except => [:index, :show]
   before_filter :retrieve_settings
-  before_filter :retrieve_plugin, :only => :index
+  before_filter :retrieve_plugin
   before_filter :find_project, :set_menu_item
 
   unloadable

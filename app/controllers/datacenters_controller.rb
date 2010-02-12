@@ -12,6 +12,9 @@ class DatacentersController < DatacenterPluginController
 
   def show
     @datacenter = @project.datacenter
+    if @datacenter.nil?
+      redirect_to :action => 'new', :project_id => @project
+    end
   end
   
   def new

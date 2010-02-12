@@ -19,4 +19,12 @@ class Datacenter < ActiveRecord::Base
   def active?
     self.status == STATUS_ACTIVE
   end
+  
+  def instances_number
+    self.applis.map do |appli|
+      appli.instance_ids.length
+    end.inject(0) do |memo,n|
+      memo + n
+    end
+  end
 end

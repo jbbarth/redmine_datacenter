@@ -10,7 +10,7 @@
       <li><%= link_to(l(:button_configure), {:controller => 'settings', :action => 'plugin', :id => "datacenter_plugin"}, :class => 'icon icon-package') %></li>
     </ul>
     <% end %>
-    <% unless @datacenter.nil? %>
+    <% unless @project.nil? || @project.datacenter.nil? %>
 	  <h3><%=l(:label_datacenter)%></h3>
     <ul>
       <li><%= link_to l(:label_appli_plural), {:controller => 'applis', :project_id => @project}, :class => 'applis' %></li>

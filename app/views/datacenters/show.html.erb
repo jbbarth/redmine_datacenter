@@ -18,10 +18,16 @@
     <tr>
       <th><%= l(:label_overview) %></th>
       <td class="overview">
-        <%= link_to "#{@datacenter.applis_number} #{l(:label_appli_plural)} (#{@datacenter.instances_number} #{l(:label_instance_plural)})",
-          {:controller => 'applis', :project_id => @project}, :class => 'applis' %> 
-        <%= link_to "#{@datacenter.servers_number} #{l(:label_server_plural)}",
-          {:controller => 'servers', :project_id => @project}, :class => 'servers' %>
+        <p>
+          <%= link_to "#{@datacenter.applis_number} #{l(:label_appli_plural)} (#{@datacenter.instances_number} #{l(:label_instance_plural)})",
+                      {:controller => 'applis', :project_id => @project},
+                      :class => 'applis' %>
+        </p>
+        <p>
+          <%= link_to "#{@datacenter.servers_number} #{l(:label_server_plural)}",
+                      {:controller => 'servers', :project_id => @project},
+                      :class => 'servers' %>
+        </p>
       </td>
     </tr>
     <tr>

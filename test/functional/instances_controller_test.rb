@@ -12,6 +12,11 @@ class InstancesControllerTest < ActionController::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     @request.session[:user_id] = 1 # admin
+    #adds correct modules / permissions for the plugin
+    #TODO: DRY it !
+    Role.find(1).add_permission! :view_datacenter, :manage_datacenter
+    p = Project.find(1)
+    p.enabled_module_names = p.enabled_modules.map(&:name) << "datacenter"
   end
   
   def test_new

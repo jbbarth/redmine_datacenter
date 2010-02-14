@@ -28,8 +28,16 @@ Redmine::Plugin.register :datacenter_plugin do
        :param => :project_id
 
   project_module :datacenter do
-    permission :dummy_datacenter_permission, {}, :public => true
-    permission :dummy2_datacenter_permission, {:datacenters=>[:show]}, :public => true
+    permission :view_datacenter, {:datacenters => :show,
+                                  :applis => [:index, :show],
+                                  :servers => [:index, :show]}
+    permission :manage_datacenter, {:datacenters => [:new, :create, :edit, :update, :destroy],
+                                    :applis => [:new, :create, :edit, :update, :destroy],
+                                    :servers => [:new, :create, :edit, :update, :destroy],
+                                    :instances => [:new, :create, :edit, :update, :destroy]},
+                                   :require => :member
+    #set to public here, but there's a require_admin in the controller
+    permission :admin_datacenter, {:datacenters => :index}, :public => true
   end
   
   settings :default => {

@@ -5,6 +5,9 @@ en:
       messages:
         invalid_ipaddress: is not a valid IP address or CIDR mask
 
+  permission_view_datacenter: View datacenter
+  permission_manage_datacenter: Manage datacenter
+
   label_datacenter: Datacenter
   label_datacenter_new: New datacenter
   label_datacenter_plural: Datacenters

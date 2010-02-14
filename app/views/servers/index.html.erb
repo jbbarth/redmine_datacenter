@@ -1,4 +1,4 @@
-<% if User.current.admin? %>
+<% if User.current.allowed_to?(:manager_datacenter,@project) %>
 <div class="contextual">
   <%= link_to l(:label_server_new), new_server_path, :class => 'icon icon-add' %>
 </div>
@@ -34,7 +34,7 @@
 	  <td class="ipaddress"><%= h(server.ipaddress) %></td>
 	  <td class="description"><%= server.description %></td>
     <td class="buttons">
-      <% if User.current.admin? %>
+      <% if User.current.allowed_to?(:manager_datacenter,@project) %>
         <%= link_to l(:button_update), edit_server_path(@project,server), :class => 'icon icon-edit' %>
         <%= change_link_server_status(server) %>
       <% end %>

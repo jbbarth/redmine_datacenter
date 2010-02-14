@@ -11,17 +11,21 @@ class ApplisControllerTest < ActionController::TestCase
     @controller = ApplisController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    @request.session[:user_id] = 1 # admin
+    @request.session[:user_id] = 2 # not admin
+    #adds correct modules / permissions for the plugin
+    #TODO: DRY it !
+    Role.find(1).add_permission! :view_datacenter, :manage_datacenter
+    p = Project.find(1)
+    p.enabled_module_names = p.enabled_modules.map(&:name) << "datacenter"
   end
   
-  def test_non_admin_user_should_be_dropped_out_on_admin_actions
-    @request.session[:user_id] = 2
-    get :index, :project_id => 1
-    assert_response :success
-    get :edit, :id => Appli.first, :project_id => 1
-    assert_response 403
+  def test_module_enabled_and_user_has_permissions
+    project = Project.find(1)
+    assert project.module_enabled?(:datacenter)
+    assert User.current.allowed_to?(:view_datacenter, project)
+    assert User.current.allowed_to?(:manage_datacenter, project)
   end
-  
+
   def test_index
     get :index, :project_id => 1
     assert_template 'index'

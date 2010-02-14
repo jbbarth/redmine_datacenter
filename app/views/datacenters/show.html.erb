@@ -1,5 +1,5 @@
 <div class="contextual">
-  <% if User.current.admin? %>
+  <% if User.current.allowed_to?(:manager_datacenter,@project) %>
     <%= link_to l(:button_update), {:action => 'edit', :project_id => @project}, :class => 'icon icon-edit' %> 
     <!--<%= change_link_datacenter_status(@datacenter) %>-->
   <% end %>

@@ -5,6 +5,9 @@ fr:
       messages:
         invalid_ipaddress: "n'est pas une adresse IP valide ou un masque CIDR"
 
+  permission_view_datacenter: Voir le centre-serveur
+  permission_manage_datacenter: Gérer le centre-serveur
+
   label_datacenter: Centre-Serveur
   label_datacenter_new: Nouveau centre-serveur
   label_datacenter_plural: Centres-Serveurs

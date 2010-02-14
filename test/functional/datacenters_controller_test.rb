@@ -13,16 +13,13 @@ class DatacentersControllerTest < ActionController::TestCase
     @response   = ActionController::TestResponse.new
     @request.session[:user_id] = 1 # admin
     Setting["plugin_datacenter_plugin"]["domain"] = ".example.com"
+    #adds correct modules / permissions for the plugin
+    #TODO: DRY it !
+    Role.find(1).add_permission! :view_datacenter, :manage_datacenter
+    p = Project.find(1)
+    p.enabled_module_names = p.enabled_modules.map(&:name) << "datacenter"
   end
   
-  def test_non_admin_user_should_be_dropped_out_on_admin_actions
-    @request.session[:user_id] = 2
-    get :show, :project_id => 1
-    assert_response :success
-    get :edit, :project_id => 1
-    assert_response 403
-  end
-
   def test_index
     get :show, :project_id => 1
     assert_template 'show'

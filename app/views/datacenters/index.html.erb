@@ -24,7 +24,7 @@
     <td class="name"><%= link_to(h(datacenter.name),datacenter_path(datacenter.project)) %></td>
     <td class="description"><%= datacenter.description %></td>
     <td class="buttons">
-      <% if User.current.allowed_to?(:manager_datacenter,@project) %>
+      <% if User.current.allowed_to?(:manage_datacenter,@project) %>
       <%= link_to l(:button_update), edit_datacenter_path(datacenter.project), :class => 'icon icon-edit' %>
       <% end %>
     </td>

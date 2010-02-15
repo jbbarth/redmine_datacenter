@@ -1,5 +1,5 @@
 <div class="contextual">
-  <% if User.current.allowed_to?(:manager_datacenter,@project) %>
+  <% if User.current.allowed_to?(:manage_datacenter,@project) %>
     <%= link_to l(:button_update), edit_appli_path(@project,@appli), :class => 'icon icon-edit' %>
     <%= change_link_appli_status(@appli) %>
   <% end %>
@@ -13,7 +13,7 @@
   <h3><%= l(:field_description) %></h3>
   <p><%= textilizable @appli, :description %></p>
   
-  <% if User.current.allowed_to?(:manager_datacenter,@project) %>
+  <% if User.current.allowed_to?(:manage_datacenter,@project) %>
     <div class="contextual">
       <%= link_to l(:label_instance_new), new_appli_instance_path(@project,@appli), :class => 'icon icon-add' %>
     </div>

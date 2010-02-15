@@ -21,12 +21,18 @@ fr:
   label_instance: Instance
   label_instance_plural: Instances
   label_instance_new: Nouvelle instance
+  label_network_new: Nouveau réseau
+  label_network_plural: Réseaux
   
   button_add_interface: Ajouter une interface
 
   field_server: Serveur
   field_fqdn: Nom complet (fqdn)
   field_ipaddress: Adresse IP
+  field_address: Adresse
+  field_netmask: Masque réseau
+  field_color: Couleur
+  field_exceptions: Exceptions
   field_domain: Domaine
   field_appli: Application
   field_appli_instance_ids: Applications

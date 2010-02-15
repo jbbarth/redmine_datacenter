@@ -1,0 +1,17 @@
+one:
+  id: 1
+  name: LAN
+  address: 192.168.0.0
+  netmask: 24
+  color: #FF0000
+  exceptions: |-
+    192.168.0.248/30 A subnet I don't want to watch
+    192.168.0.247 My router
+
+two:
+  id: 2
+  name: DMZ
+  address: 192.168.1.0
+  netmask: 255.255.255.0
+  color: #00FF00
+  exceptions:

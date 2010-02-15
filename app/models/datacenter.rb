@@ -4,6 +4,7 @@ class Datacenter < ActiveRecord::Base
   belongs_to :project
   has_many :applis
   has_many :servers
+  has_many :networks
 
   attr_accessible :name, :description, :status, :project_id, :domain
   

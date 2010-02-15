@@ -1,0 +1,55 @@
+<div class="contextual">
+  <% if User.current.allowed_to?(:manage_datacenter,@project) %>
+    <%= link_to l(:button_update), edit_network_path(:project_id => @project, :id => @network), :class => 'icon icon-edit' %> 
+    <%= change_link_network_status(@network) %>
+  <% end %>
+</div>
+
+<h2><%= link_to l(:label_network_plural), networks_path %> &#187; <%=h @network.name %></h2>
+
+<div class="splitcontentleft network">
+
+  <h3><%= @network.fullname %></h3>
+  <table class="attributes">
+    <tr>
+      <th><%= l(:field_description)%>:</th>
+      <td><%= textilizable @network, :description %></td></tr>
+    <tr>
+      <th><%= l(:label_interface_plural)%>:</th>
+      <td>
+        <% @network.interfaces.sort_by(&:name).each do |interface| %>
+          <p>(<%= interface.name.blank? ? "?" : interface.name %>) <%= interface.ipaddress %></p>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+
+  <div class="contextual">
+    <%= link_to l(:label_appli_plural), applis_path(@project), :class => 'icon icon-applis' %>
+  </div>
+
+  <h3><%= l(:label_appli_plural) %>/<%= l(:label_instance_plural) %></h3>
+  <% if @network.instances.any? %>
+    <% @network.instances.sort_by{|x| [x.appli.name, x.name]}.each do |instance| %>
+    <p>
+      <strong><%= link_to instance.appli.name, appli_path(@project,instance.appli) %></strong>
+      (<%= link_to instance.name, edit_appli_instance_path(:project_id => @project, :appli_id => instance.appli, :id => instance) %>) : 
+      <%= links_to_networks(@project,instance.networks) %>
+    </p>
+    <% end %>
+  <% else %>
+    <p class="nodata"><%= l(:label_no_data) %></p>
+  <% end %>
+</div>
+
+<div class="splitcontentright">
+  <h3><%= l(:label_related_issues) %></h3>
+  <% if @issues.empty? %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+  <% else %>
+  <%= render :partial => 'issues/list_simple', :locals => {:issues => @issues} %>
+  <p class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></p>
+  <% end %>
+</div>
+
+<% html_title(l(:label_network_plural)) -%>

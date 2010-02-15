@@ -48,8 +48,8 @@ class ServersController < DatacenterPluginController
   end
   
   def create
-    unless params[:server].blank? || @settings["domain"].blank?
-      params[:server][:fqdn] ||= params[:server][:name]+@settings["domain"]
+    unless params[:server].blank? || @project.datacenter.domain.blank?
+      params[:server][:fqdn] ||= params[:server][:name]+@project.datacenter.domain
     end
     @server = Server.new(params[:server])
     if @server.save

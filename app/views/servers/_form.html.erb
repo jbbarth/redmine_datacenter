@@ -2,8 +2,8 @@
 
 <!--[form:server]-->
 <div class="box tabular">
-  <% if @server.new_record? && !@settings["domain"].blank? %>
-    <p><%= f.text_field :name, :required => true %><%= @settings["domain"] %></p>
+  <% if @server.new_record? && !@project.datacenter.domain.blank? %>
+    <p><%= f.text_field :name, :required => true %><%= @project.datacenter.domain %></p>
   <% else %>
     <p><%= f.text_field :name, :required => true %></p>
     <p><%= f.text_field :fqdn %></p>

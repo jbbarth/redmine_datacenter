@@ -1,8 +1,4 @@
 <p>
-  <label><%= l(:field_domain) %></label> 
-  <%= text_field_tag 'settings[domain]', @settings["domain"] %>
-</p>
-<p>
   <label><%= l(:label_use_multiple_select) %></label> 
   <%= hidden_field_tag 'settings[multiple_select]', 0 %>
   <%= check_box_tag 'settings[multiple_select]', "1", Setting.datacenter_multiselect? %>

@@ -5,7 +5,7 @@ class Datacenter < ActiveRecord::Base
   has_many :applis
   has_many :servers
 
-  attr_accessible :name, :description, :status, :project_id
+  attr_accessible :name, :description, :status, :project_id, :domain
   
   STATUS_ACTIVE = 1
   STATUS_LOCKED = 2

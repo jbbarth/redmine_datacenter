@@ -1,7 +1,6 @@
 <div class="contextual">
   <% if User.current.allowed_to?(:manage_datacenter,@project) %>
     <%= link_to l(:button_update), edit_network_path(:project_id => @project, :id => @network), :class => 'icon icon-edit' %> 
-    <%= change_link_network_status(@network) %>
   <% end %>
 </div>
 

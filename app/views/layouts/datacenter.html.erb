@@ -18,6 +18,7 @@
       <li><%= link_to l(:label_network_plural), {:controller => 'networks', :project_id => @project}, :class => 'networks' %></li>
     </ul>
     <% end %>
+    <%= call_hook :view_layouts_datacenter_sidebar %>
   </div>
 <% end %>
 

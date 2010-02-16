@@ -1,7 +1,7 @@
 class DatacentersController < DatacenterPluginController
   unloadable
 
-  before_filter :authorize, :except => :index
+  before_filter :authorize, :find_project, :except => :index
   before_filter :require_admin, :only => :index
 
   #no pagination or such things here

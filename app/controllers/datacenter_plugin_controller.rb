@@ -1,5 +1,5 @@
 class DatacenterPluginController < ApplicationController
-  before_filter :find_project, :authorize
+  before_filter :find_project, :find_datacenter, :authorize
   before_filter :retrieve_settings, :set_menu_item
 
   unloadable
@@ -15,13 +15,14 @@ class DatacenterPluginController < ApplicationController
   end
 
   def find_project
-    @project = begin
-                 Project.find(params[:project_id])
-               rescue
-                 #nothing, we just want nil instead of NotFound exception
-                 #find_by_id would have been great but Redmine passes the
-                 #aphabetical identifier in most links, not the ID
-               end
+    @project = Project.find(params[:project_id])
+  end
+
+  def find_datacenter
+    @datacenter = @project.datacenter
+    if @datacenter.nil? && controller_name != "datacenters" && action_name != "new"
+      redirect_to :controller => :datacenters, :action => :new
+    end
   end
 
   def set_layout

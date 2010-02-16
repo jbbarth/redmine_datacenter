@@ -16,6 +16,22 @@ class DatacenterIssueHook < Redmine::Hook::ViewListener
   render_on :view_issues_form_details_bottom, :partial => "datacenter_plugin/issue_form"
   render_on :view_issues_show_details_bottom, :partial => "datacenter_plugin/issue_show"
   
+  # Save our elements related to issues
+  # It used to work out of the box before r3308, which introduced a "safe_attributes=" method
+  # for issues, saving only white-listed elements. Of course this is not the case of our
+  # elements, hence this patch..
+  #
+  # Context:
+  # * :params => Parameters of the request
+  # * :issue => Current issue object
+  # * :time_entry => Current time entry
+  # * :journal => Current journal for this issue
+  #
+  def controller_issues_edit_before_save(context)
+    context[:issue].server_ids         = context[:params][:issue][:server_ids]
+    context[:issue].appli_instance_ids = context[:params][:issue][:appli_instance_ids]
+  end
+
   # Add journal details for our elements related to the current issues
   #
   # Context:

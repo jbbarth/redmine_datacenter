@@ -33,7 +33,7 @@ class Server < ActiveRecord::Base
   end
   
   def ipaddress
-    interfaces.first.ipaddress if interfaces.any?
+    (interfaces.first.ipaddress if interfaces.any?).to_s
   end
 
   def fullname

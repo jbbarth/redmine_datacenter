@@ -33,4 +33,16 @@ class Network < ActiveRecord::Base
       false
     end
   end
+
+  def first
+    IPAddr.new(iprange.to_range.first.to_i + 1, Socket::AF_INET).to_s
+  end
+
+  def last
+    IPAddr.new(iprange.to_range.last.to_i - 1, Socket::AF_INET).to_s
+  end
+
+  def broadcast
+    iprange.to_range.last.to_s
+  end
 end

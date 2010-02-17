@@ -21,4 +21,20 @@ class NetworkTest < ActiveSupport::TestCase
       assert !Network.new(opts).valid?
     end
   end
+
+  def test_include
+    network = Network.new(:name => "My network", :address => "192.168.2.0", :netmask => "24")
+    assert network.include?("192.168.2.1")
+    assert network.include?("192.168.2.0")
+    assert !network.include?("192.168.3.1")
+    assert !network.include?("aaa")
+    assert !network.include?(nil)
+  end
+
+  def test_first_last_and_broadcast
+    network = Network.new(:name => "My network", :address => "192.168.2.0", :netmask => "24")
+    assert_equal "192.168.2.1", network.first
+    assert_equal "192.168.2.254", network.last
+    assert_equal "192.168.2.255", network.broadcast
+  end
 end

@@ -4,6 +4,7 @@ one:
   address: 192.168.0.0
   netmask: 24
   color: #FF0000
+  datacenter_id: 1
   exceptions: |-
     192.168.0.248/30 A subnet I don't want to watch
     192.168.0.247 My router
@@ -14,4 +15,14 @@ two:
   address: 192.168.1.0
   netmask: 255.255.255.0
   color: #00FF00
+  datacenter_id: 1
+  exceptions:
+
+three:
+  id: 3
+  name: DMZ Cracker
+  address: 172.10.1.0
+  netmask: 255.255.0.0
+  color: #00FF00
+  datacenter_id: 2
   exceptions:

@@ -1,4 +1,5 @@
 class NetworksController < DatacenterPluginController
+  before_filter :find_network, :only => [:show, :edit, :update, :destroy]
   unloadable
 
   def index
@@ -88,5 +89,15 @@ class NetworksController < DatacenterPluginController
     @network.destroy
     flash[:notice] = l(:notice_successful_delete)
     redirect_to networks_path(@project)
+  end
+
+  private
+  def find_network
+    begin
+      @network = Network.find(params[:id],
+                          :conditions => {:datacenter_id => @datacenter})
+    rescue ActiveRecord::RecordNotFound
+      render_404
+    end
   end
 end

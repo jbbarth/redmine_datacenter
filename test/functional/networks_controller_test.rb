@@ -34,6 +34,13 @@ class NetworksControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  def test_cannot_show_network_from_other_project
+    appli = Appli.find(3)
+    assert_equal 2, appli.datacenter.project_id
+    get :show, :id => 3, :project_id => 1
+    assert_response 404
+  end
+
   def test_new
     get :new, :project_id => 1
     assert_template 'new'

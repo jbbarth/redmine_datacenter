@@ -1,4 +1,5 @@
 class ServersController < DatacenterPluginController
+  before_filter :find_server, :only => [:show, :edit, :update, :destroy]
   unloadable
 
   def index
@@ -27,7 +28,6 @@ class ServersController < DatacenterPluginController
   end
   
   def show
-    @server = Server.find(params[:id], :include => :issues)
     c = ARCondition.new(["issues_servers.server_id = ?", @server.id])
     sort_init([['id', 'desc']])
     sort_update({'id' => "#{Issue.table_name}.id"})
@@ -61,12 +61,10 @@ class ServersController < DatacenterPluginController
   end
   
   def edit
-    @server = Server.find(params[:id])
   end
   
   def update
     params[:server][:existing_interface_attributes] ||= {}
-    @server = Server.find(params[:id])
     if @server.update_attributes(params[:server])
       flash[:notice] = l(:notice_successful_update)
       redirect_to server_path(@project,@server)
@@ -76,9 +74,19 @@ class ServersController < DatacenterPluginController
   end
   
   def destroy
-    @server = Server.find(params[:id])
     @server.status = Server::STATUS_LOCKED
     @server.save
     redirect_to servers_url(:project_id => @project)
+  end
+  
+  private
+  def find_server
+    begin
+      @server = Server.find(params[:id],
+                          :conditions => {:datacenter_id => @datacenter},
+                          :include => :issues)
+    rescue ActiveRecord::RecordNotFound
+      render_404
+    end
   end
 end

@@ -1,4 +1,6 @@
 class ApplisController < DatacenterPluginController
+  before_filter :find_appli, :only => [:show, :edit, :update, :destroy]
+  unloadable
   helper :servers
 
   def index
@@ -25,7 +27,6 @@ class ApplisController < DatacenterPluginController
   end
   
   def show
-    @appli = Appli.find(params[:id], :include => [:issues, :instances])
     c = ARCondition.new(["#{IssueElement.table_name}.appli_id = ?", @appli.id])
     sort_init([['id', 'desc']])
     sort_update({'id' => "#{Issue.table_name}.id"})
@@ -56,11 +57,9 @@ class ApplisController < DatacenterPluginController
   end
   
   def edit
-    @appli = Appli.find(params[:id])
   end
   
   def update
-    @appli = Appli.find(params[:id])
     if @appli.update_attributes(params[:appli])
       flash[:notice] = l(:notice_successful_update)
       redirect_to appli_path(@project,@appli)
@@ -70,9 +69,19 @@ class ApplisController < DatacenterPluginController
   end
   
   def destroy
-    @appli = Appli.find(params[:id])
     @appli.status = Appli::STATUS_LOCKED
     @appli.save
     redirect_to applis_url(:project_id => @project)
+  end
+
+  private
+  def find_appli
+    begin
+      @appli = Appli.find(params[:id],
+                          :conditions => {:datacenter_id => @datacenter},
+                          :include => [:issues, :instances])
+    rescue ActiveRecord::RecordNotFound
+      render_404
+    end
   end
 end

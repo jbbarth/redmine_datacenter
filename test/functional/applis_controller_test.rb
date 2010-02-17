@@ -36,6 +36,13 @@ class ApplisControllerTest < ActionController::TestCase
     assert_template 'show'
   end
 
+  def test_cannot_show_appli_from_other_project
+    appli = Appli.find(3)
+    assert_equal 2, appli.datacenter.project_id
+    get :show, :id => 3, :project_id => 1
+    assert_response 404
+  end
+
   def test_show_includes_related_issues
     get :show, :id => Appli.find(2), :project_id => 1
     assert_tag :tr, :attributes => {:id => 'issue-2'} #Issue(2) linked to Appli(2)

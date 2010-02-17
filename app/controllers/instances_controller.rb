@@ -42,6 +42,11 @@ class InstancesController < DatacenterPluginController
 
   private
   def find_appli
-    @appli = Appli.find(params[:appli_id])
+    begin
+      @appli = Appli.find(params[:appli_id],
+                          :conditions => {:datacenter_id => @datacenter})
+    rescue ActiveRecord::RecordNotFound
+      render_404
+    end
   end
 end

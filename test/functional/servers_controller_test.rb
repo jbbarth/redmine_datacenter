@@ -24,11 +24,23 @@ class ServersControllerTest < ActionController::TestCase
     assert_template 'index'
   end
   
+  def test_show
+    get :show, :id => Server.first, :project_id => 1
+    assert_template 'show'
+  end
+
+  def test_cannot_show_server_from_other_project
+    appli = Server.find(5)
+    assert_equal 2, appli.datacenter.project_id
+    get :show, :id => 5, :project_id => 1
+    assert_response 404
+  end
+  
   def test_new
     get :new, :project_id => 1
     assert_template 'new'
   end
-  
+ 
   def test_create_invalid
     Server.any_instance.stubs(:valid?).returns(false)
     post :create, :project_id => 1

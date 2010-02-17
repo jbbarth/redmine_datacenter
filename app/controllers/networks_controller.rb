@@ -2,7 +2,7 @@ class NetworksController < DatacenterPluginController
   unloadable
 
   def index
-    @networks = @project.datacenter.networks
+    @networks = @datacenter.networks
   end
   
   def overview

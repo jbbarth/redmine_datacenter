@@ -6,7 +6,7 @@ class ApplisController < DatacenterPluginController
     sort_update %w(id name)
 
     @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
-    c = ARCondition.new(["datacenter_id = ?", @project.datacenter.id])
+    c = ARCondition.new(["datacenter_id = ?", @datacenter.id])
     c << ["status = ?", @status] unless @status == 0
     
     unless params[:name].blank?

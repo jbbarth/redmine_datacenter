@@ -2,8 +2,8 @@
 
 <!--[form:server]-->
 <div class="box tabular">
-  <% if @server.new_record? && !@project.datacenter.domain.blank? %>
-    <p><%= f.text_field :name, :required => true %><%= @project.datacenter.domain %></p>
+  <% if @server.new_record? && !@datacenter.domain.blank? %>
+    <p><%= f.text_field :name, :required => true %><%= @datacenter.domain %></p>
   <% else %>
     <p><%= f.text_field :name, :required => true %></p>
     <p><%= f.text_field :fqdn %></p>
@@ -14,6 +14,6 @@
     <%= add_interface_link l(:button_add_interface) %>
   </p>
   <p><%= f.text_area :description, :rows => 5 %></p>
-  <%= f.hidden_field :datacenter_id, :value => @project.datacenter.id %>
+  <%= f.hidden_field :datacenter_id, :value => @datacenter.id %>
 </div>
 <!--[eoform:server]-->

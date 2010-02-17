@@ -6,7 +6,7 @@ class ServersController < DatacenterPluginController
     sort_update %w(name fqdn description)
     
     @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
-    c = ARCondition.new(["datacenter_id = ?", @project.datacenter.id])
+    c = ARCondition.new(["datacenter_id = ?", @datacenter.id])
     c << ["status = ?", @status] unless @status == 0
     
     unless params[:name].blank?
@@ -48,8 +48,8 @@ class ServersController < DatacenterPluginController
   end
   
   def create
-    unless params[:server].blank? || @project.datacenter.domain.blank?
-      params[:server][:fqdn] ||= params[:server][:name]+@project.datacenter.domain
+    unless params[:server].blank? || @datacenter.domain.blank?
+      params[:server][:fqdn] ||= params[:server][:name]+@datacenter.domain
     end
     @server = Server.new(params[:server])
     if @server.save

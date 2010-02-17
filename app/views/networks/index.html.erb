@@ -1,7 +1,9 @@
 <% if User.current.allowed_to?(:manage_datacenter,@project) %>
 <div class="contextual">
   <%= link_to l(:label_network_new), new_network_path, :class => 'icon icon-add' %>
-  <%= link_to l(:label_overview), overview_networks_path(@project), :class => 'icon icon-report' %>
+  <% if @networks.any? %>
+    <%= link_to l(:label_overview), overview_networks_path(@project), :class => 'icon icon-report' %>
+  <% end %>
 </div>
 <% end %>
 

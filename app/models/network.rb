@@ -25,4 +25,12 @@ class Network < ActiveRecord::Base
   def iprange
     IPAddr.new("#{self.address}/#{self.netmask}")
   end
+
+  def include?(address)
+    begin
+      self.iprange.include?(address)
+    rescue ArgumentError
+      false
+    end
+  end
 end

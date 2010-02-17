@@ -21,6 +21,11 @@ class DatacentersControllerTest < ActionController::TestCase
   end
   
   def test_index
+    get :index
+    assert_template 'index'
+  end
+
+  def test_show
     get :show, :project_id => 1
     assert_template 'show'
   end

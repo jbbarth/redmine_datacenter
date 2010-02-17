@@ -26,6 +26,7 @@ en:
   label_network_by_ip_host: by ip/host
   label_network_by_subnet: by network
   label_network_side_by_side: side-by-side
+  label_ipaddress_plural: IP Addresses
   
   button_add_interface: Add an interface
 

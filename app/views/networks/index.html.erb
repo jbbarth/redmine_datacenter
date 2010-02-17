@@ -14,15 +14,18 @@
       <th><%= l(:field_name) %></th>
       <th><%= l(:field_address) %></th>
       <th><%= l(:field_netmask) %></th>
+      <th colspan="2"><%= l(:label_ipaddress_plural) %></th>
       <th> </th>
     </tr>
   </thead>
   <tbody>
 <% for network in @networks -%>
   <tr class="network <%= cycle("odd", "even") %>">
-	  <td class="name"><%= link_to h(network.name), network_path(@project,network) %></td>
-	  <td class="address"><%= h(network.address) %></td>
-	  <td class="netmask"><%= network.netmask %></td>
+	  <td style="text-align:left"><%= link_to h(network.name), network_path(@project,network) %></td>
+	  <td><%= h(network.address) %></td>
+	  <td><%= network.netmask %></td>
+    <td style="text-align:right"><%= network.first %></td>
+    <td style="text-align:left">- <%= network.last %></td>
     <td class="buttons">
       <% if User.current.allowed_to?(:manage_datacenter,@project) %>
         <%= link_to l(:button_update), edit_network_path(@project,network), :class => 'icon icon-edit' %>

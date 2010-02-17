@@ -15,6 +15,7 @@ span.interface input.interface_name {width:3em;}
 span.interface input.interface_ipaddress {width:10em;}
 table.instances {border: 0;}
 table.instances td.buttons a {padding-right:0;}
+tr.network td {text-align:center;}
 tr.appli td.buttons, tr.server td.buttons, tr.datacenter td.buttons, tr.network td.buttons {text-align:left;}
 div.network-overview {float:left; padding:3px;}
 div.network-overview td {padding:3px 8px;}

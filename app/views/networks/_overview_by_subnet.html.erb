@@ -1,0 +1,26 @@
+<% @by_network.keys.sort.each do |network_name| %>
+  <% servers = @by_network[network_name].sort_by{|serv| serv[1].split(".").map(&:to_i)} %>
+  <div class="network-overview">
+    <table class="list">
+      <thead>
+        <tr>
+          <th colspan="2">
+          <% if network_name == "-" %>
+            -
+          <% else %>
+            <%= link_to network_name, network_path(@project,@networks.detect{|n|n.name==network_name}) %>
+          <% end %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% servers.each do |server| %>
+        <tr>
+          <td><%= server[1] %></td>
+          <td><%= link_to server[0].name, server_path(@project,server[0]) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

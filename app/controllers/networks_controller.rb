@@ -5,6 +5,52 @@ class NetworksController < DatacenterPluginController
     @networks = @project.datacenter.networks
   end
   
+  def overview
+    @servers = @datacenter.servers.active.all(:order => 'name asc')
+    @networks = @datacenter.networks.all(:order => 'address asc')
+    
+    @display = (%w(by_ip_host side_by_side).include?(params[:display]) ? params[:display] : 'by_subnet')
+    
+    case @display
+    when 'by_subnet'
+      @by_network = {}
+      @networks.each do |network|
+        @by_network[network.name] = []
+      end
+      @by_network["-"] = [] #for servers outside our networks
+    
+      #TODO: clean all this, it's just an awful mess
+      #      of nested arrays and hashes for the moment :( !
+      @servers.each do |server|
+        server.interfaces.each do |interface|
+          net = @networks.detect{|n| n.include?(interface.ipaddress)}
+          key = (net ? net.name : "-")
+          @by_network[key] << [server,interface.ipaddress]
+        end
+      end
+    
+    when 'by_ip_host'
+      @by_ip = {}
+      @servers.each do |server|
+        server.interfaces.each do |interface|
+          @by_ip[interface.ipaddress] = server
+        end
+      end
+
+    when 'side_by_side'
+      @side = {}
+      @servers.each do |server|
+        @side[server.id] = Hash.new("")
+        server.interfaces.each do |interface|
+          net = @networks.detect{|n| n.include?(interface.ipaddress)}
+          key = (net ? net.id : "-")
+          @side[server.id][key] = interface.ipaddress
+        end
+      end
+      
+    end
+  end
+
   def show
     @network = Network.find(params[:id])
   end

@@ -23,6 +23,9 @@ fr:
   label_instance_new: Nouvelle instance
   label_network_new: Nouveau réseau
   label_network_plural: Réseaux
+  label_network_by_ip_host: par ip/host
+  label_network_by_subnet: par réseau
+  label_network_side_by_side: côté-à-côte
   
   button_add_interface: Ajouter une interface
 

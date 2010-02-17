@@ -24,6 +24,16 @@ class NetworksControllerTest < ActionController::TestCase
     assert_template 'index'
   end
   
+  def test_overview
+    get :overview, :project_id => 1
+    assert_template 'overview'
+    assert_response :success
+    get :overview, :project_id => 1, :display => 'side_by_side'
+    assert_response :success
+    get :overview, :project_id => 1, :display => 'by_subnet'
+    assert_response :success
+  end
+
   def test_new
     get :new, :project_id => 1
     assert_template 'new'

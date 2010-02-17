@@ -1,0 +1,39 @@
+<div class="network-overview">
+  <table class="list">
+    <thead>
+      <tr>
+        <th><%= l(:field_ipaddress) %></th>
+        <th><%= l(:field_server) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @by_ip.keys.sort_by{|i| i.split(".").map(&:to_i)}.each do |ip| %>
+        <% server = @by_ip[ip] %>
+        <tr>
+          <td><%= ip %></td>
+          <td><%= link_to server.name, server_path(@project,server) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="network-overview" style="margin-left:30%">
+  <table class="list">
+    <thead>
+      <tr>
+        <th><%= l(:field_server) %></th>
+        <th><%= l(:field_ipaddress) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @by_ip.values.sort_by(&:name).uniq.each do |server| %>
+        <% interfaces = @by_ip.select{|ip,serv| serv==server}.map{|a|a[0]} %>
+        <tr>
+          <td><%= link_to server.name, server_path(@project,server) %></td>
+          <td><%= interfaces.join("<br />") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

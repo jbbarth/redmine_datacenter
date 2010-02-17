@@ -1,0 +1,10 @@
+<div class="contextual">
+  <%= l(:label_display) %> : 
+  <%= link_to l(:label_network_by_ip_host), {:display => 'by_ip_host'} %> | 
+  <%= link_to l(:label_network_by_subnet), {:display => 'by_subnet'} %> | 
+  <%= link_to l(:label_network_side_by_side), {:display => 'side_by_side'} %>
+</div>
+
+<h2><%= link_to l(:label_network_plural), networks_path %> &#187; <%= l(:label_overview) %></h2>
+
+<%= render :partial => "overview_#{@display}" %>

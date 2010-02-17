@@ -15,6 +15,6 @@ ActionController::Routing::Routes.draw do |map|
         instance.resources :servers
       end
     end
-    mmap.resources :networks
+    mmap.resources :networks, :collection => {:overview => :get}
   end
 end

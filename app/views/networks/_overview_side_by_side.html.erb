@@ -1,0 +1,22 @@
+<div class="network-overview">
+  <table class="list">
+    <thead>
+      <tr>
+        <th><%= l(:field_server) %></th>
+        <%= @networks.map{|net| "<th>#{net.name}</th>"}.join %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @servers.sort_by(&:name).each do |server| %>
+        <tr>
+          <td><%= server.name %></td>
+          <% @networks.each do |net| %>
+            <td style="font-weight:bold;background-color:<%= net.color %>">
+              <%= @side[server.id] ? @side[server.id][net.id] : "" %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

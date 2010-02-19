@@ -27,9 +27,10 @@ class Network < ActiveRecord::Base
     IPAddr.new("#{self.address}/#{self.netmask}")
   end
 
-  def include?(address)
+  def include?(addr)
     begin
-      self.iprange.include?(address)
+      addr = IPAddr.new(addr) if RUBY_VERSION < '1.8.7'
+      self.iprange.include?(addr)
     rescue ArgumentError
       false
     end

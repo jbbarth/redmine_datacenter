@@ -6,7 +6,9 @@
         <% @networks.each do |net| %>
           <th><%= link_to net.name, network_path(@project,net) %></th>
         <% end %>
-        <th>-</th>
+        <% if @out_networks %>
+          <th>-</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -18,7 +20,9 @@
               <%= @side[server.id] ? @side[server.id][net.id] : "" %>
             </td>
           <% end %>
-          <td><%= @side[server.id] ? @side[server.id]["-"] : "" %></td>
+          <% if @out_networks %>
+            <td><%= @side[server.id] ? @side[server.id]["-"] : "" %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

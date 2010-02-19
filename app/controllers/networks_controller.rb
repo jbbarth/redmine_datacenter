@@ -29,6 +29,7 @@ class NetworksController < DatacenterPluginController
           @by_network[key] << [server,interface.ipaddress]
         end
       end
+      @by_network.delete("-") if @by_network["-"].empty?
     
     when 'by_ip_host'
       @by_ip = {}
@@ -40,11 +41,13 @@ class NetworksController < DatacenterPluginController
 
     when 'side_by_side'
       @side = {}
+      @out_networks = false
       @servers.each do |server|
         @side[server.id] = Hash.new("")
         server.interfaces.each do |interface|
           net = @networks.detect{|n| n.include?(interface.ipaddress)}
           key = (net ? net.id : "-")
+          @out_networks = true if key=="-"
           @side[server.id][key] = interface.ipaddress
         end
       end

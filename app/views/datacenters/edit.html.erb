@@ -1,6 +1,6 @@
 <h2><%= l(:label_datacenter) %> &#187; <%=h @datacenter.name %></h2>
 
-<% labelled_tabular_form_for :datacenter, @datacenter, :url => datacenter_path(@datacenter),
+<% labelled_tabular_form_for :datacenter, @datacenter, :url => datacenter_path(@project),
                              :html => { :class => nil, :method => :put } do |f| %>
 	<%= render :partial => 'form', :locals => { :f => f } %>
 	<p><%= submit_tag l(:button_update) %></p>

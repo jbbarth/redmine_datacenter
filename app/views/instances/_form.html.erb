@@ -18,7 +18,7 @@ function toggle_multi_select_datacenter(field) {
   <p>
   <label><%= l(:field_appli) %><span class="required"> *</span></label>
   <%= collection_select :instance, :appli_id,
-                        Appli.for_project(@project.id), :id, :name,
+                        Appli.for_datacenter(@datacenter.id), :id, :name,
                         { :selected => @appli.id, :include_blank => false } %>
   </p>
   <p><%= f.text_field :name, :required => true %></p>

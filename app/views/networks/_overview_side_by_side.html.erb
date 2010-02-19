@@ -1,4 +1,4 @@
-<div class="network-overview">
+<div class="network-overview network-side">
   <table class="list">
     <thead>
       <tr>
@@ -12,7 +12,7 @@
     <tbody>
       <% @servers.sort_by(&:name).each do |server| %>
         <tr>
-          <td><%= link_to server.name, server_path(@project,server) %></td>
+          <td class="server"><%= link_to server.name, server_path(@project,server) %></td>
           <% @networks.each do |net| %>
             <td style="font-weight:bold;background-color:<%= net.color %>">
               <%= @side[server.id] ? @side[server.id][net.id] : "" %>

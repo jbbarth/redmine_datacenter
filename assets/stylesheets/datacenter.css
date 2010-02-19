@@ -19,3 +19,5 @@ tr.network td {text-align:center;}
 tr.appli td.buttons, tr.server td.buttons, tr.datacenter td.buttons, tr.network td.buttons {text-align:left;}
 div.network-overview {float:left; padding:3px;}
 div.network-overview td {padding:3px 8px;}
+div.network-side td {text-align:center; border: 1px solid #e4e4e4;}
+div.network-side td.server {text-align:left;}

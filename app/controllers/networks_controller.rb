@@ -53,7 +53,6 @@ class NetworksController < DatacenterPluginController
   end
 
   def show
-    @network = Network.find(params[:id])
   end
   
   def new
@@ -71,11 +70,9 @@ class NetworksController < DatacenterPluginController
   end
   
   def edit
-    @network = Network.find(params[:id])
   end
   
   def update
-    @network = Network.find(params[:id])
     if @network.update_attributes(params[:network])
       flash[:notice] = l(:notice_successful_update)
       redirect_to network_path(@project,@network)
@@ -85,7 +82,6 @@ class NetworksController < DatacenterPluginController
   end
   
   def destroy
-    @network = Network.find(params[:id])
     @network.destroy
     flash[:notice] = l(:notice_successful_delete)
     redirect_to networks_path(@project)

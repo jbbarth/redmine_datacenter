@@ -31,6 +31,10 @@ class DatacenterIssueHook < Redmine::Hook::ViewListener
     context[:issue].server_ids         = context[:params][:issue][:server_ids]
     context[:issue].appli_instance_ids = context[:params][:issue][:appli_instance_ids]
   end
+  def controller_issues_new_before_save(context)
+    context[:issue].server_ids         = context[:params][:issue][:server_ids]
+    context[:issue].appli_instance_ids = context[:params][:issue][:appli_instance_ids]
+  end
 
   # Add journal details for our elements related to the current issues
   #

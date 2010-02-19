@@ -3,13 +3,15 @@
     <thead>
       <tr>
         <th><%= l(:field_server) %></th>
-        <%= @networks.map{|net| "<th>#{net.name}</th>"}.join %>
+        <% @networks.each do |net| %>
+          <th><%= link_to net.name, network_path(@project,net) %></th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
       <% @servers.sort_by(&:name).each do |server| %>
         <tr>
-          <td><%= server.name %></td>
+          <td><%= link_to server.name, server_path(@project,server) %></td>
           <% @networks.each do |net| %>
             <td style="font-weight:bold;background-color:<%= net.color %>">
               <%= @side[server.id] ? @side[server.id][net.id] : "" %>

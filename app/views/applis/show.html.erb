@@ -26,7 +26,7 @@
 <div class="splitcontentright">
   
   <h3><%= l(:label_related_issues) %></h3>
-  <%= render :partial => 'issues/list_simple', :locals => {:issues => @issues} %>
+  <%= render :partial => 'datacenter_plugin/issues_list_simple', :locals => {:issues => @issues} %>
   <% if @issues.any? %>
     <p class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></p>
   <% end %>

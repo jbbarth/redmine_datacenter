@@ -10,6 +10,8 @@ function toggle_multi_select_datacenter(field) {
 }
 //]]>
 </script>
+<% @datacenter ||= @project.datacenter %>
+<% if @datacenter %>
 <p>
   <label><%= l(:label_appli_plural) %></label>
   <% applis = Appli.for_datacenter(@datacenter.id).active(:include => :instances) | @issue.applis | @issue.instances.map(&:appli) %>
@@ -18,3 +20,4 @@ function toggle_multi_select_datacenter(field) {
                        "toggle_multi_select_datacenter('issue_appli_instance_ids');",
                        :style => "vertical-align: bottom;" %>
 </p> 
+<% end %>

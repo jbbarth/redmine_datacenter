@@ -1,3 +1,5 @@
+<% @datacenter ||= @project.datacenter %>
+<% if @datacenter %>
 <p>
   <label><%= l(:label_server_plural) %></label>
   <% servers = Server.for_datacenter(@datacenter.id).all(:order => 'name ASC').select{|s| s.active? || @issue.server_ids.include?(s.id)} %>
@@ -17,3 +19,4 @@
     <% end -%>
   <% end %>
 </p> 
+<% end %>

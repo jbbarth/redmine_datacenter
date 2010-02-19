@@ -3,6 +3,7 @@
 	<table class="list issues">		
 		<thead><tr>
 		<th>#</th>
+		<th><%=l(:field_status)%></th>
 		<th><%=l(:field_subject)%></th>
 		</tr></thead>
 		<tbody>	
@@ -12,8 +13,11 @@
 			  <%= check_box_tag("ids[]", issue.id, false, :style => 'display:none;') %>
 				<%= link_to issue.id, :controller => 'issues', :action => 'show', :id => issue %>
 			</td>
+      <td class="status">
+        <%= issue.status %>
+      </td>
 			<td class="subject">
-        <%= link_to h(truncate(issue.subject, :length => 60)), :controller => 'issues', :action => 'show', :id => issue %> (<%=h issue.status %>)
+        <%= link_to h(truncate(issue.subject, :length => 60)), :controller => 'issues', :action => 'show', :id => issue %>
       </td>
 		</tr>
 		<% end %>

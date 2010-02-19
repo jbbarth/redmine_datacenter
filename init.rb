@@ -5,6 +5,7 @@ require 'datacenter_assets'
 require 'datacenter_issue_hook'
 
 #patches
+require 'ipaddr_patch'
 config.to_prepare do
   require_dependency 'issue_patch'
   require_dependency 'issues_controller_patch'

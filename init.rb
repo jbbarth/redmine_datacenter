@@ -45,6 +45,7 @@ Redmine::Plugin.register :datacenter_plugin do
   
   settings :default => {
               'multiple_select' => "1", #false=checkboxes, true=multiple_select
+              'hide_admin_links' => false,
               'domain'          => ""
             },
            :partial => 'settings/redmine_datacenter'

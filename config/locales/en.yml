@@ -41,3 +41,5 @@ en:
   field_appli: Application
   field_appli_instance_ids: Applications
   field_server_ids: Servers
+
+  text_hide_admin_links_in_sidebar: Hide admin links in sidebar ?

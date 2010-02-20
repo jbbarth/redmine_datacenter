@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <div id="admin-menu">
-    <% if User.current.admin? %>
+    <% if User.current.admin? && !Setting[:plugin_datacenter_plugin][:hide_admin_links] %>
 	  <h3><%=l(:label_administration)%></h3>
     <ul>
       <li><%= link_to l(:label_project_plural), {:controller => 'admin', :action => 'projects'}, :class => 'projects' %></li>

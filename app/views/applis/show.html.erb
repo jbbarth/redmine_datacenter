@@ -24,7 +24,8 @@
 </div>
 
 <div class="splitcontentright">
-  
+
+  <% if @appli.instances.any? %>
   <div class="contextual">
     <% form_tag({}, :method => :get) do %>
       <%= select_tag 'filter',
@@ -33,6 +34,7 @@
         :onchange => "this.form.submit(); return false;" %>
     <% end %>
   </div>
+  <% end %>
 
   <h3><%= l(:label_related_issues) %></h3>
   <%= render :partial => 'datacenter_plugin/issues_list_simple', :locals => {:issues => @issues} %>

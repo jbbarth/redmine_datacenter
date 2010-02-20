@@ -58,6 +58,15 @@ module ApplisHelper
     end
     options_for_select(options, selected)
   end
+  
+  def appli_instances_options_for_select(appli, selected=nil)
+    options = [['', '']]
+    options << [ appli.name, "Appli" ]
+    appli.instances.sort_by(&:name).each do |instance|
+      options << [ "&nbsp;&nbsp;&#187; #{instance.name}", "Instance:#{instance.id}" ] if instance.active?
+    end
+    options_for_select_without_escape(options, selected)
+  end
 end
 
 module ActionView

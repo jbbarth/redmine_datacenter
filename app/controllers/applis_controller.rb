@@ -27,7 +27,16 @@ class ApplisController < DatacenterPluginController
   end
   
   def show
-    c = ARCondition.new(["#{IssueElement.table_name}.appli_id = ?", @appli.id])
+    table = IssueElement.table_name
+    c = ARCondition.new(["#{table}.appli_id = ?", @appli.id])
+    
+    case params[:filter].to_s
+    when "Appli"
+      c << ["#{table}.element_type = ?", "Appli"]
+    when /^Instance:(\d+)$/
+      c << ["#{table}.element_type = ? and #{table}.element_id = ?", "Instance", $1]
+    end
+
     sort_init([['id', 'desc']])
     sort_update({'id' => "#{Issue.table_name}.id"})
     @issue_count = Issue.count(:joins => :issue_elements, :conditions => c.conditions)

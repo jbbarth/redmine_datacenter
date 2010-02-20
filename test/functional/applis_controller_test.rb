@@ -32,8 +32,26 @@ class ApplisControllerTest < ActionController::TestCase
   end
   
   def test_show
-    get :show, :id => Appli.first, :project_id => 1
+    get :show, :id => 2, :project_id => 1
     assert_template 'show'
+    #Appli(2) has Instance(4)
+    #Issue(2) linked to Appli(2)
+    #Issue(3) linked to Instance(4)
+    assert_tag :tr, :attributes => {:id => 'issue-2'}
+    assert_tag :tr, :attributes => {:id => 'issue-3'}
+  end
+
+  def test_show_filter_does_not_interfer_if_incorrect
+    params = {:id => 2, :project_id => 1, :filter => 'dummy'}
+    get :show, params.merge(:filter => 'dummy')
+    assert_tag :tr, :attributes => {:id => 'issue-2'}
+    assert_tag :tr, :attributes => {:id => 'issue-3'}
+    get :show, params.merge(:filter => 'Appli')
+    assert_tag :tr, :attributes => {:id => 'issue-2'}
+    assert_no_tag :tr, :attributes => {:id => 'issue-3'}
+    get :show, params.merge(:filter => 'Instance:4')
+    assert_no_tag :tr, :attributes => {:id => 'issue-2'}
+    assert_tag :tr, :attributes => {:id => 'issue-3'}
   end
 
   def test_cannot_show_appli_from_other_project

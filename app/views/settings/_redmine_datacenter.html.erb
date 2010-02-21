@@ -1,7 +1,7 @@
 <p>
   <label><%= l(:label_use_multiple_select) %></label> 
-  <%= hidden_field_tag 'settings[multiple_select]', 0 %>
-  <%= check_box_tag 'settings[multiple_select]', "1", Setting.datacenter_multiselect? %>
+  <%= check_box_tag 'settings[multiple_select]', 1,
+                    Setting[:plugin_datacenter_plugin][:multiple_select] %>
 </p>
 <p>
   <label><%= l(:text_hide_admin_links_in_sidebar) %></label> 

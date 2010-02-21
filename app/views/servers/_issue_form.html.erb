@@ -3,7 +3,7 @@
 <p>
   <label><%= l(:label_server_plural) %></label>
   <% servers = Server.for_datacenter(@datacenter.id).all(:order => 'name ASC').select{|s| s.active? || @issue.server_ids.include?(s.id)} %>
-  <% if Setting.datacenter_multiselect? %>
+  <% if Setting[:plugin_datacenter_plugin][:multiple_select] %>
     <%= collection_select :issue, :server_ids, servers, :id, :name,
                           { :selected => @issue.server_ids, :include_blank => true },
                           { :multiple => (@issue.server_ids.length > 1 ? true : false),

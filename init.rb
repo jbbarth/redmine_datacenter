@@ -9,7 +9,6 @@ require 'ipaddr_patch'
 config.to_prepare do
   require_dependency 'issue_patch'
   require_dependency 'issues_controller_patch'
-  require_dependency 'setting_patch'
   require_dependency 'query_patch'
   require_dependency 'project_patch'
 end
@@ -44,7 +43,7 @@ Redmine::Plugin.register :datacenter_plugin do
   end
   
   settings :default => {
-              'multiple_select' => "1", #false=checkboxes, true=multiple_select
+              'multiple_select' => true,
               'hide_admin_links' => false,
               'domain'          => ""
             },

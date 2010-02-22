@@ -4,7 +4,7 @@ class ServersController < DatacenterPluginController
 
   def index
     sort_init 'name', 'asc'
-    sort_update %w(name fqdn description)
+    sort_update %w(name fqdn description interfaces.ipaddress)
     
     @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
     c = ARCondition.new(["datacenter_id = ?", @datacenter.id])
@@ -20,6 +20,8 @@ class ServersController < DatacenterPluginController
                 per_page_option,
                 params['page']
     @servers =  Server.all :order => sort_clause,
+            :select => "servers.*, interfaces.ipaddress",
+            :joins => :interfaces,
             :conditions => c.conditions,
             :limit  =>  @server_pages.items_per_page,
             :offset =>  @server_pages.current.offset

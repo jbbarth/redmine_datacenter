@@ -27,24 +27,32 @@
   <th> </th>
   </tr></thead>
   <tbody>
+<% prev = nil %>
 <% for server in @servers -%>
   <tr class="server <%= cycle("odd", "even") %>">
-	  <td class="name"><%= link_to h(server.name), server_path(@project,server) %></td>
-	  <td class="fqdn"><%= h(server.fqdn) %></td>
-	  <td class="ipaddress"><%= h(server.ipaddress) %></td>
-	  <td class="description"><%= server.description %></td>
-    <td class="buttons">
-      <% if User.current.allowed_to?(:manage_datacenter,@project) %>
-        <%= link_to l(:button_update), edit_server_path(@project,server), :class => 'icon icon-edit' %>
-        <%= change_link_server_status(server) %>
-      <% end %>
-    </td>
+    <% if prev == server %>
+      <td colspan="2"></td>
+      <td class="ipaddress"><%= h(server.ipaddress) %></td>
+      <td colspan="2"></td>
+    <% else %>
+	    <td class="name"><%= link_to h(server.name), server_path(@project,server) %></td>
+	    <td class="fqdn"><%= h(server.fqdn) %></td>
+	    <td class="ipaddress"><%= h(server.ipaddress) %></td>
+	    <td class="description"><%= server.description %></td>
+      <td class="buttons">
+        <% if User.current.allowed_to?(:manage_datacenter,@project) %>
+          <%= link_to l(:button_update), edit_server_path(@project,server), :class => 'icon icon-edit' %>
+          <%= change_link_server_status(server) %>
+        <% end %>
+      </td>
+    <% end %>
   </tr>
+  <% prev = server %>
 <% end -%>
   </tbody>
 </table>
 
-<p class="pagination"><%= pagination_links_full @server_pages, @server_count %></p>
+<p class="pagination"><%= pagination_links_full @server_pages, @server_count_with_interfaces %></p>
 
 <% else %>
 <p class="nodata"><%= l(:label_no_data) %></p>

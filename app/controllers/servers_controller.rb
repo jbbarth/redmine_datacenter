@@ -14,17 +14,30 @@ class ServersController < DatacenterPluginController
       name = "%#{params[:name].strip.downcase}%"
       c << ["LOWER(name) LIKE ?", name]
     end
-    
+
+    joins = ["LEFT JOIN interfaces_servers ON interfaces_servers.server_id = servers.id",
+             "LEFT JOIN interfaces ON interfaces_servers.interface_id = interfaces.id"]  
     @server_count = Server.count(:conditions => c.conditions)
+    @server_count_with_interfaces = Server.count(:conditions => c.conditions, :joins => joins)
     @server_pages = Paginator.new self, @server_count,
                 per_page_option,
                 params['page']
-    @servers =  Server.all :order => sort_clause,
-            :select => "servers.*, interfaces.ipaddress",
-            :joins => :interfaces,
-            :conditions => c.conditions,
-            :limit  =>  @server_pages.items_per_page,
-            :offset =>  @server_pages.current.offset
+
+    @servers =  Server.all :select => "servers.*, interfaces.ipaddress",
+                           :conditions => c.conditions, 
+                           :order => sort_clause, 
+                           :limit  =>  @server_pages.items_per_page, 
+                           :offset =>  @server_pages.current.offset,
+                           :joins => joins
+    
+    @servers.each do |s|
+      s.instance_eval do
+        def ipaddress
+          int = interfaces.detect{|i| i.read_attribute(:ipaddress) == attributes_before_type_cast["ipaddress"].to_i}
+          int.ipaddress unless int.nil?
+        end
+      end
+    end
 
     render :layout => !request.xhr?
   end

@@ -4,7 +4,7 @@ class ServersController < DatacenterPluginController
 
   def index
     sort_init 'name', 'asc'
-    sort_update %w(name fqdn description interfaces.ipaddress)
+    sort_update %w(servers.name fqdn description interfaces.ipaddress)
     
     @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
     c = ARCondition.new(["datacenter_id = ?", @datacenter.id])

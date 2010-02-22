@@ -9,7 +9,7 @@
     <p><%= f.text_field :fqdn %></p>
   <% end %>
   <p>
-    <label><%= l(:label_interface_plural) %></label>
+    <label><%= l(:field_interfaces) %></label>
     <%= render :partial => 'interface', :collection => @server.interfaces %>
     <%= add_interface_link l(:button_add_interface) %>
   </p>

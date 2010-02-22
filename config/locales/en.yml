@@ -17,7 +17,6 @@ en:
   label_appli_new: New application
   label_appli_plural: Applications
   label_interface: Interface
-  label_interface_plural: Interfaces
   label_instance: Instance
   label_instance_plural: Instances
   label_instance_new: New instance
@@ -32,6 +31,7 @@ en:
 
   field_server: Server
   field_fqdn: Fullname (fqdn)
+  field_interfaces: Interfaces
   field_ipaddress: IP Address
   field_address: Address
   field_netmask: Netmask

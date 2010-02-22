@@ -15,7 +15,7 @@
       <th><%= l(:field_description)%>:</th>
       <td><%= textilizable @server, :description %></td></tr>
     <tr>
-      <th><%= l(:label_interface_plural)%>:</th>
+      <th><%= l(:field_interfaces)%>:</th>
       <td>
         <% @server.interfaces.sort_by(&:name).each do |interface| %>
           <p>(<%= interface.name.blank? ? "?" : interface.name %>) <%= interface.ipaddress %></p>

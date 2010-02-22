@@ -3,8 +3,8 @@
 <!--[form:network]-->
 <div class="box tabular">
   <p><%= f.text_field :name, :required => true %></p>
-  <p><%= f.text_field :address %></p>
-  <p><%= f.text_field :netmask %></p>
+  <p><%= f.text_field :address, :value => @network.address %></p>
+  <p><%= f.text_field :netmask, :value => @network.netmask %></p>
   <p><%= f.text_field :color %></p>
   <p><%= f.text_area :exceptions, :rows => 5 %></p>
   <%= f.hidden_field :datacenter_id, :value => @datacenter.id %>

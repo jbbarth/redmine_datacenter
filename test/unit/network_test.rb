@@ -37,4 +37,12 @@ class NetworkTest < ActiveSupport::TestCase
     assert_equal "192.168.2.254", network.last
     assert_equal "192.168.2.255", network.broadcast
   end
+
+  def test_ipaddress_and_mask_storage
+    network = Network.new(:name => "My network", :address => "192.168.2.0", :netmask => "24")
+    assert_equal "192.168.2.0", network.address
+    assert_equal 3232236032, network.read_attribute(:address) #IPAddr.new("192.168.2.0").to_i
+    assert_equal "255.255.255.0", network.netmask
+    assert_equal 4294967040, network.read_attribute(:netmask) #IPAddr.new("255.255.255.0").to_i
+  end
 end

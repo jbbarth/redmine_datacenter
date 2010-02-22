@@ -6,6 +6,21 @@ class Network < ActiveRecord::Base
   belongs_to :datacenter
 
   attr_accessible :name, :address, :netmask, :color, :exceptions, :datacenter_id
+  acts_as_ipaddress :attributes => [:address]
+
+  def netmask
+    attr = read_attribute(:netmask)
+    attr = attr.to_i if attr == attr.to_i.to_s
+    IPAddr.new(attr, Socket::AF_INET).to_s unless attr.blank?
+  end
+           
+  def netmask=(value)
+    if value == value.to_i.to_s && value.to_i <= 32 #netmask!
+      value = IPAddr.new("255.255.255.255/"+value.to_s).to_s
+    end
+    write_attribute(:netmask, IPAddr.new(value).to_i) if IPAddr.valid?(value)
+  end
+
 
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
@@ -16,11 +31,8 @@ class Network < ActiveRecord::Base
   named_scope :for_datacenter, lambda {|datacenter_id| {:conditions => ["datacenter_id = ?", datacenter_id]}}
   
   def validate
-    begin
-      IPAddr.new("#{address}/#{netmask}")
-    rescue
-      errors.add(:address, :invalid_ipaddress)
-    end
+    errors.add(:address, :invalid_ipaddress) unless IPAddr.valid?(address)
+    errors.add(:netmask, :invalid_ipaddress) unless IPAddr.valid?("#{address}/#{netmask}")
   end
 
   def iprange

@@ -18,4 +18,12 @@ class IPAddr
     return [clone.set(begin_addr, @family),clone.set(end_addr, @family)]
   end
   end
+
+  def self.valid?(addr)
+    begin
+      new(addr)
+    rescue ArgumentError
+      false
+    end
+  end
 end

@@ -13,6 +13,9 @@ config.to_prepare do
   require_dependency 'project_patch'
 end
 
+#store ip addresses as integer
+require 'acts_as_ipaddress'
+
 Redmine::Plugin.register :datacenter_plugin do
   name 'Datacenter management plugin'
   author 'Jean-Baptiste BARTH'

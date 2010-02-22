@@ -5,7 +5,7 @@ class Interface < ActiveRecord::Base
   
   def validate
     begin
-      IPAddr.new(ipaddress) unless ipaddress.blank?
+      IPAddr.new(ipaddress.to_s)
     rescue
       errors.add(:ipaddress, :invalid_ipaddress)
     end

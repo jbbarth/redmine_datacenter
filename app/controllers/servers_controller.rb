@@ -17,8 +17,7 @@ class ServersController < DatacenterPluginController
 
     joins = ["LEFT JOIN interfaces_servers ON interfaces_servers.server_id = servers.id",
              "LEFT JOIN interfaces ON interfaces_servers.interface_id = interfaces.id"]  
-    @server_count = Server.count(:conditions => c.conditions)
-    @server_count_with_interfaces = Server.count(:conditions => c.conditions, :joins => joins)
+    @server_count = Server.count(:conditions => c.conditions, :joins => joins)
     @server_pages = Paginator.new self, @server_count,
                 per_page_option,
                 params['page']

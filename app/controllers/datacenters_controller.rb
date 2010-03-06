@@ -14,7 +14,6 @@ class DatacentersController < DatacenterPluginController
   end
 
   def show
-    @datacenter = @datacenter
     if @datacenter.nil?
       redirect_to :action => 'new', :project_id => @project
     end
@@ -35,11 +34,9 @@ class DatacentersController < DatacenterPluginController
   end
   
   def edit
-    @datacenter = @datacenter
   end
   
   def update
-    @datacenter = @datacenter
     if @datacenter.update_attributes(params[:datacenter])
       flash[:notice] = l(:notice_successful_update)
       redirect_to :action => 'show', :project_id => @project
@@ -49,7 +46,6 @@ class DatacentersController < DatacenterPluginController
   end
   
   def destroy
-    @datacenter = @datacenter
     @datacenter.status = Datacenter::STATUS_LOCKED
     @datacenter.save
     redirect_to :action => 'show', :project_id => @project

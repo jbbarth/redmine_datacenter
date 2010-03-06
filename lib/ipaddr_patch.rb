@@ -26,4 +26,9 @@ class IPAddr
       false
     end
   end
+
+  def self.new_from_int(addr)
+    addr = addr.to_i if addr == addr.to_i.to_s #if it's an "Integer"
+    new(addr, Socket::AF_INET).to_s unless addr.blank?
+  end
 end

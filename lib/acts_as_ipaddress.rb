@@ -11,9 +11,7 @@ module Redmine
           Array(options[:attributes]).each do |attr|
             class_eval <<-"SRC"
               def #{attr}
-                attr = read_attribute(:#{attr})
-                attr = attr.to_i if attr == attr.to_i.to_s
-                IPAddr.new(attr, Socket::AF_INET).to_s unless attr.blank?
+                IPAddr.new_from_int(read_attribute(:#{attr}))
               end
            
               def #{attr}=(value)

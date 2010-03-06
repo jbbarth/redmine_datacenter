@@ -32,8 +32,7 @@ class ServersController < DatacenterPluginController
     @servers.each do |s|
       s.instance_eval do
         def ipaddress
-          int = interfaces.detect{|i| i.read_attribute(:ipaddress) == attributes_before_type_cast["ipaddress"].to_i}
-          int.ipaddress unless int.nil?
+          IPAddr.new_from_int(attributes_before_type_cast["ipaddress"])
         end
       end
     end

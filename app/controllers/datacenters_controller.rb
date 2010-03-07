@@ -15,7 +15,22 @@ class DatacentersController < DatacenterPluginController
 
   def show
     if @datacenter.nil?
-      redirect_to :action => 'new', :project_id => @project
+      redirect_to :action => 'new', :project_id => @project && return
+    end
+    #activity boxes
+    @activity = Redmine::Activity::Fetcher.new(User.current, :project => @project)
+    %w(issues wiki_edits changesets).each do |type|
+      @activity.scope=([type])
+      instance_variable_set("@#{type}", @activity.events(nil, nil, :limit => 3))
+      if type == "changesets"
+        #patch so that revisions are just displayed with
+        #their short identifier in the next section
+        @changesets.each do |c|
+          def c.event_title
+            "#{l(:label_revision)} #{revision.first(8)} #{": "+short_comments unless short_comments.blank?}"
+          end
+        end
+      end
     end
   end
   

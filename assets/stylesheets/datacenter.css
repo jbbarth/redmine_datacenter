@@ -21,3 +21,12 @@ div.network-overview {float:left; padding:3px;}
 div.network-overview td {padding:3px 8px;}
 div.network-side td {text-align:center; border: 1px solid #e4e4e4;}
 div.network-side td.server {text-align:left;}
+/* activity on Datacenter#show page */
+div#datacenter-activity dl { margin-left: 0; }
+div#datacenter-activity dd { margin-bottom: 0.5em; margin-left: 0; padding-left: 18px; font-size: 0.9em; }
+div#datacenter-activity dt { margin-bottom: 0px; padding-left: 20px; line-height: 18px; background-position: 0 50%; background-repeat: no-repeat; }
+div#datacenter-activity dt.me .time { border-bottom: 1px solid #999; }
+div#datacenter-activity dt .time { color: #777; font-size: 80%; }
+div#datacenter-activity dd .description { font-style: italic; }
+div#datacenter-activity span.project:after { content: " -"; }
+div#datacenter-activity dd span.description { display:block; color: #808080; }

@@ -1,0 +1,11 @@
+<% e = activity_event %>
+<dt class="<%= e.event_type %>  <%= User.current.logged? && e.respond_to?(:event_author) && User.current == e.event_author ? 'me' : nil %>">
+  <%= avatar(e.event_author, :size => "24") if e.respond_to?(:event_author) %>
+  <%= content_tag('span', h(e.project), :class => 'project') if @project.nil? || @project != e.project %>
+  <%= link_to format_activity_title(e.event_title), e.event_url %>
+</dt>
+<dd>
+  <span class="description"><%= format_activity_description(e.event_description) %></span>
+  <span class="time"><%= format_time(e.event_datetime, false) %></span>
+  <span class="author"><%= e.event_author if e.respond_to?(:event_author) %></span>
+</dd>

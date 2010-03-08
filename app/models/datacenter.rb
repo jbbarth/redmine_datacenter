@@ -6,7 +6,7 @@ class Datacenter < ActiveRecord::Base
   has_many :servers
   has_many :networks
 
-  attr_accessible :name, :description, :status, :project_id, :domain
+  attr_accessible :name, :description, :status, :project_id, :domain, :options
 
   serialize :options
   

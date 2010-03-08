@@ -7,6 +7,8 @@ class Datacenter < ActiveRecord::Base
   has_many :networks
 
   attr_accessible :name, :description, :status, :project_id, :domain
+
+  serialize :options
   
   STATUS_ACTIVE = 1
   STATUS_LOCKED = 2
@@ -39,5 +41,9 @@ class Datacenter < ActiveRecord::Base
     self.servers.select do |server|
       server.active?
     end.length
+  end
+
+  def options
+    read_attribute(:options) || Hash.new(nil)
   end
 end

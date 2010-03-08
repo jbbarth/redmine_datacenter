@@ -30,4 +30,9 @@ module DatacentersHelper
       "-"
     end
   end
+  
+  def datacenter_check_box(setting, checked=false, options={})
+    hidden_field_tag("datacenter[options][#{setting}]", 0) +
+    check_box_tag("datacenter[options][#{setting}]", 1, checked, options)
+  end
 end

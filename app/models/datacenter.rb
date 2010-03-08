@@ -46,4 +46,12 @@ class Datacenter < ActiveRecord::Base
   def options
     read_attribute(:options) || Hash.new(nil)
   end
+
+  def method_missing(symbol,*args)
+    if symbol.to_s =~ /(.*enabled)\?$/
+      options[$1].to_i == 1
+    else
+      super
+    end
+  end
 end

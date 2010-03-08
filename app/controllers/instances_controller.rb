@@ -1,5 +1,5 @@
 class InstancesController < DatacenterPluginController
-  before_filter :find_appli
+  before_filter :find_appli, :except => :select_servers
   
   def new
     @instance = Instance.new
@@ -38,6 +38,22 @@ class InstancesController < DatacenterPluginController
     @instance.status = Instance::STATUS_LOCKED
     @instance.save
     redirect_to appli_path(@project,@appli)
+  end
+  
+  def select_servers
+    @servers = Server.for_datacenter(@datacenter.id).all(:order => 'name ASC').select{|s| s.active?}
+    @selected = (params[:ids] || "").split(",").map do |str|
+      i = str.split(":")
+      instance = Instance.find_by_id(i[1], :include => :servers) if i[0] == "Instance"
+      instance.servers.map(&:id) if instance
+    end.flatten.compact
+    if request.xhr?
+      render :update do |page|
+        page.replace_html 'select-servers', :partial => 'select_servers'
+      end
+    else
+      render :partial => 'select_servers'
+    end
   end
 
   private

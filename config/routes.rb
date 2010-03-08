@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
     mmap.resources :servers
     mmap.resources :applis do |appli|
       appli.resources :instance, :controller => 'instances' do |instance|
-        instance.resources :servers
+        instance.resources :servers, :collection => {:select_servers => :get}
       end
     end
     mmap.resources :networks, :collection => {:overview => :get}

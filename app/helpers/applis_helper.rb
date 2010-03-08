@@ -30,7 +30,8 @@ module ApplisHelper
     values = options_for_select_without_escape(available_options, :selected => issue.appli_instance_ids)
     
     options = { :multiple => (issue.appli_instance_ids.length > 1 ? true : false),
-                :name => 'issue[appli_instance_ids][]' }
+                :name => 'issue[appli_instance_ids][]',
+                :onchange => "toggle_servers_select('issue_appli_instance_ids','select-servers-link');" }
 
     select_tag "issue_appli_instance_ids", values, options
   end

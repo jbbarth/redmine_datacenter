@@ -28,6 +28,7 @@ en:
   label_ipaddress_plural: IP Addresses
   
   button_add_interface: Add an interface
+  button_select_servers: Select servers
 
   field_server: Server
   field_fqdn: Fullname (fqdn)

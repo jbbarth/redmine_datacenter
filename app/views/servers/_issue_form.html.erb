@@ -4,10 +4,12 @@
   <label><%= l(:label_server_plural) %></label>
   <% servers = Server.for_datacenter(@datacenter.id).all(:order => 'name ASC').select{|s| s.active? || @issue.server_ids.include?(s.id)} %>
   <% if Setting[:plugin_datacenter_plugin][:multiple_select] %>
+    <span id="select-servers">
     <%= collection_select :issue, :server_ids, servers, :id, :name,
                           { :selected => @issue.server_ids, :include_blank => true },
                           { :multiple => (@issue.server_ids.length > 1 ? true : false),
                             :name => 'issue[server_ids][]' } -%>
+    </span>
     <%= link_to_function image_tag('bullet_toggle_plus.png'),
                           "toggle_multi_select_datacenter('issue_server_ids');",
                           :style => "vertical-align: bottom;" %>

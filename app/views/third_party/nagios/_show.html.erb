@@ -11,7 +11,7 @@
     <% else %>
       <% 5.times do -%>
         <% ns = @nagios_problems.shift -%>
-        <%= format_nagios_line(ns) %>
+        <%= format_nagios_line(ns) if ns %>
       <% end -%>
       <% if @nagios_problems.any? -%>
         <div id="nagios_others" style="display:none;padding:0; margin:0;">

@@ -6,6 +6,6 @@
 </dt>
 <dd>
   <span class="description"><%= format_activity_description(e.event_description) %></span>
-  <span class="time"><%= format_time(e.event_datetime, false) %></span>
+  <span class="time"><%= format_time(e.event_datetime, true) %></span>
   <span class="author"><%= e.event_author if e.respond_to?(:event_author) %></span>
 </dd>

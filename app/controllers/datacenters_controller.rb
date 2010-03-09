@@ -1,6 +1,5 @@
 class DatacentersController < DatacenterPluginController
   unloadable
-  include Redmine::Datacenter
 
   before_filter :authorize, :find_project, :find_datacenter, :except => :index
   before_filter :require_admin, :only => :index

@@ -1,10 +1,8 @@
-require File.dirname(__FILE__) + '/../../test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class NagiosTest < ActiveSupport::TestCase
-  include Redmine::Datacenter
-
   def setup
-    statusfile = File.dirname(__FILE__) + '/../../fixtures/third_party/nagios/status.dat'
+    statusfile = File.dirname(__FILE__) + '/../fixtures/third_party/nagios/status.dat'
     @status = Nagios::Status.new(statusfile)
   end
 

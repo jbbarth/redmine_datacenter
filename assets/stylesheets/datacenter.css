@@ -35,5 +35,5 @@ div#datacenter-activity dd span.description { display:block; color: #808080; }
 #nagios div { padding-left:5px; margin-bottom:2px; }
 #nagios .infos { font-size:0.9em; color:#777; }
 #nagios .nagios-warning  { border-left:6px solid #ff0; background-color:#eee; }
-#nagios .nagios-unknown  { border-left:6px solid #aaa; background-color:#ddd; }
+#nagios .nagios-unknown  { border-left:6px solid #aaa; background-color:#eee; }
 #nagios .nagios-critical { border-left:6px solid #f00; background-color:#eee; }

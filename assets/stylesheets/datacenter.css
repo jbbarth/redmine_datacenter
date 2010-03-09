@@ -30,3 +30,11 @@ div#datacenter-activity dt .time { color: #777; font-size: 80%; }
 div#datacenter-activity dd .description { font-style: italic; }
 div#datacenter-activity span.project:after { content: " -"; }
 div#datacenter-activity dd span.description { display:block; color: #808080; }
+/* third party tools */
+div.third_party { width:50%; }
+/* nagios */
+#nagios div { padding-left:5px; margin-bottom:2px; }
+#nagios .infos { font-size:0.9em; color:#777; }
+#nagios .nagios-warning  { border-left:6px solid #ff0; background-color:#eee; }
+#nagios .nagios-unknown  { border-left:6px solid #aaa; background-color:#eee; }
+#nagios .nagios-critical { border-left:6px solid #f00; background-color:#eee; }

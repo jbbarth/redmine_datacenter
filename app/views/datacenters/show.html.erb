@@ -65,11 +65,10 @@
   
 </div>
 
-<!--
-<div class="splitcontentright">
-  <div class="box">
-  </div>
+<div class="splitcontentright third_party">
+  <% if @datacenter.tool_enabled?(:nagios) %>
+    <%= render :partial => 'third_party/nagios/show' -%>
+  <% end %>
 </div>
--->
 
 <% html_title(l(:label_datacenter)) -%>

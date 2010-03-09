@@ -1,5 +1,6 @@
 class DatacentersController < DatacenterPluginController
   unloadable
+  include Redmine::Datacenter
 
   before_filter :authorize, :find_project, :find_datacenter, :except => :index
   before_filter :require_admin, :only => :index
@@ -30,6 +31,22 @@ class DatacentersController < DatacenterPluginController
             "#{l(:label_revision)} #{revision.first(8)} #{": "+short_comments unless short_comments.blank?}"
           end
         end
+      end
+    end
+    #nagios integration
+    if @datacenter.tool_enabled?(:nagios)
+      nagios_file = @datacenter.nagios_file
+      begin
+        @nagios_status = Nagios::Status.new(nagios_file)
+      rescue Errno::ENOENT
+        flash.now[:error] = "#{nagios_file}: no such file or directory"
+      else
+        @nagios_problems = @nagios_status.problems
+        @nagios_problems.each do |problem|
+          problem[:server] = Server.find_by_name(problem[:host_name])
+          problem[:status] = Nagios::Status::STATES[problem[:current_state]]
+        end
+        @last_updated = Time.at(File.mtime(nagios_file))
       end
     end
   end

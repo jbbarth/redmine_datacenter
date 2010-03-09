@@ -18,4 +18,8 @@ class DatacenterTest < ActiveSupport::TestCase
   def test_instances_number
     assert_equal 2, Datacenter.find(1).applis_number
   end
+
+  def test_retrieve_fake_option
+    assert_nil Datacenter.find(1).options[:undefined_key]
+  end
 end

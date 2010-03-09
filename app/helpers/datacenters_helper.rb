@@ -30,4 +30,26 @@ module DatacentersHelper
       "-"
     end
   end
+  
+  def datacenter_check_box(setting, checked=false, options={})
+    hidden_field_tag("datacenter[options][#{setting}]", 0) +
+    check_box_tag("datacenter[options][#{setting}]", 1, checked, options)
+  end
+
+  def format_nagios_line(section)
+    status = section[:status]
+    title = link_to_unless(section[:server].blank?,
+                           section[:host_name],
+                           :overwrite_params => { :controller => "servers",
+                                                  :action => "show",
+                                                  :id => section[:server].id
+                                                }
+                          )
+    title << ": " + section[:service_description] if section[:service_description]
+    output = section[:plugin_output]
+    html = %Q(<div class="nagios-#{status.downcase}">)
+    html << "#{title}<br />"
+    html << %Q(<span class="infos">#{output}</span>) unless output.blank?
+    html << "</div>"
+  end
 end

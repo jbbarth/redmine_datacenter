@@ -6,7 +6,9 @@ class Datacenter < ActiveRecord::Base
   has_many :servers
   has_many :networks
 
-  attr_accessible :name, :description, :status, :project_id, :domain
+  attr_accessible :name, :description, :status, :project_id, :domain, :options
+
+  serialize :options
   
   STATUS_ACTIVE = 1
   STATUS_LOCKED = 2
@@ -39,5 +41,19 @@ class Datacenter < ActiveRecord::Base
     self.servers.select do |server|
       server.active?
     end.length
+  end
+
+  def options
+    read_attribute(:options) || Hash.new(nil)
+  end
+
+  #nagios integration
+  def nagios_file
+    File.join(Rails.root,"vendor","plugins","redmine_datacenter","data",
+              project.identifier,"nagios","status.dat")
+  end
+  
+  def tool_enabled?(tool)
+    options["#{tool}_enabled"].to_i == 1
   end
 end

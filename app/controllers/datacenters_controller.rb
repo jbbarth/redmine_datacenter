@@ -14,8 +14,9 @@ class DatacentersController < DatacenterPluginController
   end
 
   def show
+    debugger
     if @datacenter.nil?
-      redirect_to :action => 'new', :project_id => @project && return
+      redirect_to(:action => 'new', :project_id => @project) && return
     end
     #activity boxes
     @activity = Redmine::Activity::Fetcher.new(User.current, :project => @project)

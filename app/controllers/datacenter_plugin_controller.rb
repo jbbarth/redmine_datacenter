@@ -20,8 +20,8 @@ class DatacenterPluginController < ApplicationController
 
   def find_datacenter
     @datacenter = @project.datacenter
-    if @datacenter.nil? && controller_name != "datacenters" && action_name != "new"
-      redirect_to :controller => :datacenters, :action => :new
+    if @datacenter.nil?
+      redirect_to(:controller => :datacenters, :action => :new) && return
     end
   end
 

@@ -1,7 +1,8 @@
 class DatacentersController < DatacenterPluginController
   unloadable
 
-  before_filter :authorize, :find_project, :find_datacenter, :except => :index
+  before_filter :authorize, :find_project, :except => :index
+  before_filter :find_datacenter, :except => [:index, :new, :create]
   before_filter :require_admin, :only => :index
 
   #no pagination or such things here
@@ -14,10 +15,6 @@ class DatacentersController < DatacenterPluginController
   end
 
   def show
-    debugger
-    if @datacenter.nil?
-      redirect_to(:action => 'new', :project_id => @project) && return
-    end
     #activity boxes
     @activity = Redmine::Activity::Fetcher.new(User.current, :project => @project)
     %w(issues wiki_edits changesets).each do |type|

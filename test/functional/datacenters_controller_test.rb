@@ -25,6 +25,12 @@ class DatacentersControllerTest < ActionController::TestCase
     assert_template 'index'
   end
 
+  def test_show_without_datacenter
+    Project.any_instance.stubs(:datacenter).returns(nil)
+    get :show, :project_id => 1
+    assert_redirected_to '/projects/ecookbook/datacenter/new'
+  end
+
   def test_show
     get :show, :project_id => 1
     assert_template 'show'

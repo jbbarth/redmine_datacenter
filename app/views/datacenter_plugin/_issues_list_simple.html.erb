@@ -17,7 +17,18 @@
         <%= issue.status %>
       </td>
 			<td class="subject">
-        <%= link_to h(truncate(issue.subject, :length => 60)), :controller => 'issues', :action => 'show', :id => issue %>
+        <div class="tooltip">
+          <%= link_to h(truncate(issue.subject, :length => 60)), :controller => 'issues', :action => 'show', :id => issue %>
+          <span class="tip">
+            <strong><%= l(:field_author) %></strong>: <%= issue.author %> 
+            <% unless issue.assigned_to.blank? -%>
+            <strong><%= l(:field_assigned_to) %></strong>: <%= issue.assigned_to %>
+            <% end -%>
+            <br />
+            <strong><%= l(:field_created_on) %></strong>: <%= format_date(issue.created_on) %> 
+            <strong><%= l(:field_updated_on) %></strong>: <%= format_date(issue.updated_on) %>
+          </span>
+        </div>
       </td>
 		</tr>
 		<% end %>

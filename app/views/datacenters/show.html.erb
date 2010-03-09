@@ -31,10 +31,12 @@
         </p>
       </td>
     </tr>
+    <% unless @datacenter.description.blank? -%>
     <tr>
       <th><%= l(:field_description)%></th>
       <td><%= textilizable @datacenter, :description %></td>
     </tr>
+    <% end -%>
   </table>
   </div>
   

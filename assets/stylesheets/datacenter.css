@@ -31,6 +31,7 @@ div#datacenter-activity dd .description { font-style: italic; }
 div#datacenter-activity span.project:after { content: " -"; }
 div#datacenter-activity dd span.description { display:block; color: #808080; }
 /* third party tools */
+div.third_party { width:50%; }
 /* nagios */
 #nagios div { padding-left:5px; margin-bottom:2px; }
 #nagios .infos { font-size:0.9em; color:#777; }

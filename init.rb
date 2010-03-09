@@ -22,7 +22,7 @@ Redmine::Plugin.register :datacenter_plugin do
   description 'This plugin helps you manage your (small) datacenter with redmine'
   url 'http://code.jbbarth.com/projects/redmine-datacenter/wiki'
   author_url 'mailto:jeanbaptiste.barth@gmail.com'
-  version '0.3'
+  version '0.2.1'
   requires_redmine :version_or_higher => '0.9.0'
   
   menu :project_menu,

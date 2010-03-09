@@ -13,6 +13,9 @@ config.to_prepare do
   require_dependency 'project_patch'
 end
 
+#third party tools
+require 'third_party'
+
 #store ip addresses as integer
 require 'acts_as_ipaddress'
 

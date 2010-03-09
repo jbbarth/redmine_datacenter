@@ -47,11 +47,13 @@ class Datacenter < ActiveRecord::Base
     read_attribute(:options) || Hash.new(nil)
   end
 
-  def method_missing(symbol,*args)
-    if symbol.to_s =~ /(.*enabled)\?$/
-      options[$1].to_i == 1
-    else
-      super
-    end
+  #nagios integration
+  def nagios_file
+    File.join(Rails.root,"vendor","plugins","redmine_datacenter","data",
+              project.identifier,"nagios","status.dat")
+  end
+  
+  def tool_enabled?(tool)
+    options["#{tool}_enabled"].to_i == 1
   end
 end

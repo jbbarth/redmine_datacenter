@@ -1,0 +1,19 @@
+<div id="nagios" class="nagios box">
+  <% unless @last_updated.nil? -%>
+  <div class="contextual">
+    <%= l(:label_updated_time, distance_of_time_in_words(Time.now,@last_updated)) %>
+  </div>
+  <% end -%>
+  <h3><%= l_or_humanize(:nagios) %></h3>
+  <% if @nagios_status -%>
+    <% if @nagios_problems.empty? %>
+      <%= l(:text_nagios_everything_ok) %>
+    <% else %>
+      <% @nagios_problems.each do |ns| -%>
+        <%= format_nagios_line(ns) %>
+      <% end -%>
+    <% end -%>
+  <% else -%>
+    <p class="nodata"><%= l(:label_no_data) %></p>
+  <% end -%>
+</div>

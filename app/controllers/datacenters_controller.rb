@@ -32,7 +32,11 @@ class DatacentersController < DatacenterPluginController
         @nagios_problems = @nagios_status.problems
         @nagios_problems.each do |problem|
           problem[:server] = Server.find_by_name(problem[:host_name])
-          problem[:status] = Nagios::Status::STATES[problem[:current_state]]
+          if problem[:type] == "servicestatus"
+            problem[:status] = Nagios::Status::STATES[problem[:current_state]]
+          else
+            problem[:status] = (problem[:current_state] == Nagios::Status::STATE_OK ? "OK" : "CRITICAL")
+          end
         end
         @last_updated = Time.at(File.mtime(nagios_file))
       end

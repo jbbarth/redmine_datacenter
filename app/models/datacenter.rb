@@ -53,6 +53,14 @@ class Datacenter < ActiveRecord::Base
               project.identifier,"nagios","status.dat")
   end
   
+  #storage integration
+  #currently supports only IBM DS4000 devices
+  def storage_file(server_name)
+    File.join(Rails.root,"vendor","plugins","redmine_datacenter","data",
+              project.identifier,"storage","#{server_name}.profile")
+  end
+
+  #third party tools integration
   def tool_enabled?(tool)
     options["#{tool}_enabled"].to_i == 1
   end

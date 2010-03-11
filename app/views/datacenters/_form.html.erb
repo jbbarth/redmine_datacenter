@@ -14,6 +14,13 @@
         <%= l_or_humanize(:nagios) %>
       </label>
     </p>
+    <p>
+      <label>
+        <%= datacenter_check_box("storage_enabled", @datacenter.options["storage_enabled"]=="1") %>
+        <%= l_or_humanize(:storage) %>
+        <%= f.hidden_field :storage_type, :value => "ibm" %>
+      </label>
+    </p>
   </fieldset>
 </div>
 <!--[eoform:datacenter]-->

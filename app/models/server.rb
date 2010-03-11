@@ -5,6 +5,8 @@ class Server < ActiveRecord::Base
   has_and_belongs_to_many :interfaces
   has_and_belongs_to_many :instances, :include => :appli
   belongs_to :datacenter
+
+  acts_as_ipaddress :attributes => :ipaddress
   
   attr_accessible :name, :fqdn, :description, :status, :datacenter_id,
                   :new_interface_attributes, :existing_interface_attributes

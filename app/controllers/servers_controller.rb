@@ -28,14 +28,6 @@ class ServersController < DatacenterPluginController
                            :limit  =>  @server_pages.items_per_page, 
                            :offset =>  @server_pages.current.offset,
                            :joins => joins
-    
-    @servers.each do |s|
-      s.instance_eval do
-        def ipaddress
-          IPAddr.new_from_int(attributes_before_type_cast["ipaddress"])
-        end
-      end
-    end
 
     render :layout => !request.xhr?
   end

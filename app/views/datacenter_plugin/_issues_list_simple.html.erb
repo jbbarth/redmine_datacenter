@@ -19,7 +19,7 @@
 			<td class="subject">
         <div class="tooltip">
           <%= link_to h(truncate(issue.subject, :length => 60)), :controller => 'issues', :action => 'show', :id => issue %>
-          <span class="tip">
+          <span class="tip dc-tip">
             <strong><%= l(:field_author) %></strong>: <%= issue.author %><br />
             <% if !issue.assigned_to.blank? && issue.assigned_to != issue.author -%>
               <strong><%= l(:field_assigned_to) %></strong>: <%= issue.assigned_to %><br />

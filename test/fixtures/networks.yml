@@ -1,7 +1,7 @@
 one:
   id: 1
   name: LAN
-  address: 192.168.0.0
+  address: 3232235520
   netmask: 24
   color: #FF0000
   datacenter_id: 1
@@ -12,8 +12,8 @@ one:
 two:
   id: 2
   name: DMZ
-  address: 192.168.1.0
-  netmask: 255.255.255.0
+  address: 3232235521
+  netmask: 4294967040 #IPAddr.new("255.255.255.0").to_i
   color: #00FF00
   datacenter_id: 1
   exceptions:
@@ -21,8 +21,8 @@ two:
 three:
   id: 3
   name: DMZ Cracker
-  address: 172.10.1.0
-  netmask: 255.255.0.0
+  address: 2886336768 #IPAddr.new("172.10.1.0").to_i
+  netmask: 4294901760 #IPAddr.new("255.255.0.0").to_i
   color: #00FF00
   datacenter_id: 2
   exceptions:

@@ -2,23 +2,23 @@
 one:
   id: 1
   name: eth1
-  ipaddress: 192.168.0.1
+  ipaddress: 3232235521 #IPAddr.new("192.168.0.1").to_i
   note: Private address of server-web
 
 two:
   id: 2
   name: eth0
-  ipaddress: 192.168.0.2
+  ipaddress: 3232235522
   note: Private address of server-mail
 
 three:
   id: 3
   name: eth0
-  ipaddress: 192.168.0.1
+  ipaddress: 3232235521
   note: "Former address of server-locked (but it's locked!)"
 
 four:
   id: 4
   name: eth0
-  ipaddress: 192.168.0.4
+  ipaddress: 3232235521
   note: Address for server-locked2

@@ -6,7 +6,7 @@ class Server < ActiveRecord::Base
   has_and_belongs_to_many :instances, :include => :appli
   belongs_to :datacenter
   
-  attr_accessible :name, :fqdn, :ipaddress, :description, :status, :datacenter_id,
+  attr_accessible :name, :fqdn, :description, :status, :datacenter_id,
                   :new_interface_attributes, :existing_interface_attributes
   
   STATUS_ACTIVE = 1
@@ -32,10 +32,6 @@ class Server < ActiveRecord::Base
     self.status == STATUS_ACTIVE
   end
   
-  def ipaddress
-    (interfaces.first.ipaddress if interfaces.any?).to_s
-  end
-
   def fullname
     self.fqdn.blank? ? self.name : self.fqdn
   end

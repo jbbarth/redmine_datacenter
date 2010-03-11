@@ -22,4 +22,14 @@ class DatacenterTest < ActiveSupport::TestCase
   def test_retrieve_fake_option
     assert_nil Datacenter.find(1).options[:undefined_key]
   end
+
+  def test_fetch_activity
+    activity = Datacenter.find(1).fetch_activity(:user => User.find(1),
+                                                 :types => %w(issues wiki_edits changesets),
+                                                 :limit => 3)
+    assert_equal [3,2,1], activity[:issues].map(&:id)
+    assert_equal Journal, activity[:issues].first.class
+    assert_equal 3, activity[:wiki_edits].length
+    assert_equal 3, activity[:changesets].length
+  end
 end

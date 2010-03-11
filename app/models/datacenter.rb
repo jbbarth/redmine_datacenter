@@ -56,4 +56,23 @@ class Datacenter < ActiveRecord::Base
   def tool_enabled?(tool)
     options["#{tool}_enabled"].to_i == 1
   end
+
+  def fetch_activity(options)
+    activity = {}
+    fetcher  = Redmine::Activity::Fetcher.new(options[:user], :project => project)
+    options[:types].each do |type|
+      fetcher.scope=([type])
+      activity[type.to_sym] = fetcher.events(nil, nil, :limit => options[:limit])
+      if type == "changesets"
+        #patch so that revisions are just displayed with
+        #their short identifier in the next section
+        activity[:changesets].each do |c|
+          def c.event_title
+            "#{l(:label_revision)} #{revision.first(8)} #{": "+short_comments unless short_comments.blank?}"
+          end
+        end
+      end
+    end
+    activity
+  end
 end

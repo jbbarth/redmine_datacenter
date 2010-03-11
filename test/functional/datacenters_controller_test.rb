@@ -35,15 +35,6 @@ class DatacentersControllerTest < ActionController::TestCase
     get :show, :project_id => 1
     assert_template 'show'
     assert_tag :tag => 'div', :attributes => {:id => 'datacenter-activity'}
-    vars = {}
-    %w(activity issues wiki_edits changesets).each do |var|
-      vars[var.to_sym] = @controller.instance_variable_get("@#{var}")
-    end
-    assert_equal Redmine::Activity::Fetcher, vars[:activity].class
-    assert_equal [3,2,1], vars[:issues].map(&:id)
-    assert_equal Journal, vars[:issues].first.class
-    assert_equal 3, vars[:wiki_edits].length
-    assert_equal 3, vars[:changesets].length
   end
 
   def test_index_with_project_routing

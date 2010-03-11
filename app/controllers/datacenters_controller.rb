@@ -16,20 +16,11 @@ class DatacentersController < DatacenterPluginController
 
   def show
     #activity boxes
-    @activity = Redmine::Activity::Fetcher.new(User.current, :project => @project)
-    %w(issues wiki_edits changesets).each do |type|
-      @activity.scope=([type])
-      instance_variable_set("@#{type}", @activity.events(nil, nil, :limit => 3))
-      if type == "changesets"
-        #patch so that revisions are just displayed with
-        #their short identifier in the next section
-        @changesets.each do |c|
-          def c.event_title
-            "#{l(:label_revision)} #{revision.first(8)} #{": "+short_comments unless short_comments.blank?}"
-          end
-        end
-      end
-    end
+    @activity = @datacenter.fetch_activity(
+                  :user => User.current,
+                  :types => %w(issues wiki_edits changesets),
+                  :limit => 3
+                )      
     #nagios integration
     if @datacenter.tool_enabled?(:nagios)
       nagios_file = @datacenter.nagios_file

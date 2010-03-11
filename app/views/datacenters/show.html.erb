@@ -41,24 +41,24 @@
   </div>
   
   <div id="datacenter-activity" class="box">
-    <% if @project.module_enabled?(:issue_tracking) && @issues.any? -%>
+    <% if @project.module_enabled?(:issue_tracking) && @activity[:issues].any? -%>
     <h3><%= l("label_issue_plural") %></h3>
     <dl>
-      <%= render :partial => 'activity_event', :collection => @issues %>
+      <%= render :partial => 'activity_event', :collection => @activity[:issues] %>
     </dl>
     <% end -%>
 
-    <% if @project.module_enabled?(:wiki) && @wiki_edits.any? -%>
+    <% if @project.module_enabled?(:wiki) && @activity[:wiki_edits].any? -%>
     <h3><%= l("label_wiki_edit_plural") %></h3>
     <dl>
-      <%= render :partial => 'activity_event', :collection => @wiki_edits %>
+      <%= render :partial => 'activity_event', :collection => @activity[:wiki_edits] %>
     </dl>
     <% end -%>
 
-    <% if @project.module_enabled?(:repository) && @changesets.any? -%>
+    <% if @project.module_enabled?(:repository) && @activity[:changesets].any? -%>
     <h3><%= l("label_changeset_plural") %></h3>
     <dl>
-      <%= render :partial => 'activity_event', :collection => @changesets %>
+      <%= render :partial => 'activity_event', :collection => @activity[:changesets] %>
     </dl>
     <% end -%>
   </div>

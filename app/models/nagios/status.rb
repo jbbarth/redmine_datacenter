@@ -10,6 +10,7 @@ class Nagios::Status
 
   def initialize(statusfile)
     @file = statusfile
+    sections #loads section at this point so we raise immediatly if file has a problem
   end
 
   def sections

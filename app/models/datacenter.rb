@@ -65,7 +65,7 @@ class Datacenter < ActiveRecord::Base
   end
 
   def storage_file(server_name)
-    File.join(storage_dir,"#{server_name}.profile")
+    File.join(storage_dir,server_name)
   end
 
   #third party tools integration

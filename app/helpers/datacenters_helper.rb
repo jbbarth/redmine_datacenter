@@ -38,13 +38,13 @@ module DatacentersHelper
 
   def format_nagios_line(section)
     status = section[:status]
-    title = link_to_unless(section[:server].blank?,
-                           section[:host_name],
-                           :overwrite_params => { :controller => "servers",
-                                                  :action => "show",
-                                                  :id => section[:server].id
-                                                }
-                          )
+    title = link_to_if(section[:server].is_a?(Server),
+                       section[:host_name],
+                       :overwrite_params => { :controller => "servers",
+                                              :action => "show",
+                                              :id => section[:server].id
+                                            }
+                      )
     title << ": " + section[:service_description] if section[:service_description]
     output = section[:plugin_output]
     if section[:type] == "servicestatus"

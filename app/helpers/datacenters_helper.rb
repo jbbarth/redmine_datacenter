@@ -32,7 +32,7 @@ module DatacentersHelper
   end
   
   def datacenter_check_box(setting, checked=false, options={})
-    hidden_field_tag("datacenter[options][#{setting}]", 0) +
+    hidden_field_tag("datacenter[options][#{setting}]", 0, :id => "datacenter_options_hidden_#{setting}") +
     check_box_tag("datacenter[options][#{setting}]", 1, checked, options)
   end
 

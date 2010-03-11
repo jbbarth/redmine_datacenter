@@ -42,8 +42,7 @@ module DatacentersHelper
                        section[:host_name],
                        :overwrite_params => { :controller => "servers",
                                               :action => "show",
-                                              :id => section[:server].id
-                                            }
+                                              :id => section[:server] }
                       )
     title << ": " + section[:service_description] if section[:service_description]
     output = section[:plugin_output]

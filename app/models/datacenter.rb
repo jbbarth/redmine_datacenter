@@ -55,9 +55,17 @@ class Datacenter < ActiveRecord::Base
   
   #storage integration
   #currently supports only IBM DS4000 devices
+  def storage_dir
+    @storage_dir ||= File.join(Rails.root,"vendor","plugins","redmine_datacenter","data",
+                               project.identifier,"storage")
+  end
+
+  def storage_files
+    Dir.glob(File.join(storage_dir,"*"))
+  end
+
   def storage_file(server_name)
-    File.join(Rails.root,"vendor","plugins","redmine_datacenter","data",
-              project.identifier,"storage","#{server_name}.profile")
+    File.join(storage_dir,"#{server_name}.profile")
   end
 
   #third party tools integration

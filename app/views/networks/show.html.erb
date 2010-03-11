@@ -1,0 +1,33 @@
+<div class="contextual">
+  <% if User.current.allowed_to?(:manage_datacenter,@project) %>
+    <%= link_to l(:button_update), edit_network_path(:project_id => @project, :id => @network), :class => 'icon icon-edit' %> 
+    <%= link_to l(:button_delete), network_path(@project,@network), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+  <% end %>
+</div>
+
+<h2><%= link_to l(:label_network_plural), networks_path %> &#187; <%= @network.name %></h2>
+
+<div class="splitcontentleft network">
+
+  <h3><%= @network.name %></h3>
+  <table class="attributes">
+    <tr>
+      <th><%= l(:field_address) %></th>
+      <td><%= @network.address %></td>
+    </tr>
+    <tr>
+      <th><%= l(:field_netmask) %></th>
+      <td><%= @network.netmask %></td>
+    </tr>
+    <tr>
+      <th><%= l(:label_ipaddress_plural) %></th>
+      <td><%= @network.first %>-<%= @network.last %></td>
+    </tr>
+    <tr>
+      <th><%= l(:field_exceptions) %></th>
+      <td><%= textilizable @network, :exceptions %></td>
+    </tr>
+  </table>
+</div>
+
+<% html_title(l(:label_network_plural)) -%>

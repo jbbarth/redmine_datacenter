@@ -5,6 +5,7 @@ one:
   fqdn: server-web.example.com
   description: First server, a web server
   status: 1
+  datacenter_id: 1
 
 two:
   id: 2
@@ -12,6 +13,7 @@ two:
   fqdn: server-mail.example.com
   description: Second server, a mail server
   status: 1
+  datacenter_id: 1
 
 three:
   id: 3
@@ -19,6 +21,7 @@ three:
   fqdn: server-locked.example.com
   description: This is the old web server, it is locked since it has disappeared
   status: 2
+  datacenter_id: 1
 
 four:
   id: 4
@@ -26,3 +29,12 @@ four:
   fqdn: server2-locked.example.com
   description: Locked since it has disappeared
   status: 2
+  datacenter_id: 1
+
+five:
+  id: 5
+  name: stranger
+  fqdn: stranger.example.ru
+  description: A server which is not in the first datacenter!
+  status: 1
+  datacenter_id: 2

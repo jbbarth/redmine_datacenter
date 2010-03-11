@@ -1,0 +1,30 @@
+<div class="network-overview network-side">
+  <table class="list">
+    <thead>
+      <tr>
+        <th><%= l(:field_server) %></th>
+        <% @networks.each do |net| %>
+          <th><%= link_to net.name, network_path(@project,net) %></th>
+        <% end %>
+        <% if @out_networks %>
+          <th>-</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @servers.sort_by(&:name).each do |server| %>
+        <tr>
+          <td class="server"><%= link_to server.name, server_path(@project,server) %></td>
+          <% @networks.each do |net| %>
+            <td style="font-weight:bold;background-color:<%= net.color %>">
+              <%= @side[server.id] ? @side[server.id][net.id] : "" %>
+            </td>
+          <% end %>
+          <% if @out_networks %>
+            <td><%= @side[server.id] ? @side[server.id]["-"] : "" %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

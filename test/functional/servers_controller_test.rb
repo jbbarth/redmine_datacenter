@@ -5,70 +5,79 @@ require 'servers_controller'
 class ServersController; def rescue_action(e) raise e end; end
 
 class ServersControllerTest < ActionController::TestCase
-  fixtures :servers, :issues, :users
+  fixtures :servers, :issues, :users, :projects, :datacenters
 
   def setup
     @controller = ServersController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     @request.session[:user_id] = 1 # admin
-    Setting["plugin_datacenter_plugin"]["domain"] = ".example.com"
+    #adds correct modules / permissions for the plugin
+    #TODO: DRY it !
+    Role.find(1).add_permission! :view_datacenter, :manage_datacenter
+    p = Project.find(1)
+    p.enabled_module_names = p.enabled_modules.map(&:name) << "datacenter"
   end
   
-  def test_non_admin_user_should_be_dropped_out_on_admin_actions
-    @request.session[:user_id] = 2
-    get :index
-    assert_response :success
-    get :edit, :id => Server.first
-    assert_response 403
-  end
-
   def test_index
-    get :index
+    get :index, :project_id => 1
     assert_template 'index'
   end
   
-  def test_new
-    get :new
-    assert_template 'new'
+  def test_show
+    get :show, :id => Server.first, :project_id => 1
+    assert_template 'show'
+  end
+
+  def test_cannot_show_server_from_other_project
+    appli = Server.find(5)
+    assert_equal 2, appli.datacenter.project_id
+    get :show, :id => 5, :project_id => 1
+    assert_response 404
   end
   
+  def test_new
+    get :new, :project_id => 1
+    assert_template 'new'
+  end
+ 
   def test_create_invalid
     Server.any_instance.stubs(:valid?).returns(false)
-    post :create
+    post :create, :project_id => 1
     assert_template 'new'
   end
   
   def test_create_valid
     Server.any_instance.stubs(:valid?).returns(true)
-    post :create, :server => {:name => "myserver"}
-    assert_redirected_to server_url(assigns(:server))
+    post :create, :server => {:name => "myserver", :datacenter_id => 1}, :project_id => 1
+    assert_redirected_to "/projects/ecookbook/servers/#{assigns(:server).id}"
     server = Server.find_by_name("myserver")
     assert_not_nil server
     assert_equal "myserver.example.com", server.fqdn
   end
   
   def test_edit
-    get :edit, :id => Server.first
+    get :edit, :id => Server.first, :project_id => 1
     assert_template 'edit'
   end
   
   def test_update_invalid
     Server.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Server.first.id, :server => {}
+    put :update, :id => Server.first.id, :server => {}, :project_id => 1
     assert_template 'edit'
   end
   
   def test_update_valid
     Server.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Server.first.id, :server => {}
-    assert_redirected_to server_url(assigns(:server))
+    put :update, :id => Server.first.id, :server => {:datacenter_id => 1}, :project_id => 1
+    datacenter = Datacenter.find(1)
+    assert_redirected_to "/projects/ecookbook/servers/#{assigns(:server).id}"
   end
   
   def test_destroy
     server = Server.first
-    delete :destroy, :id => server
-    assert_redirected_to servers_url
+    delete :destroy, :id => server, :project_id => 1
+    assert_redirected_to servers_url(server.datacenter.project)
     server.reload
     assert Server.exists?(server.id)
     assert_equal Server::STATUS_LOCKED, server.status
@@ -76,6 +85,7 @@ class ServersControllerTest < ActionController::TestCase
 
   def test_create_valid_with_interfaces
     post :create,
+         :project_id => 1,
          :server => {
            :name => "myserverwithinterfaces",
            :new_interface_attributes => [
@@ -83,7 +93,7 @@ class ServersControllerTest < ActionController::TestCase
              {:name => "eth1", :ipaddress => "192.168.1.99"}
            ]
          }
-    assert_redirected_to server_url(assigns(:server))
+    assert_redirected_to "/projects/ecookbook/servers/#{assigns(:server).id}"
     server = Server.find_by_name("myserverwithinterfaces")
     assert_not_nil server
     assert_equal ["eth0","eth1"], server.interfaces.map(&:name)
@@ -92,6 +102,7 @@ class ServersControllerTest < ActionController::TestCase
   
   def test_create_with_invalid_interface
     post :create,
+         :project_id => 1,
          :server => {
            :name => "myserverwithinterfaces",
            :new_interface_attributes => [
@@ -112,8 +123,8 @@ class ServersControllerTest < ActionController::TestCase
         :server => {
           :name => server.name,
           :existing_interface_attributes => interfaces_hash
-        }
-    assert_redirected_to server_url(assigns(:server))
+        }, :project_id => 1
+    assert_redirected_to "/projects/ecookbook/servers/#{server.id}"
     server.reload
     assert_equal interface_ids, server.interface_ids
   end
@@ -121,8 +132,8 @@ class ServersControllerTest < ActionController::TestCase
   def test_update_interfaces_without_value
     server = Server.first
     assert_not_equal [], server.interface_ids
-    put :update, :id => server.id, :server => {}
-    assert_redirected_to server_url(assigns(:server))
+    put :update, :id => server.id, :server => {}, :project_id => 1
+    assert_redirected_to "/projects/ecookbook/servers/#{server.id}"
     server.reload
     assert_equal [], server.interface_ids
   end

@@ -1,4 +1,6 @@
 class ApplisController < DatacenterPluginController
+  before_filter :find_appli, :only => [:show, :edit, :update, :destroy]
+  unloadable
   helper :servers
 
   def index
@@ -6,7 +8,8 @@ class ApplisController < DatacenterPluginController
     sort_update %w(id name)
 
     @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
-    c = ARCondition.new(@status == 0 ? nil : ["status = ?", @status])
+    c = ARCondition.new(["datacenter_id = ?", @datacenter.id])
+    c << ["status = ?", @status] unless @status == 0
     
     unless params[:name].blank?
       name = "%#{params[:name].strip.downcase}%"
@@ -24,8 +27,16 @@ class ApplisController < DatacenterPluginController
   end
   
   def show
-    @appli = Appli.find(params[:id], :include => [:issues, :instances])
-    c = ARCondition.new(["#{IssueElement.table_name}.appli_id = ?", @appli.id])
+    table = IssueElement.table_name
+    c = ARCondition.new(["#{table}.appli_id = ?", @appli.id])
+    
+    case params[:filter].to_s
+    when "Appli"
+      c << ["#{table}.element_type = ?", "Appli"]
+    when /^Instance:(\d+)$/
+      c << ["#{table}.element_type = ? and #{table}.element_id = ?", "Instance", $1]
+    end
+
     sort_init([['id', 'desc']])
     sort_update({'id' => "#{Issue.table_name}.id"})
     @issue_count = Issue.count(:joins => :issue_elements, :conditions => c.conditions)
@@ -48,30 +59,38 @@ class ApplisController < DatacenterPluginController
     @appli = Appli.new(params[:appli])
     if @appli.save
       flash[:notice] = l(:notice_successful_create)
-      redirect_to @appli
+      redirect_to appli_path(@project,@appli)
     else
       render :action => 'new'
     end
   end
   
   def edit
-    @appli = Appli.find(params[:id])
   end
   
   def update
-    @appli = Appli.find(params[:id])
     if @appli.update_attributes(params[:appli])
       flash[:notice] = l(:notice_successful_update)
-      redirect_to @appli
+      redirect_to appli_path(@project,@appli)
     else
       render :action => 'edit'
     end
   end
   
   def destroy
-    @appli = Appli.find(params[:id])
     @appli.status = Appli::STATUS_LOCKED
     @appli.save
-    redirect_to applis_url
+    redirect_to applis_url(:project_id => @project)
+  end
+
+  private
+  def find_appli
+    begin
+      @appli = Appli.find(params[:id],
+                          :conditions => {:datacenter_id => @datacenter},
+                          :include => [:issues, :instances])
+    rescue ActiveRecord::RecordNotFound
+      render_404
+    end
   end
 end

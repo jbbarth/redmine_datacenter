@@ -1,0 +1,19 @@
+<%= error_messages_for 'datacenter' %>
+
+<!--[form:datacenter]-->
+<div class="box tabular">
+  <p><%= f.text_field :name, :required => true %></p>
+  <p><%= f.text_area :description, :rows => 5 %></p>
+  <p><%= f.text_field :domain %></p>
+  <%= f.hidden_field :project_id, :value => @project.id %>
+  <fieldset>
+    <legend><%= l(:text_third_party_tools) %></legend>
+    <p>
+      <label>
+        <%= datacenter_check_box("nagios_enabled", @datacenter.options["nagios_enabled"]=="1") %>
+        <%= l_or_humanize(:nagios) %>
+      </label>
+    </p>
+  </fieldset>
+</div>
+<!--[eoform:datacenter]-->

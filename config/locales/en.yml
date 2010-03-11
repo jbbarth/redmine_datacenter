@@ -5,23 +5,44 @@ en:
       messages:
         invalid_ipaddress: is not a valid IP address or CIDR mask
 
+  permission_view_datacenter: View datacenter
+  permission_manage_datacenter: Manage datacenter
+
+  label_datacenter: Datacenter
+  label_datacenter_new: New datacenter
+  label_datacenter_plural: Datacenters
   label_server_new: New server
   label_server_plural: Servers
   label_use_multiple_select: Use multi-select instead of checkboxes ?
   label_appli_new: New application
   label_appli_plural: Applications
   label_interface: Interface
-  label_interface_plural: Interfaces
   label_instance: Instance
   label_instance_plural: Instances
   label_instance_new: New instance
+  label_network_new: New network
+  label_network_plural: Networks
+  label_network_by_ip_host: by ip/host
+  label_network_by_subnet: by network
+  label_network_side_by_side: side-by-side
+  label_ipaddress_plural: IP Addresses
   
   button_add_interface: Add an interface
+  button_select_servers: Select servers
 
   field_server: Server
   field_fqdn: Fullname (fqdn)
+  field_interfaces: Interfaces
   field_ipaddress: IP Address
+  field_address: Address
+  field_netmask: Netmask
+  field_color: Color
+  field_exceptions: Exceptions
   field_domain: Domain
   field_appli: Application
   field_appli_instance_ids: Applications
   field_server_ids: Servers
+
+  text_hide_admin_links_in_sidebar: Hide admin links in sidebar ?
+  text_third_party_tools: Third Party Tools
+  text_nagios_everything_ok: "Everything's OK"

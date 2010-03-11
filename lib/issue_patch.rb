@@ -25,6 +25,7 @@ class Issue
   end
 
   def appli_instance_ids=(appli_instances)
+    appli_instances ||= []
     self.appli_ids = appli_instances.select{|e|e.match(/Appli:/)}.map{|e|e.gsub("Appli:","").to_i}
     self.instance_ids = appli_instances.select{|e|e.match(/Instance:/)}.map{|e|e.gsub("Instance:","").to_i}
   end

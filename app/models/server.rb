@@ -4,8 +4,11 @@ class Server < ActiveRecord::Base
   has_and_belongs_to_many :issues
   has_and_belongs_to_many :interfaces
   has_and_belongs_to_many :instances, :include => :appli
+  belongs_to :datacenter
+
+  acts_as_ipaddress :attributes => :ipaddress
   
-  attr_accessible :name, :fqdn, :ipaddress, :description, :status,
+  attr_accessible :name, :fqdn, :description, :status, :datacenter_id,
                   :new_interface_attributes, :existing_interface_attributes
   
   STATUS_ACTIVE = 1
@@ -25,15 +28,12 @@ class Server < ActiveRecord::Base
   after_update :save_interfaces
   
   named_scope :active, :conditions => { :status => STATUS_ACTIVE }, :order => 'name asc'
+  named_scope :for_datacenter, lambda {|datacenter_id| {:conditions => ["datacenter_id = ?", datacenter_id]}}
   
   def active?
     self.status == STATUS_ACTIVE
   end
   
-  def ipaddress
-    interfaces.first.ipaddress if interfaces.any?
-  end
-
   def fullname
     self.fqdn.blank? ? self.name : self.fqdn
   end

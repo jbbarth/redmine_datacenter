@@ -6,8 +6,9 @@ class Appli < ActiveRecord::Base
            :dependent => :destroy
   has_many :issues,
            :through => :issue_elements
+  belongs_to :datacenter
 
-  attr_accessible :name, :description, :status
+  attr_accessible :name, :description, :status, :datacenter_id
 
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
@@ -16,6 +17,7 @@ class Appli < ActiveRecord::Base
   STATUS_LOCKED = 2
 
   named_scope :active, :conditions => { :status => STATUS_ACTIVE }
+  named_scope :for_datacenter, lambda {|datacenter_id| {:conditions => ["datacenter_id = ?", datacenter_id]}}
   
   def active?
     self.status == STATUS_ACTIVE

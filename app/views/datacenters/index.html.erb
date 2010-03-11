@@ -1,0 +1,40 @@
+<h2><%=l(:label_datacenter_plural)%></h2>
+
+<% form_tag({}, :method => :get) do %>
+  <fieldset><legend><%= l(:label_filter_plural) %></legend>
+  <label><%= l(:field_status) %>:</label>
+  <%= select_tag 'status', datacenters_status_options_for_select(@status), :class => "small", :onchange => "this.form.submit(); return false;"  %>
+  <%= submit_tag l(:button_apply), :class => "small", :name => nil %>
+  </fieldset>
+<% end %>
+&nbsp;
+
+<% if @datacenters.any? %>
+<table class="list">    
+  <thead>
+    <tr>
+      <th><%= l(:field_name) %></td>
+      <th><%= l(:field_description) %></td>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+<% for datacenter in @datacenters -%>
+  <tr class="datacenter <%= cycle("odd", "even") %>">
+    <td class="name"><%= link_to(h(datacenter.name),datacenter_path(datacenter.project)) %></td>
+    <td class="description"><%= datacenter.description %></td>
+    <td class="buttons">
+      <% if User.current.allowed_to?(:manage_datacenter,@project) %>
+      <%= link_to l(:button_update), edit_datacenter_path(datacenter.project), :class => 'icon icon-edit' %>
+      <% end %>
+    </td>
+  </tr>
+<% end -%>
+  </tbody>
+</table>
+
+<% else %>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+
+<% html_title(l(:label_datacenter_plural)) -%>

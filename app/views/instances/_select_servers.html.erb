@@ -1,0 +1,4 @@
+<%= collection_select :issue, :server_ids, @servers, :id, :name,
+                      { :selected => @selected, :include_blank => true },
+                      { :multiple => (@selected.length > 1 ? true : false),
+                      :name => 'issue[server_ids][]' } -%>

@@ -1,16 +1,16 @@
 module ApplisHelper
   include InstancesHelper
 
-  def links_to_applis(applis_and_instances, no_html = false)
+  def links_to_applis(project,applis_and_instances, no_html = false)
     applis_and_instances.sort_by(&:fullname).map do |element|
       appli_id = element.is_a?(Appli) ? element.id : element.appli_id
-      (no_html ? element.fullname : link_to(element.fullname, appli_path(appli_id)))
+      (no_html ? element.fullname : link_to(element.fullname, appli_path(project,appli_id)))
     end.join(", ")
   end
 
-  def link_to_instances(appli)
+  def links_to_instances(project,appli)
     appli.instances.map do |instance|
-      link_to instance.name, edit_appli_instance_path(appli,instance)
+      link_to instance.name, edit_appli_instance_path(project,appli,instance)
     end.join(", ")
   end
 
@@ -20,7 +20,7 @@ module ApplisHelper
       available_options << [ appli.name, "Appli:#{appli.id}" ]
       appli.instances.sort_by(&:name).each do |instance|
         if instance.active? || issue.has_instance?(instance)
-          available_options << [ "&nbsp;  -- #{instance.fullname}", "Instance:#{instance.id}" ]
+          available_options << [ "&nbsp;&nbsp;&#187; #{instance.fullname}", "Instance:#{instance.id}" ]
         end
       end
     end
@@ -30,7 +30,8 @@ module ApplisHelper
     values = options_for_select_without_escape(available_options, :selected => issue.appli_instance_ids)
     
     options = { :multiple => (issue.appli_instance_ids.length > 1 ? true : false),
-                :name => 'issue[appli_instance_ids][]' }
+                :name => 'issue[appli_instance_ids][]',
+                :onchange => "toggle_servers_select('issue_appli_instance_ids','select-servers-link');" }
 
     select_tag "issue_appli_instance_ids", values, options
   end
@@ -50,13 +51,22 @@ module ApplisHelper
     end
   end
   
-  def applis_status_options_for_select(selected)
-    appli_count_by_status = Appli.count(:group => 'status').to_hash
+  def applis_status_options_for_select(selected, datacenter)
+    appli_count_by_status = Appli.count(:conditions => ["datacenter_id = ?", datacenter], :group => 'status').to_hash
     options = [[l(:label_all), '']]
     [[:status_active,Appli::STATUS_ACTIVE],[:status_locked,Appli::STATUS_LOCKED]].each do |a|
       options << ["#{l(a[0])} (#{appli_count_by_status[a[1]].to_i})", a[1]]
     end
     options_for_select(options, selected)
+  end
+  
+  def appli_instances_options_for_select(appli, selected=nil)
+    options = [['', '']]
+    options << [ appli.name, "Appli" ]
+    appli.instances.sort_by(&:name).each do |instance|
+      options << [ "&nbsp;&nbsp;&#187; #{instance.name}", "Instance:#{instance.id}" ] if instance.active?
+    end
+    options_for_select_without_escape(options, selected)
   end
 end
 

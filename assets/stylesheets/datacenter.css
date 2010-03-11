@@ -1,12 +1,45 @@
-.icon-servers, #admin-menu a.servers { background-image: url(../images/servers.png); }
-.icon-applis, #admin-menu a.applis { background-image: url(../images/applications.png); }
-div.server, div.appli {background:#ffffdd; padding:0 6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
-div.server table.attributes, div.appli table.attributes {margin-bottom:10px;}
-div.server table.attributes th, div.appli table.attributes th {width:20%; white-space: nowrap;}
-div.server p.nodata, div.appli p.nodata {text-align:left; background:#ffffdd; border:0; color:inherit; margin:2px 0 6px 0; padding:2px; font-size:100%;}
+.icon-servers, #admin-menu a.servers, .overview a.servers { background-image: url(../images/servers.png); }
+.icon-applis, #admin-menu a.applis, .overview a.applis { background-image: url(../images/applications.png); }
+.icon-datacenters, #admin-menu a.datacenters { background-image: url(../images/datacenter.png); }
+.icon-networks, #admin-menu a.networks { background-image: url(../images/network.png); }
+div.datacenter h3 { background: url(../images/datacenter.png) no-repeat 0% 50%; padding-left: 20px; }
+div.datacenter .overview {padding: 2px 5px;}
+div.datacenter td.overview p {margin-bottom: 5px;}
+div.datacenter td.overview a { background-position: 0% 40%; background-repeat: no-repeat; padding-left: 20px; padding-top: 2px; padding-bottom: 3px;}
+div.server, div.appli, div.datacenter, div.network {background:#ffffdd; padding:0 6px; margin-bottom:6px;border: 1px solid #d7d7d7;}
+div.server table.attributes, div.appli table.attributes, div.datacenter table.attributes, div.network table.attributes {margin-bottom:10px;}
+div.server table.attributes th, div.appli table.attributes th, div.datacenter table.attributes th, div.network table.attributes th {width:20%; white-space: nowrap;}
+div.server p.nodata, div.appli p.nodata, div.datacenter p.nodata, div.network p.nodata {text-align:left; background:#ffffdd; border:0; color:inherit; margin:2px 0 6px 0; padding:2px; font-size:100%;}
 span.interface {display:block;}
 span.interface input.interface_name {width:3em;}
 span.interface input.interface_ipaddress {width:10em;}
 table.instances {border: 0;}
 table.instances td.buttons a {padding-right:0;}
-tr.appli td.buttons, tr.server td.buttons {text-align:left;}
+tr.network td {text-align:center;}
+tr.appli td.buttons, tr.server td.buttons, tr.datacenter td.buttons, tr.network td.buttons {text-align:left;}
+div.network-overview {float:left; padding:3px;}
+div.network-overview td {padding:3px 8px;}
+div.network-side { width:100%; overflow-x: auto; }
+div.network-side td {text-align:center; border: 1px solid #e4e4e4;}
+div.network-side td.server {text-align:left;}
+/* activity on Datacenter#show page */
+div#datacenter-activity dl { margin-left: 0; }
+div#datacenter-activity dd { margin-bottom: 0.5em; margin-left: 0; padding-left: 18px; font-size: 0.9em; }
+div#datacenter-activity dt { margin-bottom: 0px; padding-left: 20px; line-height: 18px; background-position: 0 50%; background-repeat: no-repeat; }
+div#datacenter-activity dt.me .time { border-bottom: 1px solid #999; }
+div#datacenter-activity dt .time { color: #777; font-size: 80%; }
+div#datacenter-activity dd .description { font-style: italic; }
+div#datacenter-activity span.project:after { content: " -"; }
+div#datacenter-activity dd span.description { display:block; color: #808080; }
+/* tooltip */
+div.tooltip:hover span.dc-tip { top: 30px; }
+/* third party tools */
+div.third_party { width:50%; }
+/* nagios */
+#nagios div { padding-left:5px; margin-bottom:2px; }
+#nagios .infos { font-size:0.9em; color:#777; }
+#nagios .nagios-service { background-color:#eee; }
+#nagios .nagios-warning { border-left:6px solid #ff0; }
+#nagios .nagios-unknown { border-left:6px solid #aaa; }
+#nagios .nagios-critical { border-left:6px solid #f00; }
+#nagios .nagios-host-critical { background-color:#fcc; }

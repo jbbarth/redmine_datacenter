@@ -1,6 +1,6 @@
-<h2><%= link_to l(:label_server_plural), servers_path %> &#187; <%=h @server.name %></h2>
+<h2><%= link_to l(:label_server_plural), servers_path(@project) %> &#187; <%=h @server.name %></h2>
 
-<% labelled_tabular_form_for :server, @server, :url => server_path(@server),
+<% labelled_tabular_form_for :server, @server, :url => server_path(@project,@server),
                              :html => { :class => nil, :method => :put } do |f| %>
 	<%= render :partial => 'form', :locals => { :f => f } %>
 	<p><%= submit_tag l(:button_update) %></p>

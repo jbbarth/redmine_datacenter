@@ -1,0 +1,74 @@
+<div class="contextual">
+  <% if User.current.allowed_to?(:manage_datacenter,@project) %>
+    <%= link_to l(:button_update), {:action => 'edit', :project_id => @project}, :class => 'icon icon-edit' %> 
+    <!--<%= change_link_datacenter_status(@datacenter) %>-->
+  <% end %>
+</div>
+
+<h2><%= l(:label_datacenter) %></h2>
+
+<div class="splitcontentleft">
+
+  <div class="datacenter">
+  <h3><%= @datacenter.name %></h3>
+  <table class="attributes">
+    <!--<tr>
+      <th><%= l(:field_project)%>:</th>
+      <td><%= project_link(@datacenter) %></td>
+    </tr>-->
+    <tr>
+      <th><%= l(:label_overview) %></th>
+      <td class="overview">
+        <p>
+          <%= link_to "#{@datacenter.applis_number} #{l(:label_appli_plural)} (#{@datacenter.instances_number} #{l(:label_instance_plural)})",
+                      {:controller => 'applis', :project_id => @project},
+                      :class => 'applis' %>
+        </p>
+        <p>
+          <%= link_to "#{@datacenter.servers_number} #{l(:label_server_plural)}",
+                      {:controller => 'servers', :project_id => @project},
+                      :class => 'servers' %>
+        </p>
+      </td>
+    </tr>
+    <% unless @datacenter.description.blank? -%>
+    <tr>
+      <th><%= l(:field_description)%></th>
+      <td><%= textilizable @datacenter, :description %></td>
+    </tr>
+    <% end -%>
+  </table>
+  </div>
+  
+  <div id="datacenter-activity" class="box">
+    <% if @project.module_enabled?(:issue_tracking) && @activity[:issues].any? -%>
+    <h3><%= l("label_issue_plural") %></h3>
+    <dl>
+      <%= render :partial => 'activity_event', :collection => @activity[:issues] %>
+    </dl>
+    <% end -%>
+
+    <% if @project.module_enabled?(:wiki) && @activity[:wiki_edits].any? -%>
+    <h3><%= l("label_wiki_edit_plural") %></h3>
+    <dl>
+      <%= render :partial => 'activity_event', :collection => @activity[:wiki_edits] %>
+    </dl>
+    <% end -%>
+
+    <% if @project.module_enabled?(:repository) && @activity[:changesets].any? -%>
+    <h3><%= l("label_changeset_plural") %></h3>
+    <dl>
+      <%= render :partial => 'activity_event', :collection => @activity[:changesets] %>
+    </dl>
+    <% end -%>
+  </div>
+  
+</div>
+
+<div class="splitcontentright third_party">
+  <% if @datacenter.tool_enabled?(:nagios) %>
+    <%= render :partial => 'third_party/nagios/show' -%>
+  <% end %>
+</div>
+
+<% html_title(l(:label_datacenter)) -%>

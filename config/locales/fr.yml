@@ -5,23 +5,44 @@ fr:
       messages:
         invalid_ipaddress: "n'est pas une adresse IP valide ou un masque CIDR"
 
+  permission_view_datacenter: Voir le centre-serveur
+  permission_manage_datacenter: Gérer le centre-serveur
+
+  label_datacenter: Centre-Serveur
+  label_datacenter_new: Nouveau centre-serveur
+  label_datacenter_plural: Centres-Serveurs
   label_server_new: Nouveau serveur
   label_server_plural: Serveurs
   label_use_multiple_select: Utiliser des listes déroulantes multiples ?
   label_appli_new: Nouvelle application
   label_appli_plural: Applications
   label_interface: Interface
-  label_interface_plural: Interfaces
   label_instance: Instance
   label_instance_plural: Instances
   label_instance_new: Nouvelle instance
+  label_network_new: Nouveau réseau
+  label_network_plural: Réseaux
+  label_network_by_ip_host: par ip/host
+  label_network_by_subnet: par réseau
+  label_network_side_by_side: côte-à-côte
+  label_ipaddress_plural: Adresses IP
   
   button_add_interface: Ajouter une interface
+  button_select_servers: Sélectionner les serveurs
 
   field_server: Serveur
   field_fqdn: Nom complet (fqdn)
+  field_interfaces: Interfaces
   field_ipaddress: Adresse IP
+  field_address: Adresse
+  field_netmask: Masque réseau
+  field_color: Couleur
+  field_exceptions: Exceptions
   field_domain: Domaine
   field_appli: Application
   field_appli_instance_ids: Applications
   field_server_ids: Serveurs
+
+  text_hide_admin_links_in_sidebar: Cacher les liens d'administration sur le côté ?
+  text_third_party_tools: Outils Tiers
+  text_nagios_everything_ok: R.A.S!

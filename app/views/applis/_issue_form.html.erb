@@ -8,13 +8,36 @@ function toggle_multi_select_datacenter(field) {
         select.multiple = true;
     }
 }
+function toggle_servers_select(id,linkid) {
+  value = flat_getValue(id);
+  if (value.include('Instance')) {
+    $(linkid).show(); 
+  } else {
+    $(linkid).hide();
+  }
+}
+function flat_getValue(id) {
+  value = $(id).getValue();
+  if (value instanceof Array) {
+    value = value.join();
+  }
+  return value
+}
 //]]>
 </script>
+<% @datacenter ||= @project.datacenter %>
+<% if @datacenter %>
 <p>
   <label><%= l(:label_appli_plural) %></label>
-  <% applis = Appli.active(:include => :instances) | @issue.applis | @issue.instances.map(&:appli) %>
+  <% applis = Appli.for_datacenter(@datacenter.id).active(:include => :instances) | @issue.applis | @issue.instances.map(&:appli) %>
   <%= select_applis_or_instances(@issue,applis) %>
   <%= link_to_function image_tag('bullet_toggle_plus.png'),
                        "toggle_multi_select_datacenter('issue_appli_instance_ids');",
                        :style => "vertical-align: bottom;" %>
+  <%= link_to_remote l(:button_select_servers),
+                     :method => 'get',
+                     :url => {:controller => "instances", :action => 'select_servers', :project_id => @project.id},
+                     :with => "'ids='+flat_getValue('issue_appli_instance_ids')",
+                     :html => {:id => 'select-servers-link', :style => 'display:none;'} %>
 </p> 
+<% end %>

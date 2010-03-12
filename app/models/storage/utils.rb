@@ -24,5 +24,9 @@ module Storage
     def percent_free
       self.free_space.to_f / self.size.to_f * 100
     end
+
+    def percent_used
+      100 - percent_free
+    end
   end
 end

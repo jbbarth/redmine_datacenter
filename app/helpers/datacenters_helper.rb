@@ -55,4 +55,15 @@ module DatacentersHelper
     html << %Q(<span class="infos">#{output}</span>) unless output.blank?
     html << "</div>"
   end
+
+  def pretty_size(size)
+    #units = %w(o Ko Mo Go To Po)
+    units = %w(o Ko Mo Go)
+    i = 0
+    while size >=1024 && units[i+1]
+      size /= 1024.0
+      i += 1
+    end
+    "#{"%.1f" % size}#{units[i]}"
+  end
 end

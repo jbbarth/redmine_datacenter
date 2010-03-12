@@ -20,5 +20,9 @@ module Storage
       end
       "#{"%.1f" % size}#{units[i]}"
     end
+
+    def percent_free
+      self.free_space.to_f / self.size.to_f * 100
+    end
   end
 end

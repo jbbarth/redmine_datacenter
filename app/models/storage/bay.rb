@@ -2,6 +2,8 @@ require 'open3'
 
 module Storage
   class Bay
+    include Storage::Utils
+
     SMCLI_BIN = "SMcli"
     
     def initialize(name, ipaddress = nil)
@@ -92,6 +94,16 @@ module Storage
         ld[:name].match(regex)
       end.inject(0) do |sum,ld|
         sum + ld[:size]
+      end
+    end
+
+    def method_missing(symbol,*args)
+      if %w(size free_space used_space).include?(symbol.to_s)
+        arrays.inject(0) do |memo,array|
+          memo + array.send(symbol,*args)
+        end
+      else
+        super
       end
     end
   end

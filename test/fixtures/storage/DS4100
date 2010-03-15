@@ -1,0 +1,831 @@
+Performing syntax check...
+
+Syntax check complete.
+
+Executing script...
+
+Storage Subsystem profile
+PROFILE FOR STORAGE SUBSYSTEM: DS4100 (1/27/10 7:00:23 PM)
+
+SUMMARY------------------------------
+   Number of controllers: 2
+   Number of arrays: 2
+   Total number of logical drives (includes an access logical drive): 5 of 1024 used
+      Number of standard logical drives: 4
+      Number of access logical drives: 1
+   Number of drives: 14
+   Supported drive types: Serial ATA (SATA) (14)
+   Total hot spare drives: 1
+      Standby: 1
+      In use: 0
+   Access logical drive: None mapped
+   Default host type: AIX (Host type index 6)
+   Current configuration
+      Firmware version: 06.12.56.00
+      NVSRAM version: N23794639R912V14
+   Pending configuration
+      Staged firmware download supported?: Yes
+      Firmware version: None
+      NVSRAM version: None
+      Transferred on: None
+   NVSRAM configured for batteries?: Yes
+   Start cache flushing at (in percentage): 80
+   Stop cache flushing at (in percentage): 80
+   Cache block size (in KB): 4
+   Media scan frequency (in days): 30
+   Failover alert delay (in minutes): 5
+   Feature enable identifier: 82296371718373885693739804450323
+   Storage Subsystem worldwide name (ID): 1426ABCDEF2ABCDEF07737ABCDEF2154715673575411670
+
+CONTROLLERS------------------------------
+   Number of controllers: 2
+
+   Controller in Enclosure 0, Slot A
+      Status: Online 
+      Current configuration
+         Firmware version: 06.12.56.00
+            Appware version: 06.12.56.00
+            Bootware version: 06.12.56.00
+         NVSRAM version: N23794639R912V14
+      Pending configuration
+         Firmware version: None
+            Appware version: None
+            Bootware version: None
+         NVSRAM version: None
+         Transferred on: None
+      Board ID: 2822
+      Product ID: 1724-100  FAStT 
+      Product revision: 0542
+      Serial number: 1T91651939
+      Date of manufacture: June 16, 2003
+      Cache/processor size (MB): 128/128
+      Date/Time: Wed Jan 27 18:58:35 CET 2001
+      Associated Logical Drives (* = Preferred Owner): 
+         logical_drive_1*, logical_drive_2*
+      Ethernet port: 1
+         MAC address: 42:83:DE:C1:81:0D
+         Host name: target
+         Network configuration: Static
+         IP address: 192.168.0.11
+         Subnet mask: 255.255.255.0
+         Gateway: 192.168.0.63
+         Remote login: Enabled
+
+      Drive interface: SATA
+         Channel: 2
+         Maximum data rate: 1.5 Gbps
+         Current data rate: 1.5 Gbps
+         Data rate control: Fixed
+      Drive interface: Fibre
+         Channel: 3
+         Current ID: 125/0x1
+         Maximum data rate: 2 Gbps 
+         Current data rate: 2 Gbps 
+         Data rate control: Fixed
+         Link status: Up
+      Drive interface: Fibre
+         Channel: 4
+         Current ID: 125/0x1
+         Maximum data rate: 2 Gbps 
+         Current data rate: 2 Gbps 
+         Data rate control: Fixed
+         Link status: Up
+      Host interface: Fibre
+         Port: 1
+         Current ID: Not applicable/0xFFFFFFFF
+         Preferred ID: 126/0x0
+         NL-Port ID: 0x610A13
+         Maximum data rate: 2 Gbps 
+         Current data rate: 2 Gbps 
+         Data rate control: Auto
+         Link status: Up
+         Topology: Fabric Attach
+         World-wide port name: 81:95:D1:51:50:73:C0:57
+         World-wide node name: 20:06:42:83:DE:C1:81:0D
+         Part type: HPFC-5400    revision 6
+      Host interface: Fibre
+         Port: 2
+         Current ID: Not applicable/0xFFFFFFFF
+         Preferred ID: 1/0xE8
+         NL-Port ID: 0x000000
+         Maximum data rate: 2 Gbps 
+         Current data rate: 2 Gbps 
+         Data rate control: Auto
+         Link status: Down
+         Topology: Not Available
+         World-wide port name: 13:DF:55:E9:FD:82:07:1B
+         World-wide node name: 20:06:42:83:DE:C1:81:0D
+         Part type: HPFC-5400    revision 6
+
+   Controller in Enclosure 0, Slot B
+      Status: Online 
+      Current configuration
+         Firmware version: 06.12.56.00
+            Appware version: 06.12.56.00
+            Bootware version: 06.12.56.00
+         NVSRAM version: N23794639R912V14
+      Pending configuration
+         Firmware version: None
+            Appware version: None
+            Bootware version: None
+         NVSRAM version: None
+         Transferred on: None
+      Board ID: 2822
+      Product ID: 1724-100  FAStT 
+      Product revision: 0542
+      Serial number: 1T75959901
+      Date of manufacture: June 16, 2003
+      Cache/processor size (MB): 128/128
+      Date/Time: Wed Jan 27 18:58:30 CET 2001
+      Associated Logical Drives (* = Preferred Owner): 
+         logical_drive_3*, logical_drive_4*
+      Ethernet port: 1
+         MAC address: 90:0E:07:D8:1F:90
+         Host name: target
+         Network configuration: Static
+         IP address: 192.168.0.635
+         Subnet mask: 255.255.255.0
+         Gateway: 192.168.0.63
+         Remote login: Enabled
+
+      Drive interface: SATA
+         Channel: 2
+         Maximum data rate: 1.5 Gbps
+         Current data rate: 1.5 Gbps
+         Data rate control: Fixed
+      Drive interface: Fibre
+         Channel: 3
+         Current ID: 124/0x2
+         Maximum data rate: 2 Gbps 
+         Current data rate: 2 Gbps 
+         Data rate control: Fixed
+         Link status: Up
+      Drive interface: Fibre
+         Channel: 4
+         Current ID: 124/0x2
+         Maximum data rate: 2 Gbps 
+         Current data rate: 2 Gbps 
+         Data rate control: Fixed
+         Link status: Up
+
+      Host Interface(s): Unable to retrieve latest data; using last known state.
+      Host interface: Fibre
+         Port: 1
+         Current ID: Not applicable/0xFFFFFFFF
+         Preferred ID: 126/0x0
+         NL-Port ID: 0x620A13
+         Maximum data rate: 2 Gbps 
+         Current data rate: 2 Gbps 
+         Data rate control: Auto
+         Link status: Up
+         Topology: Fabric Attach
+         World-wide port name: 43:85:BA:F8:F7:F7:2F:5B
+         World-wide node name: 20:06:42:83:DE:C1:81:0D
+         Part type: HPFC-5400    revision 6
+      Host interface: Fibre
+         Port: 2
+         Current ID: Not applicable/0xFFFFFFFF
+         Preferred ID: 3/0xE2
+         NL-Port ID: 0x000000
+         Maximum data rate: 2 Gbps 
+         Current data rate: 2 Gbps 
+         Data rate control: Auto
+         Link status: Down
+         Topology: Not Available
+         World-wide port name: 95:AA:0E:E1:EC:FF:3C:97
+         World-wide node name: 20:06:42:83:DE:C1:81:0D
+         Part type: HPFC-5400    revision 6
+
+ARRAYS------------------------------
+   Number of arrays: 2
+
+   Array 1 (RAID 5)
+      Status: Online 
+      Drive type: Serial ATA (SATA)
+      Enclosure loss protection: No
+      Current owner: Controller in slot A,B
+      Associated logical drives and free capacities:
+         logical_drive_3 (580.945 GB), logical_drive_1 (580.962 GB)
+      Associated drives (in piece order):
+         Drive at Enclosure 0, Slot 1
+         Drive at Enclosure 0, Slot 2
+         Drive at Enclosure 0, Slot 3
+         Drive at Enclosure 0, Slot 4
+         Drive at Enclosure 0, Slot 5
+         Drive at Enclosure 0, Slot 6
+   Array 2 (RAID 5)
+      Status: Online 
+      Drive type: Serial ATA (SATA)
+      Enclosure loss protection: No
+      Current owner: Controller in slot A,B
+      Associated logical drives and free capacities:
+         logical_drive_4 (697.145 GB), logical_drive_2 (697.143 GB)
+      Associated drives (in piece order):
+         Drive at Enclosure 0, Slot 7
+         Drive at Enclosure 0, Slot 8
+         Drive at Enclosure 0, Slot 9
+         Drive at Enclosure 0, Slot 10
+         Drive at Enclosure 0, Slot 11
+         Drive at Enclosure 0, Slot 12
+         Drive at Enclosure 0, Slot 13
+
+STANDARD LOGICAL DRIVES------------------------------
+
+SUMMARY
+   Number of standard logical drives: 4
+   See other Logical Drives sub-tabs for premium feature information.
+
+   NAME      STATUS   CAPACITY    RAID LEVEL  ARRAY  
+   logical_drive_3  Optimal  580.945 GB  5           1      
+   logical_drive_1  Optimal  580.962 GB  5           1      
+   logical_drive_4  Optimal  697.145 GB  5           2      
+   logical_drive_2  Optimal  697.143 GB  5           2      
+
+DETAILS
+   Logical Drive name: logical_drive_3
+      Logical Drive ID: 54:44:C1:FC:8A:45:92:61:91:B8:0E:4C:A4:01:2B:9E
+      Subsystem ID (SSID): 0
+      Status: Optimal 
+      Drive type: Serial ATA (SATA)
+      Enclosure loss protection: No
+      Preferred owner: Controller in slot B
+      Current owner: Controller in slot B
+      Capacity: 580.945 GB
+      RAID level: 5
+      Segment size: 128 KB
+      Modification priority: High
+      Associated array: 1
+      Read cache: Enabled
+      Write cache: Enabled
+      Write cache without batteries: Disabled
+      Write cache with mirroring: Enabled
+      Flush write cache after (in seconds): 10.00
+      Cache read ahead multiplier: 1
+      Enable background media scan: Enabled
+      Media scan with redundancy check: Disabled
+
+   Logical Drive name: logical_drive_1
+      Logical Drive ID: 0B:D0:DC:17:FB:49:C4:6A:03:69:3D:05:45:D2:4C:D4
+      Subsystem ID (SSID): 1
+      Status: Optimal 
+      Drive type: Serial ATA (SATA)
+      Enclosure loss protection: No
+      Preferred owner: Controller in slot A
+      Current owner: Controller in slot A
+      Capacity: 580.962 GB
+      RAID level: 5
+      Segment size: 128 KB
+      Modification priority: High
+      Associated array: 1
+      Read cache: Enabled
+      Write cache: Enabled
+      Write cache without batteries: Disabled
+      Write cache with mirroring: Enabled
+      Flush write cache after (in seconds): 10.00
+      Cache read ahead multiplier: 1
+      Enable background media scan: Enabled
+      Media scan with redundancy check: Disabled
+
+   Logical Drive name: logical_drive_4
+      Logical Drive ID: 86:2A:08:41:58:08:3F:69:1C:29:1B:7A:BE:F4:7E:43
+      Subsystem ID (SSID): 2
+      Status: Optimal 
+      Drive type: Serial ATA (SATA)
+      Enclosure loss protection: No
+      Preferred owner: Controller in slot B
+      Current owner: Controller in slot B
+      Capacity: 697.145 GB
+      RAID level: 5
+      Segment size: 128 KB
+      Modification priority: High
+      Associated array: 2
+      Read cache: Enabled
+      Write cache: Enabled
+      Write cache without batteries: Disabled
+      Write cache with mirroring: Enabled
+      Flush write cache after (in seconds): 10.00
+      Cache read ahead multiplier: 1
+      Enable background media scan: Enabled
+      Media scan with redundancy check: Disabled
+
+   Logical Drive name: logical_drive_2
+      Logical Drive ID: 1A:89:8D:AD:6F:D7:7F:C5:CF:06:B7:3C:66:DB:03:6B
+      Subsystem ID (SSID): 3
+      Status: Optimal 
+      Drive type: Serial ATA (SATA)
+      Enclosure loss protection: No
+      Preferred owner: Controller in slot A
+      Current owner: Controller in slot A
+      Capacity: 697.143 GB
+      RAID level: 5
+      Segment size: 128 KB
+      Modification priority: High
+      Associated array: 2
+      Read cache: Enabled
+      Write cache: Enabled
+      Write cache without batteries: Disabled
+      Write cache with mirroring: Enabled
+      Flush write cache after (in seconds): 10.00
+      Cache read ahead multiplier: 1
+      Enable background media scan: Enabled
+      Media scan with redundancy check: Disabled
+
+
+MISSING LOGICAL DRIVES------------------------------
+   Number of missing logical drives: 0
+
+DRIVES------------------------------
+
+SUMMARY
+   Number of drives: 14
+      Supported drive types: Serial ATA (SATA) (14)
+
+   BASIC:
+
+   TRAY, SLOT  STATUS   CAPACITY    CURRENT DATA RATE  PRODUCT ID                      FIRMWARE VERSION  
+   0, 1        Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+   0, 2        Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+   0, 3        Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+   0, 4        Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+   0, 5        Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+   0, 6        Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+   0, 7        Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+   0, 8        Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+   0, 9        Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+   0, 10       Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+   0, 11       Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+   0, 12       Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+   0, 13       Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+   0, 14       Optimal  232.882 GB  2 Gbps             Maxtor 7Y250M0                  YAR51HW0          
+
+   DRIVE CHANNELS:
+
+   TRAY, SLOT  PREFERRED CHANNEL  REDUNDANT CHANNEL  
+   0, 1        2                  2                  
+   0, 2        2                  2                  
+   0, 3        2                  2                  
+   0, 4        2                  2                  
+   0, 5        2                  2                  
+   0, 6        2                  2                  
+   0, 7        2                  2                  
+   0, 8        2                  2                  
+   0, 9        2                  2                  
+   0, 10       2                  2                  
+   0, 11       2                  2                  
+   0, 12       2                  2                  
+   0, 13       2                  2                  
+   0, 14       2                  2                  
+
+HOT SPARE COVERAGE:
+   The following arrays are not protected: None - All arrays are protected
+
+   Total hot spare drives: 1
+      Standby: 1
+      In use: 0
+
+   Standby drive at enclosure 0, slot 14 (SATA, 232.882 GB)
+      Protects the following arrays: 1, 2
+
+DETAILS
+   Drive at Enclosure 0, Slot 1
+      Drive port: 1, Channel: 2, ID: 0/0xEF
+      Drive port: 2, Channel: 2, ID: 0/0xEF
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y669ZKQE
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: 32:E2:AA:BC:1A:13:59:BD
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Assigned
+      Associated array: 1
+
+   Drive at Enclosure 0, Slot 2
+      Drive port: 1, Channel: 2, ID: 1/0xE8
+      Drive port: 2, Channel: 2, ID: 1/0xE8
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y669ZBLE
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: 17:4B:C9:99:A3:85:B2:38
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Assigned
+      Associated array: 1
+
+   Drive at Enclosure 0, Slot 3
+      Drive port: 1, Channel: 2, ID: 2/0xE4
+      Drive port: 2, Channel: 2, ID: 2/0xE4
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y669ZF5E
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: 80:CB:BC:40:44:92:2E:C3
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Assigned
+      Associated array: 1
+
+   Drive at Enclosure 0, Slot 4
+      Drive port: 1, Channel: 2, ID: 3/0xE2
+      Drive port: 2, Channel: 2, ID: 3/0xE2
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y66C0LWE
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: A3:11:E2:D8:86:A0:2B:B7
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Assigned
+      Associated array: 1
+
+   Drive at Enclosure 0, Slot 5
+      Drive port: 1, Channel: 2, ID: 4/0xE1
+      Drive port: 2, Channel: 2, ID: 4/0xE1
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y66AC9ZE
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: D8:6F:66:71:30:1B:09:17
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Assigned
+      Associated array: 1
+
+   Drive at Enclosure 0, Slot 6
+      Drive port: 1, Channel: 2, ID: 5/0xE0
+      Drive port: 2, Channel: 2, ID: 5/0xE0
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y66C0VJE
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: AA:4F:95:E9:E3:B1:0C:99
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Assigned
+      Associated array: 1
+
+   Drive at Enclosure 0, Slot 7
+      Drive port: 1, Channel: 2, ID: 6/0xDC
+      Drive port: 2, Channel: 2, ID: 6/0xDC
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y65J7PCE
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: B0:67:FF:E1:C9:37:6D:35
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Assigned
+      Associated array: 2
+
+   Drive at Enclosure 0, Slot 8
+      Drive port: 1, Channel: 2, ID: 7/0xDA
+      Drive port: 2, Channel: 2, ID: 7/0xDA
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y65J7QME
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: 4D:8F:8D:3E:13:25:A9:D2
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Assigned
+      Associated array: 2
+
+   Drive at Enclosure 0, Slot 9
+      Drive port: 1, Channel: 2, ID: 80/0x55
+      Drive port: 2, Channel: 2, ID: 80/0x55
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y66C0PSE
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: 27:CE:A3:60:11:F5:69:EC
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Assigned
+      Associated array: 2
+
+   Drive at Enclosure 0, Slot 10
+      Drive port: 1, Channel: 2, ID: 96/0x3A
+      Drive port: 2, Channel: 2, ID: 96/0x3A
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y65HLYPE
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: 6D:2F:E3:CA:E8:EC:A2:DF
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Assigned
+      Associated array: 2
+
+   Drive at Enclosure 0, Slot 11
+      Drive port: 1, Channel: 2, ID: 64/0x72
+      Drive port: 2, Channel: 2, ID: 64/0x72
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y65J7XSE
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: 6B:C1:C8:1E:59:82:95:0B
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Assigned
+      Associated array: 2
+
+   Drive at Enclosure 0, Slot 12
+      Drive port: 1, Channel: 2, ID: 72/0x67
+      Drive port: 2, Channel: 2, ID: 72/0x67
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y65J4QFE
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: 51:68:F7:6C:EA:07:0E:23
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Assigned
+      Associated array: 2
+
+   Drive at Enclosure 0, Slot 13
+      Drive port: 1, Channel: 2, ID: 88/0x4B
+      Drive port: 2, Channel: 2, ID: 88/0x4B
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y65HPDBE
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: 38:0D:70:7A:BD:86:05:9A
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Assigned
+      Associated array: 2
+
+   Drive at Enclosure 0, Slot 14
+      Drive port: 1, Channel: 2, ID: 104/0x2E
+      Drive port: 2, Channel: 2, ID: 104/0x2E
+      Drive path redundancy: OK
+      Status: Optimal 
+      Raw capacity: 232.882 GB
+      Usable capacity: 232.382 GB
+      Current data rate: 2 Gbps
+      Product ID: Maxtor 7Y250M0                          
+      Firmware version: YAR51HW0
+      Serial number: Y66BH7GE
+      Vendor: Not Available
+      Date of manufacture: Not Available
+      World-wide name: 14:24:BE:8A:D6:16:EE:3D
+      Drive type: Serial ATA (SATA)
+      Speed: 7200 RPM
+      Mode: Hot spare standby
+      Associated array: None
+
+DRIVE CHANNEL INFORMATION - Channel 3
+
+   SUMMARY------------------------------
+      Channel 3 status: Optimal
+      Controller A link status: Up
+      Controller B link status: Up
+
+   CUMULATIVE ERROR COUNTS------------------------------
+      Controller A Cumulative Error Counts
+         Baseline time set: 6/2/09 9:53:58 PM
+         Sample period (days, hh:mm:ss): 238 days, 22:02:29
+         Controller detected errors: 0
+         Drive detected errors: 0
+         Timeout errors: 0
+         Link down errors: 3
+         Total I/O count: 369875736
+      Controller B Cumulative Error Counts
+         Baseline time set: 6/2/09 9:53:58 PM
+         Sample period (days, hh:mm:ss): 238 days, 22:02:29
+         Controller detected errors: 0
+         Drive detected errors: 0
+         Timeout errors: 0
+         Link down errors: 3
+         Total I/O count: 854942155
+
+DRIVE CHANNEL INFORMATION - Channel 4
+
+   SUMMARY------------------------------
+      Channel 4 status: Optimal
+      Controller A link status: Up
+      Controller B link status: Up
+
+   CUMULATIVE ERROR COUNTS------------------------------
+      Controller A Cumulative Error Counts
+         Baseline time set: 6/2/09 9:53:59 PM
+         Sample period (days, hh:mm:ss): 238 days, 22:02:28
+         Controller detected errors: 0
+         Drive detected errors: 0
+         Timeout errors: 0
+         Link down errors: 4
+         Total I/O count: 275328224
+      Controller B Cumulative Error Counts
+         Baseline time set: 6/2/09 9:53:58 PM
+         Sample period (days, hh:mm:ss): 238 days, 22:02:29
+         Controller detected errors: 0
+         Drive detected errors: 0
+         Timeout errors: 0
+         Link down errors: 4
+         Total I/O count: 715064809
+
+ENCLOSURES------------------------------
+   Drive/Controller Enclosure 0 Overall Component Information
+      Drive technology: Serial ATA (SATA)
+      Minihub data rate mismatch: No
+      Part number: PN AEBKUAJ     
+      Serial number: SN 5FTRKVJ     
+      Vendor: VN IBM     
+      Date of manufacture: July 1, 2003
+      Enclosure path redundancy: OK
+      Fan canister
+         Location: Left
+         Status: Optimal
+      Fan canister
+         Location: Right
+         Status: Optimal
+      Battery status: Optimal
+         Location: Controller in slot A
+         Age: 352 day(s)
+         Days until replacement: 907 day(s)
+      Battery status: Optimal
+         Location: Controller in slot B
+         Age: 352 day(s)
+         Days until replacement: 907 day(s)
+      Power supply canister
+         Location: Left
+         Status: Optimal
+         Part number: PN 0O1WNWM     
+         Serial number: SN FL07N6BCPI5D1UAJ3PO6W8
+         Vendor: VN IBM     
+         Date of manufacture: July 1, 2003
+      Power supply canister
+         Location: Right
+         Status: Optimal
+         Part number: PN 0O1WNWM     
+         Serial number: SN SOZ2DQVPIRAXHXGGJ
+         Vendor: VN IBM     
+         Date of manufacture: July 1, 2003
+      Temperature: Optimal
+      SFP
+         Status: Optimal
+         Attached to: Host-side of controller A
+         Location: In connection
+         Supported data rate(s): 1 Gbps, 2 Gbps
+         Link length: Intermediate
+         Connector: LC
+         Transmitter type: Shortwave Laser w/o OFC
+         Transmission media: TM Multi-mode 50m(M5) TM Multi-mode 62.5m(M6) 
+         IEEE company ID: 00 01 9c 
+         Revision:     
+         Part number: JSP-21S0AA1     
+         Serial number: 4198ABCDEF4072761    
+         Vendor: JDS UNIPHASE    
+         Date of manufacture: December 27, 2003
+      SFP
+         Status: Optimal
+         Attached to: Host-side of controller B
+         Location: In connection
+         Supported data rate(s): 1 Gbps, 2 Gbps
+         Link length: Intermediate
+         Connector: LC
+         Transmitter type: Shortwave Laser w/o OFC
+         Transmission media: TM Multi-mode 50m(M5) TM Multi-mode 62.5m(M6) 
+         IEEE company ID: 00 01 9c 
+         Revision:     
+         Part number: JSP-21S0AA1     
+         Serial number: ABCDEF01ABCDEF25ABCDEF06343    
+         Vendor: JDS UNIPHASE    
+         Date of manufacture: August 22, 2003
+
+MAPPINGS (Storage Partitioning - Disabled)-------------------
+
+
+
+   VOLUME NAME  LUN  CONTROLLER  ACCESSIBLE BY  VOLUME STATUS  
+   logical_drive_3     0    B           Default Group  Optimal        
+   logical_drive_1     1    A           Default Group  Optimal        
+   logical_drive_4     2    B           Default Group  Optimal        
+   logical_drive_2     3    A           Default Group  Optimal        
+
+
+   TOPOLOGY DEFINITIONS
+      DEFAULT GROUP
+         Default type: AIX
+         Host Port: CB:42:36:F9:BF:44:FF:C5
+
+         Host: host_1
+            Host Port: C9:AD:DA:07:F0:4B:7C:96
+               Alias: host_1_FCS0
+               Type: AIX
+            Host Port: 8E:A6:4B:0D:E3:FC:67:FB
+               Alias: host_1_FCS2
+               Type: AIX
+
+   NVSRAM HOST TYPE INDEX DEFINITIONS
+
+   INDEX        ADT STATUS  TYPE                                                   
+   0            Disabled    Windows NT Non-Clustered (SP5 or higher)               
+   1            Disabled    Windows NT Clustered (SP5 or higher)                   
+   2            Disabled    Windows 2000/Server 2003 Non-Clustered                 
+   3            Disabled    Windows 2000/Server 2003 Clustered                     
+   4            Enabled     Netware-IBMSAN                                         
+   5            Enabled     Linux                                                  
+   6 (Default)  Disabled    AIX                                                    
+   7            Enabled     HP-UX                                                  
+   8            Disabled    Solaris                                                
+   9            Enabled     Windows 2000/Server 2003 Non-Clustered (supports DMP)  
+   10           Disabled    Irix                                                   
+   11           Enabled     Netware Failover                                       
+   12           Enabled     SAN Volume Contr                                       
+   13           Disabled    LNXCLVMWARE                                            
+   14           Enabled     Solaris (with Veritas DMP)                             
+   15           Enabled     Windows 2000/Server 2003 Clustered (supports DMP)      
+
+
+
+Script execution complete.
+
+The attempt to update the configuration file was unsuccessful.
+The commands completed successfully, but an error
+occurred while verifying the storage subsystem name you
+specified with the -n parameter. The name may have changed.
+To display the most up-to-date names, use the command
+SMcli -d -v.
+
+SMcli failed.
+

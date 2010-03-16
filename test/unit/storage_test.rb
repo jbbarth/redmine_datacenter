@@ -16,9 +16,11 @@ class StorageTest < ActiveSupport::TestCase
 
   def test_arrays_parsing
     assert_equal 9, @bays["DS4300"].arrays.length
+    assert_equal 2, @bays["DS4100"].arrays.length
   end
 
   def test_logical_drives_parsing
     assert_equal 98, @bays["DS4300"].logical_drives.length
+    assert_equal 4, @bays["DS4100"].logical_drives.length
   end
 end

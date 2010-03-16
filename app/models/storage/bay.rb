@@ -44,10 +44,12 @@ module Storage
       ret
     end
     
+    def parser
+      @parser ||= Storage::Parser.new(profile)
+    end
+
     def logical_drives
-      @logical_drives ||= profile.scan(/\nDETAILS\n(.*?)\n[A-Z]{5,}/m).first.first.split(/\n\s*LOGICAL /m).map do |section|
-        Storage::LogicalDrive.new("LOGICAL "+section) if section.match(/^DRIVE/)
-      end.compact
+      @logical_drives ||= parser.extract_logical_drives
     end
      
     def fresh_logical_drives
@@ -66,9 +68,7 @@ module Storage
     
     def arrays
       return @arrays unless @arrays.nil?
-      @arrays = profile.scan(/ARRAYS-*\n(.*?)\n[A-Z]{5,}/m).first.first.split(/\n\s*ARRAY /m).map do |section|
-        Storage::Array.new("ARRAY "+section) if section.match(/^\S/)
-      end.compact
+      @arrays = parser.extract_arrays
       @arrays.each do |array|
         array[:logical_drives].map! do |ld|
           if ld.match(/Free Capacity/)

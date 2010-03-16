@@ -24,6 +24,15 @@ class StorageTest < ActiveSupport::TestCase
     #assert_equal 2, @bays["DS4100"].arrays.length
   end
 
+  def test_arrays_values
+    ary = @bays["DS4300"].arrays.detect{|a| a[:name] == "8"}
+    assert_equal 39, ary.percent_used.to_i
+    assert_equal 1997736391999, ary.size
+    assert_equal 1213904860479, ary.free_space 
+    assert_equal "5", ary[:raid]
+    assert_equal "Serial ATA (SATA)", ary[:drive_type]
+  end
+
   def test_logical_drives_parsing
     assert_equal 98, @bays["DS4300"].logical_drives.length
     #assert_equal 4, @bays["DS4100"].logical_drives.length

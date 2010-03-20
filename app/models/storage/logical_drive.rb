@@ -9,7 +9,12 @@ module Storage
       else
         self[:name] = read_value(raw, "LOGICAL DRIVE NAME")
         self[:array] = read_value(raw, "Associated array")
-        self[:size] = read_value(raw, "Capacity").scan(/\((.*) Bytes/).first.first.gsub(",","").to_i
+        size = read_value(raw, "Capacity").scan(/\((.*) Bytes/)
+        if size.empty?
+          self[:size] = parse_size(read_value(raw, "Capacity"))
+        else
+          self[:size] = size.to_s.gsub(",","").to_i
+        end
         self[:raid] = read_value(raw, "RAID level")
         self[:status] = read_value(raw, "Logical Drive status")
         self[:wwid] = read_value(raw, "Logical Drive ID")

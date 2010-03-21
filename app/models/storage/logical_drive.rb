@@ -1,7 +1,7 @@
 module Storage
   class LogicalDrive < Hash
     include Storage::Utils
-
+    
     def initialize(raw)
       if raw.match(/Free Capacity/)
         self[:name] = "Free Capacity"
@@ -9,12 +9,7 @@ module Storage
       else
         self[:name] = read_value(raw, "LOGICAL DRIVE NAME")
         self[:array] = read_value(raw, "Associated array")
-        size = read_value(raw, "Capacity").scan(/\((.*) Bytes/)
-        if size.empty?
-          self[:size] = parse_size(read_value(raw, "Capacity"))
-        else
-          self[:size] = size.to_s.gsub(",","").to_i
-        end
+        self[:size] = parse_size(read_value(raw, "Capacity"))
         self[:raid] = read_value(raw, "RAID level")
         self[:status] = read_value(raw, "Logical Drive status")
         self[:wwid] = read_value(raw, "Logical Drive ID")
@@ -34,16 +29,6 @@ module Storage
 
     def to_s
       "#{self[:name]} (#{self.pretty_size})"
-    end
-
-    def parse_size(size)
-      parsed = size
-      {"KB"=>"1", "MB"=>"2", "GB"=>"3", "TB" => "4", "PB" => "5"}.each do |k,v|
-        parsed.gsub!(k,"* 1024**#{v}")
-      end
-      parsed.gsub!("B", "")
-      parsed.gsub!(",", "")
-      (eval parsed).round
     end
 
     def free?

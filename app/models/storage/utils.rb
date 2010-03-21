@@ -30,15 +30,19 @@ module Storage
       100 - percent_free
     end
 
-    def parse_size(size)
+    def parse_size(line)
+      line.gsub!(/(\d)[, ](\d)/, '\1\2') #1,234 and 1 234 => 1234
+      size = line.scan(/(\d+) Bytes/)
+      return size.to_s.to_i if size.any?
+      size = line.to_s.gsub(/\(.*/,"")
       units = %w(KB MB GB TB PB)
-      num = size.scan(/^\d+/).first.to_i
+      num = size.to_f
       units.each_with_index do |u,idx|
         if size.include?(u)
           num = num * 1024 ** (idx+1) 
         end
       end
-      num
+      num.round
     end
   end
 end

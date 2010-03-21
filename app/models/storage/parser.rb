@@ -20,6 +20,7 @@ module Storage
       #then separate each section and parse it
       section = nil
       lines.each do |line|
+        line.chomp!
         case line
         when SECTION_BEGIN
           section = $~[1].downcase.gsub(" ","_")
@@ -35,7 +36,7 @@ module Storage
       res.keys.each do |key|
         method = "parse_#{key}".to_sym
         if respond_to?(method)
-          res[key] = send(method, res[key].join)
+          res[key] = send(method, res[key].join("\n"))
         end
       end
       #then return a simple (nested) hash

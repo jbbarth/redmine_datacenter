@@ -29,11 +29,15 @@ module Storage
     end
 
     def size
-      @size ||= self[:logical_drives].inject(0) {|memo,ld| memo + ld[:size]}
+      @size ||= self[:logical_drives].inject(0) do |memo,ld|
+        memo + ld[:size]
+      end
     end
 
     def free_space
-      @free_space ||= self[:logical_drives].inject(0) {|memo,ld| ld.free? ? memo + ld[:size] : memo}
+      @free_space ||= self[:logical_drives].inject(0) do |memo,ld|
+        ld.free? ? memo + ld[:size] : memo
+      end
     end
 
     def pretty_free

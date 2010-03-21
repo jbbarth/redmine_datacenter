@@ -31,10 +31,9 @@ module Storage
     end
 
     def parse_size(line)
-      line.gsub!(/(\d)[, ](\d)/, '\1\2') #1,234 and 1 234 => 1234
-      size = line.scan(/(\d+) Bytes/)
-      return size.to_s.to_i if size.any?
-      size = line.to_s.gsub(/\(.*/,"")
+      size = line.gsub(/(\d)[, ](\d)/, '\1\2') #1,234 and 1 234 => 1234
+      return $~[1].to_i if size.match(/(\d+) Bytes/)
+      size.gsub!(/\(.*/,"")
       units = %w(KB MB GB TB PB)
       num = size.to_f
       units.each_with_index do |u,idx|

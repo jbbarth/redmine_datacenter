@@ -51,7 +51,11 @@ class StorageTest < ActiveSupport::TestCase
   end
 
   def test_parse_size
-    { "577" => 577, "1 KB" => 1024, 
+    { "56,234 GB (14 Bytes)" => 14,
+      "10,000 KB (blah Bytes)" => 10240000,
+      "10 000 KB (blah Bytes)" => 10240000,
+      "10,000 KB (43 242 Bytes)" => 43242,
+      "577" => 577, "1 KB" => 1024, 
       "1 MB" => 1024**2, "1 GB" => 1024**3, 
       "1 TB" => 1024**4, "1 PB" => 1024**5 }.each do |k,v|
       assert_equal v, parse_size(k)

@@ -26,6 +26,8 @@ fr:
   label_network_by_subnet: par réseau
   label_network_side_by_side: côte-à-côte
   label_ipaddress_plural: Adresses IP
+  label_storage: Stockage
+  label_storage_device: Baie de stockage
   
   button_add_interface: Ajouter une interface
   button_select_servers: Sélectionner les serveurs

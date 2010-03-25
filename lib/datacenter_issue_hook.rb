@@ -49,7 +49,7 @@ class DatacenterIssueHook < Redmine::Hook::ViewListener
   # * :journal => Current journal for this issue
   #
   def controller_issues_edit_after_save(context)
-    dc_elements = context[:controller].instance_variable_get("@datacenter_elements_before_change")
+    dc_elements = context[:params][:datacenter_elements_before_change]
     if dc_elements
       #appli_instance_ids
       app_before = dc_elements[:appli_instance_ids].sort

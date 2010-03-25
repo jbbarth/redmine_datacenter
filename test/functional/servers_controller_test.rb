@@ -23,6 +23,11 @@ class ServersControllerTest < ActionController::TestCase
     get :index, :project_id => 1
     assert_template 'index'
   end
+
+  def test_index_with_search
+    get :index, :project_id => 1, :status => "1", :name => "web"
+    assert_response :success
+  end
   
   def test_show
     get :show, :id => Server.first, :project_id => 1

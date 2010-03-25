@@ -17,7 +17,7 @@ class IssuesController
   end
 
   def remember_datacenter_elements
-    @datacenter_elements_before_change = {
+    params[:datacenter_elements_before_change] = {
       :appli_instance_ids => @issue.appli_instance_ids,
       :server_ids => @issue.server_ids
     }

@@ -61,7 +61,7 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
   
   def test_add_and_remove_servers_from_an_issue
     issue = Issue.find(1)
-    post :edit, :id => 1, :issue => {:subject => 'Custom field change',
+    put :update, :id => 1, :issue => {:subject => 'Custom field change',
                                      :priority_id => '6',
                                      :category_id => '1',
                                      :server_ids => ["1", "2"]}
@@ -71,7 +71,7 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     #let's repost without server_ids :
     #the fix in lib/issues_controller_patch should be applied
     #and remove servers from this issue
-    post :edit, :id => 1, :issue => {:subject => 'Custom field change',
+    put :update, :id => 1, :issue => {:subject => 'Custom field change',
                                      :priority_id => '6',
                                      :category_id => '1'}
     assert_redirected_to :action => 'show', :id => '1'
@@ -177,7 +177,7 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
   
   def test_add_and_remove_applis_from_an_issue
     issue = Issue.find(1)
-    post :edit, :id => 1, :issue => {:subject => 'Custom field change',
+    put :update, :id => 1, :issue => {:subject => 'Custom field change',
                                      :priority_id => '6',
                                      :category_id => '1',
                                      :appli_instance_ids => ["Appli:1", "Appli:2", "Instance:1"]}
@@ -186,7 +186,7 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     assert_equal [1,2], issue.appli_ids
     assert_equal [1], issue.instance_ids
     assert_equal ["Appli:1", "Appli:2", "Instance:1"], issue.appli_instance_ids
-    post :edit, :id => 1, :issue => {:subject => 'Custom field change',
+    put :update, :id => 1, :issue => {:subject => 'Custom field change',
                                      :priority_id => '6',
                                      :category_id => '1'}
     issue.reload
@@ -204,7 +204,7 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     assert_equal [], issue.appli_instance_ids
     
     #ok, let's add appli/instances
-    post :edit, :id => issue.id, 
+    put :update, :id => issue.id, 
          :issue => {:appli_instance_ids => ["Appli:1", "Appli:2", "Instance:1"]}
     assert_redirected_to :action => 'show', :id => issue.id
     
@@ -216,7 +216,7 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     assert_equal [], YAML.load(details.first.old_value)
     assert_equal ["Appli:1", "Appli:2", "Instance:1"], YAML.load(details.first.value)
     
-    post :edit, :id => issue.id, :issue => {}
+    put :update, :id => issue.id, :issue => {}
     assert_redirected_to :action => 'show', :id => issue.id
     issue.reload
     j = issue.journals.find(:first, :order => 'id DESC')

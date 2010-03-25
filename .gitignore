@@ -1,3 +1,4 @@
 *~
 *.swp
 data/*
+test/fixtures/storage/*.txt

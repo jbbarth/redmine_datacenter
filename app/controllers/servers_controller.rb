@@ -86,6 +86,7 @@ class ServersController < DatacenterPluginController
       @server = Server.find(params[:id],
                           :conditions => {:datacenter_id => @datacenter},
                           :include => :issues)
+      @instances = @server.instances.active
     rescue ActiveRecord::RecordNotFound
       render_404
     end

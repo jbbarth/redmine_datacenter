@@ -29,8 +29,8 @@
   </div>
 
   <h3><%= l(:label_appli_plural) %>/<%= l(:label_instance_plural) %></h3>
-  <% if @server.instances.any? %>
-    <% @server.instances.sort_by{|x| [x.appli.name, x.name]}.each do |instance| %>
+  <% if @instances.any? %>
+    <% @instances.sort_by{|x| [x.appli.name, x.name]}.each do |instance| %>
     <p>
       <strong><%= link_to instance.appli.name, appli_path(@project,instance.appli) %></strong>
       (<%= link_to instance.name, edit_appli_instance_path(:project_id => @project, :appli_id => instance.appli, :id => instance) %>) : 

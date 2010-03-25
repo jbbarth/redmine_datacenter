@@ -64,7 +64,7 @@ module ApplisHelper
     options = [['', '']]
     options << [ appli.name, "Appli" ]
     appli.instances.sort_by(&:name).each do |instance|
-      options << [ "&nbsp;&nbsp;&#187; #{instance.name}", "Instance:#{instance.id}" ] if instance.active?
+      options << [ "&nbsp;&nbsp;&#187; #{instance.name}", "Instance:#{instance.id}" ]
     end
     options_for_select_without_escape(options, selected)
   end

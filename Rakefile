@@ -21,3 +21,15 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('README')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+desc 'Prepares tests'
+task :prepare_tests do |t|
+  require 'open3'
+  FileUtils.chdir('..')
+  cmd = "rake db:migrate:all db:fixtures:load db:fixtures:plugins:load test:plugins:setup_plugin_fixtures"
+  cmd << " RAILS_ENV=test PLUGIN=redmine_datacenter NAME=redmine_datacenter"
+  Open3.popen3(cmd) do |stdin,stdout,stderr|
+    puts stdout.read
+    $stderr.puts stderr.read
+  end
+end

@@ -1,11 +1,11 @@
 <% if instances && instances.any? %>
 <table class="list instances"><tbody>
 	<% instances.sort_by(&:name).each do |instance| %>
-  <tr class="instance">
+  <tr class="instance<%= " disabled" unless instance.active? %>">
     <td class="name">
       <strong>
         <% if User.current.allowed_to?(:manage_datacenter,@project) %>
-          <%= link_to instance.name, edit_appli_instance_path(@project,@appli,instance) %>
+          <%= link_to_if instance.active?, instance.name, edit_appli_instance_path(@project,@appli,instance) %>
         <% else %>
           <%= instance.name %>
         <% end %>
@@ -16,7 +16,7 @@
     </td>
     <td class="buttons">
       <% if User.current.allowed_to?(:manage_datacenter,@project) %>
-      <%= link_to l(:button_update), edit_appli_instance_path(@project,@appli,instance), :class => 'icon icon-edit' %>
+      <%= link_to l(:button_update), edit_appli_instance_path(@project,@appli,instance), :class => 'icon icon-edit' if instance.active? %>
       <%= change_link_instance_status(@appli,instance) %>
       <% end %>
     </td>

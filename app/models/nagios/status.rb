@@ -7,6 +7,13 @@ class Nagios::Status
     3 => "UNKNOWN",
     4 => "DEPENDENT"
   }
+  STATES_ORDER = {
+    2 => 0, #critical => first etc.
+    3 => 1,
+    1 => 2,
+    4 => 3,
+    0 => 4
+  }
 
   def initialize(statusfile)
     @file = statusfile

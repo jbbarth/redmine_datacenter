@@ -8,12 +8,8 @@ class ServersController < DatacenterPluginController
     
     @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
     c = ARCondition.new(["datacenter_id = ?", @datacenter.id])
-    c << ["status = ?", @status] unless @status == 0
-    
-    unless params[:name].blank?
-      name = "%#{params[:name].strip.downcase}%"
-      c << ["LOWER(name) LIKE ?", name]
-    end
+    c << ["servers.status = ?", @status] unless @status == 0
+    c << ["LOWER(servers.name) LIKE ?", params[:name].strip.downcase] unless params[:name].blank?
 
     joins = ["LEFT JOIN interfaces_servers ON interfaces_servers.server_id = servers.id",
              "LEFT JOIN interfaces ON interfaces_servers.interface_id = interfaces.id"]  
@@ -90,6 +86,7 @@ class ServersController < DatacenterPluginController
       @server = Server.find(params[:id],
                           :conditions => {:datacenter_id => @datacenter},
                           :include => :issues)
+      @instances = @server.instances.active
     rescue ActiveRecord::RecordNotFound
       render_404
     end

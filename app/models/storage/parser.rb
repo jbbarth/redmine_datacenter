@@ -11,16 +11,15 @@ module Storage
     end
     
     def parse(profile)
-      lines = profile.lines.to_a
+      lines = profile.split(/\n/).map(&:chomp)
       res = {}
       #first search for meta infos
       while res["infos"].nil?
-        res["infos"] = lines.shift.chomp.scan(DEVICE_INFOS)
+        res["infos"] = lines.shift.scan(DEVICE_INFOS)
       end
       #then separate each section and parse it
       section = nil
       lines.each do |line|
-        line.chomp!
         case line
         when SECTION_BEGIN
           section = $~[1].downcase.gsub(" ","_")

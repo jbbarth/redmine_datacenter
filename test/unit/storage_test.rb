@@ -53,9 +53,8 @@ class StorageTest < ActiveSupport::TestCase
   def test_parse_size
     to_test = {
       "56,234 GB (14 Bytes)"        => 14,
-      "10,000 KB (blah Bytes)"      => 10240000,
       "10 000 KB (blah Bytes)"      => 10240000,
-      "10,000 KB (43 242 Bytes)"    => 43242,
+      "10 000 KB (43 242 Bytes)"    => 43242,
       "577"                         => 577,
       "1 KB"                        => 1024,
       "1 MB"                        => 1024**2,

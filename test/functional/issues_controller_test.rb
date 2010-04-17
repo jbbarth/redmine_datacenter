@@ -54,7 +54,6 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     @response   = ActionController::TestResponse.new
     User.current = nil
     @request.session[:user_id] = 1
-    Setting.plugin_datacenter_plugin["multiple_select"] = 0
     p = Project.find(1)
     p.enabled_module_names = p.enabled_modules.map(&:name) << "datacenter"
   end
@@ -83,54 +82,33 @@ class IssuesControllerDatacenterTest < ActionController::TestCase
     get :new, :project_id => 1, :tracker_id => 1
     assert_response :success
     assert_template 'new'
-    assert_tag :input,
-                  :attributes => {
-                    :id => 'issue_server_ids_',
-                    :type => 'checkbox',
-                    :value => '2'
-                  }
-    assert_no_tag :input,
-                  :attributes => {
-                    :id => 'issue_server_ids_',
-                    :type => 'checkbox',
-                    :value => '3'
-                  }
-    assert_no_tag :input,
-                  :attributes => {
-                    :id => 'issue_server_ids_',
-                    :type => 'checkbox',
-                    :value => '5'
-                  } #server not in this datacenter
+    assert_tag :option,
+               :attributes => { :value => "2" },
+               :content => "server-mail"
+    assert_no_tag :option,
+                  :attributes => { :value => "3" },
+                  :content => "server-locked"
+    assert_no_tag :option,
+                  :attributes => { :value => "5" },
+                  :content => "stranger" #server not in this datacenter
   end
 
   def test_edit_issue_form_contains_right_servers
     issue = Issue.find(1)
     issue.server_ids = [1,2,3] #1,2 are active, 3 is locked
     get :edit, :id => 1
-    assert_tag :input,
-                  :attributes => {
-                    :id => 'issue_server_ids_',
-                    :type => 'checkbox',
-                    :value => '1'
-                  }
-    assert_tag :input,
-                  :attributes => {
-                    :id => 'issue_server_ids_',
-                    :type => 'checkbox',
-                    :value => '3'
-                  }
-    assert_no_tag :input,
-                  :attributes => {
-                    :id => 'issue_server_ids_',
-                    :type => 'checkbox',
-                    :value => '4'
-                  }
-    assert_no_tag :input,
-                  :attributes => {
-                    :id => 'issue_server_ids_',
-                    :type => 'checkbox',
-                    :value => '5'
-                  } #server not in this datacenter
+    assert_tag :option,
+               :attributes => { :value => "1", :selected => "selected" },
+               :content => "server-web"
+    assert_tag :option,
+               :attributes => { :value => "3", :selected => "selected" },
+               :content => "server-locked"
+    assert_no_tag :option,
+                  :attributes => { :value => "4" },
+                  :content => "server2-locked"
+    assert_no_tag :option,
+                  :attributes => { :value => "5" },
+                  :content => "stranger" #server not in this datacenter
   end
 
   def test_custom_filters_are_present

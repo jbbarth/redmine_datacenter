@@ -3,7 +3,7 @@ class ServersController < DatacenterPluginController
   unloadable
 
   def index
-    sort_init 'name', 'asc'
+    sort_init 'servers.name', 'asc'
     sort_update %w(servers.name fqdn description interfaces.ipaddress)
     
     @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE

@@ -2,7 +2,7 @@ class CreateInterfaces < ActiveRecord::Migration
   def self.up
     create_table :interfaces do |t|
       t.column :name, :string
-      t.column :ipaddress, :string
+      t.column :ipaddress, :integer, :limit => 8
       t.column :note, :text
     end
     create_table :interfaces_servers, :id => false do |t|

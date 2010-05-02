@@ -5,12 +5,12 @@ require 'datacenter_assets'
 require 'datacenter_issue_hook'
 
 #patches
-require 'ipaddr_patch'
+require 'datacenter_ipaddr_patch'
 config.to_prepare do
-  require_dependency 'issue_patch'
-  require_dependency 'issues_controller_patch'
-  require_dependency 'query_patch'
-  require_dependency 'project_patch'
+  require_dependency 'datacenter_issue_patch'
+  require_dependency 'datacenter_issues_controller_patch'
+  require_dependency 'datacenter_query_patch'
+  require_dependency 'datacenter_project_patch'
 end
 
 #store ip addresses as integer
@@ -47,9 +47,7 @@ Redmine::Plugin.register :datacenter_plugin do
   end
   
   settings :default => {
-              'multiple_select' => true,
-              'hide_admin_links' => false,
-              'domain'          => ""
+              'hide_admin_links' => false
             },
            :partial => 'settings/redmine_datacenter'
 end

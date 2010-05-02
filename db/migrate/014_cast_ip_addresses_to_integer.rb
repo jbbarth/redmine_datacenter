@@ -9,7 +9,7 @@ class CastIpAddressesToInteger < ActiveRecord::Migration
       table = klass.table_name
       columns.each do |column|
         #first detect if columns is a string
-        unless klass.columns.detect{|c|c.name==column && c.type==:string}
+        if klass.columns_hash[column.to_s].type == :string
           #rename old string column and create a new int one
           rename_column table, column, "#{column}_text"
           add_column table, column, :integer, :limit => 8

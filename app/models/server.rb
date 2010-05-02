@@ -8,8 +8,10 @@ class Server < ActiveRecord::Base
 
   acts_as_ipaddress :attributes => :ipaddress
   
-  attr_accessible :name, :fqdn, :description, :status, :datacenter_id,
-                  :new_interface_attributes, :existing_interface_attributes
+  attr_accessible :name, :fqdn, :description, :status, :datacenter_id, :interfaces_attributes
+  accepts_nested_attributes_for :interfaces,
+                                :reject_if => lambda { |a| a["ipaddress"].blank? },
+                                :allow_destroy => true
   
   STATUS_ACTIVE = 1
   STATUS_LOCKED = 2
@@ -23,10 +25,7 @@ class Server < ActiveRecord::Base
                           :unless => Proc.new { |server| !server.active? },
                           :allow_nil => true, :allow_blank => true
   validates_format_of :name, :with => /\A[a-zA-Z0-9_-]*\Z/
-  validates_associated :interfaces
 
-  after_update :save_interfaces
-  
   named_scope :active, :conditions => { :status => STATUS_ACTIVE }, :order => 'name asc'
   named_scope :for_datacenter, lambda {|datacenter_id| {:conditions => ["datacenter_id = ?", datacenter_id]}}
   
@@ -36,28 +35,5 @@ class Server < ActiveRecord::Base
   
   def fullname
     self.fqdn.blank? ? self.name : self.fqdn
-  end
-
-  def new_interface_attributes=(interface_attributes)
-    interface_attributes.each do |attrs|
-      interfaces.build(attrs) unless attrs['name'].blank? && attrs['ipaddress'].blank?
-    end
-  end
-  
-  def existing_interface_attributes=(interface_attributes)
-    interfaces.reject(&:new_record?).each do |interface|
-      attributes = interface_attributes[interface.id.to_s]
-      if attributes
-        interface.attributes = attributes
-      else
-        interfaces.delete(interface)
-      end
-    end
-  end
-  
-  def save_interfaces
-    interfaces.each do |interface|
-      interface.save(false)
-    end
   end
 end

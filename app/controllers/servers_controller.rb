@@ -3,7 +3,7 @@ class ServersController < DatacenterPluginController
   unloadable
 
   def index
-    sort_init 'name', 'asc'
+    sort_init 'servers.name', 'asc'
     sort_update %w(servers.name fqdn description interfaces.ipaddress)
     
     @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
@@ -65,7 +65,6 @@ class ServersController < DatacenterPluginController
   end
   
   def update
-    params[:server][:existing_interface_attributes] ||= {}
     if @server.update_attributes(params[:server])
       flash[:notice] = l(:notice_successful_update)
       redirect_to server_path(@project,@server)

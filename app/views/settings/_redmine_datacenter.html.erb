@@ -1,9 +1,4 @@
 <p>
-  <label><%= l(:label_use_multiple_select) %></label> 
-  <%= check_box_tag 'settings[multiple_select]', 1,
-                    Setting[:plugin_datacenter_plugin][:multiple_select] %>
-</p>
-<p>
   <label><%= l(:text_hide_admin_links_in_sidebar) %></label> 
   <%= check_box_tag 'settings[hide_admin_links]', 1,
                     Setting[:plugin_datacenter_plugin][:hide_admin_links] %>

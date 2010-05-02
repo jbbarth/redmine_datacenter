@@ -13,7 +13,6 @@ fr:
   label_datacenter_plural: Centres-Serveurs
   label_server_new: Nouveau serveur
   label_server_plural: Serveurs
-  label_use_multiple_select: Utiliser des listes déroulantes multiples ?
   label_appli_new: Nouvelle application
   label_appli_plural: Applications
   label_interface: Interface

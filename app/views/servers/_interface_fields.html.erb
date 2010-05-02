@@ -1,0 +1,7 @@
+<span class="interface">
+  <%= f.text_field :name, :class => "interface_name", :no_label => true %>
+  <%= f.text_field :ipaddress, :value => f.object.ipaddress, :class => "interface_ipaddress", :no_label => true %>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to_function image_tag('delete.png', :style => 'vertical-align: middle;'),
+                                 "$(this).previous('input[type=hidden]').value='1'; $(this).up('.interface').hide();" %>
+</span>

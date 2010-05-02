@@ -88,29 +88,31 @@ class ServersControllerTest < ActionController::TestCase
     assert_equal Server::STATUS_LOCKED, server.status
   end
 
-  def test_create_valid_with_interfaces
-    post :create,
-         :project_id => 1,
-         :server => {
-           :name => "myserverwithinterfaces",
-           :new_interface_attributes => [
-             {:name => "eth0", :ipaddress => "192.168.0.99"},
-             {:name => "eth1", :ipaddress => "192.168.1.99"}
-           ]
-         }
-    assert_redirected_to "/projects/ecookbook/servers/#{assigns(:server).id}"
-    server = Server.find_by_name("myserverwithinterfaces")
-    assert_not_nil server
-    assert_equal ["eth0","eth1"], server.interfaces.map(&:name)
-    assert_equal ["192.168.0.99","192.168.1.99"], server.interfaces.map(&:ipaddress)
-  end
+  #server creation with interfaces is disabled due to a Rails bug in 2.3.5
+  #see: https://rails.lighthouseapp.com/projects/8994/tickets/3575
+  #def test_create_valid_with_interfaces
+  #  post :create,
+  #       :project_id => 1,
+  #       :server => {
+  #         :name => "myserverwithinterfaces",
+  #         :interfaces_attributes => [
+  #           {:name => "eth0", :ipaddress => "192.168.0.99"},
+  #           {:name => "eth1", :ipaddress => "192.168.1.99"}
+  #         ]
+  #       }
+  #  assert_redirected_to "/projects/ecookbook/servers/#{assigns(:server).id}"
+  #  server = Server.find_by_name("myserverwithinterfaces")
+  #  assert_not_nil server
+  #  assert_equal ["eth0","eth1"], server.interfaces.map(&:name)
+  #  assert_equal ["192.168.0.99","192.168.1.99"], server.interfaces.map(&:ipaddress)
+  #end
   
   def test_create_with_invalid_interface
     post :create,
          :project_id => 1,
          :server => {
            :name => "myserverwithinterfaces",
-           :new_interface_attributes => [
+           :interfaces_attributes => [
              {:name => "eth0", :ipaddress => "192.168.0.99"},
              {:name => "eth1", :ipaddress => "blablabla"}
            ]
@@ -121,23 +123,23 @@ class ServersControllerTest < ActionController::TestCase
   def test_update_interfaces
     server = Server.first
     interface_ids = server.interface_ids
-    interfaces_hash = Hash[ server.interfaces.map do |interface|
-      [ interface.id.to_s , {:name => interface.name, :ipaddress => interface.ipaddress} ]
-    end ]
+    interfaces_hash = server.interfaces.map do |interface|
+      {:id => interface.id.to_s, :name => interface.name, :ipaddress => interface.ipaddress}
+    end
     put :update, :id => server.id,
         :server => {
           :name => server.name,
-          :existing_interface_attributes => interfaces_hash
+          :interfaces_attributes => interfaces_hash
         }, :project_id => 1
     assert_redirected_to "/projects/ecookbook/servers/#{server.id}"
     server.reload
     assert_equal interface_ids, server.interface_ids
   end
   
-  def test_update_interfaces_without_value
-    server = Server.first
-    assert_not_equal [], server.interface_ids
-    put :update, :id => server.id, :server => {}, :project_id => 1
+  def test_destroy_interfaces
+    server = Server.find(1)
+    assert_equal [1], server.interface_ids
+    put :update, :id => server.id, :server => {:interfaces_attributes=>{"0"=>{"id"=>"1","_destroy"=>"1"}}}, :project_id => 1
     assert_redirected_to "/projects/ecookbook/servers/#{server.id}"
     server.reload
     assert_equal [], server.interface_ids

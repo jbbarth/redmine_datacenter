@@ -65,7 +65,6 @@ class ServersController < DatacenterPluginController
   end
   
   def update
-    params[:server][:existing_interface_attributes] ||= {}
     if @server.update_attributes(params[:server])
       flash[:notice] = l(:notice_successful_update)
       redirect_to server_path(@project,@server)

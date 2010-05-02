@@ -1,3 +1,7 @@
+<% content_for :header_tags do -%>
+    <%= javascript_include_tag 'datacenter', :plugin => :redmine_datacenter -%>
+<% end -%>
+
 <%= error_messages_for 'server' %>
 
 <!--[form:server]-->
@@ -8,11 +12,17 @@
     <p><%= f.text_field :name, :required => true %></p>
     <p><%= f.text_field :fqdn %></p>
   <% end %>
+  <% #see: https://rails.lighthouseapp.com/projects/8994/tickets/3575
+     #not the same problem on update apparently
+     unless @server.new_record?  -%>
   <p>
     <label><%= l(:field_interfaces) %></label>
-    <%= render :partial => 'interface', :collection => @server.interfaces %>
-    <%= add_interface_link l(:button_add_interface) %>
+    <% f.fields_for :interfaces do |builder| -%>
+      <%= render 'interface_fields', :f => builder %>
+    <% end -%>
+    <%= add_interface_link l(:button_add_interface), f %>
   </p>
+  <% end -%>
   <p><%= f.text_area :description, :rows => 5 %></p>
   <%= f.hidden_field :datacenter_id, :value => @datacenter.id %>
 </div>

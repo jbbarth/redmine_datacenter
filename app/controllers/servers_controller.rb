@@ -1,17 +1,19 @@
 class ServersController < DatacenterPluginController
   before_filter :find_server, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_hypervisors, :only => [:new, :create, :edit, :update]
   unloadable
 
   def index
     sort_init 'servers.name', 'asc'
-    sort_update %w(servers.name fqdn description interfaces.ipaddress)
+    sort_update %w(servers.name description interfaces.ipaddress hypervisors.name)
     
     @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
-    c = ARCondition.new(["datacenter_id = ?", @datacenter.id])
+    c = ARCondition.new(["servers.datacenter_id = ?", @datacenter.id])
     c << ["servers.status = ?", @status] unless @status == 0
     c << ["LOWER(servers.name) LIKE ?", params[:name].strip.downcase] unless params[:name].blank?
 
-    joins = ["LEFT JOIN interfaces_servers ON interfaces_servers.server_id = servers.id",
+    joins = ["LEFT JOIN servers AS hypervisors ON servers.hypervisor_id = hypervisors.id",
+             "LEFT JOIN interfaces_servers ON interfaces_servers.server_id = servers.id",
              "LEFT JOIN interfaces ON interfaces_servers.interface_id = interfaces.id"]  
     @server_count = Server.count(:conditions => c.conditions, :joins => joins)
     @server_pages = Paginator.new self, @server_count,
@@ -24,7 +26,7 @@ class ServersController < DatacenterPluginController
                            :limit  =>  @server_pages.items_per_page, 
                            :offset =>  @server_pages.current.offset,
                            :joins => joins
-
+    
     render :layout => !request.xhr?
   end
   
@@ -40,6 +42,9 @@ class ServersController < DatacenterPluginController
                         :limit => @issue_pages.items_per_page,
                         :offset => @issue_pages.current.offset,
                         :order => sort_clause
+    unless @server.hypervisor_id
+      @virtual_machines = @server.virtual_machines.sort_by(&:name)
+    end
     render :layout => !request.xhr?
   end
 
@@ -89,5 +94,12 @@ class ServersController < DatacenterPluginController
     rescue ActiveRecord::RecordNotFound
       render_404
     end
+  end
+
+  def find_hypervisors
+    @hypervisors = Server.all(:conditions => ["datacenter_id = ? AND id != ? AND hypervisor_id is null",
+                                              @datacenter.id,
+                                              @server.try(:id).to_i],
+                              :order => "name")
   end
 end

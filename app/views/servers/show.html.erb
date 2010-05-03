@@ -13,7 +13,19 @@
   <table class="attributes">
     <tr>
       <th><%= l(:field_description)%>:</th>
-      <td><%= textilizable @server, :description %></td></tr>
+      <td><%= textilizable @server, :description %></td>
+    </tr>
+    <% if @server.hypervisor_id %>
+    <tr>
+      <th><%= l(:label_hypervisor) %>:</th>
+      <td><%= link_to @server.hypervisor.name, server_path(@project,@server.hypervisor) %></td>
+    </tr>
+    <% elsif @virtual_machines %>
+    <tr>
+      <th><%= l(:label_virtual_machines) %>:</th>
+      <td><%= @virtual_machines.map{|v| link_to(v.name, server_path(@project,v))}.join(", ") %></td>
+    </tr>
+    <% end %>
     <tr>
       <th><%= l(:field_interfaces)%>:</th>
       <td>

@@ -21,7 +21,7 @@
 <table class="list">		
   <thead><tr>
 	<%= sort_header_tag('servers.name', :caption => l(:field_name)) %>
-	<%= sort_header_tag('fqdn', :caption => l(:field_fqdn)) %>
+	<%= sort_header_tag('hypervisors.name', :caption => l(:label_hypervisor)) %>
 	<%= sort_header_tag('interfaces.ipaddress', :caption => l(:field_ipaddress)) %>
 	<%= sort_header_tag('description', :caption => l(:field_description)) %>
   <th> </th>
@@ -36,7 +36,7 @@
       <td colspan="2"></td>
     <% else %>
 	    <td class="name"><%= link_to h(server.name), server_path(@project,server) %></td>
-	    <td class="fqdn"><%= h(server.fqdn) %></td>
+	    <td class="hypervisor"><%= link_to(server.hypervisor.name,server_path(@project,server.hypervisor)) if server.hypervisor %></td>
 	    <td class="ipaddress"><%= h(server.ipaddress) %></td>
 	    <td class="description"><%= server.description %></td>
       <td class="buttons">

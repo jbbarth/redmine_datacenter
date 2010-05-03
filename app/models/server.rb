@@ -5,10 +5,12 @@ class Server < ActiveRecord::Base
   has_and_belongs_to_many :interfaces
   has_and_belongs_to_many :instances, :include => :appli
   belongs_to :datacenter
+  belongs_to :hypervisor, :class_name => "Server"
+  has_many :virtual_machines, :class_name => "Server", :foreign_key => "hypervisor_id"
 
   acts_as_ipaddress :attributes => :ipaddress
   
-  attr_accessible :name, :fqdn, :description, :status, :datacenter_id, :interfaces_attributes
+  attr_accessible :name, :fqdn, :description, :status, :datacenter_id, :hypervisor_id, :interfaces_attributes
   accepts_nested_attributes_for :interfaces,
                                 :reject_if => lambda { |a| a["ipaddress"].blank? },
                                 :allow_destroy => true

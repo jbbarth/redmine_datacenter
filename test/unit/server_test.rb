@@ -18,4 +18,9 @@ class ServerTest < ActiveSupport::TestCase
     assert_equal "3232235521", server.attributes["ipaddress"]
     assert_equal "192.168.0.1", server.ipaddress
   end
+
+  def test_hypervisor
+    assert_equal Server.find(1).hypervisor.try(:name), "hypervisor-01"
+    assert_equal [1,2], Server.find(6).virtual_machines.map(&:id).sort
+  end
 end

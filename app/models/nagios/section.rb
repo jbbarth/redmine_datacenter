@@ -9,5 +9,6 @@ class Nagios::Section < Hash
         self[$1.to_sym] = ($2 == "#{$2.to_i}" ? $2.to_i : $2)
       end
     end
+    self[:server] = Server.find_by_name(self[:host_name])
   end
 end

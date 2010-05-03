@@ -31,7 +31,6 @@ class DatacentersController < DatacenterPluginController
       else
         @nagios_problems = @nagios_status.problems
         @nagios_problems.each do |problem|
-          problem[:server] = Server.find_by_name(problem[:host_name])
           if problem[:type] == "servicestatus"
             problem[:status] = Nagios::Status::STATES[problem[:current_state]]
           else

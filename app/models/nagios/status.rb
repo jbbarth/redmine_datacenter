@@ -1,5 +1,5 @@
 class Nagios::Status
-  attr_accessor :last_updated
+  attr_accessor :last_updated, :scope
 
   STATE_OK = 0
   STATES = {
@@ -17,10 +17,13 @@ class Nagios::Status
     0 => 4
   }
 
-  def initialize(statusfile)
+  def initialize(statusfile, options = {})
     @file = statusfile
     sections #loads section at this point so we raise immediatly if file has a problem
     @last_updated = Time.at(File.mtime(statusfile))
+    #scope is an array of lambda procs : it should evaluate to true if service has to be displayed
+    @scope = [ lambda { |section| !section.include?("current_state=#{STATE_OK}") } ]
+    @scope << options[:scope] if options[:scope].is_a?(Proc)
   end
 
   def sections
@@ -32,13 +35,13 @@ class Nagios::Status
   
   def host_problems
     @host_problems ||= sections.map do |s|
-      Nagios::Section.new(s) if s.start_with?("hoststatus") && !s.include?("current_state=#{STATE_OK}")
+      Nagios::Section.new(s) if s.start_with?("hoststatus") && in_scope?(s)
     end.compact
   end
 
   def service_problems
     @service_problems ||= sections.map do |s|
-      Nagios::Section.new(s) if s.start_with?("servicestatus") && !s.include?("current_state=#{STATE_OK}")
+      Nagios::Section.new(s) if s.start_with?("servicestatus") && in_scope?(s)
     end.compact
   end
 
@@ -47,6 +50,12 @@ class Nagios::Status
                     [ Nagios::Status::STATES_ORDER[problem[:current_state]].to_i,
                       problem[:host_name],
                       problem[:service_description] ]
+    end
+  end
+
+  def in_scope?(section)
+    @scope.inject(true) do |memo,condition|
+      memo && condition.call(section)
     end
   end
 end

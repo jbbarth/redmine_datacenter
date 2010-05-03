@@ -19,4 +19,14 @@ class NagiosTest < ActiveSupport::TestCase
     assert_equal "SWAP", section[:service_description]
     assert_equal "Swap Space: 50%used(990MB/1984MB) (>40%) : WARNING", section[:plugin_output]
   end
+
+  def test_scope_with_our_server
+    @status.scope << lambda { |s| s.include?("host_name=server-web") }
+    assert_equal 1, @status.problems.length
+  end
+
+  def test_scope_which_filters_everything
+    @status.scope << lambda { |s| false }
+    assert_equal 0, @status.problems.length
+  end
 end

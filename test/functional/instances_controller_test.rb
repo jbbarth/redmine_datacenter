@@ -65,7 +65,7 @@ class InstancesControllerTest < ActionController::TestCase
   def test_select_servers
     #we should do "xhr :get", but it's not easy to parse Element.update's content..
     get :select_servers, :project_id => 1, :ids => "Appli:1,Instance:1,Instance:9999,Dummy"
-    assert_tag :select, :attributes => {:id => 'issue_server_ids'}, :children => {:count => 3}
+    assert_tag :select, :attributes => {:id => 'issue_server_ids'}, :children => {:count => 4}
     assert_tag :option, :attributes => {:value => "1", :selected => "selected"}
     assert_tag :option, :attributes => {:value => "2", :selected => nil}
   end

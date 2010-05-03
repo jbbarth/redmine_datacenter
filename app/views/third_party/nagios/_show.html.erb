@@ -6,16 +6,16 @@
   <% end -%>
   <h3><%= l_or_humanize(:nagios) %></h3>
   <% if @nagios_status -%>
-    <% if @nagios_problems.empty? %>
+    <% if @nagios_status.problems.empty? %>
       <%= l(:text_nagios_everything_ok) %>
     <% else %>
       <% 5.times do -%>
-        <% ns = @nagios_problems.shift -%>
+        <% ns = @nagios_status.problems.shift -%>
         <%= format_nagios_line(ns) if ns %>
       <% end -%>
-      <% if @nagios_problems.any? -%>
+      <% if @nagios_status.problems.any? -%>
         <div id="nagios_others" style="display:none;padding:0; margin:0;">
-          <% @nagios_problems.each do |ns| -%>
+          <% @nagios_status.problems.each do |ns| -%>
             <%= format_nagios_line(ns) %>
           <% end -%>
         </div>

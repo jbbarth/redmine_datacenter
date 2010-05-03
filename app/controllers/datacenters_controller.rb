@@ -28,15 +28,6 @@ class DatacentersController < DatacenterPluginController
         @nagios_status = Nagios::Status.new(nagios_file)
       rescue Errno::ENOENT
         flash.now[:error] = "#{nagios_file}: no such file or directory"
-      else
-        @nagios_problems = @nagios_status.problems
-        @nagios_problems.each do |problem|
-          if problem[:type] == "servicestatus"
-            problem[:status] = Nagios::Status::STATES[problem[:current_state]]
-          else
-            problem[:status] = (problem[:current_state] == Nagios::Status::STATE_OK ? "OK" : "CRITICAL")
-          end
-        end
       end
     end
 

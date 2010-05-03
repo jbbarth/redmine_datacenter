@@ -10,5 +10,10 @@ class Nagios::Section < Hash
       end
     end
     self[:server] = Server.find_by_name(self[:host_name])
+    if self[:type] == "servicestatus"
+      self[:status] = Nagios::Status::STATES[self[:current_state]]
+    else
+      self[:status] = (self[:current_state] == Nagios::Status::STATE_OK ? "OK" : "CRITICAL")
+    end
   end
 end

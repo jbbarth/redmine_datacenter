@@ -4,7 +4,7 @@
     <% @storage_devices.each do |device| -%>
       <% profile = device[:profile] %>
       <div class="device">
-        <div class="contextual">
+        <div class="contextual" style="margin-right:3px">
           <%= l(:label_updated_time, distance_of_time_in_words(Time.now,device[:last_updated])) %>
         </div>
         <h3><%= link_to_if device[:server].is_a?(Server), device[:name],

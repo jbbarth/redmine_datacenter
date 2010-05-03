@@ -49,5 +49,6 @@ div.third_party { width:50%; }
 #storage .infos { font-size:0.9em; color:#777; }
 #storage table.progress td { height: 0.8em; }
 #storage table.progress td.closed { background: #777 none repeat scroll 0%; }
-#storage table.storage-array td { white-space:nowrap; }
+#storage table.storage-array { border-collapse:collapse; }
+#storage table.storage-array td { border:1px solid #aaa; white-space:nowrap; }
 #storage table.storage-array td.closed { background: #999 none repeat scroll 0%; }

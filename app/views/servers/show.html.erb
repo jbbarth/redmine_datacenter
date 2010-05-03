@@ -36,6 +36,18 @@
     </tr>
   </table>
 
+  <% if @nagios_status -%>
+  <div id="nagios">
+    <% unless @nagios_status.last_updated.nil? -%>
+    <div class="contextual">
+      <%= l(:label_updated_time, distance_of_time_in_words(Time.now,@nagios_status.last_updated)) %>
+    </div>
+    <% end -%>
+    <h3><%= l_or_humanize(:nagios) %></h3>
+    <%= render :partial => 'third_party/nagios/nagios_status' %>
+  </div>
+  <% end -%>
+
   <% if @instances.any? %>
   <div class="contextual">
     <%= link_to l(:label_appli_plural), applis_path(@project), :class => 'icon icon-applis' %>

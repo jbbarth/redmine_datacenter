@@ -47,6 +47,14 @@ class ServersController < DatacenterPluginController
     unless @server.hypervisor_id
       @virtual_machines = @server.virtual_machines.sort_by(&:name)
     end
+    if @datacenter.tool_enabled?(:nagios)
+      nagios_file = @datacenter.nagios_file
+      begin
+        @nagios_status = Nagios::Status.new(nagios_file, :scope => lambda{|s|s.include?("host_name=#{@server.name}")})
+      rescue Errno::ENOENT
+        #nothing, there's already a warning message on datacenters/show page
+      end
+    end
     render :layout => !request.xhr?
   end
 

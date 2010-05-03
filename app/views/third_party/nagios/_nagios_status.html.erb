@@ -1,0 +1,19 @@
+<% if @nagios_status.problems.empty? %>
+  <%= l(:text_nagios_everything_ok) %>
+<% else %>
+  <% 5.times do -%>
+    <% ns = @nagios_status.problems.shift -%>
+    <%= format_nagios_line(ns) if ns %>
+  <% end -%>
+  <% if @nagios_status.problems.any? -%>
+    <div id="nagios_others" style="display:none;padding:0; margin:0;">
+      <% @nagios_status.problems.each do |ns| -%>
+        <%= format_nagios_line(ns) %>
+      <% end -%>
+    </div>
+    <small>
+      <%= link_to l(:label_more), {},
+                  :onclick => 'Effect.toggle("nagios_others", "blind", {duration:0.3}); return false;' %>
+    </small>
+  <% end -%>
+<% end -%>

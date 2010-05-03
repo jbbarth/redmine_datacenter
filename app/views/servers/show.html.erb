@@ -20,7 +20,7 @@
       <th><%= l(:label_hypervisor) %>:</th>
       <td><%= link_to @server.hypervisor.name, server_path(@project,@server.hypervisor) %></td>
     </tr>
-    <% elsif @virtual_machines %>
+    <% elsif @virtual_machines && @virtual_machines.any? %>
     <tr>
       <th><%= l(:label_virtual_machines) %>:</th>
       <td><%= @virtual_machines.map{|v| link_to(v.name, server_path(@project,v))}.join(", ") %></td>

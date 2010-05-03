@@ -32,7 +32,7 @@ module DatacentersHelper
   end
   
   def datacenter_check_box(setting, checked=false, options={})
-    hidden_field_tag("datacenter[options][#{setting}]", 0) +
+    hidden_field_tag("datacenter[options][#{setting}]", 0, :id => "datacenter_options_hidden_#{setting}") +
     check_box_tag("datacenter[options][#{setting}]", 1, checked, options)
   end
 
@@ -54,5 +54,16 @@ module DatacentersHelper
     html << "#{title}<br />"
     html << %Q(<span class="infos">#{output}</span>) unless output.blank?
     html << "</div>"
+  end
+
+  def pretty_size(size)
+    #units = %w(o Ko Mo Go To Po)
+    units = %w(o Ko Mo Go)
+    i = 0
+    while size >=1024 && units[i+1]
+      size /= 1024.0
+      i += 1
+    end
+    "#{"%.1f" % size}#{units[i]}"
   end
 end

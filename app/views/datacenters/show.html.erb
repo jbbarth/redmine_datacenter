@@ -69,6 +69,10 @@
   <% if @datacenter.tool_enabled?(:nagios) %>
     <%= render :partial => 'third_party/nagios/show' -%>
   <% end %>
+
+  <% if @datacenter.tool_enabled?(:storage) %>
+    <%= render :partial => 'third_party/storage/index' -%>
+  <% end %>
 </div>
 
 <% html_title(l(:label_datacenter)) -%>

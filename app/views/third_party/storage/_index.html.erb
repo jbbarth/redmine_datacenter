@@ -1,0 +1,19 @@
+<div id="storage" class="storage box">
+  <h3><%= l(:label_storage) %></h3>
+  <% if @storage_devices.any? -%>
+    <% @storage_devices.each do |device| -%>
+      <div class="device">
+        <div class="contextual" style="margin-right:3px">
+          <%= l(:label_updated_time, distance_of_time_in_words(Time.now,device.last_updated)) %>
+        </div>
+        <h3><%= link_to_if device.server.is_a?(Server), device.name,
+                          :overwrite_params => { :controller => "servers", 
+                                                 :action => "show",
+                                                 :id => device.server } %></h3>
+        <%= render 'third_party/storage/device', :device => device %>
+      </div>
+    <% end -%>
+  <% else -%>
+    <p class="nodata"><%= l(:label_no_data) %></p>
+  <% end -%>
+</div>

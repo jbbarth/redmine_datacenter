@@ -45,6 +45,13 @@ class DatacentersController < DatacenterPluginController
         @last_updated = Time.at(File.mtime(nagios_file))
       end
     end
+
+    #storage integration
+    if @datacenter.tool_enabled?(:storage)
+      @storage_devices = @datacenter.storage_files.map do |file|
+        Storage::Bay.new(File.basename(file), :profile => file)
+      end
+    end
   end
   
   def new

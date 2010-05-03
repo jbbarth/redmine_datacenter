@@ -44,3 +44,12 @@ div.third_party { width:50%; }
 #nagios .nagios-unknown { border-left:6px solid #aaa; }
 #nagios .nagios-critical { border-left:6px solid #f00; }
 #nagios .nagios-host-critical { background-color:#fcc; }
+/* storage */
+#storage { margin-bottom:15px; }
+#storage .device { padding-left:5px; margin-bottom:2px; background-color:#eee; }
+#storage .infos { font-size:0.9em; color:#777; }
+#storage table.progress td { height: 0.8em; }
+#storage table.progress td.closed { background: #777 none repeat scroll 0%; }
+#storage table.storage-array { border-collapse:collapse; }
+#storage table.storage-array td { border:1px solid #aaa; white-space:nowrap; }
+#storage table.storage-array td.closed { background: #999 none repeat scroll 0%; }

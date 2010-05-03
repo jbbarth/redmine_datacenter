@@ -28,6 +28,8 @@ fr:
   label_hypervisor: Hyperviseur
   label_virtual: Virtuel
   label_virtual_machines: Machines virtuelles
+  label_storage: Stockage
+  label_storage_device: Baie de stockage
   
   button_add_interface: Ajouter une interface
   button_select_servers: Sélectionner les serveurs

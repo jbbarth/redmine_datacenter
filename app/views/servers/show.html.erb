@@ -52,6 +52,17 @@
   <% else %>
     <p class="nodata"><%= l(:label_no_data) %></p>
   <% end %>
+  
+  <% if @datacenter.tool_enabled?(:storage) && @server.storage_device? -%>
+  <div id="storage" class="device">
+    <div class="contextual" style="margin-right:3px">
+      <%= l(:label_updated_time, distance_of_time_in_words(Time.now,@server.storage_device.last_updated)) %>
+    </div>
+    <h3><%= l(:label_storage_device) %></h3>
+    <%= render 'third_party/storage/device', :device => @server.storage_device %>
+  </div>
+  <% end -%>
+
 </div>
 
 <div class="splitcontentright">

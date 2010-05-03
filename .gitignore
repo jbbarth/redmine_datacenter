@@ -1,4 +1,4 @@
 *~
 *.swp
-test/fixtures/storage/*
 data/*
+test/fixtures/storage/*.txt

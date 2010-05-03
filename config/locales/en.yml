@@ -28,6 +28,8 @@ en:
   label_hypervisor: Hypervisor
   label_virtual: Virtual
   label_virtual_machines: Virtual machines
+  label_storage: Storage
+  label_storage_device: Storage device
   
   button_add_interface: Add an interface
   button_select_servers: Select servers

@@ -1,4 +1,6 @@
 class Nagios::Status
+  attr_accessor :last_updated
+
   STATE_OK = 0
   STATES = {
     0 => "OK",
@@ -18,6 +20,7 @@ class Nagios::Status
   def initialize(statusfile)
     @file = statusfile
     sections #loads section at this point so we raise immediatly if file has a problem
+    @last_updated = Time.at(File.mtime(statusfile))
   end
 
   def sections

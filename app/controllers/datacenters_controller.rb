@@ -42,7 +42,6 @@ class DatacentersController < DatacenterPluginController
             problem[:status] = (problem[:current_state] == Nagios::Status::STATE_OK ? "OK" : "CRITICAL")
           end
         end
-        @last_updated = Time.at(File.mtime(nagios_file))
       end
     end
 

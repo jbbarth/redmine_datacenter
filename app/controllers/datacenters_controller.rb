@@ -29,11 +29,7 @@ class DatacentersController < DatacenterPluginController
       rescue Errno::ENOENT
         flash.now[:error] = "#{nagios_file}: no such file or directory"
       else
-        @nagios_problems = @nagios_status.problems.sort_by do |problem|
-                             [ Nagios::Status::STATES_ORDER[problem[:current_state]].to_i,
-                               problem[:host_name],
-                               problem[:service_description] ]
-                           end
+        @nagios_problems = @nagios_status.problems
         @nagios_problems.each do |problem|
           problem[:server] = Server.find_by_name(problem[:host_name])
           if problem[:type] == "servicestatus"

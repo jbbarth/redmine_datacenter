@@ -36,12 +36,11 @@
     </tr>
   </table>
 
+  <% if @instances.any? %>
   <div class="contextual">
     <%= link_to l(:label_appli_plural), applis_path(@project), :class => 'icon icon-applis' %>
   </div>
-
   <h3><%= l(:label_appli_plural) %>/<%= l(:label_instance_plural) %></h3>
-  <% if @instances.any? %>
     <% @instances.sort_by{|x| [x.appli.name, x.name]}.each do |instance| %>
     <p>
       <strong><%= link_to instance.appli.name, appli_path(@project,instance.appli) %></strong>
@@ -49,8 +48,6 @@
       <%= links_to_servers(@project,instance.servers) %>
     </p>
     <% end %>
-  <% else %>
-    <p class="nodata"><%= l(:label_no_data) %></p>
   <% end %>
   
   <% if @datacenter.tool_enabled?(:storage) && @server.storage_device? -%>

@@ -45,6 +45,7 @@ div.third_party { width:50%; }
 #nagios .nagios-critical { border-left:6px solid #f00; }
 #nagios .nagios-host-critical { background-color:#fcc; }
 /* storage */
+#storage { margin-bottom:15px; }
 #storage .device { padding-left:5px; margin-bottom:2px; background-color:#eee; }
 #storage .infos { font-size:0.9em; color:#777; }
 #storage table.progress td { height: 0.8em; }

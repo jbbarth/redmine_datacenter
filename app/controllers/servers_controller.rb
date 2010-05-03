@@ -3,6 +3,8 @@ class ServersController < DatacenterPluginController
   before_filter :find_hypervisors, :only => [:new, :create, :edit, :update]
   unloadable
 
+  helper :datacenters
+
   def index
     sort_init 'servers.name', 'asc'
     sort_update %w(servers.name description interfaces.ipaddress hypervisors.name)

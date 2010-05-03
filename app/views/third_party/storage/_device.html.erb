@@ -1,0 +1,35 @@
+<p class="infos">
+  Size:<%= pretty_size(device.size) %>, 
+  Free:<%= pretty_size(device.free_space) %>, 
+  Used:<%= pretty_size(device.used_space) %>
+  <br />
+  <%= "#{device.arrays.length} #{l_or_humanize(:arrays)}" %>, 
+  <%= "#{device.logical_drives.length} #{l_or_humanize(:logical_drives)}" %>
+</p>
+<% if device.arrays.any? -%>
+  <%= progress_bar(device.percent_used,
+                   :width => '20em',
+                   :legend => ('%0.0f%' % device.percent_used)) %>
+  
+  <% devid = "device-#{device.name.parameterize}" %>
+  <small>
+    <%= link_to l(:label_more), {},
+                  :onclick => %Q(Effect.toggle("#{devid}", "blind", {duration:0.3}); return false;) %>
+  </small>
+  <table id="<%= devid %>" class="storage-array" style="display:none">
+  <% device.arrays.each do |array| -%>
+    <tr>
+      <td class="center">
+        Array <%= array[:name] %><br />
+        <%= pretty_size(array.size) %>
+      </td>
+      <td class="center">
+        RAID <%= array[:raid] %><br />
+        <%= array[:drive_type] %>
+      </td>
+      <td style="width:100%"><%= progress_bar(array.percent_used, :width => '10em',
+                           :legend => "#{pretty_size(array.free_space)} free") %></td>
+    </tr>
+  <% end -%>
+  </table>
+<% end -%>

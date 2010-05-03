@@ -49,12 +49,7 @@ class DatacentersController < DatacenterPluginController
     #storage integration
     if @datacenter.tool_enabled?(:storage)
       @storage_devices = @datacenter.storage_files.map do |file|
-        device = {:name => File.basename(file), :file => file}
-        device[:server] = Server.find_by_name(device[:name])
-        device[:profile] = Storage::Bay.new(device[:name])
-        device[:profile].load_profile_from_file(file)
-        device[:last_updated] = Time.at(File.mtime(file))
-        device
+        Storage::Bay.new(File.basename(file), :profile => file)
       end
     end
   end

@@ -38,4 +38,18 @@ class Server < ActiveRecord::Base
   def fullname
     self.fqdn.blank? ? self.name : self.fqdn
   end
+  
+  def storage_file
+    @storage_file ||= self.datacenter.storage_files.detect do |file|
+      File.basename(file) == self.name
+    end
+  end
+  
+  def storage_device?
+    storage_file
+  end  
+
+  def storage_device
+    @device ||= Storage::Bay.new(name, :profile => storage_file) if storage_device?
+  end
 end

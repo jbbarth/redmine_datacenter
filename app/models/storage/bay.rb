@@ -2,13 +2,21 @@ require 'open3'
 
 module Storage
   class Bay
+    attr_accessor :name, :last_updated
+
     include Storage::Utils
 
     SMCLI_BIN = "SMcli"
     
-    def initialize(name, ipaddress = nil)
+    def initialize(name, hash={})
       @name = name
-      @ipaddress = ipaddress
+      @ipaddress = hash[:ipaddress] if hash[:ipaddress]
+      load_profile_from_file(hash[:profile]) if hash[:profile]
+    end
+    
+    def server
+      return @server if defined?(@server)
+      @server ||= Server.find_by_name(@name)
     end
     
     def profile
@@ -17,10 +25,12 @@ module Storage
     
     def load_profile_from_smcli(options)
       raise ArgumentError, "You should provide at least one controller IP" if options[:ipaddress].nil?
+      @last_updated = Time.now
       @profile = execute("show storagesubsystem profile", options)
     end
     
     def load_profile_from_file(file)
+      @last_updated = Time.at(File.mtime(file))
       @profile = File.read(file)
     end
     

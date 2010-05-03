@@ -2,35 +2,34 @@
   <h3><%= l(:label_storage) %></h3>
   <% if @storage_devices.any? -%>
     <% @storage_devices.each do |device| -%>
-      <% profile = device[:profile] %>
       <div class="device">
         <div class="contextual" style="margin-right:3px">
-          <%= l(:label_updated_time, distance_of_time_in_words(Time.now,device[:last_updated])) %>
+          <%= l(:label_updated_time, distance_of_time_in_words(Time.now,device.last_updated)) %>
         </div>
-        <h3><%= link_to_if device[:server].is_a?(Server), device[:name],
+        <h3><%= link_to_if device.server.is_a?(Server), device.name,
                           :overwrite_params => { :controller => "servers", 
                                                  :action => "show",
-                                                 :id => device[:server] } %></h3>
+                                                 :id => device.server } %></h3>
         <p class="infos">
-          Size:<%= pretty_size(profile.size) %>, 
-          Free:<%= pretty_size(profile.free_space) %>, 
-          Used:<%= pretty_size(profile.used_space) %>
+          Size:<%= pretty_size(device.size) %>, 
+          Free:<%= pretty_size(device.free_space) %>, 
+          Used:<%= pretty_size(device.used_space) %>
           <br />
-          <%= "#{profile.arrays.length} #{l_or_humanize(:arrays)}" %>, 
-          <%= "#{profile.logical_drives.length} #{l_or_humanize(:logical_drives)}" %>
+          <%= "#{device.arrays.length} #{l_or_humanize(:arrays)}" %>, 
+          <%= "#{device.logical_drives.length} #{l_or_humanize(:logical_drives)}" %>
         </p>
-        <% if profile.arrays.any? -%>
-          <%= progress_bar(profile.percent_used,
+        <% if device.arrays.any? -%>
+          <%= progress_bar(device.percent_used,
                            :width => '20em',
-                           :legend => ('%0.0f%' % profile.percent_used)) %>
+                           :legend => ('%0.0f%' % device.percent_used)) %>
           
-          <% devid = "device-#{device[:name].parameterize}" %>
+          <% devid = "device-#{device.name.parameterize}" %>
           <small>
             <%= link_to l(:label_more), {},
                           :onclick => %Q(Effect.toggle("#{devid}", "blind", {duration:0.3}); return false;) %>
           </small>
           <table id="<%= devid %>" class="storage-array" style="display:none">
-          <% profile.arrays.each do |array| -%>
+          <% device.arrays.each do |array| -%>
             <tr>
               <td class="center">
                 Array <%= array[:name] %><br />

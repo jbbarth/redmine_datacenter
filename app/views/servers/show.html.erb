@@ -36,7 +36,7 @@
     </tr>
   </table>
 
-  <% if @nagios_status -%>
+  <% if @nagios_status && @nagios_status.problems.any? -%>
   <div id="nagios">
     <% unless @nagios_status.last_updated.nil? -%>
     <div class="contextual">

@@ -12,9 +12,9 @@ class CreateOperatingSystems < ActiveRecord::Migration
     {"Windows" => %w(XP 2003Server),
      "Linux" => %w(Debian Redhat Ubuntu)}.each do |k,v|
       os = OperatingSystem.create(:name => k)
-      os.save!
       v.each do |oss|
-        OperatingSystem.create(:name => oss, :parent_id => os.id)
+        subos = OperatingSystem.create(:name => oss)
+        subos.move_to_child_of(os)
       end
     end
     #server<->os

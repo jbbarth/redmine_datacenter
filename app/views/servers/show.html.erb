@@ -15,15 +15,15 @@
       <th><%= l(:field_description)%>:</th>
       <td><%= textilizable @server, :description %></td>
     </tr>
-    <% if @server.hypervisor_id %>
+    <% if @server.virtual? %>
     <tr>
       <th><%= l(:label_hypervisor) %>:</th>
       <td><%= link_to @server.hypervisor.name, server_path(@project,@server.hypervisor) %></td>
     </tr>
-    <% elsif @virtual_machines && @virtual_machines.any? %>
+    <% elsif @server.hypervisor? %>
     <tr>
       <th><%= l(:label_virtual_machines) %>:</th>
-      <td><%= @virtual_machines.map{|v| link_to(v.name, server_path(@project,v))}.join(", ") %></td>
+      <td><%= @server.virtual_machines.map{|v| link_to(v.name, server_path(@project,v))}.join(", ") %></td>
     </tr>
     <% end %>
     <tr>

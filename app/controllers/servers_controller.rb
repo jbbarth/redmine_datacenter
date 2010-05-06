@@ -44,9 +44,6 @@ class ServersController < DatacenterPluginController
                         :limit => @issue_pages.items_per_page,
                         :offset => @issue_pages.current.offset,
                         :order => sort_clause
-    unless @server.hypervisor_id
-      @virtual_machines = @server.virtual_machines.sort_by(&:name)
-    end
     if @datacenter.tool_enabled?(:nagios)
       nagios_file = @datacenter.nagios_file
       begin

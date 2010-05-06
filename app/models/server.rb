@@ -7,7 +7,7 @@ class Server < ActiveRecord::Base
   belongs_to :datacenter
   belongs_to :operating_system
   belongs_to :hypervisor, :class_name => "Server"
-  has_many :virtual_machines, :class_name => "Server", :foreign_key => "hypervisor_id"
+  has_many :virtual_machines, :class_name => "Server", :foreign_key => "hypervisor_id", :order => "name"
 
   acts_as_ipaddress :attributes => :ipaddress
   
@@ -38,6 +38,14 @@ class Server < ActiveRecord::Base
   
   def fullname
     self.fqdn.blank? ? self.name : self.fqdn
+  end
+  
+  def virtual?
+    !!hypervisor_id
+  end
+  
+  def hypervisor?
+    virtual_machines.any?
   end
   
   def storage_file

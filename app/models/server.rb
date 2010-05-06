@@ -53,8 +53,4 @@ class Server < ActiveRecord::Base
   def storage_device
     @device ||= Storage::Bay.new(name, :profile => storage_file) if storage_device?
   end
-
-  def nagios_problems
-    @nagios_problems ||= Nagios
-  end
 end

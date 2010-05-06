@@ -7,7 +7,7 @@ class ServersController < DatacenterPluginController
 
   def index
     sort_init 'servers.name', 'asc'
-    sort_update %w(servers.name description interfaces.ipaddress hypervisors.name)
+    sort_update %w(servers.name description interfaces.ipaddress hypervisors.name operating_systems.name)
     
     @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
     c = ARCondition.new(["servers.datacenter_id = ?", @datacenter.id])
@@ -15,6 +15,7 @@ class ServersController < DatacenterPluginController
     c << ["LOWER(servers.name) LIKE ?", params[:name].strip.downcase] unless params[:name].blank?
 
     joins = ["LEFT JOIN servers AS hypervisors ON servers.hypervisor_id = hypervisors.id",
+             "LEFT JOIN operating_systems ON operating_systems.id = servers.operating_system_id",
              "LEFT JOIN interfaces_servers ON interfaces_servers.server_id = servers.id",
              "LEFT JOIN interfaces ON interfaces_servers.interface_id = interfaces.id"]  
     @server_count = Server.count(:conditions => c.conditions, :joins => joins)

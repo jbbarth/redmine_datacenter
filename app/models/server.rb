@@ -11,7 +11,8 @@ class Server < ActiveRecord::Base
 
   acts_as_ipaddress :attributes => :ipaddress
   
-  attr_accessible :name, :fqdn, :description, :status, :datacenter_id, :hypervisor_id, :interfaces_attributes
+  attr_accessible :name, :fqdn, :description, :status, :interfaces_attributes, 
+                  :datacenter_id, :hypervisor_id, :operating_system_id
   accepts_nested_attributes_for :interfaces,
                                 :reject_if => lambda { |a| a["ipaddress"].blank? },
                                 :allow_destroy => true

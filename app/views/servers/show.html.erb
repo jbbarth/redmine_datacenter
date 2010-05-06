@@ -15,6 +15,10 @@
       <th><%= l(:field_description)%>:</th>
       <td><%= textilizable @server, :description %></td>
     </tr>
+    <tr>
+      <th><%= l(:field_operating_system)%>:</th>
+      <td><%= h(@server.operating_system.try(:name)) %></td>
+    </tr>
     <% if @server.virtual? %>
     <tr>
       <th><%= l(:label_hypervisor) %>:</th>

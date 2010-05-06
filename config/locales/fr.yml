@@ -46,6 +46,7 @@ fr:
   field_appli: Application
   field_appli_instance_ids: Applications
   field_server_ids: Serveurs
+  field_operating_system: Système d'exploitation
 
   text_hide_admin_links_in_sidebar: Cacher les liens d'administration sur le côté ?
   text_third_party_tools: Outils Tiers

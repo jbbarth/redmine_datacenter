@@ -13,6 +13,13 @@
     <p><%= f.text_field :fqdn %></p>
   <% end %>
   <p>
+    <%= f.select :operating_system_id,
+                 nested_set_options(OperatingSystem, @server.operating_system) { |i|
+                   "#{'--' * i.level} #{i.name}"
+                 },
+                 :include_blank => true %>
+  </p>
+  <p>
     <label><%= l(:label_virtual) %>?</label>
     <%= check_box_tag "server_virtual", "1", @server.virtual?,
                       :onchange => "toggleVisibility('server_virtual','hypervisor_fields');" %>

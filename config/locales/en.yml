@@ -46,6 +46,7 @@ en:
   field_appli: Application
   field_appli_instance_ids: Applications
   field_server_ids: Servers
+  field_operating_system: Operating System
 
   text_hide_admin_links_in_sidebar: Hide admin links in sidebar ?
   text_third_party_tools: Third Party Tools

@@ -5,6 +5,7 @@ class Server < ActiveRecord::Base
   has_and_belongs_to_many :interfaces
   has_and_belongs_to_many :instances, :include => :appli
   belongs_to :datacenter
+  belongs_to :operating_system
   belongs_to :hypervisor, :class_name => "Server"
   has_many :virtual_machines, :class_name => "Server", :foreign_key => "hypervisor_id"
 

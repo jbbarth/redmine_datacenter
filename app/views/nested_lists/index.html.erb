@@ -15,11 +15,11 @@
 <tr class="<%= cycle('odd', 'even') %>">
   <td>
     <%= "&nbsp;" * 4 * element.level %>
-    <%= link_to h(element.name), :action => 'edit', :id => element, :type => klass.name %>
+    <%= link_to h(element.name), nested_list_path(element, :type => klass.name) %>
   </td>
   <td class="center" style="width:15%;"><%= checked_image element.hypervisor? %></td>
   <td class="buttons">
-    <%= link_to l(:button_delete), { :action => 'destroy', :id => element, :type => klass.name }, 
+    <%= link_to l(:button_delete), nested_list_path(element, :type => klass.name), 
     															 :method => :post,
     															 :confirm => l(:text_are_you_sure),
     															 :class => 'icon icon-del' %>
@@ -30,5 +30,5 @@
 <% reset_cycle %>
 <% end %>
 
-<p><%= link_to l(:label_new), { :action => 'new', :type => klass.name } %></p>
+<p><%= link_to l(:label_new), new_nested_list_path(:type => klass.name) %></p>
 <% end %>

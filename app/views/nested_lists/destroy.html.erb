@@ -1,0 +1,12 @@
+<h2><%= l(@element.option_name) %>: <%=h @element %></h2>
+
+<% form_tag({}) do %>
+<div class="box">
+<p><strong><%= l(:text_nested_list_destroy_question, @element.objects_count) %></strong></p>
+<p><%= l(:text_nested_list_category_reassign_to) %>
+<%= select_tag 'reassign_to_id', ("<option>--- #{l(:actionview_instancetag_blank_option)} ---</option>" + options_from_collection_for_select(@elements, 'id', 'name')) %></p>
+</div>
+
+<%= submit_tag l(:button_apply) %>
+<%= link_to l(:button_cancel), :controller => 'nested_lists', :action => 'index' %>
+<% end %>

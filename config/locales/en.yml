@@ -30,6 +30,9 @@ en:
   label_virtual_machines: Virtual machines
   label_storage: Storage
   label_storage_device: Storage device
+  label_datacenter_list_plural: Datacenter lists
+  label_operating_system_plural: Operating Systems
+  label_operating_system_parent: Parent
   
   button_add_interface: Add an interface
   button_select_servers: Select servers

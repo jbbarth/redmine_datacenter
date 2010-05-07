@@ -1,0 +1,10 @@
+<h2><%= link_to l(:label_datacenter_list_plural), :controller => 'nested_lists', :action => 'index' %> &#187; <%=h(@element.name)%></h2>
+
+<% form_tag({:action => 'update', :id => @element}, :class => "tabular") do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag l(:button_save) %>
+<% end %>
+
+<% form_tag({:action => 'destroy', :id => @element}) do %>
+  <%= submit_tag l(:button_delete) %>
+<% end %>

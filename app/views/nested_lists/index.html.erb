@@ -1,0 +1,34 @@
+<h2><%=l(:label_datacenter_list_plural)%></h2>
+
+<% [OperatingSystem].each do |klass| %>
+<h3><%= l(:"label_#{klass.name.underscore}_plural") %></h3>
+
+<% list = klass.all(:order => 'lft') %>
+<% if list.any? %>
+<table class="list">
+<tr>
+    <th><%= l(:field_name) %></th>
+    <th style="width:15%;"><%= l(:label_hypervisor) %>?</th>
+    <th align="center" style="width:10%;"> </th>
+</tr>
+<% list.each do |element| %>
+<tr class="<%= cycle('odd', 'even') %>">
+  <td>
+    <%= "&nbsp;" * 4 * element.level %>
+    <%= link_to h(element.name), :action => 'edit', :id => element, :type => klass.name %>
+  </td>
+  <td class="center" style="width:15%;"><%= checked_image element.hypervisor? %></td>
+  <td class="buttons">
+    <%= link_to l(:button_delete), { :action => 'destroy', :id => element, :type => klass.name }, 
+    															 :method => :post,
+    															 :confirm => l(:text_are_you_sure),
+    															 :class => 'icon icon-del' %>
+  </td>
+</tr>
+<% end %>
+</table>
+<% reset_cycle %>
+<% end %>
+
+<p><%= link_to l(:label_new), { :action => 'new', :type => klass.name } %></p>
+<% end %>

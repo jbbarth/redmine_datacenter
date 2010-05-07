@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   #  end
   #end
   #map.resources :datacenters, :path_prefix => 'datacenter'
+  map.resources :nested_lists
   map.with_options :path_prefix => 'projects/:project_id' do |mmap|
     mmap.resource  :datacenter
     mmap.datacenters 'datacenters', :controller => 'datacenters'

@@ -1,0 +1,23 @@
+<%= error_messages_for 'element' %>
+<div class="box">
+<!--[form:optvalue]-->
+<%= hidden_field_tag "type", @klass.name %>
+
+<p><label for="element_name"><%=l(:field_name)%></label>
+<%= text_field "element", "name" %></p>
+
+<p>
+  <label for="element_parent"><%=l(:label_operating_system_parent)%></label>
+  <%= select "element", "parent_id",
+             nested_set_options(@klass, @element) { |i|
+               "#{'--' * i.level} #{i.name}"
+             },
+             :include_blank => true %>
+</p>
+
+<% @klass.columns.select{|c|c.type==:boolean}.each do |bool| -%>
+  <p><label for="element_is_<%= bool.name %>"><%=l(:"label_#{bool.name}")%></label>
+  <%= check_box "element", bool.name %></p>
+<% end -%>
+<!--[eoform:optvalue]-->
+</div>

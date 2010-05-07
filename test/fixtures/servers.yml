@@ -48,3 +48,4 @@ six:
   description: Hypervisor
   status: 1
   datacenter_id: 1
+  operating_system_id: 4

@@ -23,6 +23,10 @@ class ServerTest < ActiveSupport::TestCase
     assert_equal Server.find(1).hypervisor.try(:name), "hypervisor-01"
     assert_equal [1,2], Server.find(6).virtual_machines.map(&:id).sort
   end
+  
+  def test_hypervisors_scope
+    assert_equal [6], Server.hypervisors.map(&:id)
+  end
 
   def test_storage_methods
     assert !Server.find(1).storage_device?

@@ -105,9 +105,9 @@ class ServersController < DatacenterPluginController
   end
 
   def find_hypervisors
-    @hypervisors = Server.all(:conditions => ["datacenter_id = ? AND id != ? AND hypervisor_id is null",
-                                              @datacenter.id,
-                                              @server.try(:id).to_i],
-                              :order => "name")
+    @hypervisors = Server.hypervisors(:conditions => ["datacenter_id = ? AND servers.id != ? AND hypervisor_id is null",
+                                                      @datacenter.id,
+                                                      @server.try(:id).to_i],
+                                      :order => "servers.name")
   end
 end

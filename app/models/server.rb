@@ -32,6 +32,9 @@ class Server < ActiveRecord::Base
 
   named_scope :active, :conditions => { :status => STATUS_ACTIVE }, :order => 'name asc'
   named_scope :for_datacenter, lambda {|datacenter_id| {:conditions => ["datacenter_id = ?", datacenter_id]}}
+  named_scope :hypervisors, :include => :operating_system, 
+                            :conditions => { 'operating_systems.hypervisor' => true },
+                            :order => 'servers.name asc'
   
   def active?
     self.status == STATUS_ACTIVE

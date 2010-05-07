@@ -6,6 +6,8 @@ class OperatingSystem < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  named_scope :hypervisors, :conditions => { :hypervisor => true }, :order => "name"
+
   def set_parent!(value)
     if !new_record?
       target = self.class.find_by_id(value)

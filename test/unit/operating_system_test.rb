@@ -7,4 +7,8 @@ class OperatingSystemTest < ActiveSupport::TestCase
     assert !OperatingSystem.new.valid?
     assert OperatingSystem.new(:name => "OpenSolaris").valid?
   end
+
+  def test_hypervisor_scope
+    assert_equal 2, OperatingSystem.hypervisors.length
+  end
 end

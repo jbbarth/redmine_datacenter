@@ -10,3 +10,15 @@ two:
   name: Debian
   parent_id: 1
   hypervisor: false
+
+three:
+  id: 3
+  name: VMWare
+  parent_id: 
+  hypervisor: true
+
+four:
+  id: 4
+  name: VSphere 4
+  parent_id: 3
+  hypervisor: true

@@ -3,7 +3,7 @@
 <%= render 'crontabs/filter' %>
 
 <h1 class=""><%=h params[:server]%></h1>
-<table class="list issues cron">
+<table id="crontab" class="list issues cron">
   <tr>
     <% head = @cron_lines.shift.split(/\s+/) %>
     <%= head.map{|l| %Q[<th>#{l}</th>]} -%>

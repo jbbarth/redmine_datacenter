@@ -49,13 +49,13 @@ class Datacenter < ActiveRecord::Base
 
   #nagios integration
   def nagios_file
-    @nagios_file ||= File.join(thirdpartydir,"nagios","status.dat")
+    File.join(thirdpartydir,"nagios","status.dat")
   end
   
   #storage integration
   #currently supports only IBM DS4000 devices
   def storage_dir
-    @storage_dir ||= File.join(thirdpartydir,"storage")
+    File.join(thirdpartydir,"storage")
   end
 
   def storage_files
@@ -77,7 +77,7 @@ class Datacenter < ActiveRecord::Base
   end
 
   def thirdpartydir
-    @thirdpartydir ||= File.join(Rails.root,"vendor","plugins","redmine_datacenter","data", project.identifier)
+    File.join(Rails.root,"vendor","plugins","redmine_datacenter","data", project.identifier)
   end
 
   def fetch_activity(options)

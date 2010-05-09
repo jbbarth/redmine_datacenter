@@ -3,6 +3,7 @@
 .icon-datacenters, #admin-menu a.datacenters { background-image: url(../images/datacenter.png); }
 .icon-networks, #admin-menu a.networks { background-image: url(../images/network.png); }
 .icon-nested-lists, a.nested-lists { background-image: url(../images/table.png); }
+.icon-crontabs, #admin-menu a.crontabs { background-image: url(../images/clock.png); }
 div.datacenter h3 { background: url(../images/datacenter.png) no-repeat 0% 50%; padding-left: 20px; }
 div.datacenter .overview {padding: 2px 5px;}
 div.datacenter td.overview p {margin-bottom: 5px;}
@@ -56,3 +57,5 @@ div.third_party { width:50%; }
 #storage table.storage-array { border-collapse:collapse; }
 #storage table.storage-array td { border:1px solid #aaa; white-space:nowrap; }
 #storage table.storage-array td.closed { background: #999 none repeat scroll 0%; }
+/* crontabs */
+#crontab td.croncommand { font-family: monospace; }

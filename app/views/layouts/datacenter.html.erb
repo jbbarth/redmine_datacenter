@@ -16,6 +16,9 @@
       <li><%= link_to l(:label_appli_plural), {:controller => 'applis', :project_id => @project}, :class => 'applis' %></li>
       <li><%= link_to l(:label_server_plural), {:controller => 'servers', :project_id => @project}, :class => 'servers' %></li>
       <li><%= link_to l(:label_network_plural), {:controller => 'networks', :project_id => @project}, :class => 'networks' %></li>
+      <% if @datacenter.tool_enabled?(:crontabs) -%>
+      <li><%= link_to l(:label_crontab_plural), {:controller => 'crontabs', :project_id => @project}, :class => 'crontabs' %></li>
+    <% end -%>
     </ul>
     <% end %>
     <%= call_hook :view_layouts_datacenter_sidebar %>

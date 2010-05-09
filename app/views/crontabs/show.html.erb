@@ -1,0 +1,16 @@
+<h2><%= link_to l(:label_crontab_plural), crontabs_path %> &#187; <%=h @server.name %></h2>
+
+<%= render 'crontabs/filter' %>
+
+<h1 class=""><%=h params[:server]%></h1>
+<table class="list issues cron">
+  <tr>
+    <% head = @cron_lines.shift.split(/\s+/) %>
+    <%= head.map{|l| %Q[<th>#{l}</th>]} -%>
+  </tr>
+  <% @cron_lines.each do |line| -%>
+    <tr>
+      <%= format_cron_line(line) %>
+    </tr>
+  <% end -%>
+</table>

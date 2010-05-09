@@ -33,6 +33,8 @@ fr:
   label_datacenter_list_plural: Listes centre-serveur
   label_operating_system_plural: Systèmes d'exploitation
   label_operating_system_parent: Parent
+  label_crontab: Crontab
+  label_crontab_plural: Crontabs
   
   button_add_interface: Ajouter une interface
   button_select_servers: Sélectionner les serveurs

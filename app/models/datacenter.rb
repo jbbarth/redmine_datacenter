@@ -65,7 +65,12 @@ class Datacenter < ActiveRecord::Base
   def storage_file(server_name)
     File.join(storage_dir,server_name)
   end
-
+  
+  #crontabs integration
+  def crondir
+    File.join(thirdpartydir,"cron")
+  end
+  
   #third party tools integration
   def tool_enabled?(tool)
     options["#{tool}_enabled"].to_i == 1

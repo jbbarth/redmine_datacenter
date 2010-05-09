@@ -36,7 +36,8 @@ Redmine::Plugin.register :datacenter_plugin do
                                   :applis => [:index, :show, :update_servers],
                                   :instances => [:select_servers],
                                   :servers => [:index, :show],
-                                  :networks => [:index, :overview, :show]}
+                                  :networks => [:index, :overview, :show],
+                                  :crontabs => [:index, :show]}
     permission :manage_datacenter, {:datacenters => [:new, :create, :edit, :update, :destroy],
                                     :applis => [:new, :create, :edit, :update, :destroy],
                                     :servers => [:new, :create, :edit, :update, :destroy],

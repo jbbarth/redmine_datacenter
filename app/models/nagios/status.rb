@@ -49,7 +49,7 @@ class Nagios::Status
     @problems ||= (host_problems + service_problems).sort_by do |problem|
                     [ Nagios::Status::STATES_ORDER[problem[:current_state]].to_i,
                       problem[:host_name],
-                      problem[:service_description] ]
+                      problem[:service_description].to_s ]
     end
   end
 

@@ -46,7 +46,7 @@ div.third_party { width:50%; }
 #nagios .nagios-unknown { border-left:6px solid #aaa; }
 #nagios .nagios-critical { border-left:6px solid #f00; }
 #nagios .nagios-ok { border-left:6px solid #0c0; }
-#nagios .nagios-host-critical { background-color:#eee; border-width:1px 1px 1px 6px; border-style:solid; border-color:#fcc; }
+#nagios .nagios-host-critical { background-color:#eee; border-width:1px 1px 1px 6px; border-style:solid; border-color:#f00; }
 #nagios .nagios-host-ok { background-color:#eee; border-width:1px 1px 1px 6px; border-style:solid; border-color:#0c0; }
 .server .nagios-service { border:1px solid #ddd; }
 .server #nagios { margin-bottom:15px; }

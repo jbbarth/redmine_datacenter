@@ -21,7 +21,8 @@
   <small>
     <% if @nagios_status.items.any? -%>
       <%= link_to l(:label_more), {},
-                  :onclick => 'Effect.toggle("nagios_others", "blind", {duration:0.3}); return false;' %> | 
+                  :onclick => 'Effect.toggle("nagios_others", "blind", {duration:0.3}); return false;' %>
+      <%= " | " if nagios_ok_any %>
     <% end -%>
     <% if nagios_ok_any -%>
       <%= link_to l(:label_nagios_display_ok), {},

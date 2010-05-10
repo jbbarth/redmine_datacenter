@@ -14,7 +14,7 @@
   <% end %>
   <p>
     <%= f.select :operating_system_id,
-                 nested_set_options(OperatingSystem, @server.operating_system) { |i|
+                 nested_set_options(OperatingSystem) { |i|
                    "#{'--' * i.level} #{i.name}"
                  },
                  :include_blank => true %>

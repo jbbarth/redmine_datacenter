@@ -2,6 +2,7 @@
   <%= l(:text_nagios_everything_ok) %>
 <% else %>
   <% i = 0 -%>
+  <% nagios_ok_any = @nagios_status.items.any?{|s| s[:status] == "OK"} -%>
   <% while (i < 5 && @nagios_status.items.any?) do -%>
     <% ns = @nagios_status.items.shift -%>
     <% i +=1 if ns[:status] != "OK" -%>
@@ -22,7 +23,9 @@
       <%= link_to l(:label_more), {},
                   :onclick => 'Effect.toggle("nagios_others", "blind", {duration:0.3}); return false;' %> | 
     <% end -%>
-    <%= link_to l(:label_nagios_display_ok), {},
-                :onclick => '$$(".nagios-ok").each(function(elem){elem.toggle();}); return false;' %>
+    <% if nagios_ok_any -%>
+      <%= link_to l(:label_nagios_display_ok), {},
+                  :onclick => '$$(".nagios-ok").each(function(elem){elem.toggle();}); return false;' %>
+    <% end -%>
   </small>
 <% end -%>

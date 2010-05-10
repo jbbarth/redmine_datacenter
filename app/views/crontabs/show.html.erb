@@ -1,6 +1,6 @@
 <h2>
   <%= link_to l(:label_crontab_plural), crontabs_path %>
-  &#187; <%= link_to h(@server.name), server_path(@datacenter,@server) %>
+  &#187; <%= link_to h(@server.name), server_path(@project,@server) %>
 </h2>
 
 <%= render 'crontabs/filter' %>

@@ -35,7 +35,7 @@ fr:
   label_operating_system_parent: Parent
   label_crontab: Crontab
   label_crontab_plural: Crontabs
-  label_nagios_display_ok: Afficher les éléments en 'OK'
+  label_nagios_display_ok: Afficher les OK
   
   button_add_interface: Ajouter une interface
   button_select_servers: Sélectionner les serveurs

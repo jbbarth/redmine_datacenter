@@ -15,7 +15,7 @@
 <tr class="<%= cycle('odd', 'even') %>">
   <td>
     <%= "&nbsp;" * 4 * element.level %>
-    <%= link_to h(element.name), nested_list_path(element, :type => klass.name) %>
+    <%= link_to h(element.name), edit_nested_list_path(element, :type => klass.name) %>
   </td>
   <td class="center" style="width:15%;"><%= checked_image element.hypervisor? %></td>
   <td class="buttons">

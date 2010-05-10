@@ -1,5 +1,5 @@
 <div class="contextual">
-  <% if @datacenter.tool_enabled?(:crontabs) -%>
+  <% if @datacenter.tool_enabled?(:crontabs) && @server.has_crontab? -%>
     <%= link_to l(:label_crontab), crontab_path(@project,@server), :class => "icon icon-crontabs" %>
   <% end -%>
   <% if User.current.allowed_to?(:manage_datacenter,@project) %>

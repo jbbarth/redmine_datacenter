@@ -65,4 +65,12 @@ class Server < ActiveRecord::Base
   def storage_device
     @device ||= Storage::Bay.new(name, :profile => storage_file) if storage_device?
   end
+  
+  def has_crontab?
+    File.exists?(crontab_file)
+  end
+   
+  def crontab_file
+    File.join(datacenter.crondir,name)
+  end
 end

@@ -15,7 +15,7 @@ class CrontabsController < DatacenterPluginController
     end
     if @server
       begin
-        @cron_lines = File.readlines("#{@datacenter.crondir}/#{@server.name}").map{|l| l.chomp}
+        @cron_lines = File.readlines(@server.crontab_file).map{|l| l.chomp}
       rescue Errno::ENOENT => e
         flash[:error] = e.message
       end

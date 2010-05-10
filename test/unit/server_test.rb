@@ -31,4 +31,11 @@ class ServerTest < ActiveSupport::TestCase
   def test_storage_methods
     assert !Server.find(1).storage_device?
   end
+
+  def test_crontab_file
+    server = Server.find(1)
+    assert_equal File.join(Rails.root,"/vendor/plugins/redmine_datacenter/data/ecookbook/cron/#{server.name}"),
+                 server.crontab_file
+    assert !server.has_crontab?
+  end
 end

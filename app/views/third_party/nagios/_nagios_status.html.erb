@@ -9,6 +9,7 @@
     <%= format_nagios_line(ns) if ns %>
   <% end -%>
   <% @nagios_status.items.select{|p|p[:status]=="OK"}.each do |ns| -%>
+    <% @nagios_status.items -= ns %>
     <%= format_nagios_line(ns) %>
   <% end -%>
   <% if @nagios_status.items.any? -%>

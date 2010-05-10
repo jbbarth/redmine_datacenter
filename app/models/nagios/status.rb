@@ -22,7 +22,8 @@ class Nagios::Status
     sections #loads section at this point so we raise immediatly if file has a problem
     @last_updated = Time.at(File.mtime(statusfile))
     #scope is an array of lambda procs : it should evaluate to true if service has to be displayed
-    @scope = [ lambda { |section| !section.include?("current_state=#{STATE_OK}") } ]
+    @scope = []
+    @scope << lambda { |section| !section.include?("current_state=#{STATE_OK}") } unless options[:include_ok]
     @scope << options[:scope] if options[:scope].is_a?(Proc)
   end
 
@@ -47,7 +48,8 @@ class Nagios::Status
 
   def problems
     @problems ||= (host_problems + service_problems).sort_by do |problem|
-                    [ Nagios::Status::STATES_ORDER[problem[:current_state]].to_i,
+                    [ (problem[:type] == "servicestatus" ? 1 : 0),
+                      Nagios::Status::STATES_ORDER[problem[:current_state]].to_i,
                       problem[:host_name],
                       problem[:service_description].to_s ]
     end

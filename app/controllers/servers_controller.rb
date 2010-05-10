@@ -46,9 +46,10 @@ class ServersController < DatacenterPluginController
                         :offset => @issue_pages.current.offset,
                         :order => sort_clause
     if @datacenter.tool_enabled?(:nagios)
-      nagios_file = @datacenter.nagios_file
       begin
-        @nagios_status = Nagios::Status.new(nagios_file, :scope => lambda{|s|s.include?("host_name=#{@server.name}")})
+        @nagios_status = Nagios::Status.new(@datacenter.nagios_file,
+                                            :scope => lambda{|s|s.include?("host_name=#{@server.name}")},
+                                            :include_ok => true)
       rescue Errno::ENOENT
         #nothing, there's already a warning message on datacenters/show page
       end

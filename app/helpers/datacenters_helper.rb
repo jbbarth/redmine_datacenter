@@ -46,10 +46,11 @@ module DatacentersHelper
                       )
     title << ": " + section[:service_description] if section[:service_description]
     output = section[:plugin_output]
+    display = (status == "OK" ? ' style="display:none;"' : '')
     if section[:type] == "servicestatus"
-      html = %Q(<div class="nagios-#{status.downcase} nagios-service">)
+      html = %Q(<div class="nagios-#{status.downcase} nagios-service"#{display}>)
     else
-      html = %Q(<div class="nagios-#{status.downcase} nagios-host-#{status.downcase}">)
+      html = %Q(<div class="nagios-#{status.downcase} nagios-host-#{status.downcase}"#{display}>)
     end
     html << "#{title}<br />"
     html << %Q(<span class="infos">#{output}</span>) unless output.blank?

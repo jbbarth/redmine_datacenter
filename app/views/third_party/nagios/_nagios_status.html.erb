@@ -1,9 +1,14 @@
 <% if @nagios_status.problems.empty? %>
   <%= l(:text_nagios_everything_ok) %>
 <% else %>
-  <% 5.times do -%>
+  <% i = 0 -%>
+  <% while (i < 5 && @nagios_status.problems.any?) do -%>
     <% ns = @nagios_status.problems.shift -%>
+    <% i +=1 if ns[:status] != "OK" -%>
     <%= format_nagios_line(ns) if ns %>
+  <% end -%>
+  <% @nagios_status.problems.select{|p|p[:status]=="OK"}.each do |ns| -%>
+    <%= format_nagios_line(ns) %>
   <% end -%>
   <% if @nagios_status.problems.any? -%>
     <div id="nagios_others" style="display:none;padding:0; margin:0;">
@@ -11,9 +16,13 @@
         <%= format_nagios_line(ns) %>
       <% end -%>
     </div>
-    <small>
-      <%= link_to l(:label_more), {},
-                  :onclick => 'Effect.toggle("nagios_others", "blind", {duration:0.3}); return false;' %>
-    </small>
   <% end -%>
+  <small>
+    <% if @nagios_status.problems.any? -%>
+      <%= link_to l(:label_more), {},
+                  :onclick => 'Effect.toggle("nagios_others", "blind", {duration:0.3}); return false;' %> | 
+    <% end -%>
+    <%= link_to l(:label_nagios_display_ok), {},
+                :onclick => '$$(".nagios-ok").each(function(elem){elem.toggle();}); return false;' %>
+  </small>
 <% end -%>

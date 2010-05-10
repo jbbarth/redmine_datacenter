@@ -10,8 +10,8 @@ class NagiosTest < ActiveSupport::TestCase
     assert_equal 7, @status.sections.length
   end
 
-  def test_service_problem
-    section = @status.service_problems.first
+  def test_service_item
+    section = @status.service_items.first
     assert section.is_a?(Hash)
     assert_equal "server-web", section[:host_name]
     assert section[:current_state].is_a?(Fixnum)
@@ -22,18 +22,18 @@ class NagiosTest < ActiveSupport::TestCase
 
   def test_scope_with_our_server
     @status.scope << lambda { |s| s.include?("host_name=server-web") }
-    assert_equal 1, @status.problems.length
+    assert_equal 1, @status.items.length
   end
 
   def test_scope_which_filters_everything
     @status.scope << lambda { |s| false }
-    assert_equal 0, @status.problems.length
+    assert_equal 0, @status.items.length
   end
 
   def test_scope_with_include_ok
     status = Nagios::Status.new(@statusfile,
                                 :scope => lambda{|s|s.include?("host_name=server-web")},
                                 :include_ok => true)
-    assert_equal 2, status.problems.length
+    assert_equal 2, status.items.length
   end
 end

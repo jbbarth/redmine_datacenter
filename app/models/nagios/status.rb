@@ -19,7 +19,7 @@ class Nagios::Status
 
   def initialize(statusfile, options = {})
     @file = statusfile
-    sections #loads section at this point so we raise immediatly if file has a problem
+    sections #loads section at this point so we raise immediatly if file has a item
     @last_updated = Time.at(File.mtime(statusfile))
     #scope is an array of lambda procs : it should evaluate to true if service has to be displayed
     @scope = []
@@ -34,24 +34,24 @@ class Nagios::Status
     @sections ||= File.read(@file).split("\n\n")
   end
   
-  def host_problems
-    @host_problems ||= sections.map do |s|
+  def host_items
+    @host_items ||= sections.map do |s|
       Nagios::Section.new(s) if s.start_with?("hoststatus") && in_scope?(s)
     end.compact
   end
 
-  def service_problems
-    @service_problems ||= sections.map do |s|
+  def service_items
+    @service_items ||= sections.map do |s|
       Nagios::Section.new(s) if s.start_with?("servicestatus") && in_scope?(s)
     end.compact
   end
 
-  def problems
-    @problems ||= (host_problems + service_problems).sort_by do |problem|
-                    [ (problem[:type] == "servicestatus" ? 1 : 0),
-                      Nagios::Status::STATES_ORDER[problem[:current_state]].to_i,
-                      problem[:host_name],
-                      problem[:service_description].to_s ]
+  def items
+    @items ||= (host_items + service_items).sort_by do |item|
+                    [ (item[:type] == "servicestatus" ? 1 : 0),
+                      Nagios::Status::STATES_ORDER[item[:current_state]].to_i,
+                      item[:host_name],
+                      item[:service_description].to_s ]
     end
   end
 

@@ -1,12 +1,12 @@
 one:
-  id: 1
+  id: 2
   name: Telecity
   description: Telecity datacenter (Paris)
   domain: .example.com
   project_id: 1
 
 two:
-  id: 2
+  id: 3
   name: Redhouse datacenter
   description: Redhouse datacenter (Paris)
   domain: .cracker.org

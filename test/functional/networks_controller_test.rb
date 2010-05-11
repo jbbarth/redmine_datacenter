@@ -54,7 +54,7 @@ class NetworksControllerTest < ActionController::TestCase
   
   def test_create_valid
     Network.any_instance.stubs(:valid?).returns(true)
-    post :create, :network => {:name => "mynetwork", :datacenter_id => 1}, :project_id => 1
+    post :create, :network => {:name => "mynetwork", :datacenter_id => 2}, :project_id => 1
     assert_redirected_to "/projects/ecookbook/networks/#{assigns(:network).id}"
     network = Network.find_by_name("mynetwork")
     assert_not_nil network
@@ -67,8 +67,7 @@ class NetworksControllerTest < ActionController::TestCase
   
   def test_update
     Network.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Network.first.id, :network => {:datacenter_id => 1}, :project_id => 1
-    datacenter = Datacenter.find(1)
+    put :update, :id => Network.first.id, :network => {:datacenter_id => 2}, :project_id => 1
     assert_redirected_to "/projects/ecookbook/networks/#{assigns(:network).id}"
   end
   

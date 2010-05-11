@@ -54,7 +54,7 @@ class ServersControllerTest < ActionController::TestCase
   
   def test_create_valid
     Server.any_instance.stubs(:valid?).returns(true)
-    post :create, :server => {:name => "myserver", :datacenter_id => 1}, :project_id => 1
+    post :create, :server => {:name => "myserver", :datacenter_id => 2}, :project_id => 1
     assert_redirected_to "/projects/ecookbook/servers/#{assigns(:server).id}"
     server = Server.find_by_name("myserver")
     assert_not_nil server
@@ -74,8 +74,8 @@ class ServersControllerTest < ActionController::TestCase
   
   def test_update_valid
     Server.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Server.first.id, :server => {:datacenter_id => 1}, :project_id => 1
-    datacenter = Datacenter.find(1)
+    put :update, :id => Server.first.id, :server => {:datacenter_id => 2}, :project_id => 1
+    datacenter = Datacenter.find(2)
     assert_redirected_to "/projects/ecookbook/servers/#{assigns(:server).id}"
   end
   

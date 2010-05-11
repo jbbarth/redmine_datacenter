@@ -81,12 +81,12 @@ class DatacentersControllerTest < ActionController::TestCase
   end
   
   def test_destroy
-    datacenter = Datacenter.find(1)
+    datacenter = Datacenter.find(2)
     assert_equal datacenter.project_id, 1
     delete :destroy, :project_id => 1
     assert_redirected_to '/projects/ecookbook/datacenter'
     datacenter.reload
-    assert Datacenter.exists?(1)
+    assert Datacenter.exists?(2)
     assert_equal Datacenter::STATUS_LOCKED, datacenter.status
   end
 end

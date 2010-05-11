@@ -30,5 +30,10 @@
 <% reset_cycle %>
 <% end %>
 
-<p><%= link_to l(:label_new), new_nested_list_path(:type => klass.name) %></p>
+<p>
+  <%= link_to l(:label_new), new_nested_list_path(:type => klass.name) %>
+  <% if list.any? -%>
+    <%= " | " + link_to(l(:button_sort), rebuild_nested_lists_path(:type => klass.name), :method => :put) %>
+  <% end -%>
+</p>
 <% end %>

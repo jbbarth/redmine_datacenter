@@ -45,6 +45,13 @@ class NestedListsController < ApplicationController
     redirect_to :action => 'index'
   end
   
+  def rebuild
+    @klass.update_all({:lft=>nil,:rgt=>nil})
+    @klass.rebuild!
+    flash[:notice] = l(:notice_successful_update)
+    redirect_to :action => 'index'
+  end
+  
   protected
   def get_klass
     klasses = %w(OperatingSystem)

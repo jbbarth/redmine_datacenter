@@ -32,7 +32,7 @@
 <% for server in @servers -%>
   <tr class="server <%= cycle("odd", "even") %>">
     <% if prev == server %>
-      <td colspan="2"></td>
+      <td colspan="3"></td>
       <td class="ipaddress"><%= h(server.ipaddress) %></td>
       <td colspan="2"></td>
     <% else %>

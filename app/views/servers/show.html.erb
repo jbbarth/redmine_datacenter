@@ -51,7 +51,7 @@
     </div>
     <% end -%>
     <h3><%= l_or_humanize(:nagios) %></h3>
-    <%= render :partial => 'third_party/nagios/nagios_status' %>
+    <%= render :partial => 'nagios/nagios_status' %>
   </div>
   <% end -%>
 
@@ -75,7 +75,7 @@
       <%= l(:label_updated_time, distance_of_time_in_words(Time.now,@server.storage_device.last_updated)) %>
     </div>
     <h3><%= l(:label_storage_device) %></h3>
-    <%= render 'third_party/storage/device', :device => @server.storage_device %>
+    <%= render 'storage/device', :device => @server.storage_device %>
   </div>
   <% end -%>
 

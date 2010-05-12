@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class NagiosTest < ActiveSupport::TestCase
   def setup
-    @statusfile = File.dirname(__FILE__) + '/../fixtures/third_party/nagios/status.dat'
+    @statusfile = File.dirname(__FILE__) + '/../fixtures/nagios/status.dat'
     @status = Nagios::Status.new(@statusfile)
   end
 

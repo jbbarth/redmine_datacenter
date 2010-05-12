@@ -6,7 +6,7 @@
   <% end -%>
   <h3><%= l_or_humanize(:nagios) %></h3>
   <% if @nagios_status -%>
-    <%= render 'third_party/nagios/nagios_status' %>
+    <%= render 'nagios/nagios_status' %>
   <% else -%>
     <p class="nodata"><%= l(:label_no_data) %></p>
   <% end -%>

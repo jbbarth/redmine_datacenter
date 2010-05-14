@@ -73,4 +73,12 @@ class Server < ActiveRecord::Base
   def crontab_file
     File.join(datacenter.crondir,name)
   end
+  
+  def has_apache?
+    File.directory?(apache_dir)
+  end
+  
+  def apache_dir
+    File.join(datacenter.apachedir,name)
+  end
 end

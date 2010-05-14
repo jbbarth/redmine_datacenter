@@ -36,6 +36,10 @@ fr:
   label_crontab: Crontab
   label_crontab_plural: Crontabs
   label_nagios_display_ok: Afficher les OK
+  label_apache: Apache
+  label_apache_server_plural: Apache servers
+  label_apache_vhost: VirtualHost
+  label_apache_vhost_plural: VirtualHosts
   
   button_add_interface: Ajouter une interface
   button_select_servers: Sélectionner les serveurs

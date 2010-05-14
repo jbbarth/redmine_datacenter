@@ -71,6 +71,11 @@ class Datacenter < ActiveRecord::Base
     File.join(thirdpartydir,"cron")
   end
   
+  #Apache integration
+  def apachedir
+    File.join(thirdpartydir,"apache")
+  end
+  
   #third party tools integration
   def tool_enabled?(tool)
     options["#{tool}_enabled"].to_i == 1

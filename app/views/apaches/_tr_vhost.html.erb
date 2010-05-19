@@ -1,5 +1,14 @@
 <tr>
-  <td><%= link_to vhost[:servername], "http://#{vhost[:servername]}" %></td>
+  <td>
+    <%= link_to vhost[:servername], "http://#{vhost[:servername]}" %>
+    <% if vhost[:serveraliases].any? -%>
+      <ul class="serveraliases">
+      <% vhost[:serveraliases].each do |sa| -%>
+        <li><%= sa %></li>
+      <% end -%>
+      </ul>
+    <% end -%>
+  </td>
   <td class="vhost">
     <% if vhost[:proxypasses].any? -%>
       <%= link_to_function image_tag('bullet_toggle_plus.png'),

@@ -101,6 +101,11 @@ class Server < ActiveRecord::Base
       content.delete_if{|line| line.match(/^\s*#/)}
       content.join.scan(%r{<VirtualHost[^>]*>.*?</VirtualHost>}mi).each do |section|
         servername = section.scan(/ServerName\s+(\S+)/)
+        serveraliases = []
+        section.split("\n").grep(/ServerAlias/).each do |line|
+          serveralias = line.scan(/ServerAlias\s+(\S+)/).to_s
+          serveraliases << serveralias unless serveralias.blank?
+        end
         proxypasses = []
         section.split("\n").grep(/ProxyPass\s/).each do |line|
           proxypass = {}
@@ -122,6 +127,7 @@ class Server < ActiveRecord::Base
           @virtualhosts << {:server => self,
                             :file => file,
                             :servername => servername,
+                            :serveraliases => serveraliases,
                             :proxypasses => proxypasses,
                             :content => section }
         end

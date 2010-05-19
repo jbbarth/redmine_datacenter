@@ -64,4 +64,4 @@ div.third_party { width:50%; }
 #crontab td.croncommand { font-family: monospace; }
 /* apache */
 #apache .vhostconfig { margin-left:30px; }
-#apache ul.nsresolution { margin:0 0 0 15px; padding:0; color:#777; list-style-type:none; }
+#apache ul.nsresolution, #apache ul.serveraliases { margin:0 0 0 15px; padding:0; color:#777; list-style-type:none; }

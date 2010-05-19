@@ -18,7 +18,10 @@
       <li><%= link_to l(:label_network_plural), {:controller => 'networks', :project_id => @project}, :class => 'networks' %></li>
       <% if @datacenter.tool_enabled?(:crontabs) -%>
       <li><%= link_to l(:label_crontab_plural), {:controller => 'crontabs', :project_id => @project}, :class => 'crontabs' %></li>
-    <% end -%>
+      <% end -%>
+      <% if @datacenter.tool_enabled?(:apache) -%>
+      <li><%= link_to l(:label_apache_server_plural), {:controller => 'apaches', :project_id => @project}, :class => 'apaches' %></li>
+      <% end -%>
     </ul>
     <% end %>
     <%= call_hook :view_layouts_datacenter_sidebar %>

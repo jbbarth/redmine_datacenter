@@ -1,0 +1,12 @@
+<h2>
+  <%= link_to l(:label_apache_server_plural), apaches_path %>
+  &#187; <%= h(@server.name) %>
+</h2>
+
+<%= render 'apaches/filter' %>
+
+<table id="apache" class="list issues apache">
+  <% @server.virtual_hosts.each do |vhost| -%>
+    <%= render 'tr_vhost', :vhost => vhost %>
+  <% end -%>
+</table>

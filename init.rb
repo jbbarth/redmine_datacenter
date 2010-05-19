@@ -37,7 +37,8 @@ Redmine::Plugin.register :datacenter_plugin do
                                   :instances => [:select_servers],
                                   :servers => [:index, :show],
                                   :networks => [:index, :overview, :show],
-                                  :crontabs => [:index, :show]}
+                                  :crontabs => [:index, :show],
+                                  :apaches => [:index, :show, :browse]}
     permission :manage_datacenter, {:datacenters => [:new, :create, :edit, :update, :destroy],
                                     :applis => [:new, :create, :edit, :update, :destroy],
                                     :servers => [:new, :create, :edit, :update, :destroy],
@@ -59,4 +60,8 @@ Redmine::MenuManager.map :admin_menu do |menu|
   menu.push :nested_lists, {:controller => :nested_lists}, :caption => :label_datacenter_list_plural
   #menu.push :servers, {:controller => :servers}, :caption => :label_server_plural
   #menu.push :applis, {:controller => :applis}, :caption => :label_appli_plural
+end
+
+ActiveSupport::Inflector.inflections do |inflection|
+  inflection.irregular "apache", "apaches"
 end

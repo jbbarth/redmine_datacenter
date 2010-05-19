@@ -1,0 +1,10 @@
+<h3>
+  <%= link_to @server.name, apache_path(@project,@server) %>: 
+  <%= h params[:file] %>
+</h3>
+
+<%= render :partial => 'common/file', :locals => {:content => @apache_file, :filename => params[:file]} %>
+
+<% content_for :header_tags do -%>
+    <%= stylesheet_link_tag "scm" -%>
+<% end -%>

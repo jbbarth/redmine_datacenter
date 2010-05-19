@@ -18,5 +18,7 @@ ActionController::Routing::Routes.draw do |map|
     end
     mmap.resources :networks, :collection => {:overview => :get}
     mmap.resources :crontabs, :only => [:index, :show]
+    mmap.resources :apaches, :only => [:index, :show],
+                             :member => {:browse => :get}
   end
 end

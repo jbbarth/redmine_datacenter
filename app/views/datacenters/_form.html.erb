@@ -27,6 +27,12 @@
       </label>
       <%= datacenter_check_box("crontabs_enabled", @datacenter.tool_enabled?(:crontabs)) %>
     </p>
+    <p>
+      <label for="datacenter_options_apache_enabled">
+        <%= l(:label_apache) %>
+      </label>
+      <%= datacenter_check_box("apache_enabled", @datacenter.tool_enabled?(:apache)) %>
+    </p>
   </fieldset>
 </div>
 <!--[eoform:datacenter]-->

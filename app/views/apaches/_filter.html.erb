@@ -1,0 +1,16 @@
+<% form_tag({}, :method => :get) do %>
+  <fieldset>
+    <div class="contextual">
+    <% if @server && @controller.action_name == "show" -%>
+      <%= link_to l(:label_apache_config_files), browse_apache_path(@project,@server) %>
+    <% elsif @server && @controller.action_name == "browse" -%>
+      <%= link_to l(:label_apache_vhost_plural), apache_path(@project,@server) %>
+    <% end -%>
+    </div>
+    <legend><%= l(:label_filter_plural) %></legend>
+    <label><%= l(:field_server) %>:</label>
+    <%= render_apaches_jump_menu(@project,@servers,@server) %>
+    <!-- <%= submit_tag l(:button_apply), :class => "small", :name => nil %> -->
+  </fieldset>
+<% end %>
+&nbsp;

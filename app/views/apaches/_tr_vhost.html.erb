@@ -1,0 +1,24 @@
+<tr>
+  <td><%= link_to vhost[:servername], "http://#{vhost[:servername]}" %></td>
+  <td class="vhost">
+    <% if vhost[:proxypasses].any? -%>
+      <%= link_to_function image_tag('bullet_toggle_plus.png'),
+                           "$(this).next('.vhostconfig').toggle();",
+                           :style => "vertical-align: bottom;" %>
+    <% end -%>
+    <%= l(:field_server) %>: <%= link_to vhost[:server].name,
+                                         apache_path(@datacenter,vhost[:server]) %>,
+    <%= l(:field_filename) %>: <%= link_to vhost[:file],
+                                           browse_apache_path(@datacenter, vhost[:server], :file => vhost[:file]) %>
+    <div class="vhostconfig" style="display:none;">
+      <% vhost[:proxypasses].each do |proxypass| -%>
+        <%= proxypass[:line] %>
+        <ul class="nsresolution">
+          <% proxypass[:dns].each do |ns| -%>
+            <li><%= ns %></li>
+          <% end -%>
+        </ul>
+      <% end -%>
+    </div>
+  </td>
+</tr>

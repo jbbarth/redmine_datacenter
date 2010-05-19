@@ -16,9 +16,9 @@
                            :style => "vertical-align: bottom;" %>
     <% end -%>
     <%= l(:field_server) %>: <%= link_to vhost[:server].name,
-                                         apache_path(@datacenter,vhost[:server]) %>,
+                                         apache_path(@project,vhost[:server]) %>,
     <%= l(:field_filename) %>: <%= link_to vhost[:file],
-                                           browse_apache_path(@datacenter, vhost[:server], :file => vhost[:file]) %>
+                                           browse_apache_path(@project, vhost[:server], :file => vhost[:file]) %>
     <div class="vhostconfig" style="display:none;">
       <% vhost[:proxypasses].each do |proxypass| -%>
         <%= proxypass[:line] %>

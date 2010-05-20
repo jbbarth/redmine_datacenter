@@ -42,7 +42,7 @@ class Apache::VirtualHost
       else
         realserver = URI.parse(realserver).host
         begin
-          chain = resolver.deeplook(realserver)
+          chain = @@resolver.deeplook(realserver)
           chain.shift
           proxypass[:dns] = chain
         rescue

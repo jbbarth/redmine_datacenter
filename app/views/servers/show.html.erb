@@ -1,8 +1,10 @@
 <div class="contextual">
-  <% if User.current.allowed_to?(:manage_datacenter,@project) %>
-    <%= link_to l(:button_update), edit_server_path(:project_id => @project, :id => @server), :class => 'icon icon-edit' %> 
-    <%= change_link_server_status(@server) %>
-  <% end %>
+  <% if @datacenter.tool_enabled?(:crontabs) && @server.has_crontab? -%>
+    <%= link_to l(:label_crontab), crontab_path(@project,@server), :class => "icon icon-crontabs" %>
+  <% end -%>
+  <% if @datacenter.tool_enabled?(:apache) && @server.has_apache? -%>
+    <%= link_to l(:label_apache), apache_path(@project,@server), :class => "icon icon-apaches" %>
+  <% end -%>
 </div>
 
 <h2><%= link_to l(:label_server_plural), servers_path %> &#187; <%=h @server.name %></h2>
@@ -10,12 +12,10 @@
 <div class="splitcontentleft server">
 
   <div class="contextual">
-    <% if @datacenter.tool_enabled?(:crontabs) && @server.has_crontab? -%>
-      <%= link_to l(:label_crontab), crontab_path(@project,@server), :class => "icon icon-crontabs" %>
-    <% end -%>
-    <% if @datacenter.tool_enabled?(:apache) && @server.has_apache? -%>
-      <%= link_to l(:label_apache), apache_path(@project,@server), :class => "icon icon-apaches" %>
-    <% end -%>
+    <% if User.current.allowed_to?(:manage_datacenter,@project) %>
+      <%= link_to l(:button_update), edit_server_path(:project_id => @project, :id => @server), :class => 'icon icon-edit' %>
+      <%= change_link_server_status(@server) %>
+    <% end %>
   </div>
   <h3><%= @server.fullname %></h3>
   <table class="attributes">

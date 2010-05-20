@@ -1,20 +1,12 @@
 require 'resolv'
 
-class Redmine::Resolver < Resolv::DNS
-  def initialize(args = {})
-    #prepare cache
+class Redmine::Resolver < Resolv
+  def initialize
     @cache = {}
     %w(getaddresses getnames getaddress getname).each do |method|
       @cache[method.to_sym] = {}
     end
-    #guess name server
-    unless args[:nameserver]
-      args[:nameserver] = %x(grep nameserver /etc/resolv.conf).map do |line|
-        line.scan(/nameserver\s*(\S*)/)
-      end.flatten
-    end
-    #call super
-    super(args)
+    super
   end
   
   def getaddresses(name)

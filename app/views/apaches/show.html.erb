@@ -1,3 +1,6 @@
+<div class="contextual">
+  <%= link_to l(:field_server), server_path(@project,@server), :class => "icon icon-servers" %>
+</div>
 <h2>
   <%= link_to l(:label_apache_server_plural), apaches_path %>
   &#187; <%= h(@server.name) %>

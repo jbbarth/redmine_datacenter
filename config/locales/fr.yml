@@ -37,7 +37,7 @@ fr:
   label_crontab_plural: Crontabs
   label_nagios_display_ok: Afficher les OK
   label_apache: Apache
-  label_apache_server_plural: Apache servers
+  label_apache_server_plural: Serveurs Apache
   label_apache_vhost: VirtualHost
   label_apache_vhost_plural: VirtualHosts
   label_apache_config_files: Fichiers de configuration

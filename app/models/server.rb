@@ -116,7 +116,9 @@ class Server < ActiveRecord::Base
           else
             realserver = URI.parse(realserver).host
             begin
-              proxypass[:dns] = resolver.deeplook(realserver).drop(1)
+              chain = resolver.deeplook(realserver)
+              chain.shift
+              proxypass[:dns] = chain
             rescue
               proxypass[:dns] = [l(:label_no_dns_record_for,realserver)]
             end

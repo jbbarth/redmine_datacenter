@@ -1,5 +1,3 @@
-require 'uri'
-
 class Server < ActiveRecord::Base
   unloadable
   
@@ -95,44 +93,14 @@ class Server < ActiveRecord::Base
   def virtual_hosts
     return @virtualhosts if defined?(@virtualhosts)
     @virtualhosts = []
-    resolver = Redmine::Resolver.new
     apache_files.each do |file|
       content = File.readlines("#{self.apache_dir}/#{file}")
       content.delete_if{|line| line.match(/^\s*#/)}
       content.join.scan(%r{<VirtualHost[^>]*>.*?</VirtualHost>}mi).each do |section|
-        servername = section.scan(/ServerName\s+(\S+)/)
-        serveraliases = []
-        section.split("\n").grep(/ServerAlias/).each do |line|
-          serveralias = line.scan(/ServerAlias\s+(\S+)/).to_s
-          serveraliases << serveralias unless serveralias.blank?
-        end
-        proxypasses = []
-        section.split("\n").grep(/ProxyPass\s/).each do |line|
-          proxypass = {}
-          proxypass[:line] = line
-          realserver = line.scan(/ProxyPass\s+\S+\s+(\S+)/i).to_s
-          if realserver == "!"
-            proxypass[:dns] = []
-          else
-            realserver = URI.parse(realserver).host
-            begin
-              chain = resolver.deeplook(realserver)
-              chain.shift
-              proxypass[:dns] = chain
-            rescue
-              proxypass[:dns] = [l(:label_no_dns_record_for,realserver)]
-            end
-          end
-          proxypasses << proxypass
-        end
-        unless servername.blank?
-          @virtualhosts << {:server => self,
-                            :file => file,
-                            :servername => servername,
-                            :serveraliases => serveraliases,
-                            :proxypasses => proxypasses,
-                            :content => section }
-        end
+        vhost = Apache::VirtualHost.new(section)
+        vhost.file = file
+        vhost.server = self
+        @virtualhosts << vhost unless vhost.servername.blank?
       end
     end
     @virtualhosts

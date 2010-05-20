@@ -1,26 +1,26 @@
 <tr>
   <td>
-    <%= link_to vhost[:servername], "http://#{vhost[:servername]}" %>
-    <% if vhost[:serveraliases].any? -%>
+    <%= link_to vhost.servername, "http://#{vhost.servername}" %>
+    <% if vhost.serveraliases.any? -%>
       <ul class="serveraliases">
-      <% vhost[:serveraliases].each do |sa| -%>
-        <li><%= sa %></li>
+      <% vhost.serveraliases.each do |serveralias| -%>
+        <li><%= serveralias %></li>
       <% end -%>
       </ul>
     <% end -%>
   </td>
   <td class="vhost">
-    <% if vhost[:proxypasses].any? -%>
+    <% if vhost.proxypasses.any? -%>
       <%= link_to_function image_tag('bullet_toggle_plus.png'),
                            "$(this).next('.vhostconfig').toggle();",
                            :style => "vertical-align: bottom;" %>
     <% end -%>
-    <%= l(:field_server) %>: <%= link_to vhost[:server].name,
-                                         apache_path(@project,vhost[:server]) %>,
-    <%= l(:field_filename) %>: <%= link_to vhost[:file],
-                                           browse_apache_path(@project, vhost[:server], :file => vhost[:file]) %>
+    <%= l(:field_server) %>: <%= link_to vhost.server.name,
+                                         apache_path(@project,vhost.server) %>,
+    <%= l(:field_filename) %>: <%= link_to vhost.file,
+                                           browse_apache_path(@project, vhost.server, :file => vhost.file) %>
     <div class="vhostconfig" style="display:none;">
-      <% vhost[:proxypasses].each do |proxypass| -%>
+      <% vhost.proxypasses.each do |proxypass| -%>
         <%= proxypass[:line] %>
         <ul class="nsresolution">
           <% proxypass[:dns].each do |ns| -%>

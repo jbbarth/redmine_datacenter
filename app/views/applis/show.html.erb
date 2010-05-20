@@ -27,7 +27,7 @@
 
   <% if @appli.instances.any? %>
   <div class="contextual">
-    <% form_tag({}, :method => :get) do %>
+    <% form_tag(appli_path(@project,@appli), :method => :get) do %>
       <%= select_tag 'filter',
         appli_instances_options_for_select(@appli, params[:filter]),
         :class => "small",

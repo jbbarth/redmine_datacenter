@@ -6,12 +6,14 @@ class Apache::VirtualHost
    
   include Redmine::I18n
   
-  def initialize(section)
+  def initialize(section, options = {})
     @@resolver ||= Redmine::Resolver.new
     @content = section
     parse_servername!
     parse_serveraliases!
     parse_proxypasses!
+    @server = options[:server] if options[:server]
+    @file = options[:file] if options[:file]
   end
   
   private

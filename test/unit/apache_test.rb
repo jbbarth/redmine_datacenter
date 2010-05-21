@@ -15,5 +15,7 @@ class ApacheTest < ActiveSupport::TestCase
     assert_equal "bleh.example.net", vhost.servername
     assert_equal ["bleh.example.com"], vhost.serveraliases
     assert_equal 3, vhost.proxypasses.length
+    assert_equal @server, vhost.server
+    assert_equal "test/fixtures/apache/sites-enabled/virtual_host_ok.conf", vhost.file
   end
 end

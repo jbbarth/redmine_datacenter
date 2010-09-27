@@ -94,7 +94,6 @@ class Server < ActiveRecord::Base
     return @virtualhosts if defined?(@virtualhosts)
     @virtualhosts = []
     apache_files.each do |file|
-      #config_file = Apache::ConfigurationFile.new("#{self.apache_dir}/#{file}")
       content = File.readlines("#{self.apache_dir}/#{file}")
       content.delete_if{|line| line.match(/^\s*#/)}
       content.join.scan(%r{<VirtualHost[^>]*>.*?</VirtualHost>}mi).each do |section|

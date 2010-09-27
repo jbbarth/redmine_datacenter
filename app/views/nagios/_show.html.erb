@@ -1,5 +1,5 @@
 <div id="nagios" class="nagios box">
-  <% unless @nagios_status.nil? || @nagios_status.last_updated.nil? -%>
+  <% unless @nagios_status.last_updated.nil? -%>
   <div class="contextual">
     <%= l(:label_updated_time, distance_of_time_in_words(Time.now,@nagios_status.last_updated)) %>
   </div>

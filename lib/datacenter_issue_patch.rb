@@ -2,7 +2,7 @@ require_dependency 'issue'
 
 class Issue
   has_and_belongs_to_many :servers
-  has_many :issue_elements, :dependent => :destroy
+  has_many :issue_elements#, :dependent => :destroy
   has_many :applis, :through => :issue_elements,
            :source => :element, :source_type => 'Appli'
   has_many :instances, :through => :issue_elements,

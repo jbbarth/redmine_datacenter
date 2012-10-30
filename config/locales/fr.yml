@@ -31,7 +31,7 @@ fr:
   label_storage: Stockage
   label_storage_device: Baie de stockage
   label_datacenter_list_plural: Listes centre-serveur
-  label_operating_system_plural: Systèmes d'exploitation
+  label_operating_system_plural: Systèmes
   label_operating_system_parent: Parent
   label_crontab: Crontab
   label_crontab_plural: Crontabs
@@ -58,7 +58,7 @@ fr:
   field_appli: Application
   field_appli_instance_ids: Applications
   field_server_ids: Serveurs
-  field_operating_system: Système d'exploitation
+  field_operating_system: OS
 
   text_hide_admin_links_in_sidebar: Cacher les liens d'administration sur le côté ?
   text_third_party_tools: Outils Tiers

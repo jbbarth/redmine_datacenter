@@ -1,24 +1,21 @@
-ActionController::Routing::Routes.draw do |map|
-  #map.resources :servers, :path_prefix => 'datacenter'
-  #map.resources :applis, :path_prefix => 'datacenter' do |appli|
-  #  appli.resources :instance, :controller => 'instances' do |instance|
-  #    instance.resources :servers
-  #  end
-  #end
-  #map.resources :datacenters, :path_prefix => 'datacenter'
-  map.resources :nested_lists, :collection => {:rebuild => :put}
-  map.with_options :path_prefix => 'projects/:project_id' do |mmap|
-    mmap.resource  :datacenter
-    mmap.datacenters 'datacenters', :controller => 'datacenters'
-    mmap.resources :servers
-    mmap.resources :applis do |appli|
-      appli.resources :instance, :controller => 'instances' do |instance|
-        instance.resources :servers, :collection => {:select_servers => :get}
+RedmineApp::Application.routes.draw do
+  resources :nested_lists do
+    collection{ put :rebuild }
+  end
+  scope 'projects/:project_id' do
+    resources  :datacenters
+    resources :servers
+    resources :applis do
+      resources :instances do
+        collection { get :select_servers }
       end
     end
-    mmap.resources :networks, :collection => {:overview => :get}
-    mmap.resources :crontabs, :only => [:index, :show]
-    mmap.resources :apaches, :only => [:index, :show],
-                             :member => {:browse => :get}
+    resources :networks do
+      collection { get :overview }
+    end
+    resources :crontabs, :only => [:index, :show]
+    resources :apaches, :only => [:index, :show] do
+      member { get :browse }
+    end
   end
 end

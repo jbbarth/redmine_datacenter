@@ -6,7 +6,7 @@ require 'datacenter_issue_hook'
 
 #patches
 require 'datacenter_ipaddr_patch'
-config.to_prepare do
+ActionDispatch::Callbacks.to_prepare do
   require_dependency 'datacenter_issue_patch'
   require_dependency 'datacenter_issues_controller_patch'
   require_dependency 'datacenter_query_patch'
@@ -23,8 +23,8 @@ Redmine::Plugin.register :datacenter_plugin do
   description 'This plugin helps you manage your (small) datacenter with redmine'
   url 'http://code.jbbarth.com/projects/redmine-datacenter/wiki'
   author_url 'mailto:jeanbaptiste.barth@gmail.com'
-  version '0.2.1'
-  requires_redmine :version_or_higher => '0.9.0'
+  version '0.3.0'
+  requires_redmine :version_or_higher => '2.1.0'
   
   menu :project_menu,
        :datacenter, { :controller => 'datacenters', :action => 'show' },

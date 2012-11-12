@@ -40,12 +40,12 @@ module ApplisHelper
     parameters = {:id => appli, :action => :update}
     if appli.active?
       link_to l(:button_lock),
-              url_for(:overwrite_params => parameters.merge(:appli => {:status => Appli::STATUS_LOCKED})),
+              url_for(parameters.merge(:appli => {:status => Appli::STATUS_LOCKED})),
               :method => :put,
               :class => 'icon icon-lock'
     else
       link_to l(:button_unlock),
-              url_for(:overwrite_params => parameters.merge(:instance => {:status => Appli::STATUS_ACTIVE})),
+              url_for(parameters.merge(:instance => {:status => Appli::STATUS_ACTIVE})),
               :method => :put,
               :class => 'icon icon-unlock'
     end

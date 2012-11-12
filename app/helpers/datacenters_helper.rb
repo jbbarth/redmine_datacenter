@@ -12,12 +12,12 @@ module DatacentersHelper
     parameters = {:id => datacenter, :action => :update}
     if datacenter.active?
       link_to l(:button_lock),
-              url_for(:overwrite_params => parameters.merge(:datacenter => {:status => Datacenter::STATUS_LOCKED})),
+              url_for(parameters.merge(:datacenter => {:status => Datacenter::STATUS_LOCKED})),
               :method => :put,
               :class => 'icon icon-lock'
     else
       link_to l(:button_unlock),
-              url_for(:overwrite_params => parameters.merge(:datacenter => {:status => Datacenter::STATUS_ACTIVE})),
+              url_for(parameters.merge(:datacenter => {:status => Datacenter::STATUS_ACTIVE})),
               :method => :put,
               :class => 'icon icon-unlock'
     end
@@ -40,9 +40,9 @@ module DatacentersHelper
     status = section[:status]
     title = link_to_if(section[:server].is_a?(Server),
                        section[:host_name],
-                       :overwrite_params => { :controller => "servers",
+                       params.merge({ :controller => "servers",
                                               :action => "show",
-                                              :id => section[:server] }
+                                              :id => section[:server] })
                       )
     title << ": " + section[:service_description] if section[:service_description]
     output = section[:plugin_output]

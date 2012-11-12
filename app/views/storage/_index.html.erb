@@ -7,9 +7,7 @@
           <%= l(:label_updated_time, distance_of_time_in_words(Time.now,device.last_updated)) %>
         </div>
         <h3><%= link_to_if device.server.is_a?(Server), device.name,
-                          :overwrite_params => { :controller => "servers", 
-                                                 :action => "show",
-                                                 :id => device.server } %></h3>
+                          { :controller => "servers", :action => "show", :id => device.server } %></h3>
         <%= render 'storage/device', :device => device %>
       </div>
     <% end -%>

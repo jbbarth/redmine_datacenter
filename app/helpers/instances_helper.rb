@@ -3,12 +3,12 @@ module InstancesHelper
     parameters = {:id => instance, :action => :update, :controller => :instances, :appli_id => appli.id}
     if instance.active?
       link_to l(:button_lock),
-              url_for(:overwrite_params => parameters.merge(:instance => {:status => Instance::STATUS_LOCKED})),
+              url_for(parameters.merge(:instance => {:status => Instance::STATUS_LOCKED})),
               :method => :put,
               :class => 'icon icon-lock'
     else
       link_to l(:button_unlock),
-              url_for(:overwrite_params => parameters.merge(:instance => {:status => Instance::STATUS_ACTIVE})),
+              url_for(parameters.merge(:instance => {:status => Instance::STATUS_ACTIVE})),
               :method => :put,
               :class => 'icon icon-unlock'
     end

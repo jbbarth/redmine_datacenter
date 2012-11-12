@@ -6,7 +6,7 @@ module ApachesHelper
     html << options_for_select(servers.map{|server| [server.name, apache_path(project,server)] },
                                :selected => (selected.is_a?(Server) ? apache_path(project,selected) : ""))
     html << %(</select>)
-    html.join("\n")
+    html.join("\n").html_safe
   end
 
   def parse_apache_conf(file)
@@ -21,6 +21,6 @@ module ApachesHelper
     html.map! do |p|
       "<p>#{p}</p>"
     end
-    html.join("\n")
+    html.join("\n").html_safe
   end
 end

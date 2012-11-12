@@ -24,7 +24,7 @@ module CrontabsHelper
       html << line_a.slice(0,6).map{|l| "<td>#{l}</td>"}.join
       html << '<td class="croncommand">'+line_a.slice(6,line_a.length).join(" ")+"</td>"
     end
-    html
+    html.html_safe
   end
 
   def render_crontabs_jump_menu(project,servers,selected)
@@ -34,6 +34,6 @@ module CrontabsHelper
     html << options_for_select(servers.map{|server| [server.name, crontab_path(project,server)] },
                                :selected => (selected.is_a?(Server) ? crontab_path(project,selected) : ""))
     html << %(</select>)
-    html.join("\n")
+    html.join("\n").html_safe
   end
 end

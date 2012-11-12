@@ -55,6 +55,7 @@ module DatacentersHelper
     html << "#{title}<br />"
     html << %Q(<span class="infos">#{output}</span>) unless output.blank?
     html << "</div>"
+    html.html_safe
   end
 
   def pretty_size(size)

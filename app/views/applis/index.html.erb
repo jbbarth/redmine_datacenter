@@ -6,7 +6,7 @@
 
 <h2><%=l(:label_appli_plural)%></h2>
 
-<% form_tag(applis_path(@project), :method => :get) do %>
+<%= form_tag(applis_path(@project), :method => :get) do %>
   <fieldset><legend><%= l(:label_filter_plural) %></legend>
   <label><%= l(:field_status) %>:</label>
   <%= select_tag 'status', applis_status_options_for_select(@status,@datacenter), :class => "small", :onchange => "this.form.submit(); return false;"  %>

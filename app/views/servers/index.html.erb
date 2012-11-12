@@ -6,7 +6,7 @@
 
 <h2><%= link_to l(:label_server_plural), servers_path %></h2>
 
-<% form_tag(servers_path(@project), :method => :get) do %>
+<%= form_tag(servers_path(@project), :method => :get) do %>
   <fieldset><legend><%= l(:label_filter_plural) %></legend>
   <label><%= l(:field_status) %>:</label>
   <%= select_tag 'status', servers_status_options_for_select(@status, @datacenter), :class => "small", :onchange => "this.form.submit(); return false;"  %>

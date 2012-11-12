@@ -1,10 +1,10 @@
 <h2><%= link_to l(:label_datacenter_list_plural), :controller => 'nested_lists', :action => 'index' %> &#187; <%=h(@element.name)%></h2>
 
-<% form_tag nested_list_path(@element), :method => "put", :class => "tabular" do %>
+<%= form_tag nested_list_path(@element), :method => "put", :class => "tabular" do %>
   <%= render :partial => 'form' %>
   <%= submit_tag l(:button_save) %>
 <% end %>
 
-<% form_tag({:action => 'destroy', :id => @element}) do %>
+<%= form_tag({:action => 'destroy', :id => @element}) do %>
   <%= submit_tag l(:button_delete) %>
 <% end %>

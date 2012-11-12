@@ -82,7 +82,7 @@ class Datacenter < ActiveRecord::Base
   end
 
   def thirdpartydir
-    File.join(Rails.root,"vendor","plugins","redmine_datacenter","data", project.identifier)
+    File.join(Rails.root,'plugins','redmine_datacenter','data', project.identifier)
   end
 
   def fetch_activity(options)

@@ -11,7 +11,7 @@ class DatacenterPluginController < ApplicationController
 
   private
   def retrieve_settings
-    @settings = Setting["plugin_datacenter_plugin"]
+    @settings = Setting["plugin_redmine_datacenter"]
   end
 
   def find_project

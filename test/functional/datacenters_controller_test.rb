@@ -12,7 +12,7 @@ class DatacentersControllerTest < ActionController::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     @request.session[:user_id] = 1 # admin
-    Setting["plugin_datacenter_plugin"]["domain"] = ".example.com"
+    Setting["plugin_redmine_datacenter"]["domain"] = ".example.com"
     #adds correct modules / permissions for the plugin
     #TODO: DRY it !
     Role.find(1).add_permission! :view_datacenter, :manage_datacenter

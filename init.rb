@@ -16,7 +16,7 @@ end
 #store ip addresses as integer
 require 'acts_as_ipaddress'
 
-Redmine::Plugin.register :datacenter_plugin do
+Redmine::Plugin.register :redmine_datacenter do
   name 'Datacenter management plugin'
   author 'Jean-Baptiste BARTH'
   description 'This plugin helps you manage your (small) datacenter with redmine'

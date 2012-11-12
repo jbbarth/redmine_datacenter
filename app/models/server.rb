@@ -30,11 +30,9 @@ class Server < ActiveRecord::Base
                           :allow_nil => true, :allow_blank => true
   validates_format_of :name, :with => /\A[a-zA-Z0-9_-]*\Z/
   
-  named_scope :active, :conditions => { :status => STATUS_ACTIVE }, :order => 'name asc'
-  named_scope :for_datacenter, lambda {|datacenter_id| {:conditions => ["datacenter_id = ?", datacenter_id]}}
-  named_scope :hypervisors, :include => :operating_system, 
-                            :conditions => { 'operating_systems.hypervisor' => true },
-                            :order => 'servers.name asc'
+  scope :active, where(:status => STATUS_ACTIVE).order('name asc')
+  scope :for_datacenter, lambda {|datacenter_id| where(:datacenter_id => datacenter_id)}
+  scope :hypervisors, includes(:operating_system).where('operating_systems.hypervisor' => true).order('servers.name asc')
   
   def active?
     self.status == STATUS_ACTIVE

@@ -16,7 +16,7 @@ class Instance < ActiveRecord::Base
   STATUS_ACTIVE = 1
   STATUS_LOCKED = 2
   
-  named_scope :active, :conditions => { :status => STATUS_ACTIVE }
+  scope :active, where(:status => STATUS_ACTIVE)
   
   def active?
     self.status == STATUS_ACTIVE

@@ -16,8 +16,8 @@ class Appli < ActiveRecord::Base
   STATUS_ACTIVE = 1
   STATUS_LOCKED = 2
 
-  named_scope :active, :conditions => { :status => STATUS_ACTIVE }
-  named_scope :for_datacenter, lambda {|datacenter_id| {:conditions => ["datacenter_id = ?", datacenter_id]}}
+  scope :active, where(:status => STATUS_ACTIVE)
+  scope :for_datacenter, lambda {|datacenter_id| where(:datacenter_id => datacenter_id)}
   
   def active?
     self.status == STATUS_ACTIVE

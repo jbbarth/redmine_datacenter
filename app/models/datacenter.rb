@@ -16,8 +16,8 @@ class Datacenter < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
   
-  default_scope :order => 'name asc'
-  named_scope :active, :conditions => { :status => STATUS_ACTIVE }
+  default_scope order('name asc')
+  scope :active, where(:status => STATUS_ACTIVE)
   
   def active?
     self.status == STATUS_ACTIVE

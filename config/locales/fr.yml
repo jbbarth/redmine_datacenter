@@ -4,10 +4,8 @@ fr:
     errors:
       messages:
         invalid_ipaddress: "n'est pas une adresse IP valide ou un masque CIDR"
-
   permission_view_datacenter: Voir le centre-serveur
   permission_manage_datacenter: Gérer le centre-serveur
-
   label_datacenter: Centre-Serveur
   label_datacenter_new: Nouveau centre-serveur
   label_datacenter_plural: Centres-Serveurs
@@ -42,10 +40,8 @@ fr:
   label_apache_vhost_plural: VirtualHosts
   label_apache_config_files: Fichiers de configuration
   label_no_dns_record_for: "Pas d'entrée DNS pour {{value}}"
-  
   button_add_interface: Ajouter une interface
   button_select_servers: Sélectionner les serveurs
-
   field_server: Serveur
   field_fqdn: Nom complet (fqdn)
   field_interfaces: Interfaces
@@ -59,7 +55,6 @@ fr:
   field_appli_instance_ids: Applications
   field_server_ids: Serveurs
   field_operating_system: OS
-
   text_hide_admin_links_in_sidebar: Cacher les liens d'administration sur le côté ?
   text_third_party_tools: Outils Tiers
   text_nagios_everything_ok: R.A.S!

@@ -4,10 +4,8 @@ en:
     errors:
       messages:
         invalid_ipaddress: is not a valid IP address or CIDR mask
-
   permission_view_datacenter: View datacenter
   permission_manage_datacenter: Manage datacenter
-
   label_datacenter: Datacenter
   label_datacenter_new: New datacenter
   label_datacenter_plural: Datacenters
@@ -42,10 +40,8 @@ en:
   label_apache_vhost_plural: VirtualHosts
   label_apache_config_files: Configuration files
   label_no_dns_record_for: "No DNS record for {{value}}"
-  
   button_add_interface: Add an interface
   button_select_servers: Select servers
-
   field_server: Server
   field_fqdn: Fullname (fqdn)
   field_interfaces: Interfaces
@@ -59,7 +55,6 @@ en:
   field_appli_instance_ids: Applications
   field_server_ids: Servers
   field_operating_system: Operating System
-
   text_hide_admin_links_in_sidebar: Hide admin links in sidebar ?
   text_third_party_tools: Third Party Tools
   text_nagios_everything_ok: "Everything's OK"

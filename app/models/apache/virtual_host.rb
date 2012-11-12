@@ -19,14 +19,14 @@ class Apache::VirtualHost
   private
   
   def parse_servername!
-    @servername ||= @content.scan(/ServerName\s+(\S+)/).to_s
+    @servername ||= @content.scan(/ServerName\s+(\S+)/).first.try(:first)
   end
   
   def parse_serveraliases!
     return @serveraliases if @serveraliases
     @serveraliases = []
     @content.split("\n").grep(/ServerAlias/).each do |line|
-      serveralias = line.scan(/ServerAlias\s+(\S+)/).to_s
+      serveralias = line.scan(/ServerAlias\s+(\S+)/).first.try(:first)
       @serveraliases << serveralias unless serveralias.blank?
     end
     @serveraliases
@@ -38,7 +38,7 @@ class Apache::VirtualHost
     @content.split("\n").grep(/ProxyPass\s/).each do |line|
       proxypass = {}
       proxypass[:line] = line
-      realserver = line.scan(/ProxyPass\s+\S+\s+(\S+)/i).to_s
+      realserver = line.scan(/ProxyPass\s+\S+\s+(\S+)/i).first.try(:first)
       if realserver == "!"
         proxypass[:dns] = []
       else

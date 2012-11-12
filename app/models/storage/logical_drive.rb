@@ -5,7 +5,7 @@ module Storage
     def initialize(raw)
       if raw.match(/Free Capacity/)
         self[:name] = "Free Capacity"
-        self[:size] = parse_size(raw.scan(/Free Capacity\s+(\S.*)/).to_s.strip)
+        self[:size] = parse_size(raw.scan(/Free Capacity\s+(\S.*)/).first.try(:first).try(:strip))
       else
         self[:name] = read_value(raw, "LOGICAL DRIVE NAME")
         self[:array] = read_value(raw, "Associated array")

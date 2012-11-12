@@ -7,7 +7,7 @@ module Storage
       self[:status] = read_value(raw, "Array status")
       self[:drive_type] = read_value(raw, "Drive type")
       self[:logical_drives] = []
-      raw.scan(/LOGICAL DRIVE.*?\n(.*?)\n\n/m).to_s.each_line do |line|
+      raw.scan(/LOGICAL DRIVE.*?\n(.*?)\n\n/m).first.try(:first).each_line do |line|
         if line.match(/Free Capacity/)
           self[:logical_drives] << line
         else
@@ -17,7 +17,7 @@ module Storage
       #ds4100
       if self[:logical_drives].empty?
         r = /^\s+Associated logical.*?:(.*)\s+Associated drives/m
-        raw.scan(r).to_s.split(/\n|,/).map(&:strip).compact.each do |line|
+        raw.scan(r).first.try(:first).split(/\n|,/).map(&:strip).compact.each do |line|
           if line.match(/Free Capacity/)
             self[:logical_drives] << line
           else

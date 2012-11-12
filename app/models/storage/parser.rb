@@ -43,7 +43,7 @@ module Storage
     end
 
     def parse_standard_logical_drives(section)
-      section.scan(/\nDETAILS\n(.*)(?:\n[A-Z]|$)/m).to_s.split(/^\s*LOGICAL DRIVE NAME/im).map do |sub|
+      section.scan(/\nDETAILS\n(.*)(?:\n[A-Z]|$)/m).first.try(:first).split(/^\s*LOGICAL DRIVE NAME/im).map do |sub|
         "LOGICAL DRIVE NAME"+sub if sub.match(/^:/)
       end.compact
     end

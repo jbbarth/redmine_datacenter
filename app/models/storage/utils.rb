@@ -34,7 +34,7 @@ module Storage
       size = line.gsub(/[^a-z0-9().,]/i, '') #1,234 and 1 234 => 1234 + sanitizes some awful chars
       if size.match(/\dBytes\)/)
         size.tr!(",.","")
-        return size.scan(/(\d+)Bytes/).to_s.to_i
+        return size.scan(/(\d+)Bytes/).first.try(:first).to_i
       end
       size.gsub!(/\(.*/,"")
       units = %w(KB MB GB TB PB)

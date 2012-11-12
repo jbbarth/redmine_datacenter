@@ -93,7 +93,8 @@ class Server < ActiveRecord::Base
     @virtualhosts = []
     apache_files.each do |file|
       content = File.readlines("#{self.apache_dir}/#{file}")
-      content.delete_if{|line| line.match(/^\s*#/)}
+      content = content.force_encoding('UTF-8') if content.respond_to?(:force_encoding)
+      content.delete_if{|line| line.strip.start_with?('#')}
       content.join.scan(%r{<VirtualHost[^>]*>.*?</VirtualHost>}mi).each do |section|
         vhost = Apache::VirtualHost.new(section, :server => self, :file => file)
         @virtualhosts << vhost unless vhost.servername.blank?

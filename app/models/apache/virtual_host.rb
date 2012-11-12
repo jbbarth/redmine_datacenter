@@ -9,6 +9,7 @@ class Apache::VirtualHost
   def initialize(section, options = {})
     @@resolver ||= Redmine::Resolver.new
     @content = section
+    section = section.force_encoding('UTF-8') if section.respond_to?(:force_encoding)
     parse_servername!
     parse_serveraliases!
     parse_proxypasses!

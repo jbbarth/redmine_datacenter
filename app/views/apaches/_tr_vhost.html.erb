@@ -12,7 +12,7 @@
   <td class="vhost">
     <% if vhost.proxypasses.any? -%>
       <%= link_to_function image_tag('bullet_toggle_plus.png'),
-                           "$(this).next('.vhostconfig').toggle();",
+                           "$(this).siblings('.vhostconfig').toggle()",
                            :style => "vertical-align: bottom;" %>
     <% end -%>
     <%= l(:field_server) %>: <%= link_to vhost.server.name,

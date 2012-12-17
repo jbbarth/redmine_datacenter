@@ -11,7 +11,7 @@
 <table id="crontab" class="list issues cron">
   <tr>
     <% head = @cron_lines.shift.split(/\s+/) %>
-    <%= head.map{|l| %Q[<th>#{l}</th>]} -%>
+    <%= head.map{|l| %Q[<th>#{l}</th>]}.join.html_safe -%>
   </tr>
   <% @cron_lines.each do |line| -%>
     <tr>

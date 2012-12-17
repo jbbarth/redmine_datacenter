@@ -1,6 +1,6 @@
 <h2><%= link_to l(:label_appli_plural), applis_path %> &#187; <%=l(:label_appli_new)%></h2>
 
-<% labelled_tabular_form_for :appli, @appli, :url => applis_path, :html => { :class => nil } do |f| %>
+<%= labelled_form_for :appli, @appli, :url => applis_path, :html => { :class => nil } do |f| %>
 	<%= render :partial => 'form', :locals => { :f => f } %>
 	<p><%= submit_tag l(:button_create) %></p>
 <% end %>

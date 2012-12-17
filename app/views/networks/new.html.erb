@@ -1,6 +1,6 @@
 <h2><%= link_to l(:label_network_plural), networks_path %> &#187; <%=l(:label_network_new)%></h2>
 
-<% labelled_tabular_form_for :network, @network, :url => networks_path, :html => { :class => nil } do |f| %>
+<%= labelled_form_for :network, @network, :url => networks_path, :html => { :class => nil } do |f| %>
 	<%= render :partial => 'form', :locals => { :f => f } %>
 	<p><%= submit_tag l(:button_create) %></p>
 <% end %>

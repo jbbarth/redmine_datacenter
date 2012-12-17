@@ -12,11 +12,11 @@ module ApachesHelper
   def parse_apache_conf(file)
     html = []
     content = File.readlines(file)
-    content.grep(/^\s*Server(Name|Alias)/).each do |sn|
-      html << sn.strip
-    end
-    content.grep(/^\s*ProxyPass\s/).each do |pp|
-      html << pp.strip
+    content = content.force_encoding('UTF-8') if content.respond_to?(:force_encoding)
+    content.select do |sn|
+      sn.strip!
+      html << sn if sn.start_with?("ServerName") || sn.start_with?("ServerAlias")
+      html << sn if sn.start_with?("ProxyPass ")
     end
     html.map! do |p|
       "<p>#{p}</p>"

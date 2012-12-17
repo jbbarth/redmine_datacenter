@@ -1,8 +1,9 @@
 function toggleVisibility(checkbox_id,section_id) {
-  if ($(checkbox_id).checked) {
-    $(section_id).show();
+  var $section = $("#"+section_id)
+  if ($("#"+checkbox_id).is(":checked")) {
+    $section.show()
   } else {
-    $(section_id).hide();
-    $(section_id).firstDescendant('select').value="";
+    $section.hide()
+    $section.find("select").val("")
   }
 }

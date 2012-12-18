@@ -19,3 +19,25 @@ function add_fields(link, association, content) {
   var regexp = new RegExp("new_" + association, "g")
   $(link).before(content.replace(regexp, new_id));
 }
+
+//multiselect expansion
+function toggle_multi_select_datacenter(field_id) {
+  toggleMultiSelect($("#"+field_id))
+}
+
+function toggle_servers_select(id,linkid) {
+  value = flat_getValue(id);
+  if (value.include('Instance')) {
+    $("#"+linkid).show()
+  } else {
+    $("#"+linkid).hide()
+  }
+}
+function flat_getValue(id) {
+  value = $("#"+id).val()
+  alert(value);
+  if (value instanceof Array) {
+    value = value.join()
+  }
+  return value
+}

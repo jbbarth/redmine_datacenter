@@ -1,15 +1,6 @@
-<script type="text/javascript">
-//<![CDATA[
-function toggle_multi_select_datacenter(field) {
-    select = $(field);
-    if (select.multiple == true) {
-        select.multiple = false;
-    } else {
-        select.multiple = true;
-    }
-}
-//]]>
-</script>
+<% content_for :header_tags do -%>
+    <%= javascript_include_tag 'datacenter', :plugin => :redmine_datacenter -%>
+<% end -%>
 
 <%= error_messages_for 'instance' %>
 

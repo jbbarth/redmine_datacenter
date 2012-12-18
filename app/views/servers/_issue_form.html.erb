@@ -1,3 +1,7 @@
+<% content_for :header_tags do -%>
+    <%= javascript_include_tag 'datacenter', :plugin => :redmine_datacenter -%>
+<% end -%>
+
 <% @datacenter ||= @project.datacenter %>
 <% if @datacenter %>
 <p>

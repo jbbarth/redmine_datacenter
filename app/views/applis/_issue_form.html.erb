@@ -1,30 +1,7 @@
-<script type="text/javascript">
-//<![CDATA[
-function toggle_multi_select_datacenter(field) {
-    select = $(field);
-    if (select.multiple == true) {
-        select.multiple = false;
-    } else {
-        select.multiple = true;
-    }
-}
-function toggle_servers_select(id,linkid) {
-  value = flat_getValue(id);
-  if (value.include('Instance')) {
-    $(linkid).show(); 
-  } else {
-    $(linkid).hide();
-  }
-}
-function flat_getValue(id) {
-  value = $(id).getValue();
-  if (value instanceof Array) {
-    value = value.join();
-  }
-  return value
-}
-//]]>
-</script>
+<% content_for :header_tags do -%>
+    <%= javascript_include_tag 'datacenter', :plugin => :redmine_datacenter -%>
+<% end -%>
+
 <% @datacenter ||= @project.datacenter %>
 <% if @datacenter %>
 <p>

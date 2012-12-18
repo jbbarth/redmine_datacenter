@@ -27,7 +27,7 @@ function toggle_multi_select_datacenter(field_id) {
 
 function toggle_servers_select(id,linkid) {
   value = flat_getValue(id);
-  if (value.include('Instance')) {
+  if (value.indexOf("Instance") >= 0) {
     $("#"+linkid).show()
   } else {
     $("#"+linkid).hide()
@@ -36,7 +36,15 @@ function toggle_servers_select(id,linkid) {
 function flat_getValue(id) {
   value = $("#"+id).val()
   if (value instanceof Array) {
-    value = value.join()
+    value = value.join(',')
   }
   return value
 }
+
+//select servers from application instance in issues/form
+$(function() {
+  $("#select-servers-link").live("click", function() {
+    $.getScript(this.href+"?ids="+flat_getValue("issue_appli_instance_ids"))
+    return false
+  })
+})

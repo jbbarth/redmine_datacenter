@@ -47,13 +47,6 @@ class InstancesController < DatacenterPluginController
       instance = Instance.find_by_id(i[1], :include => :servers) if i[0] == "Instance"
       instance.servers.map(&:id) if instance
     end.flatten.compact
-    if request.xhr?
-      render :update do |page|
-        page.replace_html 'select-servers', :partial => 'select_servers'
-      end
-    else
-      render :partial => 'select_servers'
-    end
   end
 
   private

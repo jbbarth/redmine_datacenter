@@ -12,8 +12,6 @@
                        "toggle_multi_select_datacenter('issue_appli_instance_ids');",
                        :style => "vertical-align: bottom;" %>
   <%= link_to l(:button_select_servers), select_servers_appli_instances_path(@project.id, 'wedontcare'),
-              :method => 'get', :with => "'ids='+flat_getValue('issue_appli_instance_ids')",
-              :html => {:id => 'select-servers-link', :style => 'display:none;'},
-              :remote => true %>
+              :method => 'get', :id => 'select-servers-link', :style => "display:none;", :remote => true %>
 </p> 
 <% end %>

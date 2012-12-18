@@ -11,7 +11,7 @@ class ServersController < DatacenterPluginController
     @status = params[:status] ? params[:status].to_i : Server::STATUS_ACTIVE
     servers = Server.where("servers.datacenter_id = ?", @datacenter.id)
     servers = servers.where("servers.status = ?", @status) unless @status == 0
-    servers = servers.where("LOWER(servers.name) LIKE ?", params[:name].strip.downcase) unless params[:name].blank?
+    servers = servers.where("LOWER(servers.name) LIKE ?", "%#{params[:name].strip.downcase}%") unless params[:name].blank?
     servers = servers.joins(["LEFT JOIN servers AS hypervisors ON servers.hypervisor_id = hypervisors.id",
                              "LEFT JOIN operating_systems ON operating_systems.id = servers.operating_system_id",
                              "LEFT JOIN interfaces_servers ON interfaces_servers.server_id = servers.id",

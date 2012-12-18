@@ -11,10 +11,9 @@
   <%= link_to_function image_tag('bullet_toggle_plus.png'),
                        "toggle_multi_select_datacenter('issue_appli_instance_ids');",
                        :style => "vertical-align: bottom;" %>
-  <%= link_to_remote l(:button_select_servers),
-                     :method => 'get',
-                     :url => {:controller => "instances", :action => 'select_servers', :project_id => @project.id},
-                     :with => "'ids='+flat_getValue('issue_appli_instance_ids')",
-                     :html => {:id => 'select-servers-link', :style => 'display:none;'} %>
+  <%= link_to l(:button_select_servers), select_servers_appli_instances_path(@project.id, 'wedontcare'),
+              :method => 'get', :with => "'ids='+flat_getValue('issue_appli_instance_ids')",
+              :html => {:id => 'select-servers-link', :style => 'display:none;'},
+              :remote => true %>
 </p> 
 <% end %>

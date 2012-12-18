@@ -20,6 +20,7 @@
   </thead>
   <tbody>
 <% for datacenter in @datacenters -%>
+  <% next if datacenter.project.blank? %>
   <tr class="datacenter <%= cycle("odd", "even") %>">
     <td class="name"><%= link_to(h(datacenter.name),datacenter_path(datacenter.project)) %></td>
     <td class="description"><%= datacenter.description %></td>

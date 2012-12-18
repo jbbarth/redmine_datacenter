@@ -34,7 +34,7 @@
      unless @server.new_record?  -%>
   <p>
     <label><%= l(:field_interfaces) %></label>
-    <% f.fields_for :interfaces do |builder| -%>
+    <%= f.fields_for :interfaces do |builder| -%>
       <%= render 'interface_fields', :f => builder %>
     <% end -%>
     <%= add_interface_link l(:button_add_interface), f %>

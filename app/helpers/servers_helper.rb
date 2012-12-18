@@ -27,9 +27,8 @@ module ServersHelper
     fields = f.fields_for(:interfaces, Interface.new) do |builder|
       render("interface_fields", :f => builder)
     end
-    link_to_function name, :id => 'add_interface', :class => 'icon icon-add' do |page|
-      page.insert_html :before, :add_interface, fields
-    end
+    link_to_function name, "add_fields(this, \"interfaces\", \"#{escape_javascript(fields)}\")",
+                     :id => 'add_interface', :class => 'icon icon-add'
   end
   
   def links_to_servers(project,servers)

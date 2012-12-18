@@ -56,8 +56,7 @@ end
 
 Redmine::MenuManager.map :admin_menu do |menu|
   menu.push :datacenters, { :controller => 'datacenters',
-                            :action     => 'index',
-                            :project_id => 'admin' },
+                            :action     => 'index' },
             :caption => :label_datacenter_plural
   menu.push :nested_lists, { :controller => 'nested_lists',
                              :action     => 'index' },

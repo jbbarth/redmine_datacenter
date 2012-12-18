@@ -2,8 +2,9 @@ RedmineApp::Application.routes.draw do
   resources :nested_lists do
     collection{ put :rebuild }
   end
+  get 'datacenters', :to => 'datacenters#index'
   scope 'projects/:project_id' do
-    resources :datacenters
+    resource  :datacenters
     resources :servers
     resources :applis do
       resources :instances do

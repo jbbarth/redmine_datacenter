@@ -14,7 +14,7 @@
 <% list.each do |element| %>
 <tr class="<%= cycle('odd', 'even') %>">
   <td>
-    <%= "&nbsp;" * 4 * element.level %>
+    <%= ("&nbsp;" * 4 * element.level).html_safe %>
     <%= link_to h(element.name), edit_nested_list_path(element, :type => klass.name) %>
   </td>
   <td class="center" style="width:15%;"><%= checked_image element.hypervisor? %></td>
@@ -33,7 +33,7 @@
 <p>
   <%= link_to l(:label_new), new_nested_list_path(:type => klass.name) %>
   <% if list.any? -%>
-    <%= " | " + link_to(l(:button_sort), rebuild_nested_lists_path(:type => klass.name), :method => :put) %>
+    | <%= link_to(l(:button_sort), rebuild_nested_lists_path(:type => klass.name), :method => :put) %>
   <% end -%>
 </p>
 <% end %>

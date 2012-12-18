@@ -55,8 +55,13 @@ Redmine::Plugin.register :redmine_datacenter do
 end
 
 Redmine::MenuManager.map :admin_menu do |menu|
-  menu.push :datacenters, {:controller => :datacenters}, :caption => :label_datacenter_plural
-  menu.push :nested_lists, {:controller => :nested_lists}, :caption => :label_datacenter_list_plural
+  menu.push :datacenters, { :controller => 'datacenters',
+                            :action     => 'index',
+                            :project_id => 'admin' },
+            :caption => :label_datacenter_plural
+  menu.push :nested_lists, { :controller => 'nested_lists',
+                             :action     => 'index' },
+            :caption => :label_datacenter_list_plural
   #menu.push :servers, {:controller => :servers}, :caption => :label_server_plural
   #menu.push :applis, {:controller => :applis}, :caption => :label_appli_plural
 end

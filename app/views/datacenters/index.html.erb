@@ -22,7 +22,8 @@
 <% for datacenter in @datacenters -%>
   <% next if datacenter.project.blank? %>
   <tr class="datacenter <%= cycle("odd", "even") %>">
-    <td class="name"><%= link_to(h(datacenter.name),datacenter_path(datacenter.project)) %></td>
+    <td class="name"><%= link_to(h(datacenter.name),
+                                 datacenter_path(:id=>datacenter.id, :project_id=>datacenter.project.id)) %></td>
     <td class="description"><%= datacenter.description %></td>
     <td class="buttons">
       <% if User.current.allowed_to?(:manage_datacenter,@project) %>

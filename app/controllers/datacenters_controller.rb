@@ -20,7 +20,7 @@ class DatacentersController < DatacenterPluginController
                   :user => User.current,
                   :types => %w(issues wiki_edits changesets),
                   :limit => 3
-                )      
+                )
     #nagios integration
     if @datacenter.tool_enabled?(:nagios)
       nagios_file = @datacenter.nagios_file

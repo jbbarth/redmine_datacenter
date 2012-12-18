@@ -3,7 +3,7 @@ RedmineApp::Application.routes.draw do
     collection{ put :rebuild }
   end
   scope 'projects/:project_id' do
-    resource  :datacenters
+    resources :datacenters
     resources :servers
     resources :applis do
       resources :instances do

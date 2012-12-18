@@ -30,7 +30,7 @@
   <tr class="appli <%= cycle("odd", "even") %>">
 	  <td class="name"><%= link_to h(appli.name), appli_path(@project,appli) %></td>
     <td class="instances"><%= links_to_instances(@project,appli) %>
-	  <td class="description"><%= appli.short_description(80) %></td>
+	  <td class="description"><%= appli.short_description(80).html_safe %></td>
     <td class="buttons">
       <% if User.current.allowed_to?(:manage_datacenter,@project) %>
       <%= link_to l(:button_update), edit_appli_path(@project,appli), :class => 'icon icon-edit' %>

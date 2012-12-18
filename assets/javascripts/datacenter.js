@@ -35,7 +35,6 @@ function toggle_servers_select(id,linkid) {
 }
 function flat_getValue(id) {
   value = $("#"+id).val()
-  alert(value);
   if (value instanceof Array) {
     value = value.join()
   }

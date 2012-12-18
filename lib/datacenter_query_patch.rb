@@ -6,11 +6,13 @@ class Query
     if project && project.module_enabled?(:datacenter) && project.datacenter
       datacenter = project.datacenter
       if datacenter
-        @available_filters["server_id"] = { :type => :list,
-                                            :order => 25,
+        @available_filters["server_id"] = { :type   => :list,
+                                            :order  => 25,
+                                            :name   => l("field_server"),
                                             :values => Server.for_datacenter(datacenter.id).collect{|s| [s.name, s.id.to_s] } }
-        @available_filters["appli_id"] = { :type => :list,
-                                            :order => 30,
+        @available_filters["appli_id"] =  { :type   => :list,
+                                            :order  => 30,
+                                            :name   => l("field_appli"),
                                             :values => Appli.for_datacenter(datacenter.id).collect{|s| [s.name, s.id.to_s] } }
       end
     end

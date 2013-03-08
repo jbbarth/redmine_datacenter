@@ -1,5 +1,7 @@
 h1. Redmine Datacenter Plugin
 
+**THIS PLUGIN IS NOT MAINTAINED ACTIVELY ANYMORE, AND YOU SHOULDN'T USE IT.** (I only make patches for my former colleagues who still use it for some months)
+
 This plugin will help you manager your small datacenter through "Redmine":http://www.redmine.org/.
 
 h2. Install

@@ -43,7 +43,9 @@ class Apache::VirtualHost
       if realserver == "!"
         proxypass[:dns] = []
       else
+        realserver.gsub!("_", "--UNDERSCORE--")
         realserver = URI.parse(realserver).host
+        realserver.gsub!("--UNDERSCORE--", "_")
         begin
           chain = @@resolver.deeplook(realserver)
           chain.shift

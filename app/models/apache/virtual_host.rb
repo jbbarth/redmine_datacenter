@@ -51,7 +51,7 @@ class Apache::VirtualHost
           chain.shift
           proxypass[:dns] = chain
         rescue
-          proxypass[:dns] = [l(:label_no_dns_record_for,realserver)]
+          proxypass[:dns] = [l(:label_no_dns_record_for, :value => realserver)]
         end
       end
       @proxypasses << proxypass

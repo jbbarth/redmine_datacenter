@@ -11,6 +11,7 @@ ActionDispatch::Callbacks.to_prepare do
   require_dependency 'datacenter_issues_controller_patch'
   require_dependency 'datacenter_query_patch'
   require_dependency 'datacenter_project_patch'
+  require_dependency 'macros'
 end
 
 #store ip addresses as integer
